@@ -1,0 +1,16 @@
+<div class="page-page">
+  <article>
+    <div class="htmlDataBlock">
+      <!-- Описание -->
+      <div>{PAGE_CONTENT}</div>
+      <!-- Короткое SEO-описание -->
+      {% IF PAGE_SEO_DESCRIPTION_SHORT %}
+      <p>{PAGE_SEO_DESCRIPTION_SHORT}</p>
+      {% ENDIF %}
+      <!-- Полное SEO-описание -->
+      {% IF PAGE_SEO_DESCRIPTION_LARGE %}
+      <p>{PAGE_SEO_DESCRIPTION_LARGE}</p>
+      {% ENDIF %}
+    </div>
+  </article>
+</div>

@@ -1,0 +1,72 @@
+<div class="page-client">
+	<div class="row">
+		<div class="flex-start">
+
+			<div class="client__block">
+				<h3 class="client__title">Постоянным покупателям</h3>
+				<p>Если вы уже имеете аккаунт, войдите в него, используя свои логин и пароль.</p>
+
+				<form class="form__client" action="{USER_LOGIN_URL}" method="post">
+					<input type="hidden" name="hash" value="{HASH}" />
+					<input type="hidden" name="from" value="{FROM}" />
+					<!-- Набор полей которые не видит пользователь, но видят боты. Когда они их заполняют мы точно знаем, что их прислал нам бот и мы не сохраняем подобный отзыв о товаре, а боту отправившему отзыв сообщаем, что отзыв добавлен успешно, но будет отображён здесь после прохождения модерации -->
+					{ANTISPAM_CODE}
+
+					<div class="form__list">
+						<div class="form__fields">
+							<label for="sites_client_mail" class="form__label required"><span>Электронная почта</span><em>*</em></label>
+							<input id="sites_client_mail" class="form__input form__email" type="email" name="form[sites_client_mail]" value="{FORM_SITES_CLIENT_MAIL}" maxlength="255" placeholder="Email" required/>
+						</div>
+
+						<div class="form__fields">
+							<label for="sites_client_pass" class="form__label required"><span>Пароль:</span><em>*</em></label>
+							<input id="sites_client_pass" class="form__input" type="password" name="form[{ANTISPAM_FORM_FIELD_NAME_SITES_CLIENT_PASS}]" value="{FORM_SITES_CLIENT_PASS}" maxlength="50" minlength="6" placeholder="Пароль" required/>
+							
+							<div class="form__showPass" title="Показать пароль"></div>
+
+							<div id="capslock">
+								<div class="capslock__icon flex">
+									<i class="icon-warning"></i>
+									<strong>Caps Lock включен.</strong>
+								</div>
+								<div class="capslock__text">Пароль может быть введен неверно.</div>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="client__buttons">
+						<button class="button-primary" type="submit" name="send" title="Войти">
+							<span>Войти</span>
+						</button>
+						<a class="button-secondary" href="{USER_RECOVERY_URL}" title="Забыли пароль">
+							<span>Забыли пароль?</span>
+						</a>
+					</div>
+
+				</form>
+
+			</div>
+
+			<div class="client__block">
+				<h3 class="client__title">Зарегистрировать аккаунт</h3>
+				<p>Зарегистрировавшись в нашем магазине, Вы сможете:</p>
+
+				<ul class="disc">
+					<li>Оформлять заказы быстрее;</li>
+					<li>Просматривать и отслеживать Ваши заказы;</li>
+					<li>Хранить адреса доставки</li>
+					<li>И многое другое...</li>
+				</ul>
+
+				<div class="client__buttons">
+					<a class="button-primary" href="{USER_REGISTER_URL}" title="Зарегистрироваться">
+						<span>Зарегистрироваться</span>
+					</a>
+				</div>
+				
+			</div>
+
+		</div>
+	</div>
+</div>

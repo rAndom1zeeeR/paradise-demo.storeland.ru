@@ -1,0 +1,52 @@
+{% IF promotion_campaign_empty %}
+<div class="notice attention">Акций в нашем магазине пока не проводилось</div>
+{% ELSE %}
+<!-- Список акций -->
+<div class="promotion__grid">
+	{% FOR promotion_campaign %}
+	<div class="promotion__item {% IFNOT promotion_campaign.IS_WORK %}promotion__empty{% ENDIF %}" data-id="{promotion_campaign.ID}">
+		<div class="promotion__form flex">
+			<a class="promotion__percentage promotion__margin" href="{promotion_campaign.URL | url_amp}" title="Скидка -{promotion_campaign.PERCENTAGE}%">
+				<strong>-{promotion_campaign.PERCENTAGE}%</strong>
+			</a>
+
+			<a class="promotion__name promotion__margin" href="{promotion_campaign.URL | url_amp}" title="{promotion_campaign.NAME}">
+				<span>{promotion_campaign.NAME}</span>
+			</a>
+
+			{% IF promotion_campaign.DESCRIPTION_SHORT %}
+			<div class="promotion__desc promotion__margin">
+				<span>{promotion_campaign.DESCRIPTION_SHORT}</span>
+			</div>
+			{% ENDIF %}
+
+			<div class="promotion__date">
+				<div class="promotion__date-time">Акция до {promotion_campaign.EXPIRED_TIME | date('d.m.Y')}</div>
+
+				<div class="promotion__counter counter flex-center" data-expired="{promotion_campaign.EXPIRED_TIME | date('m/d/Y H:i:s')}" data-time="{CURRENT_TIME | date('m/d/Y H:i:s')}">
+					<div class="days">
+						<span>00</span>
+						<label>д</label>
+					</div>
+					<div class="hours">
+						<span>00</span>
+						<label>ч</label>
+					</div>
+					<div class="minutes">
+						<span>00</span>
+						<label>м</label>
+					</div>
+					<div class="seconds">
+						<span>00</span>
+						<label>с</label>
+					</div>
+				</div>
+
+				<div class="promotion__date-expired">Акция завершена</div>
+			</div>
+
+		</div>
+	</div>
+	{% ENDFOR promotion_campaign %}
+</div>
+{% ENDIF %}

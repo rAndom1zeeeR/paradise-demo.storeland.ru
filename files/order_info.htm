@@ -1,0 +1,200 @@
+<div class="order-info">
+  {% IF FORM_NOTICE %}
+  <div class="notice {% IF FORM_NOTICE_IS_GOOD %}success{% ELSE %}warning{% ENDIF %}">{FORM_NOTICE | nl2br}</div>
+  {% ENDIF %}
+  <div class="client__blocks">
+    <h3 class="client__title">Данные заказа</h3>
+    <div class="scroll">
+      <table class="table-box">
+        <tbody>
+          <tr>
+            <td class="cell1"><span>Номер:</span></td>
+            <td class="cell2">{ORDER_NUM}</td>
+          </tr>
+          <tr>
+            <td class="cell1"><span>Статус заказа:</span></td>
+            <td class="cell2" title="{ORDER_STATUS_DESC}">{ORDER_STATUS_NAME}</td>
+          </tr>
+          <tr>
+            <td class="cell1"><span>Сумма заказа:</span></td>
+            <td class="cell2">
+              <span class="{CURRENCY_CHAR_CODE}">{ORDER_SUM | money_format}</span>
+              {% IF ORDER_SUM_WITHOUT_DISCONT != ORDER_SUM %}
+                <br />
+                <span class="{CURRENCY_CHAR_CODE}">
+                  <s>{ORDER_SUM_WITHOUT_DISCONT | money_format}</s>
+                  <i>без учета скидки</i>
+                </span>
+              {% ENDIF %}
+            </td>
+          </tr>
+          <tr>
+            <td class="cell1"><span>Статус оплаты:</span></td>
+            <td class="cell2">{% IF ORDER_IS_PAYMENT=1 %}оплачен{% ELSEIF ORDER_IS_PAYMENT=2 %}Оплачен частично{% ELSE %}не оплачен{% ENDIF %}</td>
+          </tr>
+          <tr>
+            <td class="cell1"><span>Контактное лицо:</span></td>
+            <td class="cell2">{ORDER_CONTACT_PERSON}</td>
+          </tr>
+          <tr>
+            <td class="cell1"><span>Телефон для связи:</span></td>
+            <td class="cell2">{ORDER_CONTACT_PHONE}</td>
+          </tr>
+          {% IF ORDER_CONTACT_EMAIL %}
+            <tr>
+              <td class="cell1"><span>Электронная почта:</span></td>
+              <td class="cell2">{ORDER_CONTACT_EMAIL}</td>
+            </tr>
+          {% ENDIF %}
+          {% IF ORDER_DELIVERY_ZIP_CODE %}
+            <tr>
+              <td class="cell1"><span>Почтовый индекс:</span></td>
+              <td class="cell2">{ORDER_DELIVERY_ZIP_CODE}</td>
+            </tr>
+          {% ENDIF %}
+          {% IF ORDER_DELIVERY_COUNTRY %}
+            <tr>
+              <td class="cell1"><span>Страна:</span></td>
+              <td class="cell2">{ORDER_DELIVERY_COUNTRY}</td>
+            </tr>
+          {% ENDIF %}
+          {% IF ORDER_DELIVERY_REGION %}
+            <tr>
+              <td class="cell1"><span>Область:</span></td>
+              <td class="cell2">{ORDER_DELIVERY_REGION}</td>
+            </tr>
+          {% ENDIF %}
+          {% IF ORDER_DELIVERY_CITY %}
+            <tr>
+              <td class="cell1"><span>Город:</span></td>
+              <td class="cell2">{ORDER_DELIVERY_CITY}</td>
+            </tr>
+          {% ENDIF %}
+          {% IF ORDER_DELIVERY_ADDRESS %}
+            <tr>
+              <td class="cell1"><span>Адрес доставки:</span></td>
+              <td class="cell2">{ORDER_DELIVERY_ADDRESS | nl2br}</td>
+            </tr>
+          {% ENDIF %}
+          {% IF ORDER_DELIVERY_CONVENIENT_DATE %}
+            <tr>
+              <td class="cell1"><span>Удобное время доставки:</span></td>
+              <td class="cell2">
+                {ORDER_DELIVERY_CONVENIENT_DATE | date('d.m.Y')} 
+                {% IF ORDER_DELIVERY_CONVENIENT_HOUR_FROM %}
+                  c {ORDER_DELIVERY_CONVENIENT_HOUR_FROM}:00
+                {% ENDIF %}
+                {% IF ORDER_DELIVERY_CONVENIENT_HOUR_TO %}
+                  до {ORDER_DELIVERY_CONVENIENT_HOUR_TO}:00
+                {% ENDIF %}
+              </td>
+            </tr>
+          {% ENDIF %}
+          {% IF ORDER_DELIVERY_COMMENT %}
+            <tr>
+              <td class="cell1"><span>Комментарий к заказу:</span></td>
+              <td class="cell2">{ORDER_DELIVERY_COMMENT | nl2br}</td>
+            </tr>
+          {% ENDIF %}
+          {% IF ORDER_DELIVERY_TRACKING_NUMBER %}
+            <tr>
+              <td class="cell1"><span>Номер отслеживания:</span></td>
+              <td class="cell2">{ORDER_DELIVERY_TRACKING_NUMBER | nl2br}</td>
+            </tr>
+          {% ENDIF %}
+          {% FOR order_extra_fields %}
+            <tr>
+              <td class="cell1"><span>{order_extra_fields.NAME}:</span></td>
+              <td class="cell2">{order_extra_fields.VALUE | nl2br}</td>
+            </tr>
+          {% ENDFOR %}
+        </tbody>
+        
+        <!-- Методы методы оплаты онлайн -->
+        <!-- Если заказ не оплачен и выбранный метод оплаты позволяет оплатить его онлайн, покажем форму с оплатой заказа через сайт -->
+        {% IF ORDER_PAYMENT_STEP_ENABLE %}
+          <!-- Здесь появляются дополнительные данные, необходимые для заполнения клиентом -->
+          {PAYMENT_FORM_TBODY}
+        {% ENDIF %}
+        <!-- END методы методы оплаты онлайн -->
+      </table>
+    </div>
+  </div>
+  
+  {% IFNOT order_lines_empty %}
+  <div class="client__blocks">
+    <h3 class="client__title">Позиции заказа</h3>
+    <div class="scroll">
+      <table class="table-box"> 
+        <thead> 
+          <tr> 
+            <th>Артикул</th>
+            <td>Название товара</td> 
+            <td>Цена</td>
+            <td>Кол-во</td> 
+            <td>Общая сумма</td> 
+          </tr> 
+        </thead>
+
+        <tbody>
+          {% FOR order_lines %}
+            <tr class="order-lines" data-id="{order_lines.ID}">
+              <td>{% IF order_lines.ART_NUMBER %}{order_lines.ART_NUMBER}{% ELSE %}&nbsp;{% ENDIF %}</td>
+              <td>
+                {% IF order_lines.GOODS_URL %}
+                  <a href="{order_lines.GOODS_URL}" title="{order_lines.NAME}">{order_lines.NAME}</a>
+                {% ELSE %}
+                  <span>{order_lines.NAME}</span>
+                {% ENDIF %}
+              </td>
+              <td>
+                <span class="order-lines__price {CURRENCY_CHAR_CODE}">
+                  <!-- Товарная позиция либо доставка -->
+                  {% IF order_lines.TYPE_ID=1 || order_lines.TYPE_ID=2 || order_lines.TYPE_ID=3 && order_lines.MEASURE_NAME!=% %}
+                    {order_lines.LINE_PRICE | money_format}
+                  <!-- Скидка -->
+                  {% ELSEIF order_lines.TYPE_ID = 3%}
+                    {order_lines.LINE_PRICE_NUMBER_FORMAT}
+                    {order_lines.MEASURE_NAME}
+                  {% ENDIF %}
+                </span>
+              </td> 
+              <td>
+                <!-- Товарная позиция -->
+                {% IF order_lines.TYPE_ID=1 %}
+                  <span>{order_lines.QUANTITY}</span>
+                  <span title="{order_lines.MEASURE_TITLE}">{order_lines.MEASURE_NAME}</span>
+                <!-- Доставка -->
+                {% ELSEIF order_lines.TYPE_ID = 2%}
+                  <span>1 шт</span>
+                <!-- Скидка -->
+                {% ELSEIF order_lines.TYPE_ID = 3%}
+                  <span title="{order_lines.MEASURE_TITLE}">{order_lines.MEASURE_NAME}</span>
+                {% ENDIF %}
+              </td> 
+              <td>
+                <span class="order-lines__price {CURRENCY_CHAR_CODE}">{order_lines.LINE_SUM | money_format}</span>
+              </td> 
+            </tr> 
+          {% ENDFOR %}
+        </tbody>
+        
+        <tfoot>
+          <tr>
+            <td colspan="2" class="text-right">
+              <span>Итого:</span>
+            </td>
+            <td colspan="2">
+              <span class="{CURRENCY_CHAR_CODE}">{ORDER_SUM | money_format}</span>  
+            </td>
+          </tr>
+        </tfoot>
+
+      </table>
+    </div>
+    <div class="client__buttons">
+      <a class="button-primary" href="{INDEX_PAGE_URL}"><span>Перейти на главную</span></a>
+    </div>
+  </div>
+  {% ENDIF %}
+</div>

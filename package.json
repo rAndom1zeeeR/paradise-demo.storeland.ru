@@ -1,0 +1,45 @@
+{
+	"name": "StoreLandTemplateNodeJSEditor",
+	"version": "1.0.0",
+	"description": "",
+	"main": "main.js",
+	"scripts": {
+		"start": "gulp",
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"gulp install": "npm install -g gulp-cli gulp",
+		"npm install": "npm install",
+		"gulp download": "gulp download"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"bl": "^1.2.3",
+		"chalk": "^4.0.0",
+		"gulp-plumber": "^1.2.1",
+		"gulp-wait": "0.0.2",
+		"http-proxy": "^1.18.1",
+		"moment": "^2.25.3",
+		"node-fetch": "^2.6.1",
+		"node-notifier": "^7.0.0",
+		"nodejs-base64": "^1.0.3",
+		"object-path": "^0.11.8",
+		"yargs-parser": "^13.1.2"
+	},
+	"devDependencies": {
+		"bootstrap": "^4.4.1",
+		"browser-sync": "^2.27.7",
+		"del": "^5.1.0",
+		"gulp": "^4.0.2",
+		"gulp-autoprefixer": "^7.0.1",
+		"gulp-clean-css": "^4.3.0",
+		"gulp-concat": "^2.6.1",
+		"gulp-imagemin": "^7.1.0",
+		"gulp-less": "^4.0.1",
+		"gulp-newer": "^1.4.0",
+		"gulp-rsync": "0.0.9",
+		"gulp-sass": "^4.1.0",
+		"gulp-stylus": "^2.7.0",
+		"gulp-uglify-es": "^2.0.0",
+		"lodash": "^4.17.21"
+	}
+}
