@@ -654,7 +654,7 @@
 								<ol class="pages flex unstyled">
 								{% FOR opinion_pages_list %}
 									{% IF opinion_pages_list.CURRENT %}
-										<li class="current"><span>{opinion_pages_list.PAGE}</span></li>
+										<li class="is-actived"><span>{opinion_pages_list.PAGE}</span></li>
 									{% ELSE %}
 										<li><a href="{GOODS_OPINION_PAGINATE_URL}&page={opinion_pages_list.PAGE}#tab_4">{opinion_pages_list.PAGE}</a></li>
 									{% ENDIF %}
@@ -1048,7 +1048,7 @@
 		</div>
 
 		<!-- Пагинация -->
-		<div class="swiper-pagination flex"></div>
+		<div class="swiper-pagination flex-center"></div>
 
 	</div>
 </div>
@@ -1339,7 +1339,7 @@
 		</div>
 
 		<!-- Пагинация -->
-		<div class="swiper-pagination flex"></div>
+		<div class="swiper-pagination flex-center"></div>
 
 	</div>
 </div>

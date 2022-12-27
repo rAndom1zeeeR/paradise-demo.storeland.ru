@@ -325,7 +325,7 @@
             id="paymentId{order_payment.ID}" 
             name="form[payment][id]" 
             value="{order_payment.ID}"
-            order="{ORDER_FORM_PAYMENT_ID}"
+            order-id="{ORDER_FORM_PAYMENT_ID}"
             {% IF order_payment.first %}checked="checked"
             {% ELSEIF order_payment.ID = ORDER_FORM_PAYMENT_ID %}checked="checked"{% ENDIF %}
             />

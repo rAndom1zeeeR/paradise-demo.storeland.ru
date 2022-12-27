@@ -87,11 +87,14 @@
 					{% ENDFOR %}
 				</div>
 
-				<div class="cartTable__buttons">
+				<div class="cartTable__buttons flex justify-between">
 					<a class="button-rotate button-link cartTable__clear" href="{CART_TRUNCATE_URL}" title="Очистить корзину">
 						<i class="icon-reload"></i>
 						<span>Очистить корзину</span>
 					</a>
+					<button class="button-rotate button-link cartTable__recalc" type="submit" title="Пересчитать">
+						<span>Пересчитать</span>
+					</button>
 				</div>
 
 			</form>
@@ -184,14 +187,6 @@
 					<a class="button-secondary button-link closeOrder" title="Отменить заказ">
 						<span>Изменить </span><span>заказ</span>
 					</a>
-					<noscript>
-						<button class="button-secondary" type="submit" title="Пересчитать">
-							<span>Пересчитать</span>
-						</button>
-						<button class="button-primary" type="submit" name="next_step" title="Перейти к оформлению заказа в 4 шага">
-							<span>Оформить </span><span>заказ</span>
-						</button>
-					</noscript>
 					<div class="form__pp">
 						<span>Нажимая на кнопку &laquo;Оформить заказ&raquo;, Вы соглашаетесь с</span>
 						<span data-fancybox data-src="#fancybox__pp">правилами обработки данных</span>

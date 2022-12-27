@@ -76,11 +76,11 @@
 			<!-- Вид Таблица/Список -->
 			<div class="toolbar__view flex">
 				{% IF GOODS_VIEW_TYPE=1 %}
-				<div class="view__icon is-active" title="Таблица"><i class="icon-view_grid"></i></div>
+				<div class="view__icon is-actived" title="Таблица"><i class="icon-view_grid"></i></div>
 				<a class="view__icon" href="?q={SEARCH_QUERY}&goods_view_type=2" title="Список"><i class="icon-view_list"></i></a>
 				{% ELSEIF GOODS_VIEW_TYPE=2 %}
 				<a class="view__icon" href="?q={SEARCH_QUERY}&goods_view_type=1" title="Таблица"><i class="icon-view_grid"></i></a>
-				<div class="view__icon is-active" title="Список"><i class="icon-view_list"></i></div>
+				<div class="view__icon is-actived" title="Список"><i class="icon-view_list"></i></div>
 				{% ENDIF %}
 			</div>
 			<!-- /END Вид Таблица/Список -->
@@ -648,7 +648,7 @@
 				<a href="{GOODS_PAGINATE_URL | url_amp}&page={GOODS_PAGES_PREVIOUS}" title="Предыдущая страница"><span>{GOODS_PAGES_PREVIOUS}</span></a>
 			</li>
 			{% ENDIF %}
-			<li class="current"><span>{GOODS_PAGES_CURRENT}</span></li>
+			<li class="is-actived"><span>{GOODS_PAGES_CURRENT}</span></li>
 			{% IF GOODS_PAGES_SHOW_LAST %}
 			<li class="next">
 				<a href="{GOODS_PAGINATE_URL | url_amp}&page={GOODS_PAGES_NEXT}" title="Следующая страница"><span>{GOODS_PAGES_NEXT}</span></a>

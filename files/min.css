@@ -47,6 +47,7 @@ body {line-height: 1;font-size: 1rem;font-weight: 400;position: relative;overflo
 a {text-decoration: none;transition: all 0.3s ease;}
 a:hover, a.is-actived, a.added {text-decoration: none;cursor: pointer;}
 img {max-width: 100%;max-height: 100%;width: auto;}
+.IE img {width: 100%;height: 100%;border: 0;}
 p {margin: 0 0 1rem 0;line-height: 1.5;overflow: hidden;}
 .unstyled {margin: 0;padding: 0;list-style: none;}
 .htmlDataBlock {line-height: 1.5;overflow: hidden;}
@@ -57,7 +58,6 @@ p {margin: 0 0 1rem 0;line-height: 1.5;overflow: hidden;}
 .is-show {display: block;}
 .is-hide {display: none;}
 
-.IE img {width: 100%;height: 100%;}
 
 
 /**************************************/
@@ -147,6 +147,7 @@ h6 {font-size: 0.875rem;}
 /**************************************/
 .selectBox {position: relative;}
 .selectBox:after {content: '\e907';font-size: 1rem;bottom: .75rem;right: .5rem;position: absolute;font-family: 'icomoon';pointer-events: none;}
+.selectBox:hover:after {color: var(--color-primary);}
 .selectBox select {padding: 0 1.75rem 0 1rem;}
 .selectBox select::-ms-expand {display: none;}
 
@@ -155,7 +156,7 @@ h6 {font-size: 0.875rem;}
 /*** Навигация по страницам ***/
 /**************************************/
 .pages li {margin: 0 .5rem;font-size: 1.125rem;}
-.pages li.current {color: var(--color-primary);}
+.pages li.is-actived {font-weight: bold;}
 .pages li a {display: block;}
 .pages li.first a, .pages li.last a {font-size: 1.5rem;line-height: 1;width: 2.5rem;height: 2.5rem;line-height: 2.5rem;text-align: center;}
 
@@ -163,7 +164,7 @@ h6 {font-size: 0.875rem;}
 /**************************************/
 /*** Выпадающие объекты ***/
 /**************************************/
-.dropdown__content {margin-top: 1rem;width: 25rem;padding: 1rem;background-color: var(--color-white);border: 1px solid var(--color-lightgray);transform: scale(1,0);transform-origin: right top;transition: all 0.3s ease-in-out;right: 0;position: absolute;z-index: 11;}
+.dropdown__content {margin-top: 1rem;width: 25rem;padding: 1rem;background-color: var(--color-white);border: 1px solid var(--color-border);transform: scale(1,0);transform-origin: right top;transition: all 0.3s ease-in-out;right: 0;position: absolute;z-index: 11;}
 .dropdown.opened .dropdown__content {display: block;}
 @media all and (min-width: 1024px) {
 	.dropdown .dropdown__open:before {content: "";right: 0;bottom: -1rem;height: 2rem;width: 100%;display: block;position: absolute;}
@@ -184,13 +185,13 @@ h6 {font-size: 0.875rem;}
 .addto__content {width: calc(100% - 5rem);padding-left: 1rem;flex-grow: 1;}
 .addto__name {margin-bottom: .625rem;padding-right: 2rem;max-height: 3rem;line-height: 1.5rem;overflow: hidden;display: block;}
 .addto__name span {display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;}
-.addto__mod {color: var(--color-gray);font-size: .75rem;margin-bottom: .625rem;}
+.addto__mod {font-size: .75rem;margin-bottom: .625rem;}
 .addto__qty {margin-right: 1rem;}
 .addto__qty .qty__select {width: 1.5rem;height: 1.5rem;line-height: 1.5rem;border: 0;}
 .addto__qty .qty__input {width: 2.5rem;height: 1.5rem;}
 .addto__price {flex-direction: column;align-items: flex-start;}
 .addto__price .price__now {margin-right: .5rem;}
-.addto__item .addto__remove {position: absolute;right: 0;top: 0;}
+.addto__item .addto__remove {position: absolute;right: .25rem;top: 0;}
 .addto__total {margin: 1rem 0;display: none;}
 .addto__total-label {margin-right: .5rem;}
 .addto__buttons {margin-top: 1rem;display: none;}
@@ -219,7 +220,7 @@ h6 {font-size: 0.875rem;}
 .noty_type__success .noty_progressbar {background-color: var(--color-primary);opacity: 1;}
 .noty_type__warning .noty_progressbar {background-color: var(--color-red);opacity: 1;}
 .noty_type__warning .noty__title {color: var(--color-red);}
-.noty_body {padding: 1rem;border: .25rem solid var(--color-lightgray);background-color: var(--color-white);text-align: center;}
+.noty_body {padding: 1rem;border: .25rem solid var(--color-border);background-color: var(--color-white);text-align: center;}
 .noty__title {font-size: 1.125rem;font-weight: bold;margin-bottom: 1rem;width: 100%;}
 .noty__message {display: block;line-height: 1.5;}
 .noty__message a {font-weight: bold;}
@@ -248,7 +249,7 @@ h6 {font-size: 0.875rem;}
 .compare__buttons a {margin: 1rem 2rem 0 0;}
 .compare__buttons a i {vertical-align: middle;}
 .compare__buttons a span {vertical-align: middle;margin-left: .25rem;}
-.compare__line {border-bottom: 1px solid var(--color-lightgray);margin-bottom: 1rem;padding-bottom: 1rem;}
+.compare__line {border-bottom: 1px solid var(--color-border);margin-bottom: 1rem;padding-bottom: 1rem;}
 .compare__line:nth-child(-n+2) {border-bottom: 0;padding-bottom: 0;}
 .compare__title {margin-bottom: 1rem;width: 100%;font-weight: bold;}
 .compare__title input {margin-right: .5rem;}

@@ -3105,8 +3105,8 @@
 						<div class="catalog__items">
 							{% FOR catalog_full %}
 								{% IFNOT catalog_full.LEVEL = 0 && catalog_full.FIRST %}<div class="catalog__sub" data-level="{catalog_full.LEVEL}">{% ENDIF %}
-									<div {% IF catalog_full.HIDE %}style="display: none;"{% ENDIF %} data-level="{catalog_full.LEVEL}" class="catalog__item {% IF catalog_full.ISSET_VISIBLE_SUB %}parent{% ENDIF %} {% IF catalog_full.CURRENT_PARENT %}opened{% ENDIF %}">
-										<a href="{catalog_full.URL}" data-level="{catalog_full.LEVEL}" class="catalog__link flex {% IF catalog_full.CURRENT || catalog_full.CURRENT_PARENT %}opened{% ENDIF %}">
+									<div class="catalog__item {% IF catalog_full.ISSET_VISIBLE_SUB %}parent{% ENDIF %} {% IF catalog_full.CURRENT_PARENT %}opened{% ENDIF %}" data-level="{catalog_full.LEVEL}" {% IF catalog_full.HIDE %}style="display: none;"{% ENDIF %}>
+										<a class="catalog__link flex {% IF catalog_full.CURRENT || catalog_full.CURRENT_PARENT %}opened{% ENDIF %}" href="{catalog_full.URL}" data-level="{catalog_full.LEVEL}">
 											<span class="catalog__name">{catalog_full.NAME}</span>
 											{% IF catalog_full.ISSET_VISIBLE_SUB %}<span class="catalog__open"></span>{% ENDIF %}
 										</a>
@@ -3244,6 +3244,13 @@
 
 	<!-- Фиксы для IE -->
 	{% IF user_agent_ie || user_agent_mozilla %}
+	<div class="nosupport">
+		<div class="nosupport-inner">
+			<h2><strong>Мы заметили, что у Вас устаревший браузер.</strong></h2>
+			<h3>Необходимо обновиться для корректной работы сайта.</h3>
+		</div>
+	</div>
+	
 	<script src="https://polyfill.io/v3/polyfill.min.js?version=3.111.0&features=Element.prototype.closest,Array.prototype.find,Promise,Object.assign,CSS.supports,es2015,es2016,es2017,es2018,es2019,es2020,es2021,es2022,es5,es6,es7,default,XMLHttpRequest"></script>
 	<script>
 		// Picture element HTML5 shiv

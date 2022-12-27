@@ -29,12 +29,12 @@
 
     {% FOR news_pages %}
       {% IF news_pages.CURRENT %}
-        <li class="current"><span>{news_pages.PAGE}</span></li>
+        <li class="is-actived"><span>{news_pages.PAGE}</span></li>
       {% ELSE %}
         <li><a href="?sid={NEWS_SECTION_ID}&page={news_pages.PAGE}"><span>{news_pages.PAGE}</span></a></li>
       {% ENDIF %}
     {% ENDFOR %}
-    
+
     {% IF NEWS_PAGES_SHOW_NEXT %}
       <li class="last">
         <a href="?sid={NEWS_SECTION_ID}&page={NEWS_PAGES_NEXT}" title="Следующая страница">

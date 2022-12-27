@@ -29,7 +29,7 @@ a {color: var(--color-black);}
 a:hover, a.is-actived, a.added {color: var(--color-primary);}
 .tc {color: var(--color-primary);}
 .required em {color: var(--color-red);}
-.noscript {color: var(--color-white);background-color: var(--color-primary);padding: 1rem;position: relative;text-align: center;}
+.noscript {color: var(--color-white);background-color: var(--color-primary);padding: 1.25rem;position: fixed;top: 0;z-index: 99;text-align: center;width: 100%;}
 
 
 /**************************************/
@@ -42,6 +42,7 @@ input.error, textarea.error {border-color: var(--color-red);}
 textarea {height: auto;padding: 1rem;resize: vertical;}
 select {cursor: pointer;}
 input[type="file"] {margin-top: 0.25rem;height: auto;line-height: 1;border: 0;padding: 0;border-radius: 0;background: transparent;}
+input::-ms-clear {display: none;}
 
 /* Квадрат с иконкой */
 .square {background-color: transparent;border: 1px solid var(--color-black);color: var(--color-black);width: 1.25rem;height: 1.25rem;line-height: 1.25rem;font-size: 1.125rem;margin: 0;padding: 0;text-align: center;cursor: pointer;}
@@ -112,12 +113,6 @@ button:hover, [class*="button-"]:hover, .paymentFormSubmitLink:hover, .paymentFo
 
 
 /**************************************/
-/*** Селекты ***/
-/**************************************/
-.selectBox:hover:after {color: var(--color-primary);}
-
-
-/**************************************/
 /*** Количество ***/
 /**************************************/
 .qty__select {border: 1px solid var(--color-border);width: 2.5rem;height: 2.5rem;line-height: 2.5rem;font-size: 1.5rem;padding: 0;text-align: center;transition: all 0.3s ease;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;}
@@ -144,7 +139,7 @@ button:hover, [class*="button-"]:hover, .paymentFormSubmitLink:hover, .paymentFo
 /*** Основные блоки ***/
 /**************************************/
 section {margin: 3rem 0;position: relative;}
-main {margin: 3rem 0;position: relative;}
+main {margin: 3rem 0;position: relative;display: block;}
 .main__left {width: 25%;padding-right: 1rem;}
 .main__right.has-sidebar {width: 75%;padding-left: 1rem;}
 .main__right {width: 100%;}
@@ -239,6 +234,7 @@ main {margin: 3rem 0;position: relative;}
 .product__sticker {z-index: 2;position: absolute;}
 .product__image {position: relative;}
 .product__img {height: 16.125rem;}
+.IE .product__img img {max-width: 16.125rem;max-height: 16.125rem;}
 .product__links > a {font-size: 1.5rem;margin-left: 1rem;}
 .product__links > a span {display: none;}
 .product__links > a i {margin-right: 0;}
@@ -331,6 +327,7 @@ main {margin: 3rem 0;position: relative;}
 .categories__image {height: 14.5rem;}
 .categories__name {margin-top: 1rem;height: 3rem;line-height: 1.5rem;overflow: hidden;}
 .categories__name span {display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;}
+.IE .categories__name {display: block;}
 .products + .htmlDataBlock {margin-top: 2rem;}
 @media all and (min-width: 1024px) {
 	.categories__full .categories__item {width: calc(25% - 2rem);}
@@ -559,8 +556,7 @@ main {margin: 3rem 0;position: relative;}
 .goods_delivery_zone__item {margin-top: 1rem;}
 .goods_delivery_zone__name {font-weight: bold;}
 .goods_delivery__sublabel {margin: .75rem 0;}
-
-/* .order-delivery__items {display: none;} */
+.order-delivery__items {display: none;}
 .order-delivery__item:nth-child(n+2) {margin-top: 1.5rem;}
 .order-delivery__title {margin-bottom: .75rem;font-weight: bold;}
 .order-delivery__radio {margin-right: .75rem;}
@@ -584,6 +580,7 @@ main {margin: 3rem 0;position: relative;}
 .generally i {font-size: 1.5rem;margin: 0 .5rem;}
 .opinion__captcha {position: relative;}
 .captcha__image {position: absolute;right: 0;bottom: 0;}
+.IE .captcha__image img {width: 3.75rem;}
 .captcha__refresh {position: absolute;right: 4.5rem;bottom: .625rem;font-size: 1.25rem;}
 .captcha__input {width: calc(100% - 3.75rem);}
 @media all and (max-width: 1023px) {
@@ -710,17 +707,19 @@ main {margin: 3rem 0;position: relative;}
 .cartTable__remove {position: absolute;right: 1rem;top: 1rem;}
 .cartTable__remove i {font-size: 1.5rem;line-height: 1;}
 .cartTable__remove span {display: none;}
+.cartTable__recalc {display: none;}
+.IE .cartTable__recalc {display: inline-block;}
 /*** Корзина. Итоговый блок ***/
 .cartTable {width: calc(100% - 18rem);padding-right: 2rem;}
 .cartTotal {width: 18rem;position: sticky;top: 1px;}
-.cartTotal__items {padding: 1rem;border: 1px solid var(--color-lightgray);}
+.cartTotal__items {padding: 1rem;border: 1px solid var(--color-border);}
 .cartTotal__items:hover {border-color: var(--color-primary);}
 .cartTotal__item {margin: .75rem 0 0 0;}
 .cartTotal__price {font-size: 1.125rem;font-weight: normal;}
 .cartTotal__title {margin-bottom: 1.5rem;font-size: 1.125rem;font-weight: bold;}
 .total__cart {margin-top: 1rem;font-size: 1.125rem;font-weight: bold;}
 .cartTotal__label {max-width: 50%;}
-.cartTotal__buttons [class*="button-"] {margin-top: 1rem;width: 100%;text-align: center;pointer-events: all;}
+.cartTotal__buttons [class*="button-"] {margin-top: 1rem;width: 100%;text-align: center;}
 /*** Корзина. Начало оформления заказа ***/
 .cartTable__ajax .total__buttons {display: none;}
 .confirmOrder {display: none;}
@@ -751,17 +750,19 @@ main {margin: 3rem 0;position: relative;}
 .cartTable__order {margin-top: 3rem;}
 .cartTable__order .form__registration {margin: 0 .5rem;}
 .cartTable__order .form__label {display: none;}
-.order_fast__form [order] {margin-bottom: 2rem;width: 100%;}
-.order_fast__form [order]:last-child {margin-bottom: 0;}
+.order_fast__form [order] {margin-top: 2rem;width: 100%;}
+.order_fast__form [order]:first-child {margin-top: 0;}
 .order_fast__form label.error {display: none !important;}
 .order_fast__form .row {margin: 0 -.5rem;}
 .order_fast__form .form__field {margin: 0 .5rem;width: calc(100% - 1rem);flex-grow: 1;}
 .order_fast__form .form__pass {margin: 1rem .5rem 0 .5rem;}
+.order_fast__form .form__registration {margin: 0 .5rem;} 
 .order_fast__form .block__title .title {font-size: 1.125rem;text-align: left;text-transform: capitalize;}
 .order_fast__form .comment .form__field {margin: 0;width: 100%;}
 .order_fast__form .total__buttons {margin-top: 2rem;text-align: center;}
 .order-delivery-zone__selectBox {margin-top: 1rem;}
 .order-delivery__description {margin-top: 1rem;}
+.order-payments_items {display: none;}
 .order-payment__item + .order-payment__item {margin-top: .75rem;}
 .order-payment__desc {margin-top: .75rem;width: 100%;}
 .coupon__button {position: absolute;right: 1rem;line-height: 2.5rem;}
@@ -934,6 +935,7 @@ header .contacts__content {white-space: nowrap;}
 .news__buttons {margin-top: 1rem;}
 .news__title {max-height: 3rem;line-height: 1.5rem;font-weight: bold;display: block;overflow: hidden;}
 .news__title span {display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;}
+.IE .news__title {display: block;}
 @media all and (max-width: 1199px) {
 	.news__image {height: 216px;}
 }

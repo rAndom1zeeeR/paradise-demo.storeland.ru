@@ -158,7 +158,7 @@
 													name="form[payment][id]" 
 													data-id="{order_delivery.available_payment_list.ID}" 
 													value="{order_delivery.available_payment_list.ID}" 
-													order="{ORDER_FORM_PAYMENT_ID}"
+													order-id="{ORDER_FORM_PAYMENT_ID}"
 													{% IF order_delivery.available_payment_list.first %}checked="checked"
 													{% ELSEIF order_delivery.available_payment_list.ID = ORDER_FORM_PAYMENT_ID %}checked="checked"{% ENDIF %}
 										/>
