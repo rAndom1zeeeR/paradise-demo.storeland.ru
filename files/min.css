@@ -63,11 +63,11 @@ p {margin: 0 0 1rem 0;line-height: 1.5;overflow: hidden;}
 /**************************************/
 /*** Заголовки ***/
 /**************************************/
-h1, h2, h3, h4, h5, h6 {text-rendering: optimizelegibility;text-transform: none;line-height: 1.5;margin: 0;padding: 0;font-weight: bold;}
-h1 {font-size: 2rem;}
-h2 {font-size: 1.75rem;}
+h1, h2, h3, h4, h5, h6 {text-rendering: optimizelegibility;text-transform: none;line-height: 1.5;margin: 0;padding: 0;font-weight: 800;}
+h1 {font-size: 2.5rem;}
+h2 {font-size: 2rem;}
 h3 {font-size: 1.5rem;}
-h4 {font-size: 1.25rem;}
+h4 {font-size: 1.25rem;font-weight: bold;}
 h5 {font-size: 1rem;}
 h6 {font-size: 0.875rem;}
 
@@ -140,16 +140,6 @@ h6 {font-size: 0.875rem;}
 .form__pass {position: relative;}
 .form__time {margin-left: 1rem;}
 .form__date {flex-grow: 1;}
-
-
-/**************************************/
-/*** Селекты ***/
-/**************************************/
-.selectBox {position: relative;}
-.selectBox:after {content: '\e907';font-size: 1rem;bottom: .75rem;right: .5rem;position: absolute;font-family: 'icomoon';pointer-events: none;}
-.selectBox:hover:after {color: var(--color-primary);}
-.selectBox select {padding: 0 1.75rem 0 1rem;}
-.selectBox select::-ms-expand {display: none;}
 
 
 /**************************************/

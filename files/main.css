@@ -2,27 +2,30 @@
 /*** Основные переменные шаблона ***/
 /**************************************/
 :root {
-	--color-black: #000000;
+	--color-black: #301815;
 	--color-white: #ffffff;
-	--color-gray: #737373;
-	--color-lightgray: #C4C4C4;
-	--color-border: #999999;
-	--color-red: #E83B35;
-	--color-primary: #00DBDA;
-	--color-secondary: #0CF2B1;
-	--color-shadow: rgba(0, 0, 0, .1);
+	--color-gray: #C2B9B1;
+	--color-lightgray: #F2F0EE;
+	--color-border: #C2B9B1;
+	--color-red: #FD2437;
+	--color-primary: #FD8A4F;
+	--color-secondary: #6FCB59;
+	--color-tertiary: #EDFCE9;
+	--color-quaternary: #B780FC;
+	--color-bg: #FDFAF9;
+	--color-shadow: rgba(164, 139, 123, 0.2);
 }
 
 
 /**************************************/
 /*** Основные стили ***/
 /**************************************/
-body {color: var(--color-black);background-color: var(--color-white);font-family: 'Open Sans', sans-serif;}
+body {color: var(--color-black);background-color: var(--color-bg);font-family: 'Mulish', sans-serif;}
 
 /*** Скролы сайта ***/
 ::-webkit-scrollbar {width: 1rem;height: 0;}
 ::-webkit-scrollbar-thumb {border-radius: 0;background-color: var(--color-gray);}
-::-webkit-scrollbar-track {border-radius: 0;background-color: var(--color-lightgray);}
+::-webkit-scrollbar-track {border-radius: 0;background-color: var(--color-white);}
 
 /*** Вспомогательные элементы ***/
 a {color: var(--color-black);}
@@ -35,8 +38,8 @@ a:hover, a.is-actived, a.added {color: var(--color-primary);}
 /**************************************/
 /*** Инпут поля ***/
 /**************************************/
-input, select, textarea {height: 2.5rem;padding: 0 1rem;color: var(--color-black);background-color: transparent;border-color: var(--color-border);border-width: 1px;border-style: solid;border-radius: 0;width: 100%;font-size: inherit;font-weight: 400;font-family: inherit;outline: 0;-webkit-appearance: none;-moz-appearance: none;appearance: none;}
-input:focus, select:focus, textarea:focus {border-color: var(--color-primary);}
+input, select, textarea {height: 2.5rem;padding: 0 1rem;color: var(--color-black);background-color: var(--color-lightgray);border-color: var(--color-border);border-width: 1px;border-style: solid;border-radius: .75rem;width: 100%;font-size: inherit;font-weight: 400;font-family: inherit;outline: 0;-webkit-appearance: none;-moz-appearance: none;appearance: none;}
+input:focus, select:focus, textarea:focus {border-color: var(--color-secondary);background-color: var(--color-white);}
 input.focus, select.focus, textarea.focus {border-color: var(--color-primary);}
 input.error, textarea.error {border-color: var(--color-red);}
 textarea {height: auto;padding: 1rem;resize: vertical;}
@@ -45,18 +48,26 @@ input[type="file"] {margin-top: 0.25rem;height: auto;line-height: 1;border: 0;pa
 input::-ms-clear {display: none;}
 
 /* Квадрат с иконкой */
-.square {background-color: transparent;border: 1px solid var(--color-black);color: var(--color-black);width: 1.25rem;height: 1.25rem;line-height: 1.25rem;font-size: 1.125rem;margin: 0;padding: 0;text-align: center;cursor: pointer;}
+.square {background-color: transparent;color: var(--color-black);background: var(--color-white);border: 1px solid var(--color-gray);width: 1.25rem;height: 1.25rem;line-height: 1.25rem;font-size: 1.125rem;margin: 0;padding: 0;text-align: center;cursor: pointer;}
 .square:after {content: '';font-family: 'icomoon';}
-.square:checked, .square:hover {color: var(--color-primary);border-color: var(--color-primary);}
+.square:checked {color: var(--color-white);background-color: var(--color-secondary);border-color: var(--color-secondary);}
+.square:hover {background-color: var(--color-tertiary);border-color: var(--color-secondary);}
 .square:checked:after {content: '\e906';}
-.square:disabled {border-color: var(--color-lightgray);cursor: default;}
-.square:disabled:after {content: '';opacity: .5;}
+.square:disabled {background-color: var(--color-gray);border-color: var(--color-gray);cursor: default;pointer-events: none;}
+.square:disabled:after {content: '';}
 .square + label {cursor: pointer;}
-.square:disabled + label {color: var(--color-lightgray);cursor: default;}
+.square:disabled + label {color: var(--color-gray);cursor: default;pointer-events: none;}
 
 /* Чекбокс */
 .checkbox {vertical-align: middle;}
 .checkbox + label {padding-left: .75rem;}
+
+/* Селекты */
+.selectBox {position: relative;}
+.selectBox:after {content: '\e907';font-size: 1rem;bottom: .75rem;right: .5rem;position: absolute;font-family: 'icomoon';pointer-events: none;}
+.selectBox:hover:after {color: var(--color-primary);}
+.selectBox select {padding: 0 1.75rem 0 1rem;}
+.selectBox select::-ms-expand {display: none;}
 
 /* Текст в не активном инпуте */
 ::-webkit-input-placeholder {color: var(--color-gray);}
@@ -74,7 +85,7 @@ input::-ms-clear {display: none;}
 /**************************************/
 /*** Кнопки ***/
 /**************************************/
-button, [class*="button-"], .paymentFormSubmitLink, .paymentFormTbodySubmitButton {color: var(--color-white);background: var(--color-primary);padding: 0 2rem;line-height: 2.25rem;border: 2px solid transparent;border-radius:0;text-align: center;font-size: inherit;font-weight: 500;font-family: inherit;cursor: pointer;display: inline-block;position: relative;transition: all 0.3s ease;}
+button, [class*="button-"], .paymentFormSubmitLink, .paymentFormTbodySubmitButton {color: var(--color-white);background: var(--color-primary);padding: 0 2rem;line-height: 2.75rem;border: 0;border-radius:0;text-align: center;font-size: inherit;font-weight: 500;font-family: inherit;cursor: pointer;display: inline-block;position: relative;transition: all 0.3s ease;}
 button:hover, [class*="button-"]:hover, .paymentFormSubmitLink:hover, .paymentFormTbodySubmitButton:hover, button.is-actived, [class*="button-"].is-actived {color: var(--color-white);background: var(--color-secondary);border-color: var(--color-secondary);}
 /*** Кнопка. Основная ***/
 .button-primary {background: var(--color-primary);border-color: var(--color-primary);}
@@ -83,10 +94,15 @@ button:hover, [class*="button-"]:hover, .paymentFormSubmitLink:hover, .paymentFo
 .button-secondary {background: var(--color-secondary);border-color: var(--color-secondary);}
 .button-secondary:hover, .button-secondary.is-actived {background: var(--color-primary);border-color: var(--color-primary);color: var(--color-white);}
 /*** Кнопка. Третичная ***/
-.button-tertiary {background: var(--color-black);border-color: var(--color-black);}
-.button-tertiary:hover, .button-tertiary.is-actived {background: var(--color-primary);border-color: var(--color-primary);color: var(--color-white);}
+.button-tertiary {background: var(--color-tertiary);border-color: var(--color-tertiary);color: var(--color-secondary);}
+.button-tertiary:hover, .button-tertiary.is-actived {background: var(--color-secondary);border-color: var(--color-secondary);color: var(--color-white);}
+/*** Кнопка. Выключенная ***/
+[class*="button-"].is-disabled, [class*="button-"]:disabled {background-color: var(--color-lightgray);border-color: var(--color-lightgray);pointer-events: none;cursor: default;}
+/*** Кнопка. Нет в наличии ***/
+.button-empty {background: var(--color-lightgray);border-color: var(--color-lightgray);}
+.button-empty:hover {background: var(--color-gray);border-color: var(--color-gray);}
 /*** Кнопка. Маленькая ***/
-.button-small {font-size: .75rem;line-height: 1.5rem;padding: 0 .75rem;}
+.button-small {padding: 0 .75rem;font-size: .75rem;line-height: 1.25rem;}
 /*** Кнопка. Анимация поворота ***/
 .button-rotate i {font-size: 1.125rem;vertical-align: middle;transition: all 0.3s ease;display: inline-block;}
 .button-rotate span {margin-left: .5rem;vertical-align: middle;transition: all 0.3s ease;}
@@ -100,13 +116,8 @@ button:hover, [class*="button-"]:hover, .paymentFormSubmitLink:hover, .paymentFo
 [class^="add-"] span {vertical-align: middle;}
 /*** Кнопка. Фенсибокс ***/
 .fancybox-button {background: var(--color-shadow);color: var(--color-lightgray);border: 0;}
-.fancybox-close-small {line-height: 1;font-size: 1.25rem;background: transparent;}
+.fancybox-close-small {font-size: 1.25rem;line-height: 1;background: transparent;}
 .fancybox-close-small:hover {background: none;color: var(--color-primary);}
-/*** Кнопка. Выключенная ***/
-[class*="button-"].is-disabled, [class*="button-"]:disabled {cursor: default;background-color: var(--color-lightgray);border-color: var(--color-lightgray);pointer-events: none;}
-/*** Кнопка. Нет в наличии ***/
-.button-empty {background: var(--color-lightgray);border-color: var(--color-lightgray);}
-.button-empty:hover {background: var(--color-gray);border-color: var(--color-gray);}
 /*** Кнопка с иконкой ***/
 .button-icon i {font-size: 1.25rem;margin-right: .5rem;vertical-align: middle;}
 .button-icon span {vertical-align: middle;}
