@@ -87,35 +87,62 @@
 			<div class="header__top">
 				<div class="container">
 					<div class="header__inner flex">
-						
-						<!-- Шапка. Меню -->
-						<div class="header-menu">
-							<div class="mainnav__icon">
-								<i class="icon-catalog"></i>
-								<span>Меню</span>
-							</div>
-
-							<nav class="mainnav" itemscope itemtype="https://schema.org/SiteNavigationElement">
-								<ul class="mainnav__list unstyled flex loading">
-									{% FOR menu %}
-										{% FOR header %}
-											{% FOR links %}
-											<li class="mainnav__item">
-												<a class="mainnav__link {% IF menu.header.links.SELECTED %}_active{%ENDIF%} {% IF menu.header.links.NAME = Каталог %}_catalog{% ENDIF %}" href="{menu.header.links.URL}" title="{% IF menu.header.links.TITLE %}{menu.header.links.TITLE}{% ELSE%}{menu.header.links.NAME}{% ENDIF %}" itemprop="url">
-													<span itemprop="name">{menu.header.links.NAME}</span>
-												</a>
-											</li>
-											{% ENDFOR %}
-										{% ENDFOR %}
-									{% ENDFOR %}
-								</ul>
-								<!-- Меню. Еще -->
-								<ul class="mainnav__overflow dropdown__content unstyled"></ul>
-							</nav>
+						<!-- Логотип -->
+						<div class="header-logo" itemscope itemtype="http://schema.org/Organization">
+							<a href="{INDEX_PAGE_URL}" title="{SETTINGS_STORE_NAME}" itemprop="url">
+								<img src="{ASSETS_IMAGES_PATH}logo.png?design=THEMENAME" alt="{SETTINGS_STORE_NAME}" itemprop="image" width="182" height="54">
+								<meta itemprop="image" content="{ASSETS_IMAGES_PATH}logo.png?design=THEMENAME">
+								<meta itemprop="name" content="{SETTINGS_STORE_NAME}">
+								<meta itemprop="telephone" content="{SETTINGS_STORE_PHONE_COUNTRY_CODE1}({SETTINGS_STORE_PHONE_CITY_CODE1}){SETTINGS_STORE_PHONE_NUMBER1}">
+								<span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+									<meta itemprop="addressLocality" content="{SETTINGS_STORE_REGION}" />
+								</span>
+							</a>
 						</div>
 
 						<!-- Шапка. Контакты -->
 						<div class="header-contacts flex">
+							
+							<!-- Время работы -->
+							{% IF SETTINGS_STORE_WORK_TIME %}
+							<div class="contacts__block contacts__worktime">
+								<div class="contacts__label">График работы</div>
+								<a class="contacts__link flex" href="{FEEDBACK_URL}" title="Режим работы">
+									<div class="contacts__icon"><i class="icon-schedule"></i></div>
+									<div class="contacts__content">
+										<span>{SETTINGS_STORE_WORK_TIME}</span>
+									</div>
+								</a>
+							</div>
+							{% ENDIF %}
+							
+							<!-- Адрес -->
+							{% IF SETTINGS_STORE_REGION %}
+							<div class="contacts__block contacts__region">
+								<div class="contacts__label">Адрес магазина</div>
+								<a class="contacts__link flex" href="https://yandex.ru/maps/?text={SETTINGS_STORE_REGION}&z=17" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress" target="_blank" title="Открыть карту по адресу {SETTINGS_STORE_REGION}">
+									<div class="contacts__icon"><i class="icon-location"></i></div>
+									<div class="contacts__content">
+										<span itemprop="addressLocality">{SETTINGS_STORE_REGION}</span>
+									</div>
+								</a>
+							</div>
+							{% ENDIF %}
+
+							<!-- Почта -->
+							{% IF SETTINGS_STORE_EMAIL_MAIN %}
+							<div class="contacts__block contacts__email">
+								<!-- <div class="contacts__label">Электронная почта</div> -->
+								<a class="contacts__link flex" href="mailto:{SETTINGS_STORE_EMAIL_MAIN}" title="{SETTINGS_STORE_EMAIL_MAIN}">
+									<div class="contacts__icon"><i class="icon-mail"></i></div>
+									<div class="contacts__content">
+										<span itemprop="email">{SETTINGS_STORE_EMAIL_MAIN}</span>
+										<div class="contacts__fancy" data-fancybox data-src="#fancybox__feedback"><span>Заказать звонок</span></div>
+									</div>
+								</a>
+							</div>
+							{% ENDIF SETTINGS_STORE_EMAIL_MAIN %}
+
 							<!-- Телефон 1 -->
 							{% IF SETTINGS_STORE_PHONE_NUMBER1 %}
 							<div class="contacts__block contacts__phone">
@@ -130,21 +157,6 @@
 								</a>
 							</div>
 							{% ENDIF SETTINGS_STORE_PHONE_NUMBER1 %}
-
-							<!-- Почта -->
-							{% IF SETTINGS_STORE_EMAIL_MAIN %}
-							<div class="contacts__block contacts__email">
-								<a class="contacts__link flex" href="mailto:{SETTINGS_STORE_EMAIL_MAIN}" title="{SETTINGS_STORE_EMAIL_MAIN}">
-									<div class="contacts__icon">
-										<i class="icon-mail"></i>
-									</div>
-									<div class="contacts__content">
-										<span>{SETTINGS_STORE_EMAIL_MAIN}</span>
-										<div class="contacts__fancy" data-fancybox data-src="#fancybox__feedback"><span>Обратная связь</span></div>
-									</div>
-								</a>
-							</div>
-							{% ENDIF SETTINGS_STORE_EMAIL_MAIN %}
 						</div>
 
 					</div>
@@ -155,17 +167,9 @@
 			<div class="header__middle">
 				<div class="container">
 					<div class="header__inner flex">
-						<!-- Логотип -->
-						<div class="header-logo" itemscope itemtype="http://schema.org/Organization">
-							<a href="{INDEX_PAGE_URL}" title="{SETTINGS_STORE_NAME}" itemprop="url">
-								<img src="{ASSETS_IMAGES_PATH}logo.png?design=THEMENAME" alt="{SETTINGS_STORE_NAME}" itemprop="image" width="182" height="54">
-								<meta itemprop="image" content="{ASSETS_IMAGES_PATH}logo.png?design=THEMENAME">
-								<meta itemprop="name" content="{SETTINGS_STORE_NAME}">
-								<meta itemprop="telephone" content="{SETTINGS_STORE_PHONE_COUNTRY_CODE1}({SETTINGS_STORE_PHONE_CITY_CODE1}){SETTINGS_STORE_PHONE_NUMBER1}">
-								<span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-									<meta itemprop="addressLocality" content="{SETTINGS_STORE_REGION}" />
-								</span>
-							</a>
+						<!-- Каталог -->
+						<div class="header-catalog">
+
 						</div>
 
 						<!-- Поиск -->
@@ -495,6 +499,37 @@
 						</div>
 
 					</div>
+				</div>
+			</div>
+
+			<div class="header__bottom">
+				<div class="container">
+					<!-- Шапка. Меню -->
+					<div class="header-menu">
+						<div class="mainnav__icon">
+							<i class="icon-catalog"></i>
+							<span>Меню</span>
+						</div>
+
+						<nav class="mainnav" itemscope itemtype="https://schema.org/SiteNavigationElement">
+							<ul class="mainnav__list unstyled flex loading">
+								{% FOR menu %}
+									{% FOR header %}
+										{% FOR links %}
+										<li class="mainnav__item">
+											<a class="mainnav__link {% IF menu.header.links.SELECTED %}_active{%ENDIF%} {% IF menu.header.links.NAME = Каталог %}_catalog{% ENDIF %}" href="{menu.header.links.URL}" title="{% IF menu.header.links.TITLE %}{menu.header.links.TITLE}{% ELSE%}{menu.header.links.NAME}{% ENDIF %}" itemprop="url">
+												<span itemprop="name">{menu.header.links.NAME}</span>
+											</a>
+										</li>
+										{% ENDFOR %}
+									{% ENDFOR %}
+								{% ENDFOR %}
+							</ul>
+							<!-- Меню. Еще -->
+							<ul class="mainnav__overflow dropdown__content unstyled"></ul>
+						</nav>
+					</div>
+
 				</div>
 			</div>
 
@@ -2863,79 +2898,79 @@
 								<div class="footer__title">Контакты</div>
 								<div class="footer__content">
 									<div class="contacts" itemscope itemtype="https://schema.org/Organization">
-										<div class="contacts__block">
+										<div class="contacts__block contacts__phones">
+											<!-- <div class="contacts__label">Телефоны</div> -->
 											<!-- Телефон 1 -->
 											{% IF SETTINGS_STORE_PHONE_NUMBER1 %}
-											<!-- <div class="contacts__label">Телефоны</div> -->
-											<div class="contacts__phone flex">
-												<div class="contacts__icon"><i class="icon-phone"></i></div>
-												<div class="contacts__content">
-													<a class="contacts__link" href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE1}({SETTINGS_STORE_PHONE_CITY_CODE1}){SETTINGS_STORE_PHONE_NUMBER1}" title="{SETTINGS_STORE_PHONE_COUNTRY_CODE1}({SETTINGS_STORE_PHONE_CITY_CODE1}){SETTINGS_STORE_PHONE_NUMBER1}">
+											<div class="contacts__phone">
+												<a class="contacts__link flex" href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE1}({SETTINGS_STORE_PHONE_CITY_CODE1}){SETTINGS_STORE_PHONE_NUMBER1}" title="{SETTINGS_STORE_PHONE_COUNTRY_CODE1}({SETTINGS_STORE_PHONE_CITY_CODE1}){SETTINGS_STORE_PHONE_NUMBER1}">
+													<div class="contacts__icon"><i class="icon-phone"></i></div>
+													<div class="contacts__content">
 														<span itemprop="telephone">{SETTINGS_STORE_PHONE_COUNTRY_CODE1}({SETTINGS_STORE_PHONE_CITY_CODE1}){SETTINGS_STORE_PHONE_NUMBER1}</span>
-													</a>
-												</div>
+													</div>
+												</a>
 											</div>
 											{% ENDIF SETTINGS_STORE_PHONE_NUMBER1 %}
 											<!-- Телефон 2 -->
 											{% IF SETTINGS_STORE_PHONE_NUMBER2 %}
-											<div class="contacts__phone flex">
-												<div class="contacts__icon"><i class="icon-phone"></i></div>
-												<div class="contacts__content">
-													<a class="contacts__link" href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE2}({SETTINGS_STORE_PHONE_CITY_CODE2}){SETTINGS_STORE_PHONE_NUMBER2}" title="{SETTINGS_STORE_PHONE_COUNTRY_CODE2}({SETTINGS_STORE_PHONE_CITY_CODE2}){SETTINGS_STORE_PHONE_NUMBER2}">
+											<div class="contacts__phone">
+												<a class="contacts__link flex" href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE2}({SETTINGS_STORE_PHONE_CITY_CODE2}){SETTINGS_STORE_PHONE_NUMBER2}" title="{SETTINGS_STORE_PHONE_COUNTRY_CODE2}({SETTINGS_STORE_PHONE_CITY_CODE2}){SETTINGS_STORE_PHONE_NUMBER2}">
+													<div class="contacts__icon"><i class="icon-phone"></i></div>
+													<div class="contacts__content">
 														<span itemprop="telephone">{SETTINGS_STORE_PHONE_COUNTRY_CODE2}({SETTINGS_STORE_PHONE_CITY_CODE2}){SETTINGS_STORE_PHONE_NUMBER2}</span>
-													</a>
-												</div>
+													</div>
+												</a>
 											</div>
 											{% ENDIF SETTINGS_STORE_PHONE_NUMBER2 %}
 											<!-- Телефон 3 -->
 											{% IF SETTINGS_STORE_PHONE_NUMBER3 %}
-											<div class="contacts__phone flex">
-												<div class="contacts__icon"><i class="icon-phone"></i></div>
-												<div class="contacts__content">
-													<a class="contacts__link" href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE3}({SETTINGS_STORE_PHONE_CITY_CODE3}){SETTINGS_STORE_PHONE_NUMBER3}" title="{SETTINGS_STORE_PHONE_COUNTRY_CODE3}({SETTINGS_STORE_PHONE_CITY_CODE3}){SETTINGS_STORE_PHONE_NUMBER3}">
+											<div class="contacts__phone">
+												<a class="contacts__link flex" href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE3}({SETTINGS_STORE_PHONE_CITY_CODE3}){SETTINGS_STORE_PHONE_NUMBER3}" title="{SETTINGS_STORE_PHONE_COUNTRY_CODE3}({SETTINGS_STORE_PHONE_CITY_CODE3}){SETTINGS_STORE_PHONE_NUMBER3}">
+													<div class="contacts__icon"><i class="icon-phone"></i></div>
+													<div class="contacts__content">
 														<span itemprop="telephone">{SETTINGS_STORE_PHONE_COUNTRY_CODE3}({SETTINGS_STORE_PHONE_CITY_CODE3}){SETTINGS_STORE_PHONE_NUMBER3}</span>
-													</a>
-												</div>
+													</div>
+												</a>
 											</div>
 											{% ENDIF SETTINGS_STORE_PHONE_NUMBER3 %}
 										</div>
 							
 										<!-- Почта -->
 										{% IF SETTINGS_STORE_EMAIL_MAIN %}
-										<div class="contacts__block contacts__email flex">
+										<div class="contacts__block contacts__email">
 											<div class="contacts__label">Электронная почта</div>
-											<div class="contacts__icon"><i class="icon-mail"></i></div>
-											<div class="contacts__content">
-												<a class="contacts__link email" href="mailto:{SETTINGS_STORE_EMAIL_MAIN}" title="{SETTINGS_STORE_EMAIL_MAIN}">
+											<a class="contacts__link flex" href="mailto:{SETTINGS_STORE_EMAIL_MAIN}" title="{SETTINGS_STORE_EMAIL_MAIN}">
+												<div class="contacts__icon"><i class="icon-mail"></i></div>
+												<div class="contacts__content">
 													<span itemprop="email">{SETTINGS_STORE_EMAIL_MAIN}</span>
-												</a>
-											</div>
+												</div>
+											</a>
 										</div>
 										{% ENDIF %}
 							
 										<!-- Адрес -->
 										{% IF SETTINGS_STORE_REGION %}
-										<div class="contacts__block contacts__block_region flex" target="_blank" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+										<div class="contacts__block contacts__region">
 											<div class="contacts__label">Адрес магазина</div>
-											<div class="contacts__icon"><i class="icon-location"></i></div>
-											<div class="contacts__content">
-												<a class="contacts__link" href="https://yandex.ru/maps/?text={SETTINGS_STORE_REGION}&z=17" target="_blank">
+											<a class="contacts__link flex" href="https://yandex.ru/maps/?text={SETTINGS_STORE_REGION}&z=17" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress" target="_blank" title="Открыть карту по адресу {SETTINGS_STORE_REGION}">
+												<div class="contacts__icon"><i class="icon-location"></i></div>
+												<div class="contacts__content">
 													<span itemprop="addressLocality">{SETTINGS_STORE_REGION}</span>
-												</a>
-											</div>
+												</div>
+											</a>
 										</div>
 										{% ENDIF %}
 							
 										<!-- Время работы -->
 										{% IF SETTINGS_STORE_WORK_TIME %}
-										<div class="contacts__block contacts__block_worktime flex">
+										<div class="contacts__block contacts__worktime">
 											<div class="contacts__label">График работы</div>
-											<div class="contacts__icon"><i class="icon-schedule"></i></div>
-											<div class="contacts__content">
-												<a class="contacts__link" href="{FEEDBACK_URL}" title="Режим работы">
+											<a class="contacts__link flex" href="{FEEDBACK_URL}" title="Режим работы">
+												<div class="contacts__icon"><i class="icon-schedule"></i></div>
+												<div class="contacts__content">
 													<span>{SETTINGS_STORE_WORK_TIME}</span>
-												</a>
-											</div>
+												</div>
+											</a>
 										</div>
 										{% ENDIF %}
 										<!-- Название магазина -->
