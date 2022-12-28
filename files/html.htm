@@ -518,13 +518,6 @@
 
 							</div>
 
-							<!-- Наверх -->
-							<div class="addto__block toTop">
-								<a class="addto__link" href="javascript:;" title="Наверх">
-									<i class="icon-arrow_up"></i>
-								</a>
-							</div>
-
 						</div>
 
 					</div>
@@ -3180,35 +3173,42 @@
 
 			<!-- Обратный звонок в модальном окне -->
 			<div id="fancybox__callback" class="modal" style="display:none">
-				<div class="modal__title block__title">
-					<h2 class="title">Обратный звонок</h2>
+				<div class="modal__title">
+					<h2 class="title">Заказать звонок</h2>
 				</div>
 				<div class="modal__content">
 					<form method="post" action="{CALLBACK_URL}" class="form__callback" enctype="multipart/form-data">
 						<input type="hidden" name="hash" value="{HASH}" />
 						<input class="callbackredirect" type="hidden" name="return_to" value="{CALLBACK_URL}" />
+						<input class="form__person" type="hidden" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PERSON}]" value="Заказать звонок - {FORM_CALLBACK_PERSON}" placeholder="Ваше имя" autocomplete="off" />
 						<!-- Набор полей которые не видит пользователь, но видят боты. Когда они их заполняют мы точно знаем, что их прислал нам бот и мы не сохраняем подобный отзыв о товаре, а боту отправившему отзыв сообщаем, что отзыв добавлен успешно, но будет отображён здесь после прохождения модерации -->
 						{ANTISPAM_CODE}
-						<div class="form__fields">
-							<input class="form__input form__person" type="text" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PERSON}]" value="{FORM_CALLBACK_PERSON}" placeholder="Ваше имя" autocomplete="off" required />
-						</div>
-						<div class="form__fields">
-							<input class="form__input form__phone" type="tel" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PHONE}]" value="{FORM_CALLBACK_PHONE}" placeholder="Номер телефона" autocomplete="off" required />
-						</div>
-						<div class="form__buttons">
-							<button class="button-primary form__button" type="submit" title="Заказать звонок"><span>Заказать звонок</span></button>
+						<p class="form__text">
+							<span>Оставьте свой номер телефона и мы проконсультируем Вас бесплатно</span>
+						</p>
+
+						<div class="form__fields flex">
+							<div class="form__field">
+								<input class="form__input form__phone" type="tel" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PHONE}]" value="{FORM_CALLBACK_PHONE}" placeholder="Номер телефона" autocomplete="off" required />
+								<button class="form__button button-secondary" type="submit" title="Заказать звонок">
+									<i class="icon-phone"></i>
+									<!-- <span>Заказать звонок</span> -->
+								</button>
+							</div>
+
 							<div class="form__pp">
-								<span>Нажимая на кнопку &laquo;Заказать звонок&raquo;, Вы соглашаетесь с</span>
-								<span data-fancybox data-src="#fancybox__pp" href="javascript:;">правилами обработки данных</span>
+								<span>Я принимаю условия</span>
+								<span data-fancybox data-src="#fancybox__pp" href="javascript:;">политики конфиденциальности</span>
 							</div>
 						</div>
+
 					</form>
 				</div>
 			</div>
 
 			<!-- Обратный звонок в модальном окне -->
 			<div id="fancybox__feedback" class="modal" style="display:none">
-				<div class="modal__title block__title">
+				<div class="modal__title">
 					<h2 class="title">Обратная связь</h2>
 				</div>
 				<div class="modal__content">
@@ -3227,7 +3227,7 @@
 							<textarea class="textarea" rows="2" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_COMMENT}]" placeholder="Комментарий" >{FORM_CALLBACK_COMMENT}</textarea>
 						</div>
 						<div class="form__buttons">
-							<button class="button-primary form__button" type="submit" title="Отправить"><span>Отправить</span></button>
+							<button class="form__button button-secondary" type="submit" title="Отправить"><span>Отправить</span></button>
 							<div class="form__pp">
 								<span>Нажимая на кнопку &laquo;Отправить&raquo;, Вы соглашаетесь с</span>
 								<span data-fancybox data-src="#fancybox__pp" href="javascript:;">правилами обработки данных</span>
@@ -3239,7 +3239,7 @@
 
 			<!-- Уведомить о поступлении в модальном окне -->
 			<div id="fancybox__notify" class="modal" style="display:none">
-				<div class="modal__title block__title">
+				<div class="modal__title">
 					<h2 class="title">Уведомить</h2>
 				</div>
 				<div class="modal__content">
@@ -3262,7 +3262,7 @@
 							<input class="form__input form__email" type="email" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_EMAIL}]" value="{FORM_CALLBACK_EMAIL}" placeholder="email@email.ru *" autocomplete="off" />
 						</div>
 						<div class="form__buttons">
-							<button class="button-primary form__button" type="submit" title="Уведомить"><span>Уведомить</span></button>
+							<button class="form__button button-secondary" type="submit" title="Уведомить"><span>Уведомить</span></button>
 							<div class="form__pp">
 								<span>Нажимая на кнопку &laquo;Уведомить&raquo;, Вы соглашаетесь с</span>
 								<span data-fancybox data-src="#fancybox__pp" href="javascript:;">правилами обработки данных</span>
@@ -3274,7 +3274,7 @@
 
 			<!-- Политика конфиденциальности в модальном окне -->
 			<div id="fancybox__pp" style="display:none">
-				<div class="modal__title block__title">
+				<div class="modal__title">
 					<h2 class="title">Политика приватности</h2>
 				</div>
 				<div class="modal__content">

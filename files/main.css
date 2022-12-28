@@ -159,6 +159,37 @@ main {margin: 3rem 0;position: relative;display: block;}
 
 
 /**************************************/
+/*** Модальные окна ***/
+/**************************************/
+.fancybox-container .fancybox-content {max-width: 50rem;padding: 0;overflow: hidden;}
+.fancybox-slide--html .modal .fancybox-close-small {opacity: .6;color: var(--color-white);background: rgba(255, 255, 255, 0.2);border-radius: .75rem;padding: .75rem;top: .875rem;right: 1rem;transition: all 0.3s ease;}
+.fancybox-slide--html .modal .fancybox-close-small:hover {opacity: 1;background: rgba(255, 255, 255, 0.5);}
+.fancybox-slide--html .modal .fancybox-close-small:before {content: '\e90b';font-family: 'icomoon';}
+.fancybox-slide--html .modal .fancybox-button svg {display: none;}
+.modal {border-radius: .75rem;}
+.modal__title {color: var(--color-white);background-color: var(--color-primary);padding: 1rem 1.5rem;border-radius: .75rem .75rem 0 0;}
+.modal__content {padding: 1.5rem;}
+@media all and (max-width: 479px) {
+	.fancybox-slide--html .modal .fancybox-close-small {top: 0;right: 0;}
+}
+
+/*** Обратный звонок ***/
+#fancybox__callback {max-width: 40rem;}
+#fancybox__callback .form__button {padding: 0;font-size: 1.5rem;width: 3.5rem;height: 3.5rem;line-height: 3.5rem;color: var(--color-white);border-radius: 100%;position: absolute;top: 0;right: 0;}
+#fancybox__callback .form__input {height: 3.5rem;border-radius: 3.5rem;padding: 0 3.5rem 0 1.75rem;flex-grow: 1;}
+#fancybox__callback .form__field {width: calc(100% - 13rem);}
+#fancybox__callback .form__text {font-weight: 500;}
+#fancybox__feedback .form__button {width: 100%;}
+@media all and (min-width: 640px) {
+	#fancybox__callback .form__pp {width: 12rem;margin: 0 0 0 1rem;color: var(--color-gray);}
+	#fancybox__callback .form__pp span {display: block;}
+}
+@media all and (max-width: 639px) {
+	#fancybox__callback .form__field {width: 100%;}
+}
+
+
+/**************************************/
 /*** Блок Заголовков ***/
 /**************************************/
 .block__title {margin-bottom: 1.5rem;position: relative;text-align: center;}
@@ -838,8 +869,8 @@ header {background-color: var(--color-white);box-shadow: 0px 0px 20px 0px var(--
 /*** Шапка. Контакты ***/
 .header-contacts {width: calc(100% - 13rem);flex-grow: 1;justify-content: flex-end;}
 .header-contacts .contacts__label {display: none;}
-.header-contacts .contacts__worktime {max-width: 9rem;}
-.header-contacts .contacts__region {max-width: 12.25rem;}
+.header-contacts .contacts__worktime {max-width: 10rem;}
+.header-contacts .contacts__region {max-width: 16.25rem;}
 .header-contacts .contacts__email {max-width: 16rem;}
 .header-contacts .contacts__phone {font-size: 1.125rem;white-space: nowrap;}
 .header-contacts .contacts__block {margin-left: 2rem;}
@@ -873,7 +904,7 @@ header {background-color: var(--color-white);box-shadow: 0px 0px 20px 0px var(--
 .addto__link {font-size: 1.5rem;width: 3.5rem;height: 3.5rem;background-color: var(--color-lightgray);border-radius: .75rem;display: flex;align-items: center;justify-content: center;}
 .addto__count {font-size: .75rem;top: -.75rem;left: calc(50% - .75rem);position: absolute;width: 1.5rem;height: 1.5rem;line-height: 1.5rem;background-color: var(--color-primary);color: var(--color-white);border-radius: 100%;text-align: center;font-weight: bold;}
 .cart__icon {width: auto;padding: 0 1rem;}
-.cart__icon .cartSumNow {margin-left: .5rem;}
+.has-items .cart__icon .cartSumNow {margin-left: .5rem;}
 @media all and (max-width: 479px) {
 	.addto__link {font-size: 1.25rem;width: 2.75rem;height: 2.75rem;}
 }
@@ -949,6 +980,7 @@ header {background-color: var(--color-white);box-shadow: 0px 0px 20px 0px var(--
 @media all and (max-width: 639px) {
 	#search-results {top: 8rem;}
 }
+
 
 
 

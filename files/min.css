@@ -65,7 +65,7 @@ p {margin: 0 0 1rem 0;line-height: 1.5;overflow: hidden;}
 /**************************************/
 h1, h2, h3, h4, h5, h6 {text-rendering: optimizelegibility;text-transform: none;line-height: 1.5;margin: 0;padding: 0;font-weight: 800;}
 h1 {font-size: 2.5rem;}
-h2 {font-size: 2rem;}
+h2 {font-size: 1.75rem;}
 h3 {font-size: 1.5rem;}
 h4 {font-size: 1.25rem;font-weight: bold;}
 h5 {font-size: 1rem;}
@@ -133,7 +133,7 @@ h6 {font-size: 0.875rem;}
 .form__fields label em {display: none;}
 .form__fields label.required em {display: inline-block;}
 .form__field {position: relative;}
-.form__pp {font-size: .75rem;margin-top: 1rem;}
+.form__pp {margin-top: 1rem;font-size: .75rem;line-height: 1.5;}
 .form__pp [data-fancybox] {text-decoration: underline;display: inline;}
 .form__pp [data-fancybox]:hover {text-decoration: none;cursor: pointer;}
 .form__buttons {margin-top: 1rem;}
@@ -190,16 +190,6 @@ h6 {font-size: 0.875rem;}
 .has-items .addto__buttons {display: flex;}
 .has-items .addto__total {display: flex;}
 .addto__login {width: 14rem;}
-
-
-/**************************************/
-/*** Модальные окна ***/
-/**************************************/
-.fancybox-container .fancybox-content {max-width: 50rem;padding: 2rem;}
-.fancybox-content.modal {max-width: 24rem;}
-@media all and (max-width: 479px) {
-	.fancybox-container .fancybox-content {padding: 1rem;}
-}
 
 
 /**************************************/
