@@ -38,7 +38,7 @@ a:hover, a.is-actived, a.added {color: var(--color-primary);}
 /**************************************/
 /*** Инпут поля ***/
 /**************************************/
-input, select, textarea {height: 2.5rem;padding: 0 1rem;color: var(--color-black);background-color: var(--color-lightgray);border-color: var(--color-border);border-width: 1px;border-style: solid;border-radius: .75rem;width: 100%;font-size: inherit;font-weight: 400;font-family: inherit;outline: 0;-webkit-appearance: none;-moz-appearance: none;appearance: none;}
+input, select, textarea {height: 2.75rem;padding: 0 1rem;color: var(--color-black);background-color: var(--color-lightgray);border-color: var(--color-lightgray);border-width: 1px;border-style: solid;border-radius: .75rem;width: 100%;font-size: inherit;font-weight: 400;font-family: inherit;outline: 0;-webkit-appearance: none;-moz-appearance: none;appearance: none;}
 input:focus, select:focus, textarea:focus {border-color: var(--color-secondary);background-color: var(--color-white);}
 input.focus, select.focus, textarea.focus {border-color: var(--color-primary);}
 input.error, textarea.error {border-color: var(--color-red);}
@@ -85,7 +85,7 @@ input::-ms-clear {display: none;}
 /**************************************/
 /*** Кнопки ***/
 /**************************************/
-button, [class*="button-"], .paymentFormSubmitLink, .paymentFormTbodySubmitButton {color: var(--color-white);background: var(--color-primary);padding: 0 2rem;line-height: 2.75rem;border: 0;border-radius:0;text-align: center;font-size: inherit;font-weight: 500;font-family: inherit;cursor: pointer;display: inline-block;position: relative;transition: all 0.3s ease;}
+button, [class*="button-"], .paymentFormSubmitLink, .paymentFormTbodySubmitButton {color: var(--color-white);background: var(--color-primary);padding: 0 2rem;line-height: 2.75rem;border: 0;border-radius: .75rem;text-align: center;font-size: inherit;font-weight: 500;font-family: inherit;cursor: pointer;display: inline-block;position: relative;transition: all 0.3s ease;}
 button:hover, [class*="button-"]:hover, .paymentFormSubmitLink:hover, .paymentFormTbodySubmitButton:hover, button.is-actived, [class*="button-"].is-actived {color: var(--color-white);background: var(--color-secondary);border-color: var(--color-secondary);}
 /*** Кнопка. Основная ***/
 .button-primary {background: var(--color-primary);border-color: var(--color-primary);}
@@ -103,6 +103,8 @@ button:hover, [class*="button-"]:hover, .paymentFormSubmitLink:hover, .paymentFo
 .button-empty:hover {background: var(--color-gray);border-color: var(--color-gray);}
 /*** Кнопка. Маленькая ***/
 .button-small {padding: 0 .75rem;font-size: .75rem;line-height: 1.25rem;}
+/*** Кнопка. Большая ***/
+.button-big {padding: 0 2.75rem;font-size: 1.125rem;line-height: 3.5rem;}
 /*** Кнопка. Анимация поворота ***/
 .button-rotate i {font-size: 1.125rem;vertical-align: middle;transition: all 0.3s ease;display: inline-block;}
 .button-rotate span {margin-left: .5rem;vertical-align: middle;transition: all 0.3s ease;}
@@ -119,8 +121,8 @@ button:hover, [class*="button-"]:hover, .paymentFormSubmitLink:hover, .paymentFo
 .fancybox-close-small {font-size: 1.25rem;line-height: 1;background: transparent;}
 .fancybox-close-small:hover {background: none;color: var(--color-primary);}
 /*** Кнопка с иконкой ***/
-.button-icon i {font-size: 1.25rem;margin-right: .5rem;vertical-align: middle;}
-.button-icon span {vertical-align: middle;}
+.button-icon i {font-size: 1.25rem;margin-right: .5rem;vertical-align: text-top;}
+.button-icon span {vertical-align: baseline;}
 
 
 /**************************************/
@@ -138,12 +140,6 @@ button:hover, [class*="button-"]:hover, .paymentFormSubmitLink:hover, .paymentFo
 #toTop {color: var(--color-black);background-color: var(--color-white);border: 2px solid var(--color-black);position: fixed;bottom: 1rem;right: 1rem;width: 3rem;height: 3rem;line-height: 3rem;font-size: 1.5rem;text-align: center;transition: all 0.3s ease;z-index: 9;}
 #toTop:hover {color: var(--color-white);background-color: var(--color-black);border-color: var(--color-black);cursor: pointer;}
 .toTop {display: none;}
-@media all and (min-width: 768px) {
-	.addto__block.toTop {display: none !important;}
-}
-@media all and (max-width: 767px) {
-	#toTop {display: none !important;}
-}
 
 
 /**************************************/
@@ -805,24 +801,56 @@ main {margin: 3rem 0;position: relative;display: block;}
 .stages__buttons [class*="button-"] {margin: 1rem 1rem 0 0;}
 .stages__buttons [class*="button-"]:last-child {margin-right: 0;}
 
+/**************************************/
+/*** Контакты ***/
+/**************************************/
+.contacts__phone + .contacts__phone {margin-top: .75rem;}
+.contacts__icon {font-size: 1.5rem;margin-right: .75rem;transition: all 0.3s ease;}
+.contacts__content {width: calc(100% - 1.5rem - 1rem);}
+.contacts__link {font-weight: 500;align-items: flex-start;}
+.contacts__label {width: 100%;margin-bottom: .75rem;font-weight: 600;}
+.contacts__fancy {margin-top: .5rem;font-size: .875rem;font-weight: 500;text-decoration: underline;text-align: right;}
+.contacts__fancy:hover {text-decoration: underline;}
+
 
 /**************************************/
 /*** Шапка ***/
 /**************************************/
-.header__top {padding: 1rem 0;}
-.header__middle {padding: 1rem 0 0 0;}
+header {background-color: var(--color-white);box-shadow: 0px 0px 20px 0px var(--color-shadow);}
+.header__top {padding: .75rem 0;}
+.header__middle {padding: .75rem 0;}
+.header__bottom {padding: .75rem 0;}
 .header__inner {position: relative;}
 @media all and (max-width: 639px) {
 	.header__middle {padding: 0;}
-	.header-logo {margin-bottom: 1rem;width: 100%;text-align: center;}
 }
 
+/*** Шапка. Логотип ***/
+.header-logo {width: 13rem;}
 
-/**************************************/
-/*** Меню ***/
-/**************************************/
-.header-menu {width: calc(100% - 30rem);flex-grow: 1;}
-.mainnav__list.loading {height: 2.875rem;}
+/*** Шапка. Контакты ***/
+.header-contacts {width: calc(100% - 13rem);flex-grow: 1;justify-content: flex-end;}
+.header-contacts .contacts__label {display: none;}
+.header-contacts .contacts__worktime {max-width: 9.5rem;}
+.header-contacts .contacts__region {max-width: 13rem;}
+.header-contacts .contacts__email {max-width: 16rem;}
+.header-contacts .contacts__phone {font-size: 1.125rem;}
+.header-contacts .contacts__phone {white-space: nowrap;}
+.header-contacts .contacts__block {margin-left: 2rem;}
+.header-contacts .contacts__block:first-child {margin-left: 0;}
+.header-contacts .contacts__icon {color: var(--color-gray);}
+.header-contacts .contacts__block:hover .contacts__icon {color: var(--color-black);}
+
+/*** Добавить в ... ***/
+.addto__block {margin-left: .5rem;position: relative;}
+.addto__link {font-size: 1.5rem;width: 3.5rem;height: 3.5rem;background-color: var(--color-lightgray);border-radius: .75rem;display: flex;align-items: center;justify-content: center;}
+.addto__count {font-size: .75rem;top: -.75rem;left: calc(50% - .75rem);position: absolute;width: 1.5rem;height: 1.5rem;line-height: 1.5rem;background-color: var(--color-primary);color: var(--color-white);border-radius: 100%;text-align: center;font-weight: bold;}
+.cart__icon {width: auto;padding: 0 1rem;}
+.cart__icon .cartSumNow {margin-left: .5rem;}
+
+/*** Шапка. Меню ***/
+.header-menu {width: 100%;flex-grow: 1;}
+.mainnav__list.loading {height: 2.75rem;}
 .mainnav__link {padding: 1rem;display: block;}
 .mainnav__overflow {margin-top: 0;width: 15rem;}
 .mainnav__overflow.opened {transform: scale(1);}
@@ -836,43 +864,12 @@ main {margin: 3rem 0;position: relative;display: block;}
 	.mainnav__icon span {vertical-align: middle;}
 }
 
-/*** Мобильное меню ***/
-#mobmenu {transform: translateX(-100%);max-width: 20rem;height: 100vh;background-color: var(--color-white);border: 1px solid var(--color-lightgray);position: fixed;left: 0;top: 0;transition: all 0.5s ease-in-out;z-index: 10;}
-#mobmenu.opened {transform: translateX(0);}
-.mobmenu__content [data-content] {max-height: calc(100vh - 176px);overflow-y: auto;padding: 1rem;}
-.mobmenu__nav-item {padding: 0 1rem;}
-[data-content] {display: none;position: relative;}
-[data-content].opened {display: block;}
-
-
-/**************************************/
-/*** Контакты ***/
-/**************************************/
-header .contacts__block + .contacts__block {margin: 0 0 0 2rem;}
-header .contacts__content {white-space: nowrap;}
-.contacts__phone + .contacts__phone {margin-top: .75rem;}
-.contacts__icon {font-size: 1.5rem;margin-right: 1rem;transition: all 0.3s ease;}
-.contacts__content {width: calc(100% - 1.5rem - 1rem);}
-.contacts__link {font-weight: bold;}
-.contacts__label {width: 100%;margin-bottom: .75rem;font-weight: 600;}
-.contacts__fancy {margin-top: .5rem;font-size: .75rem;font-weight: 400;text-decoration: underline;}
-.contacts__fancy:hover {text-decoration: underline;}
-@media all and (max-width: 639px) {
-	header .contacts__email .contacts__content {display: none;}
-}
-@media all and (max-width: 479px) {
-	header .contacts__content {display: none;}
-	header .contacts__icon {margin-right: 0;}
-}
-
-
-/**************************************/
-/*** Поиск ***/
-/**************************************/
-.header-search {flex-grow: 1;margin: 0 1rem 0 2rem;}
+/*** Шапка. Поиск ***/
+.header-search {flex-grow: 1;margin-left: 1rem;}
 .search__form {position: relative;}
-.search__input {padding-right: 5rem;}
-.search__submit {padding: 0 .375rem;height: 100%;font-size: 1.5rem;line-height: 2.5rem;position: absolute;right: 0;}
+.search__input {padding-left: 3.5rem;height: 3.5rem;}
+.search__submit {left: 0;color: var(--color-gray);padding: 0 .375rem;width: 3.5rem;height: 100%;font-size: 1.5rem;line-height: 2.5rem;position: absolute;background-color: transparent;}
+.search__submit:hover {}
 .search__reset {opacity: 0;font-size: 1.25rem;top: .625rem;right: 3rem;position: absolute;}
 .search__filled .search__reset {opacity: 1;}
 .search__loading {top: .75rem;right: 5rem;width: 1rem;height: 1rem;display: none;position: absolute;}
@@ -895,9 +892,7 @@ header .contacts__content {white-space: nowrap;}
 	.header-search {margin: 0 0 1rem 0;width: 100%;}
 }
 
-/**************************************/
-/*** Результаты поиска ***/
-/**************************************/
+/*** Шапка. Результаты поиска ***/
 #search-results {display: none;position: absolute;width: 100%;top: 4rem;left: 0;z-index: 13;}
 #search-results ::-webkit-scrollbar {width: .5rem;height: 0;}
 .search-results__inner {border: 2px solid var(--color-lightgray);background-color: var(--color-white);}
@@ -920,16 +915,6 @@ header .contacts__content {white-space: nowrap;}
 	#search-results {top: 8rem;}
 }
 
-
-/**************************************/
-/*** Добавить в ... ***/
-/**************************************/
-.addto__block {padding: .5rem .75rem;position: relative;}
-.addto__link {font-size: 1.5rem;display: block;}
-.addto__count {font-size: .75rem;top: 0;right: 0;position: absolute;}
-@media all and (max-width: 767px) {
-	.header__addto {padding-top: .5rem;border-top: 1px solid var(--color-lightgray);background-color: var(--color-white);position: fixed;bottom: 0;left: 0;width: 100%;justify-content: space-around;z-index: 12;}
-}
 
 
 /**************************************/

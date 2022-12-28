@@ -90,7 +90,7 @@
 						<!-- Логотип -->
 						<div class="header-logo" itemscope itemtype="http://schema.org/Organization">
 							<a href="{INDEX_PAGE_URL}" title="{SETTINGS_STORE_NAME}" itemprop="url">
-								<img src="{ASSETS_IMAGES_PATH}logo.png?design=THEMENAME" alt="{SETTINGS_STORE_NAME}" itemprop="image" width="182" height="54">
+								<img src="{ASSETS_IMAGES_PATH}logo.png?design=THEMENAME" alt="{SETTINGS_STORE_NAME}" itemprop="image" width="208" height="70">
 								<meta itemprop="image" content="{ASSETS_IMAGES_PATH}logo.png?design=THEMENAME">
 								<meta itemprop="name" content="{SETTINGS_STORE_NAME}">
 								<meta itemprop="telephone" content="{SETTINGS_STORE_PHONE_COUNTRY_CODE1}({SETTINGS_STORE_PHONE_CITY_CODE1}){SETTINGS_STORE_PHONE_NUMBER1}">
@@ -151,7 +151,7 @@
 										<i class="icon-phone"></i>
 									</div>
 									<div class="contacts__content">
-										<span>{SETTINGS_STORE_PHONE_COUNTRY_CODE1} ({SETTINGS_STORE_PHONE_CITY_CODE1}) {SETTINGS_STORE_PHONE_NUMBER1}</span>
+										<strong>{SETTINGS_STORE_PHONE_COUNTRY_CODE1} ({SETTINGS_STORE_PHONE_CITY_CODE1}) {SETTINGS_STORE_PHONE_NUMBER1}</strong>
 										<div class="contacts__fancy" data-fancybox data-src="#fancybox__callback"><span>Заказать звонок</span></div>
 									</div>
 								</a>
@@ -169,7 +169,10 @@
 					<div class="header__inner flex">
 						<!-- Каталог -->
 						<div class="header-catalog">
-
+							<div class="header-catalog__icon button-icon button-big">
+								<i class="icon-catalog"></i>
+								<span>Каталог</span>
+							</div>
 						</div>
 
 						<!-- Поиск -->
@@ -180,7 +183,7 @@
 								<form class="search__form" action="{QUICK_SEARCH_URL}" method="get" itemprop="potentialAction" itemscope itemtype="https://schema.org/SearchAction">
 									<meta itemprop="target" content="{SEARCH_URL}?q={query}" />
 									<input type="hidden" name="goods_search_field_id" value="0" />
-									<input class="search__input" type="text" name="query" value="{FORM_SEARCH_Q}" placeholder="Я ищу" autocomplete="off" itemprop="query" />
+									<input class="search__input" type="text" name="query" value="{FORM_SEARCH_Q}" placeholder="Поиск" autocomplete="off" itemprop="query" />
 									<!-- Найти -->
 									<button class="search__submit button-tertiary" type="submit" title="Искать">
 										<i class="icon-search"></i>
@@ -394,6 +397,7 @@
 							<div class="addto__block cart dropdown {% IF CART_COUNT_TOTAL > 0 %}has-items{% ENDIF %}">
 								<a class="addto__link cart__icon dropdown__open" href="{CART_URL}" title="Перейти в корзину">
 									<i class="icon-cart"></i>
+									<span class="price__now cartSumNow {CURRENCY_CHAR_CODE}" data-price="{CART_SUM_NOW}">{CART_SUM_NOW | money_format}</span>
 									<span class="addto__count cart-count" data-cart-count="{CART_COUNT_TOTAL}">{CART_COUNT_TOTAL}</span>
 								</a>
 
@@ -502,34 +506,37 @@
 				</div>
 			</div>
 
+			<!-- Шапка. Меню -->
 			<div class="header__bottom">
 				<div class="container">
-					<!-- Шапка. Меню -->
-					<div class="header-menu">
-						<div class="mainnav__icon">
-							<i class="icon-catalog"></i>
-							<span>Меню</span>
-						</div>
+					<div class="row">
+						
+						<div class="header-menu">
+							<div class="mainnav__icon">
+								<i class="icon-catalog"></i>
+								<span>Меню</span>
+							</div>
 
-						<nav class="mainnav" itemscope itemtype="https://schema.org/SiteNavigationElement">
-							<ul class="mainnav__list unstyled flex loading">
-								{% FOR menu %}
-									{% FOR header %}
-										{% FOR links %}
-										<li class="mainnav__item">
-											<a class="mainnav__link {% IF menu.header.links.SELECTED %}_active{%ENDIF%} {% IF menu.header.links.NAME = Каталог %}_catalog{% ENDIF %}" href="{menu.header.links.URL}" title="{% IF menu.header.links.TITLE %}{menu.header.links.TITLE}{% ELSE%}{menu.header.links.NAME}{% ENDIF %}" itemprop="url">
-												<span itemprop="name">{menu.header.links.NAME}</span>
-											</a>
-										</li>
+							<nav class="mainnav" itemscope itemtype="https://schema.org/SiteNavigationElement">
+								<ul class="mainnav__list unstyled flex loading">
+									{% FOR menu %}
+										{% FOR header %}
+											{% FOR links %}
+											<li class="mainnav__item">
+												<a class="mainnav__link {% IF menu.header.links.SELECTED %}is-actived{%ENDIF%} {% IF menu.header.links.NAME = Каталог %}_catalog{% ENDIF %}" href="{menu.header.links.URL}" title="{% IF menu.header.links.TITLE %}{menu.header.links.TITLE}{% ELSE%}{menu.header.links.NAME}{% ENDIF %}" itemprop="url">
+													<span itemprop="name">{menu.header.links.NAME}</span>
+												</a>
+											</li>
+											{% ENDFOR %}
 										{% ENDFOR %}
 									{% ENDFOR %}
-								{% ENDFOR %}
-							</ul>
-							<!-- Меню. Еще -->
-							<ul class="mainnav__overflow dropdown__content unstyled"></ul>
-						</nav>
-					</div>
+								</ul>
+								<!-- Меню. Еще -->
+								<ul class="mainnav__overflow dropdown__content unstyled"></ul>
+							</nav>
+						</div>
 
+					</div>
 				</div>
 			</div>
 
