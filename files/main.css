@@ -805,11 +805,11 @@ main {margin: 3rem 0;position: relative;display: block;}
 /*** Контакты ***/
 /**************************************/
 .contacts__phone + .contacts__phone {margin-top: .75rem;}
-.contacts__icon {font-size: 1.5rem;margin-right: .75rem;transition: all 0.3s ease;}
-.contacts__content {width: calc(100% - 1.5rem - 1rem);}
+.contacts__icon {margin-top: 0.25rem;font-size: 1.5rem;margin-right: .75rem;transition: all 0.3s ease;}
+.contacts__content {width: calc(100% - 1.5rem - .75rem);line-height: 1.5;text-align: right;}
 .contacts__link {font-weight: 500;align-items: flex-start;}
 .contacts__label {width: 100%;margin-bottom: .75rem;font-weight: 600;}
-.contacts__fancy {margin-top: .5rem;font-size: .875rem;font-weight: 500;text-decoration: underline;text-align: right;}
+.contacts__fancy {font-size: .875rem;font-weight: 500;text-decoration: underline;text-align: right;}
 .contacts__fancy:hover {text-decoration: underline;}
 
 
@@ -817,29 +817,56 @@ main {margin: 3rem 0;position: relative;display: block;}
 /*** Шапка ***/
 /**************************************/
 header {background-color: var(--color-white);box-shadow: 0px 0px 20px 0px var(--color-shadow);}
-.header__top {padding: .75rem 0;}
-.header__middle {padding: .75rem 0;}
-.header__bottom {padding: .75rem 0;}
+.header__top {padding: .75rem 0 1.5rem 0;}
+/* .header__bottom {padding-bottom: .25rem;} */
 .header__inner {position: relative;}
-@media all and (max-width: 639px) {
-	.header__middle {padding: 0;}
+@media all and (max-width: 1023px) {
+	.header__top {padding-bottom: .75rem;}
+	.header__middle {padding-bottom: .75rem;}
+	.header__bottom {display: none;}
+}
+@media all and (max-width: 767px) {
+	.header__middle {display: none;}
 }
 
 /*** Шапка. Логотип ***/
 .header-logo {width: 13rem;}
+@media all and (max-width: 479px) {
+	.header-logo {width: 9rem;height: 3rem;}
+}
 
 /*** Шапка. Контакты ***/
 .header-contacts {width: calc(100% - 13rem);flex-grow: 1;justify-content: flex-end;}
 .header-contacts .contacts__label {display: none;}
-.header-contacts .contacts__worktime {max-width: 9.5rem;}
-.header-contacts .contacts__region {max-width: 13rem;}
+.header-contacts .contacts__worktime {max-width: 9rem;}
+.header-contacts .contacts__region {max-width: 12.25rem;}
 .header-contacts .contacts__email {max-width: 16rem;}
-.header-contacts .contacts__phone {font-size: 1.125rem;}
-.header-contacts .contacts__phone {white-space: nowrap;}
+.header-contacts .contacts__phone {font-size: 1.125rem;white-space: nowrap;}
 .header-contacts .contacts__block {margin-left: 2rem;}
 .header-contacts .contacts__block:first-child {margin-left: 0;}
 .header-contacts .contacts__icon {color: var(--color-gray);}
 .header-contacts .contacts__block:hover .contacts__icon {color: var(--color-black);}
+@media all and (max-width: 1199px) {
+	.header-contacts .contacts__worktime {display: none;}
+}
+@media all and (max-width: 1023px) {
+	.header-contacts {width: calc(100% - 13rem - 3.5rem - 2rem);margin-right: 2rem;}
+	.header-contacts .contacts__region {display: none;}
+	.header-contacts .contacts__email {display: none;}
+}
+@media all and (max-width: 767px) {
+	.header-contacts {width: calc(100% - 13rem - 3.5rem - 2rem - 3.5rem - 2rem);margin-right: 1rem;}
+	.header-contacts .contacts__block {margin: 0;}
+}
+@media all and (max-width: 639px) {
+	.header-contacts {display: none;}
+}
+
+@media all and (max-width: 479px) {
+}
+
+@media all and (max-width: 374px) {
+}
 
 /*** Добавить в ... ***/
 .addto__block {margin-left: .5rem;position: relative;}
@@ -847,6 +874,20 @@ header {background-color: var(--color-white);box-shadow: 0px 0px 20px 0px var(--
 .addto__count {font-size: .75rem;top: -.75rem;left: calc(50% - .75rem);position: absolute;width: 1.5rem;height: 1.5rem;line-height: 1.5rem;background-color: var(--color-primary);color: var(--color-white);border-radius: 100%;text-align: center;font-weight: bold;}
 .cart__icon {width: auto;padding: 0 1rem;}
 .cart__icon .cartSumNow {margin-left: .5rem;}
+@media all and (max-width: 479px) {
+	.addto__link {font-size: 1.25rem;width: 2.75rem;height: 2.75rem;}
+}
+
+/*** Шапка. Адаптивность ***/
+.header-adaptive {display: none;}
+@media all and (max-width: 1023px) {
+	.header-catalog {flex-grow: 1;}
+	.header-adaptive {display: flex;flex-grow: 1;justify-content: flex-end;}
+	.adaptive-search__icon {display: none;}
+}
+@media all and (max-width: 767px) {
+	.adaptive-search__icon {display: flex;margin-right: 1rem;}
+}
 
 /*** Шапка. Меню ***/
 .header-menu {width: 100%;flex-grow: 1;}
@@ -854,25 +895,22 @@ header {background-color: var(--color-white);box-shadow: 0px 0px 20px 0px var(--
 .mainnav__link {padding: 1rem;display: block;}
 .mainnav__overflow {margin-top: 0;width: 15rem;}
 .mainnav__overflow.opened {transform: scale(1);}
-.mainnav__icon {display: none;}
 .mainnav__more_hidden {display: none;}
 .mainnav__more i {vertical-align: bottom;margin-left: .5rem;}
-@media all and (max-width: 1023px) {
-	.mainnav {display: none;}
-	.mainnav__icon {display: inline-block;}
-	.mainnav__icon i {margin-right: .5rem;font-size: 1.5rem;vertical-align: middle;}
-	.mainnav__icon span {vertical-align: middle;}
-}
 
 /*** Шапка. Поиск ***/
 .header-search {flex-grow: 1;margin-left: 1rem;}
 .search__form {position: relative;}
-.search__input {padding-left: 3.5rem;height: 3.5rem;}
-.search__submit {left: 0;color: var(--color-gray);padding: 0 .375rem;width: 3.5rem;height: 100%;font-size: 1.5rem;line-height: 2.5rem;position: absolute;background-color: transparent;}
-.search__submit:hover {}
-.search__reset {opacity: 0;font-size: 1.25rem;top: .625rem;right: 3rem;position: absolute;}
+.search__input {padding: 0 11rem 0 3.5rem;height: 3.5rem;}
+.search__submit {left: 0;color: var(--color-gray);padding: 0;width: 3.5rem;height: 100%;font-size: 1.5rem;line-height: 2.5rem;position: absolute;background-color: transparent;}
+.search__submit:hover, .search__focused .search__submit {background-color: transparent;color: var(--color-black);}
+.search__icon {display: none;}
+.search__form .button-secondary {opacity: 0;right: 1rem;top: .5rem;line-height: 2.5rem;padding: 0 1.5rem;position: absolute;}
+.search__filled .button-secondary {opacity: 1;}
+.search__reset {color: var(--color-gray);right: 8rem;line-height: 3.5rem;opacity: 0;top: 0;position: absolute;transition: all 0.3s ease;cursor: pointer;}
+.search__reset:hover {color: var(--color-black);}
 .search__filled .search__reset {opacity: 1;}
-.search__loading {top: .75rem;right: 5rem;width: 1rem;height: 1rem;display: none;position: absolute;}
+.search__loading {top: 1.125rem;right: 10rem;width: 1rem;height: 1rem;display: none;position: absolute;}
 .search__load .search__loading {display: block;}
 .search__loading div {border: 2px solid var(--color-primary);border-color: var(--color-primary) transparent transparent transparent;width: 1rem;height: 1rem;margin: 0;border-radius: 50%;animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;display: block;position: absolute;}
 .search__loading div:nth-child(1) {animation-delay: -0.45s;}
@@ -882,15 +920,12 @@ header {background-color: var(--color-white);box-shadow: 0px 0px 20px 0px var(--
 	0% {transform: rotate(0deg);}
 	100% {transform: rotate(360deg);}
 }
-@media all and (max-width: 767px) {
-	.header-search {margin: 0 0 0 1rem;width: calc(100% - 198px);}
+@media all and (max-width: 1023px) {
+	.header-search {flex-grow: 0;}
+	.search__form {display: none;}
+	.search__icon {display: flex;}
 }
-@media all and (max-width: 639px) {
-	.header-search {margin: 0;}
-}
-@media all and (max-width: 479px) {
-	.header-search {margin: 0 0 1rem 0;width: 100%;}
-}
+
 
 /*** Шапка. Результаты поиска ***/
 #search-results {display: none;position: absolute;width: 100%;top: 4rem;left: 0;z-index: 13;}

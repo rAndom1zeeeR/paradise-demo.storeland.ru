@@ -357,11 +357,11 @@ h6 {font-size: 0.875rem;}
 /*** Адаптивность ***/
 /**************************************/
 @media all and (min-width: 320px) {
-  .container {min-width: 320px;}
+  .container {min-width: 288px;}
 }
 
 @media all and (min-width: 480px) {
-  .container {min-width: 480px;}
+  .container {min-width: 448px;}
 }
 
 @media all and (min-width: 768px) {
@@ -369,11 +369,11 @@ h6 {font-size: 0.875rem;}
 }
 
 @media all and (min-width: 1024px) {
-  .container {width: 1024px;}
+  .container {width: 992px;}
 }
 
 @media all and (min-width: 1200px) {
-  .container {width: 1200px;}
+  .container {width: 1168px;}
 }
 
 @media all and (max-width: 1199px) {

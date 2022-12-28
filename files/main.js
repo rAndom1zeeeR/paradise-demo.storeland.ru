@@ -2772,16 +2772,6 @@ function openMenu() {
 		}
 	});
 
-	// Открытие Меню
-  $('.mainnav__icon').on('click', function (event){
-    event.preventDefault();
-		$(this).toggleClass('opened');
-		$('#mobmenu').toggleClass('opened');
-		$('#overlay').toggleClass('opened transparent');
-		$('.mobmenu__menu').addClass('opened')
-		$('.mobmenu__nav-item[data-open="menu"]').addClass('opened')
-  });
-
 	// Открытие элементов
   $('[data-open]').on('click', function(event){
     event.preventDefault();

@@ -90,7 +90,7 @@
 						<!-- Логотип -->
 						<div class="header-logo" itemscope itemtype="http://schema.org/Organization">
 							<a href="{INDEX_PAGE_URL}" title="{SETTINGS_STORE_NAME}" itemprop="url">
-								<img src="{ASSETS_IMAGES_PATH}logo.png?design=THEMENAME" alt="{SETTINGS_STORE_NAME}" itemprop="image" width="208" height="70">
+								<img src="{ASSETS_IMAGES_PATH}logo.png?design=THEMENAME" alt="{SETTINGS_STORE_NAME}" itemprop="image" width="206" height="68">
 								<meta itemprop="image" content="{ASSETS_IMAGES_PATH}logo.png?design=THEMENAME">
 								<meta itemprop="name" content="{SETTINGS_STORE_NAME}">
 								<meta itemprop="telephone" content="{SETTINGS_STORE_PHONE_COUNTRY_CODE1}({SETTINGS_STORE_PHONE_CITY_CODE1}){SETTINGS_STORE_PHONE_NUMBER1}">
@@ -103,60 +103,78 @@
 						<!-- Шапка. Контакты -->
 						<div class="header-contacts flex">
 							
-							<!-- Время работы -->
-							{% IF SETTINGS_STORE_WORK_TIME %}
-							<div class="contacts__block contacts__worktime">
-								<div class="contacts__label">График работы</div>
-								<a class="contacts__link flex" href="{FEEDBACK_URL}" title="Режим работы">
-									<div class="contacts__icon"><i class="icon-schedule"></i></div>
-									<div class="contacts__content">
-										<span>{SETTINGS_STORE_WORK_TIME}</span>
-									</div>
-								</a>
-							</div>
-							{% ENDIF %}
-							
-							<!-- Адрес -->
-							{% IF SETTINGS_STORE_REGION %}
-							<div class="contacts__block contacts__region">
-								<div class="contacts__label">Адрес магазина</div>
-								<a class="contacts__link flex" href="https://yandex.ru/maps/?text={SETTINGS_STORE_REGION}&z=17" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress" target="_blank" title="Открыть карту по адресу {SETTINGS_STORE_REGION}">
-									<div class="contacts__icon"><i class="icon-location"></i></div>
-									<div class="contacts__content">
-										<span itemprop="addressLocality">{SETTINGS_STORE_REGION}</span>
-									</div>
-								</a>
-							</div>
-							{% ENDIF %}
+							<div class="contacts flex" itemscope itemtype="https://schema.org/Organization">
+								<!-- Время работы -->
+								{% IF SETTINGS_STORE_WORK_TIME %}
+								<div class="contacts__block contacts__worktime">
+									<div class="contacts__label">График работы</div>
+									<a class="contacts__link flex" href="{FEEDBACK_URL}" title="Режим работы">
+										<div class="contacts__icon"><i class="icon-schedule"></i></div>
+										<div class="contacts__content">
+											<span>{SETTINGS_STORE_WORK_TIME}</span>
+										</div>
+									</a>
+								</div>
+								{% ENDIF %}
+								
+								<!-- Адрес -->
+								{% IF SETTINGS_STORE_REGION %}
+								<div class="contacts__block contacts__region">
+									<div class="contacts__label">Адрес магазина</div>
+									<a class="contacts__link flex" href="https://yandex.ru/maps/?text={SETTINGS_STORE_REGION}&z=17" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress" target="_blank" title="Открыть карту по адресу {SETTINGS_STORE_REGION}">
+										<div class="contacts__icon"><i class="icon-location"></i></div>
+										<div class="contacts__content">
+											<span itemprop="addressLocality">{SETTINGS_STORE_REGION}</span>
+										</div>
+									</a>
+								</div>
+								{% ENDIF %}
 
-							<!-- Почта -->
-							{% IF SETTINGS_STORE_EMAIL_MAIN %}
-							<div class="contacts__block contacts__email">
-								<!-- <div class="contacts__label">Электронная почта</div> -->
-								<a class="contacts__link flex" href="mailto:{SETTINGS_STORE_EMAIL_MAIN}" title="{SETTINGS_STORE_EMAIL_MAIN}">
-									<div class="contacts__icon"><i class="icon-mail"></i></div>
-									<div class="contacts__content">
-										<span itemprop="email">{SETTINGS_STORE_EMAIL_MAIN}</span>
-										<div class="contacts__fancy" data-fancybox data-src="#fancybox__feedback"><span>Заказать звонок</span></div>
-									</div>
-								</a>
-							</div>
-							{% ENDIF SETTINGS_STORE_EMAIL_MAIN %}
+								<!-- Почта -->
+								{% IF SETTINGS_STORE_EMAIL_MAIN %}
+								<div class="contacts__block contacts__email">
+									<!-- <div class="contacts__label">Электронная почта</div> -->
+									<a class="contacts__link flex" href="mailto:{SETTINGS_STORE_EMAIL_MAIN}" title="{SETTINGS_STORE_EMAIL_MAIN}">
+										<div class="contacts__icon"><i class="icon-mail"></i></div>
+										<div class="contacts__content">
+											<span itemprop="email">{SETTINGS_STORE_EMAIL_MAIN}</span>
+											<div class="contacts__fancy" data-fancybox data-src="#fancybox__feedback"><span>Написать нам</span></div>
+										</div>
+									</a>
+								</div>
+								{% ENDIF SETTINGS_STORE_EMAIL_MAIN %}
 
-							<!-- Телефон 1 -->
-							{% IF SETTINGS_STORE_PHONE_NUMBER1 %}
-							<div class="contacts__block contacts__phone">
-								<a class="contacts__link flex" href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE1}({SETTINGS_STORE_PHONE_CITY_CODE1}){SETTINGS_STORE_PHONE_NUMBER1}" title="{SETTINGS_STORE_PHONE_COUNTRY_CODE1}({SETTINGS_STORE_PHONE_CITY_CODE1}){SETTINGS_STORE_PHONE_NUMBER1}">
-									<div class="contacts__icon">
-										<i class="icon-phone"></i>
-									</div>
-									<div class="contacts__content">
-										<strong>{SETTINGS_STORE_PHONE_COUNTRY_CODE1} ({SETTINGS_STORE_PHONE_CITY_CODE1}) {SETTINGS_STORE_PHONE_NUMBER1}</strong>
-										<div class="contacts__fancy" data-fancybox data-src="#fancybox__callback"><span>Заказать звонок</span></div>
-									</div>
-								</a>
+								<!-- Телефон 1 -->
+								{% IF SETTINGS_STORE_PHONE_NUMBER1 %}
+								<div class="contacts__block contacts__phone">
+									<a class="contacts__link flex" href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE1}({SETTINGS_STORE_PHONE_CITY_CODE1}){SETTINGS_STORE_PHONE_NUMBER1}" title="{SETTINGS_STORE_PHONE_COUNTRY_CODE1}({SETTINGS_STORE_PHONE_CITY_CODE1}){SETTINGS_STORE_PHONE_NUMBER1}">
+										<div class="contacts__icon">
+											<i class="icon-phone"></i>
+										</div>
+										<div class="contacts__content">
+											<strong>{SETTINGS_STORE_PHONE_COUNTRY_CODE1} ({SETTINGS_STORE_PHONE_CITY_CODE1}) {SETTINGS_STORE_PHONE_NUMBER1}</strong>
+											<div class="contacts__fancy" data-fancybox data-src="#fancybox__callback"><span>Заказать звонок</span></div>
+										</div>
+									</a>
+								</div>
+								{% ENDIF SETTINGS_STORE_PHONE_NUMBER1 %}
+
+								<!-- Название магазина -->
+								<meta itemprop="name" content="{SETTINGS_STORE_ORG_NAME}" />
+								<meta itemprop="image" content="{ASSETS_IMAGES_PATH}logo.png?design=THEMENAME">
 							</div>
-							{% ENDIF SETTINGS_STORE_PHONE_NUMBER1 %}
+						</div>
+
+						<!-- Шапка. Контакты -->
+						<div class="header-adaptive">
+							<div class="adaptive-search__icon addto__link">
+								<i class="icon-search"></i>
+							</div>
+
+							<div class="adaptive-menu__icon addto__link">
+								<i class="icon-menu"></i>
+							</div>
+
 						</div>
 
 					</div>
@@ -179,6 +197,9 @@
 						<div class="header-search">
 							<div class="search" itemscope itemtype="https://schema.org/WebSite">
 								<link itemprop="url" href="{INDEX_PAGE_URL}" />
+								<div class="search__icon addto__link">
+									<i class="icon-search"></i>
+								</div>
 								<!-- Форма поиска -->
 								<form class="search__form" action="{QUICK_SEARCH_URL}" method="get" itemprop="potentialAction" itemscope itemtype="https://schema.org/SearchAction">
 									<meta itemprop="target" content="{SEARCH_URL}?q={query}" />
@@ -187,6 +208,10 @@
 									<!-- Найти -->
 									<button class="search__submit button-tertiary" type="submit" title="Искать">
 										<i class="icon-search"></i>
+									</button>
+									<!-- Найти -->
+									<button class="button-secondary" type="submit" title="Найти">
+										<span>Найти</span>
 									</button>
 									<!-- Кружок обновления -->
 									<div class="search__loading">
@@ -218,7 +243,7 @@
 						</div>
 
 						<!-- Добавление в ... -->
-						<div class="header__addto flex">
+						<div class="header-addto flex">
 							<!-- Личный кабинет -->
 							<div class="addto__block login dropdown">
 								<a class="addto__link dropdown__open" href="{USER_LOGIN_URL}" title="Личный кабинет">
@@ -510,13 +535,7 @@
 			<div class="header__bottom">
 				<div class="container">
 					<div class="row">
-						
-						<div class="header-menu">
-							<div class="mainnav__icon">
-								<i class="icon-catalog"></i>
-								<span>Меню</span>
-							</div>
-
+						<div class="header-menu">							
 							<nav class="mainnav" itemscope itemtype="https://schema.org/SiteNavigationElement">
 								<ul class="mainnav__list unstyled flex loading">
 									{% FOR menu %}
@@ -534,8 +553,8 @@
 								<!-- Меню. Еще -->
 								<ul class="mainnav__overflow dropdown__content unstyled"></ul>
 							</nav>
-						</div>
 
+						</div>
 					</div>
 				</div>
 			</div>
