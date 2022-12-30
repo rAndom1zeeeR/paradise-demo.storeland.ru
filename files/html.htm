@@ -724,6 +724,40 @@
 			</div>
 		</section>
 
+		<!-- Каталог -->
+		<section id="catalog" class="loading">
+			<div class="container">
+
+				<div class="catalog__inner flex-stretch">
+					<div class="swiper-navigate">
+						<div class="swiper-title">Наш ассортимент</div>
+						<div class="swiper-navigation">
+							<div class="swiper-button-prev"></div>
+							<div class="swiper-button-next"></div>
+						</div>
+					</div>
+
+					<div class="swiper">
+						<div class="swiper-wrapper">
+							{% FOR catalog_full %}
+							{% IF catalog_full.HIDE || catalog_full.LEVEL > 0 %}{continue}{% ENDIF %}
+							<div class="categories__item swiper-slide" data-id="{catalog_full.ID}">
+								<a class="categories__image flex-center" href="{catalog_full.URL}" title="Перейти к категории &laquo;{catalog_full.NAME}&raquo;">
+									<img class="lozad" data-src="{% IF catalog_full.IMAGE_MEDIUM %}{catalog_full.IMAGE_MEDIUM}{% ELSE %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ENDIF %}">
+								</a>
+								<a class="categories__name flex-center" href="{catalog_full.URL}" title="Перейти к категории &laquo;{catalog_full.NAME}&raquo;">
+									<span>{catalog_full.NAME}</span>
+								</a>
+							</div>
+							{% ENDFOR %}
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		</section>
+
 		<!-- Хиты продаж -->
 		{% IFNOT index_page_favorites_goods_empty %}
 		<section id="pdt__best" class="pdt__visible loading">
@@ -3469,7 +3503,7 @@
 			goods.initTabs();
 			goods.onInit();
 			goods.onClick();
-			goods.swiperTumbs()
+			goods.swiperTumbs();
 			swiperSlider('#related-views');
 			swiperSlider('#related-goods');
 		});
@@ -3514,6 +3548,7 @@
 			indexNews();
 			swiperShow();
 			counterDate();
+			swiperCatalog();
 		});
 	</script>
 	{% ENDIF %}

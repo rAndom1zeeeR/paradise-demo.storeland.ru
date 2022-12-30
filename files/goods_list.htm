@@ -3,8 +3,8 @@
 	<!-- Вывод категорий -->
 	{% IFNOT nested_categories_list_empty %}
 	<div class="categories {% IF IS_FULL_CATALOG %}categories__full{% ENDIF %}">
-		<div class="row">
-			<div class="categories__list flex {% IF index_page %}index{% ENDIF %}">
+		<div class="row-small">
+			<div class="categories__list flex {% IF index_page %}page-index{% ENDIF %}">
 				{% FOR nested_categories_list %}
 				<div class="categories__item" data-id="{nested_categories_list.ID}">
 					<a class="categories__image flex-center" href="{nested_categories_list.URL}" title="Перейти к категории &laquo;{nested_categories_list.NAME}&raquo;">

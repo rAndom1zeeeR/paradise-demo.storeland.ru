@@ -3068,6 +3068,68 @@ function swiperShow(){
 	}
 }
 
+// Слайдер Каталога
+function swiperCatalog(){
+	var id = '#catalog'
+	// Слайдер товаров
+	var swiper = new Swiper(id + ' .swiper', {
+		loop: false,
+		autoplay: false,
+		watchSlidesVisibility: true,
+		simulateTouch: true,
+		grabCursor: true,
+		slidesPerView: '5',
+		spaceBetween: 16,
+		nested: true,
+		preloadImages: false,
+		lazy: {
+			enabled: true,
+			loadPrevNext: true,
+			loadOnTransitionStart: true,
+		},
+		navigation: {
+			nextEl: id + ' .swiper-button-next',
+			prevEl: id + ' .swiper-button-prev',
+		},
+		pagination: {
+			el: id + ' .swiper-pagination',
+			type: 'bullets',
+			dynamicBullets: false,
+			clickable: true,
+		},
+		breakpoints: {
+			0: {
+				slidesPerView: '1',
+			},
+			320: {
+				slidesPerView: '2',
+			},
+			480: {
+				slidesPerView: '3',
+			},
+			640: {
+				slidesPerView: '2',
+			},
+			768: {
+				slidesPerView: '3',
+			},
+			1024: {
+				slidesPerView: '4',
+			},
+			1200: {
+				slidesPerView: '5',
+			}
+		},
+	});
+
+	// Скрываем навигацию если слайдер заблокирован
+	if($(id).find('.swiper-button-lock').length){
+		$(id).find('.swiper-button-lock').parent().addClass('swiper-navigation-lock')
+	}else{
+		$(id).find('.swiper-navigation').removeClass('swiper-navigation-lock')
+	}
+
+}
 
 
 // Переименование названий Месяца
