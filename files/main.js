@@ -2528,7 +2528,7 @@ function mainnav(id,rows,media){
 		var nextCheck = 0;
 
 		for(var i=1; i < menuCount;  i++){
-			var currentWidth = parseInt(Math.ceil(mainNavList.find('li:nth-child('+i+')').width())) + 16;
+			var currentWidth = parseInt(Math.ceil(mainNavList.find('li:nth-child('+i+')').width())) + 8;
 			nextCheck += currentWidth;
 
 			if(nextCheck > menuWidth){
