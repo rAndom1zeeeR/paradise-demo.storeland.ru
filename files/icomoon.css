@@ -124,6 +124,9 @@
 .icon-mail:before {
   content: "\e913";
 }
+.icon-notifications:before {
+  content: "\e913";
+}
 .icon-menu:before {
   content: "\e914";
 }
@@ -133,7 +136,7 @@
 .icon-minus:before {
   content: "\e916";
 }
-.icon-notifications:before {
+.icon-notification:before {
   content: "\e917";
 }
 .icon-person:before {

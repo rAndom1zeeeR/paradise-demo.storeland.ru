@@ -348,7 +348,7 @@ function Product() {
 			var diff = 0;
 			if ($type == 'percent') {
 				var diffPercent = (((old - now)/old)*100).toFixed();
-				$obj.find('.sticker__sales').text('-' + diffPercent + '%');
+				$obj.find('.sticker__sales span').text('-' + diffPercent + '%');
 			} else {
 				diff = (old - now).toFixed();
 				$obj.find('.sticker__sales .num').text(addSpaces(diff));
@@ -2585,7 +2585,7 @@ function pdtVisible(id){
 	var visible = $(id).find('.product__item:visible').length;
 
 	// Кнопка показать все
-	var button = $(id).find('.visible__button');
+	var button = $(id).find('.pdt__visible-button');
 	
 	// Скрываем кнопку показать все если мало товаров
 	item.length > visible ? button.parent().show() : button.parent().hide()
@@ -2593,16 +2593,16 @@ function pdtVisible(id){
 	// Функция открытия скрытых товаров
 	button.on('click', function (event){
 		event.preventDefault();
-		changeTxt($(this))
+		changeTxt($(this).find('span'))
 		if($(this).hasClass('is-actived')){
 			$(this).removeClass('is-actived')
-			$(id).removeClass('is-actived')
 			item.removeClass('is-show')
 			$('html, body').animate({scrollTop : $(id).offset().top}, 600);
 		}else{
 			$(this).addClass('is-actived')
-			$(id).addClass('is-actived')
 			item.addClass('is-show')
+			var scrollTop = $(id).offset().top + $(id).height() - $(window).height();
+			$('html, body').animate({scrollTop : scrollTop}, 600);
 		}
 	});
 }
@@ -3131,6 +3131,62 @@ function swiperCatalog(){
 
 }
 
+// Слайдер Каталога
+function swiperOffers(){
+	var id = '#offers'
+	// Слайдер товаров
+	var swiper = new Swiper(id + ' .swiper', {
+		loop: false,
+		autoplay: false,
+		watchSlidesVisibility: true,
+		simulateTouch: true,
+		grabCursor: true,
+		slidesPerView: '2',
+		spaceBetween: 16,
+		nested: true,
+		preloadImages: false,
+		lazy: {
+			enabled: false,
+			loadPrevNext: true,
+			loadOnTransitionStart: true,
+		},
+		navigation: {
+			nextEl: id + ' .swiper-button-next',
+			prevEl: id + ' .swiper-button-prev',
+		},
+		breakpoints: {
+			0: {
+				slidesPerView: '1',
+			},
+			320: {
+				slidesPerView: '1',
+			},
+			480: {
+				slidesPerView: '1',
+			},
+			640: {
+				slidesPerView: '1',
+			},
+			768: {
+				slidesPerView: '2',
+			},
+			1024: {
+				slidesPerView: '2',
+			},
+			1200: {
+				slidesPerView: '2',
+			}
+		},
+	});
+
+	// Скрываем навигацию если слайдер заблокирован
+	if($(id).find('.swiper-button-lock').length){
+		$(id).find('.swiper-button-lock').parent().addClass('swiper-navigation-lock')
+	}else{
+		$(id).find('.swiper-navigation').removeClass('swiper-navigation-lock')
+	}
+
+}
 
 // Переименование названий Месяца
 // function monthNames() {
