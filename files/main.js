@@ -2624,8 +2624,8 @@ function indexNews() {
 			watchSlidesVisibility: true,
 			simulateTouch: true,
 			grabCursor: true,
-			slidesPerView: '4',
-			spaceBetween: 32,
+			slidesPerView: '3',
+			spaceBetween: 16,
 			nested: true,
 			preloadImages: false,
 			autoHeight: false,
@@ -2658,7 +2658,7 @@ function indexNews() {
 					slidesPerView: '3',
 				},
 				1200: {
-					slidesPerView: '4',
+					slidesPerView: '3',
 				}
 			}
 		});
@@ -2965,7 +2965,7 @@ ajaxForms('.page-сallback','pageCallbackFlag','Спасибо за обраще
 // "Обратный звонок".
 // ajaxForms('#callback','callbackFlag','Спасибо за обращение! Мы перезвоним вам в ближайшее время','Вы уже отправляли запрос. Пожалуйста ожидайте звонка.')
 // "Подписаться".
-//ajaxForms('#subscribe','subscribeFlag','Спасибо за обращение! Вы подписались на наши уведомления','Вы уже отправляли запрос. Пожалуйста ожидайте.')
+ajaxForms('#subscribe','subscribeFlag','Спасибо за обращение! Вы подписались на наши уведомления','Вы уже отправляли запрос. Пожалуйста ожидайте.')
 
 
 // Функции стандартного слайдера

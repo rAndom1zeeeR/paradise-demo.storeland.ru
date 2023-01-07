@@ -878,7 +878,7 @@ main {margin: 3rem 0;position: relative;display: block;}
 /**************************************/
 .contacts__phone + .contacts__phone {margin-top: .75rem;}
 .contacts__icon {margin-top: 0.25rem;font-size: 1.5rem;margin-right: .75rem;transition: all 0.3s ease;}
-.contacts__content {width: calc(100% - 1.5rem - .75rem);line-height: 1.5;text-align: right;}
+.contacts__content {width: calc(100% - 1.5rem - .75rem);line-height: 1.5;}
 .contacts__link {font-weight: 500;align-items: flex-start;}
 .contacts__label {width: 100%;margin-bottom: .75rem;font-weight: 600;}
 .contacts__fancy {font-size: .875rem;font-weight: 500;text-decoration: underline;text-align: right;}
@@ -918,6 +918,7 @@ header {background-color: var(--color-white);box-shadow: 0px 0px 20px 0px var(--
 .header-contacts .contacts__block:first-child {margin-left: 0;}
 .header-contacts .contacts__icon {color: var(--color-gray);}
 .header-contacts .contacts__block:hover .contacts__icon {color: var(--color-black);}
+.header-contacts .contacts__content {text-align: right;}
 @media all and (max-width: 1199px) {
 	.header-contacts .contacts__worktime {display: none;}
 }
@@ -969,7 +970,7 @@ header {background-color: var(--color-white);box-shadow: 0px 0px 20px 0px var(--
 .mainnav__overflow {margin-top: 0;width: 15rem;}
 .mainnav__overflow.opened {transform: scale(1);}
 .mainnav__more_hidden {display: none;}
-.mainnav__more i {vertical-align: bottom;margin-left: .5rem;}
+.mainnav__more i {vertical-align: bottom;margin-left: .5rem;font-size: .75rem;}
 
 /*** Шапка. Поиск ***/
 .header-search {flex-grow: 1;margin-left: 1rem;}
@@ -1025,7 +1026,6 @@ header {background-color: var(--color-white);box-shadow: 0px 0px 20px 0px var(--
 
 
 
-
 /**************************************/
 /*** Новости ***/
 /**************************************/
@@ -1034,13 +1034,18 @@ header {background-color: var(--color-white);box-shadow: 0px 0px 20px 0px var(--
 .news__navs::-webkit-scrollbar {height: .25rem;}
 .news__nav {padding: .625rem 1rem;line-height: 1.25;font-weight: 700;}
 .news__nav.is-actived {background-color: var(--color-primary);color: var(--color-white);}
-.news__image {margin-bottom: 1rem;height: 260px;}
-.news__desc {margin-top: 1rem;max-height: 4.5rem;line-height: 1.5rem;display: block;overflow: hidden;}
+#news .swiper-slide {height: auto;}
+.news__item {height: 100%;}
+.news__image {margin-bottom: 1rem;width: 100%;height: 12rem;border-radius: .75rem .75rem 0 0;position: relative;overflow: hidden;}
+.news__image img {object-fit: cover;width: 100%;height: 100%;}
+.news__desc {margin-top: .5rem;max-height: 4.5rem;line-height: 1.5rem;display: block;overflow: hidden;flex-grow: 1;}
 .news__desc span {display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;}
 .news__buttons {margin-top: 1rem;}
-.news__title {max-height: 3rem;line-height: 1.5rem;font-weight: bold;display: block;overflow: hidden;}
+.news__title {max-height: 3rem;line-height: 1.5rem;font-size: 1.25rem;font-weight: bold;display: block;overflow: hidden;flex-grow: 1;}
 .news__title span {display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;}
-.IE .news__title {display: block;}
+.news__content {width: 100%;height: calc(100% - 13rem);display: flex;flex-wrap: wrap;flex-direction: column;}
+.news__item .news__date {color: var(--color-gray);background: var(--color-white);font-size: .875rem;font-weight: bold;padding: .5rem 1rem;border-radius: .75rem .75rem 0 0;line-height: 1;text-align: center;text-transform: lowercase;position: absolute;left: 1rem;bottom: 0;}
+.news__item .news__date i {font-size: 1.25rem;vertical-align: text-bottom;margin-right: .5rem;}
 @media all and (max-width: 1199px) {
 	.news__image {height: 216px;}
 }
@@ -1173,7 +1178,7 @@ footer .contacts__block {margin-top: 1.5rem;}
 
 
 /**************************************/
-/*** Описание страницы на главной ***/
+/*** Обратный звонок ***/
 /**************************************/
 #callback .form__button {padding: 0;font-size: 1.5rem;width: 3.5rem;height: 3.5rem;line-height: 3.5rem;color: var(--color-white);border-radius: 100%;position: absolute;top: 0;right: 0;}
 #callback .form__input {background-color: rgba(255, 255, 255, 0.8);border: 0;height: 3.5rem;border-radius: 3.5rem;padding: 0 3.5rem 0 1.75rem;flex-grow: 1;}
@@ -1186,7 +1191,20 @@ footer .contacts__block {margin-top: 1.5rem;}
 
 
 /**************************************/
-/*** Описание страницы на главной ***/
+/*** Подписка ***/
+/**************************************/
+#subscribe .form__button {padding: 0;font-size: 1.5rem;width: 3.5rem;height: 3.5rem;line-height: 3.5rem;color: var(--color-white);border-radius: 100%;position: absolute;top: 0;right: 0;}
+#subscribe .form__input {background-color: rgba(255, 255, 255, 0.8);border: 0;height: 3.5rem;border-radius: 3.5rem;padding: 0 3.5rem 0 1.75rem;flex-grow: 1;}
+#subscribe .form__field {width: calc(100% - 15rem);}
+#subscribe .form__pp {width: 14rem;margin: 0 0 0 1rem;color: var(--color-gray);font-size: .875rem;}
+#subscribe .form__pp span {display: block;}
+.subscribe__inner {padding: 2rem;background-color: #EDF8FF;border-radius: .75rem;}
+.subscribe__title {color: #437797;font-size: 2.5rem;font-weight: 800;margin-right: 3rem;}
+.subscribe__content {flex-grow: 1;}
+
+
+/**************************************/
+/*** Промо ***/
 /**************************************/
 .promo__inner {padding: 1.75rem 2.5rem;background-color: #E7ECFF;border-radius: .75rem;position: relative;}
 .promo__inner:before {content: '\e936';font-family: 'icomoon';color: var(--color-white);font-size: 9rem;position: absolute;bottom: .5rem;right: 4rem;}
