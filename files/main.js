@@ -2788,6 +2788,17 @@ function openMenu() {
       $('[data-opened="'+ value +'"]').addClass('opened');
     }
   });
+	
+	// Открытие подвала
+	$('.footer__title').on('click', function(event){
+    event.preventDefault();
+		if (getClientWidth() < 640){
+			$(this).toggleClass('is-actived')
+			$(this).next().slideToggle();
+		}else{
+			$(this).next().attr('style', '')
+		}
+	});
 }
 
 // Функция удаления классов всех активных элементов

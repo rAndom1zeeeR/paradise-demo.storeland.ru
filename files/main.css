@@ -877,7 +877,7 @@ main {margin: 3rem 0;position: relative;display: block;}
 /*** Контакты ***/
 /**************************************/
 .contacts__phone + .contacts__phone {margin-top: .75rem;}
-.contacts__icon {margin-top: 0.25rem;font-size: 1.5rem;margin-right: .75rem;transition: all 0.3s ease;}
+.contacts__icon {margin-top: 0.125rem;font-size: 1.5rem;margin-right: .75rem;color: var(--color-gray);transition: all 0.3s ease;}
 .contacts__content {width: calc(100% - 1.5rem - .75rem);line-height: 1.5;}
 .contacts__link {font-weight: 500;align-items: flex-start;}
 .contacts__label {width: 100%;margin-bottom: .75rem;font-weight: 600;}
@@ -916,8 +916,8 @@ header {background-color: var(--color-white);box-shadow: 0px 0px 20px 0px var(--
 .header-contacts .contacts__phone {font-size: 1.125rem;white-space: nowrap;}
 .header-contacts .contacts__block {margin-left: 2rem;}
 .header-contacts .contacts__block:first-child {margin-left: 0;}
-.header-contacts .contacts__icon {color: var(--color-gray);}
-.header-contacts .contacts__block:hover .contacts__icon {color: var(--color-black);}
+.header-contacts .contacts__icon {margin-top: 0.25rem;}
+.header-contacts .contacts__link:hover .contacts__icon {color: var(--color-black);}
 .header-contacts .contacts__content {text-align: right;}
 @media all and (max-width: 1199px) {
 	.header-contacts .contacts__worktime {display: none;}
@@ -1070,33 +1070,73 @@ header {background-color: var(--color-white);box-shadow: 0px 0px 20px 0px var(--
 /**************************************/
 /*** Подвал ***/
 /**************************************/
-.footer__middle {border-top: 1px solid var(--color-lightgray);padding: 2rem 0 0;}
-.footer__bottom {border-top: 1px solid var(--color-lightgray);padding: .5rem 0;}
-.footer__block {width: calc(25% - 2rem);margin: 0 1rem 2rem 1rem;}
-.footer__title {font-size: 1.125rem;font-weight: bold;margin-bottom: .75rem;}
-.footer__worktime {margin-bottom: 1rem;}
-.footer__logo {margin: 2rem 0;}
-.footer__text {line-height: 1.5;}
-.footer__link {display: block;padding: .75rem 0;}
+footer {background-color: #371E1B;color: var(--color-white);padding: 2rem 0;}
+.footer__blocks {width: calc(25% - 1rem);margin: 0 .5rem 1.5rem .5rem;flex-grow: 1;}
+.footer__blocks:nth-child(2) {width: calc(50% - 1rem);}
+.footer__block {width: calc(33.333333% - 1rem);margin: 0 .5rem 1rem .5rem;}
+.footer__title {font-size: 1.25rem;font-weight: bold;margin-bottom: .75rem;position: relative;}
+.footer__logo {margin-bottom: 1rem;padding: .5rem;background-color: var(--color-white);border-radius: .75rem;text-align: center;}
+.footer__text {margin-bottom: 1rem;width: 100%;}
+.footer__link {color: var(--color-white);padding: .5rem 0;line-height: 1.25;display: block;}
+.footer__link:hover {padding-left: .75rem;}
 /*** Подвал. Контакты ***/
-footer .contacts__block {margin-top: 1.5rem;}
-/*** Подвалю. Иконки ***/
-.footer__icons span {display: none;}
-.footer__icons a {margin: .5rem;padding: 0;}
-.footer__icons a:nth-child(n+5) {display: none;}
+.footer__contacts .contacts__block {margin-top: 1.5rem;}
+.footer__contacts .contacts__block:first-child {margin-top: 0;}
+.footer__contacts .contacts__link {color: var(--color-white);}
+.footer__contacts .contacts__link:hover {color: var(--color-primary);}
+.footer__contacts .contacts__label {display: none;}
+.footer__contacts .contacts__phone:nth-child(1) {font-size: 1.25rem;font-weight: bold;}
+.footer__contacts .contacts__callback {margin-bottom: 2rem;}
+/*** Подвалю. Соц сети ***/
+.footer__social-row {margin: 0 -.25rem;}
+.social__link {margin: .25rem;font-size: 1.5rem;width: 4rem;height: 2.5rem;background-color: var(--color-white);border-radius: .75rem;display: flex;align-items: center;justify-content: center;}
+.social__link:hover {color: var(--color-white);background-color: var(--color-primary);}
+.social__link span {display: none;}
+/*** Подвалю. Оплата ***/
+.payments__link {margin: .5rem;flex-grow: 1;}
 /*** Подвалю. Копирайт ***/
-.copyright {width: calc(100% - 240px);font-size: .75rem;color: var(--color-lightgray);flex-grow: 1;}
-.copyright a {padding: 0;}
+.footer__copyright {margin-top: 1rem;font-size: .75rem;color: var(--color-gray);flex-grow: 1;line-height: 1.5;}
+.footer__copyright div {display: inline;}
+@media(max-width: 1199px) {
+	.footer__blocks:nth-child(1) {width: 100%;margin-bottom: 0;order: 3;display: flex;flex-wrap: wrap;align-items: center;}
+	.footer__blocks:nth-child(2) {width: 38rem;}
+	.footer__blocks:nth-child(3) {width: calc(100% - 40rem);padding-left: 2.25rem;}
+	.footer__logo {width: 17.5rem;margin-bottom: 0;}
+	.footer__social {width: 23.5rem;padding: 0 3rem;}
+	.footer__copyright {width: calc(100% - 17.5rem - 23.5rem);margin-top: 0;}
+}
 @media(max-width: 1023px) {
-	.footer__block {width: calc(50% - 2rem);}
+	.footer__text {display: none;}
+	.footer__block {width: calc(50% - 1rem);}
+	.footer__payments {width: 100%;}
+	.footer__blocks:nth-child(2) {width: calc(60% - 1rem);}
+	.footer__blocks:nth-child(3) {width: calc(40% - 1rem);padding: 0 0 1rem 0;}
+	.footer__copyright {width: 100%;margin-top: 1rem;}
+	.footer__social {width: calc(100% - 17.5rem);padding: 0 0 0 2rem;}
+	.payments__link {flex-grow: 0;margin: .25rem;}
 }
 @media (max-width: 767px) {
-	footer {padding-bottom: 50px;}
+	.footer__blocks:nth-child(2) {width: 100%;order: 2;}
+	.footer__blocks:nth-child(3) {width: 100%;order: 1;}
+}
+@media (min-width: 640px) and (max-width: 767px) {
+	.footer__contacts {display: flex;flex-wrap: wrap;align-items: flex-start;}
+	.footer__contacts .contacts__blocks {width: 50%;}
+	.footer__contacts .contacts__callback {margin-bottom: 0;}
+}
+@media (min-width: 640px) {
+	.footer__content {display: block !important;}
+}
+@media (max-width: 639px) {
+	.footer__title:after {content: '\e907';font-family: 'icomoon';position: absolute;right: 0;font-size: .75rem;}
+	.footer__title.is-actived {color: var(--color-primary);}
+	.footer__title.is-actived:after {content: '\e90a';}
+	.footer__title + .footer__content {display: none;}
+	.footer__block {width: 100%;margin: 0 0 1.5rem 0;padding: 0 0 .75rem 0;border-bottom: 1px solid rgba(255, 255, 255, 0.2);}
+	.footer__social {width: 100%;padding: 1rem 0 0 0;}
+	.footer__payments {margin: 0;}
 }
 @media (max-width: 479px) {
-	.footer__block {width: 100%;}
-	.copyright {width: 100%;margin-top: 1rem;}
-	.payments {width: 100%;}
 }
 
 
