@@ -422,7 +422,7 @@
 							<div class="addto__block cart dropdown {% IF CART_COUNT_TOTAL > 0 %}has-items{% ENDIF %}">
 								<a class="addto__link cart__icon dropdown__open" href="{CART_URL}" title="Перейти в корзину">
 									<i class="icon-cart"></i>
-									<span class="price__now cartSumNow {CURRENCY_CHAR_CODE}" data-price="{CART_SUM_NOW}">{CART_SUM_NOW | money_format}</span>
+									<span class="cartSumNow {CURRENCY_CHAR_CODE}" data-price="{CART_SUM_NOW}">{CART_SUM_NOW | money_format}</span>
 									<span class="addto__count cart-count" data-cart-count="{CART_COUNT_TOTAL}">{CART_COUNT_TOTAL}</span>
 								</a>
 
@@ -559,123 +559,125 @@
 		<!-- Слайдшоу -->
 		<section id="slideshow">
 			<div class="container">
-				<div class="slideshow__inner flex">
+				<div class="slideshow__inner flex-stretch">
 					<!-- Слайдер -->
-					<div class="slideshow__swiper swiper">
-						<div class="swiper-wrapper">
-							<!-- Слайд 1 -->
-							<div class="slideshow__item swiper-slide flex">
-								<a class="slideshow__image" href="{CATALOG_URL}" title="Наборы орешков с любовью собираем коробочки полные витаминов">
-									<div class="swiper-lazy-preloader"></div>
-									<picture>
-										<img class="swiper-lazy" 
-												data-src="{ASSETS_IMAGES_PATH}slide_1_1200.jpg?design=THEMENAME" 
-												alt="Наборы орешков с любовью собираем коробочки полные витаминов" 
-												width="674"
-												height="288"
-										/>
-									</picture>
-								</a>
-								<div class="slideshow__content">
-									<div class="slideshow__pretitle">Скидка 15%</div>
-									<a class="slideshow__title" href="{CATALOG_URL}" title="Перейти За покупками в каталог">
-										<span>Наборы орешков</span>
+					<div class="slideshow">
+						<div class="swiper">
+							<div class="swiper-wrapper">
+								<!-- Слайд 1 -->
+								<div class="slideshow__item swiper-slide flex">
+									<a class="slideshow__image" href="{CATALOG_URL}" title="Наборы орешков с любовью собираем коробочки полные витаминов">
+										<div class="swiper-lazy-preloader"></div>
+										<picture>
+											<img class="swiper-lazy" 
+													data-src="{ASSETS_IMAGES_PATH}slide_1_1200.jpg?design=THEMENAME" 
+													alt="Наборы орешков с любовью собираем коробочки полные витаминов" 
+													width="656"
+													height="288"
+											/>
+										</picture>
 									</a>
-									<div class="slideshow__subtitle">с любовью собираем коробочки полные витаминов</div>
-									<!-- Пагинация -->
-									<div class="swiper-pagination flex"></div>
+									<div class="slideshow__content">
+										<div class="slideshow__pretitle">Скидка 15%</div>
+										<a class="slideshow__title" href="{CATALOG_URL}" title="Перейти За покупками в каталог">
+											<span>Наборы орешков</span>
+										</a>
+										<div class="slideshow__subtitle">с любовью собираем коробочки полные витаминов</div>
+										<!-- Пагинация -->
+										<div class="swiper-pagination flex"></div>
+									</div>
 								</div>
+
+								<!-- Слайд 2 -->
+								<div class="slideshow__item swiper-slide flex">
+									<a class="slideshow__image" href="{CATALOG_URL}" title="Наборы орешков с любовью собираем коробочки полные витаминов">
+										<div class="swiper-lazy-preloader"></div>
+										<picture>
+											<img class="swiper-lazy" 
+													data-src="{ASSETS_IMAGES_PATH}slide_2_1200.jpg?design=THEMENAME" 
+													alt="Наборы орешков с любовью собираем коробочки полные витаминов" 
+													width="656"
+													height="288"
+											/>
+										</picture>
+									</a>
+									<div class="slideshow__content">
+										<div class="slideshow__pretitle">Распродажа</div>
+										<a class="slideshow__title" href="{CATALOG_URL}" title="Перейти За покупками в каталог">
+											<span>Восточные сладости</span>
+										</a>
+										<div class="slideshow__subtitle">по самым лучшим ценам</div>
+										<!-- Пагинация -->
+										<div class="swiper-pagination flex"></div>
+									</div>
+								</div>
+
+								<!-- Слайд 3 -->
+								<div class="slideshow__item swiper-slide flex">
+									<a class="slideshow__image" href="{CATALOG_URL}" title="Пряная осень - Устраиваем распродажу специй для любыйх блюд">
+										<div class="swiper-lazy-preloader"></div>
+										<picture>
+											<img class="swiper-lazy" 
+													data-src="{ASSETS_IMAGES_PATH}slide_3_1200.jpg?design=THEMENAME" 
+													alt="Пряная осень - Устраиваем распродажу специй для любыйх блюд" 
+													width="656"
+													height="288"
+											/>
+										</picture>
+									</a>
+									<div class="slideshow__content">
+										<div class="slideshow__pretitle">Скидка 30%</div>
+										<a class="slideshow__title" href="{CATALOG_URL}" title="Перейти За покупками в каталог">
+											<span>Пряная осень</span>
+										</a>
+										<div class="slideshow__subtitle">Устраиваем распродажу специй для любыйх блюд</div>
+										<!-- Пагинация -->
+										<div class="swiper-pagination flex"></div>
+									</div>
+								</div>
+
+								<!-- Слайд 4 -->
+								<div class="slideshow__item swiper-slide flex">
+									<a class="slideshow__image" href="{CATALOG_URL}" title="Сушенные ягоды - Запасаемся витаминами и экономим деньги">
+										<div class="swiper-lazy-preloader"></div>
+										<picture>
+											<img class="swiper-lazy" 
+													data-src="{ASSETS_IMAGES_PATH}slide_1_1200.jpg?design=THEMENAME" 
+													alt="Сушенные ягоды - Запасаемся витаминами и экономим деньги" 
+													width="656"
+													height="288"
+											/>
+										</picture>
+									</a>
+									<div class="slideshow__content">
+										<div class="slideshow__pretitle">Скидка 20%</div>
+										<a class="slideshow__title" href="{CATALOG_URL}" title="Перейти За покупками в каталог">
+											<span>Сушенные ягоды</span>
+										</a>
+										<div class="slideshow__subtitle">Запасаемся витаминами и экономим деньги</div>
+										<!-- Пагинация -->
+										<div class="swiper-pagination flex"></div>
+									</div>
+								</div>
+
 							</div>
 
-							<!-- Слайд 2 -->
-							<div class="slideshow__item swiper-slide flex">
-								<a class="slideshow__image" href="{CATALOG_URL}" title="Наборы орешков с любовью собираем коробочки полные витаминов">
-									<div class="swiper-lazy-preloader"></div>
-									<picture>
-										<img class="swiper-lazy" 
-												data-src="{ASSETS_IMAGES_PATH}slide_2_1200.jpg?design=THEMENAME" 
-												alt="Наборы орешков с любовью собираем коробочки полные витаминов" 
-												width="674"
-												height="288"
-										/>
-									</picture>
-								</a>
-								<div class="slideshow__content">
-									<div class="slideshow__pretitle">Распродажа</div>
-									<a class="slideshow__title" href="{CATALOG_URL}" title="Перейти За покупками в каталог">
-										<span>Восточные сладости</span>
-									</a>
-									<div class="slideshow__subtitle">по самым лучшим ценам</div>
-									<!-- Пагинация -->
-									<div class="swiper-pagination flex"></div>
-								</div>
+							<!-- Навигация -->
+							<div class="swiper-navigation flex">
+								<div class="swiper-button-prev"></div>
+								<div class="swiper-button-next"></div>
 							</div>
-
-							<!-- Слайд 3 -->
-							<div class="slideshow__item swiper-slide flex">
-								<a class="slideshow__image" href="{CATALOG_URL}" title="Пряная осень - Устраиваем распродажу специй для любыйх блюд">
-									<div class="swiper-lazy-preloader"></div>
-									<picture>
-										<img class="swiper-lazy" 
-												data-src="{ASSETS_IMAGES_PATH}slide_3_1200.jpg?design=THEMENAME" 
-												alt="Пряная осень - Устраиваем распродажу специй для любыйх блюд" 
-												width="674"
-												height="288"
-										/>
-									</picture>
-								</a>
-								<div class="slideshow__content">
-									<div class="slideshow__pretitle">Скидка 30%</div>
-									<a class="slideshow__title" href="{CATALOG_URL}" title="Перейти За покупками в каталог">
-										<span>Пряная осень</span>
-									</a>
-									<div class="slideshow__subtitle">Устраиваем распродажу специй для любыйх блюд</div>
-									<!-- Пагинация -->
-									<div class="swiper-pagination flex"></div>
-								</div>
-							</div>
-
-							<!-- Слайд 4 -->
-							<div class="slideshow__item swiper-slide flex">
-								<a class="slideshow__image" href="{CATALOG_URL}" title="Сушенные ягоды - Запасаемся витаминами и экономим деньги">
-									<div class="swiper-lazy-preloader"></div>
-									<picture>
-										<img class="swiper-lazy" 
-												data-src="{ASSETS_IMAGES_PATH}slide_1_1200.jpg?design=THEMENAME" 
-												alt="Сушенные ягоды - Запасаемся витаминами и экономим деньги" 
-												width="674"
-												height="288"
-										/>
-									</picture>
-								</a>
-								<div class="slideshow__content">
-									<div class="slideshow__pretitle">Скидка 20%</div>
-									<a class="slideshow__title" href="{CATALOG_URL}" title="Перейти За покупками в каталог">
-										<span>Сушенные ягоды</span>
-									</a>
-									<div class="slideshow__subtitle">Запасаемся витаминами и экономим деньги</div>
-									<!-- Пагинация -->
-									<div class="swiper-pagination flex"></div>
-								</div>
-							</div>
+							<!-- Пагинация -->
+							<!-- <div class="swiper-pagination flex"></div> -->
 
 						</div>
-
-						<!-- Навигация -->
-						<div class="swiper-navigation flex">
-							<div class="swiper-button-prev"></div>
-							<div class="swiper-button-next"></div>
-						</div>
-						<!-- Пагинация -->
-						<!-- <div class="swiper-pagination flex"></div> -->
-
 					</div>
 
 					<!-- Распродажа -->
 					{% IFNOT index_page_sale_goods_empty %}
 					<div id="pdt__sales" class="loading">
 						<div class="block__title">
-							<a class="title" href="{DISCOUNT_URL}" title="Перейти в Распродажа"><span>Распродажа</span></a>
+							<a class="title" href="{DISCOUNT_URL}" title="Перейти в Распродажа"><span>Товар дня</span></a>
 						</div>
 						<!-- Слайдер -->
 						<div class="swiper">
@@ -706,43 +708,6 @@
 												<span class="sticker__sales"><span>%</span></span>
 												{% ELSEIF index_page_sale_goods.MIN_PRICE_OLD > index_page_sale_goods.MIN_PRICE_NOW %}
 												<span class="sticker__sales"><span>%</span></span>
-												{% ENDIF %}
-											</div>
-
-											<!-- Добавление товара в избранное и сравнение и в корзину -->
-											<div class="product__addCart">
-												<!-- Добавление в корзину -->
-												{% IF index_page_sale_goods.MAX_REST_VALUE=0 %}
-												<a class="add-notify"
-													title="Уведомить"
-													data-tooltip="Уведомить"
-													rel="nofollow"
-													data-fancybox
-													data-src="#fancybox__notify"
-													href="javascript:;"
-													data-name="{index_page_sale_goods.NAME}"
-													data-art="{index_page_sale_goods.ART_NUMBER}"
-												>
-													<i class="icon-notifications"></i>
-													<span>Уведомить</span>
-												</a>
-												{% ELSE %}
-												<a class="{% IF index_page_sale_goods.COUNT_MODIFICATION > 1 %}add-mod{% ELSE %}add-cart{% ENDIF %}"
-													title="Добавить в корзину &laquo;{index_page_sale_goods.NAME}&raquo;"
-													data-tooltip="В корзину"
-													rel="nofollow"
-													href="{% IF index_page_sale_goods.COUNT_MODIFICATION > 1 %}{index_page_sale_goods.URL_MIN_PRICE_NOW}{% ELSE %}{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_sale_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_sale_goods.MIN_PRICE_NOW_ID}{% ENDIF %}"
-												>
-													<i class="icon-cart"></i>
-													<span class="inCart__label">В корзину</span>
-													<span class="inCart__added">
-														<span class="inCart__count">{index_page_sale_goods.NB_GOODS_IN_CART}</span>
-														{% FOR mods %}
-															{% IF index_page_sale_goods.mods.index > 1 %}{continue}{% ENDIF %}
-															<span class="inCart__measure">{index_page_sale_goods.mods.MEASURE_NAME}.</span>
-														{% ENDFOR %}
-													</span>
-												</a>
 												{% ENDIF %}
 											</div>
 
@@ -880,7 +845,7 @@
 											<!-- Счетчик обратного отсчета. end дата окончания акции в формате Месяц:День:Год Часы:Минуты:Секунды -->
 											<div class="product__counter product__margin">
 												<div class="counter flex" data-expired="{index_page_sale_goods.MAX_DISCOUNT_EXPIRED_AT | date('m/d/Y H:i:s')}" data-time="{CURRENT_TIME | date('m/d/Y H:i:s')}">
-													<i class="icon-time"></i>
+													<i class="icon-sale"></i>
 													<div class="counter__item days">
 														<span>0</span>
 														<label>д</label>
@@ -929,6 +894,43 @@
 													<span class="price__now {CURRENCY_CHAR_CODE}" itemprop="price" content="{index_page_sale_goods.MIN_PRICE_NOW}">{index_page_sale_goods.MIN_PRICE_NOW | money_format}</span>
 												</div>
 
+												<!-- Добавление товара в избранное и сравнение и в корзину -->
+												<div class="product__addCart">
+													<!-- Добавление в корзину -->
+													{% IF index_page_sale_goods.MAX_REST_VALUE=0 %}
+													<a class="add-notify"
+														title="Уведомить"
+														data-tooltip="Уведомить"
+														rel="nofollow"
+														data-fancybox
+														data-src="#fancybox__notify"
+														href="javascript:;"
+														data-name="{index_page_sale_goods.NAME}"
+														data-art="{index_page_sale_goods.ART_NUMBER}"
+													>
+														<i class="icon-notifications"></i>
+														<span>Уведомить</span>
+													</a>
+													{% ELSE %}
+													<a class="{% IF index_page_sale_goods.COUNT_MODIFICATION > 1 %}add-mod{% ELSE %}add-cart{% ENDIF %}"
+														title="Добавить в корзину &laquo;{index_page_sale_goods.NAME}&raquo;"
+														data-tooltip="В корзину"
+														rel="nofollow"
+														href="{% IF index_page_sale_goods.COUNT_MODIFICATION > 1 %}{index_page_sale_goods.URL_MIN_PRICE_NOW}{% ELSE %}{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_sale_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_sale_goods.MIN_PRICE_NOW_ID}{% ENDIF %}"
+													>
+														<i class="icon-cart"></i>
+														<span class="inCart__label">В корзину</span>
+														<span class="inCart__added">
+															<span class="inCart__count">{index_page_sale_goods.NB_GOODS_IN_CART}</span>
+															{% FOR mods %}
+																{% IF index_page_sale_goods.mods.index > 1 %}{continue}{% ENDIF %}
+																<span class="inCart__measure">{index_page_sale_goods.mods.MEASURE_NAME}.</span>
+															{% ENDFOR %}
+														</span>
+													</a>
+													{% ENDIF %}
+												</div>
+
 												{% IF index_page_sale_goods.COUNT_MODIFICATION > 1 %}
 												<div class="product__props selectBox">
 													<select class="product__props-select select" name="form[properties][]">
@@ -953,9 +955,6 @@
 								<div class="swiper-button-prev"></div>
 								<div class="swiper-button-next"></div>
 							</div>
-
-							<!-- Пагинация -->
-							<div class="swiper-pagination flex"></div>
 
 						</div>
 					</div>
@@ -3085,35 +3084,35 @@
 							</div>
 
 							<!-- Подвал. Оплата -->
-							<div class="footer__payments">
+							<div class="footer__block footer__payments">
 								<div class="footer__payments-row">
 									<div class="payments__links flex">
+										<a class="payments__link mastercard" href="#" title="Способы оплаты">
+											<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 50 50"><path fill="#ff9800" d="M32 10a14 14 0 1 0 0 28 14 14 0 1 0 0-28Z"/><path fill="#d50000" d="M16 10a14 14 0 1 0 0 28 14 14 0 1 0 0-28Z"/><path fill="#ff3d00" d="M18 24c0 4.755 2.376 8.95 6 11.48 3.624-2.53 6-6.725 6-11.48s-2.376-8.95-6-11.48c-3.624 2.53-6 6.725-6 11.48z"/></svg>
+										</a>
+										<a class="payments__link iomoney" href="#" title="Способы оплаты">
+											<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><style>.st1{fill:#8b3ffd}</style><path class="st1" d="M32.3 7.2c-9.9 0-17.8 8-17.8 17.8 0 9.9 8 17.8 17.8 17.8s17.8-8 17.8-17.8-8-17.8-17.8-17.8zm0 24.4c-3.6 0-6.6-3-6.6-6.6s3-6.6 6.6-6.6c3.6 0 6.6 3 6.6 6.6-.1 3.6-3 6.6-6.6 6.6zM14.4 12.4v25.9H8.1L0 12.4h14.4z"/></svg>
+										</a>
+										<a class="payments__link iokassa" href="#" title="Способы оплаты">
+											<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><linearGradient id="a" gradientUnits="userSpaceOnUse" x1="32.194" y1="44.667" x2="32.194" y2="9.167" gradientTransform="matrix(1 0 0 -1 0 52)"><stop offset="0" style="stop-color:#0160d1"/><stop offset="1" style="stop-color:#00479c"/></linearGradient><path d="M32.2 7.3c-9.9 0-17.7 8-17.7 17.8 0 9.9 8 17.8 17.7 17.8 9.8 0 17.8-8 17.8-17.8S42 7.3 32.2 7.3zm0 24.4c-3.6 0-6.6-3-6.6-6.6s3-6.6 6.6-6.6c3.6 0 6.6 3 6.6 6.6-.1 3.6-3 6.6-6.6 6.6z" style="fill:url(#a)"/><linearGradient id="b" gradientUnits="userSpaceOnUse" x1="-.049" y1="25.42" x2="14.33" y2="25.42"><stop offset="0" style="stop-color:#0160d1"/><stop offset="1" style="stop-color:#00479c"/></linearGradient><path d="M14.3 12.5v25.8H8L0 12.5h14.3z" style="fill:url(#b)"/></svg>
+										</a>
+										<a class="payments__link qiwi" href="#" title="Способы оплаты">
+											<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><style>.st2{fill:#ff8d24}</style><path class="st2" d="M40 33.9c.1.8-.1 1.1-.4 1.1-.3 0-.7-.3-1.1-1-.4-.6-.6-1.4-.4-1.7.1-.2.4-.4.8-.2.7.2 1 1.3 1.1 1.8m-3 1.6c1 .7 1.3 1.5.8 2-.3.3-.8.5-1.4.5-.6 0-1.1-.2-1.5-.4-.9-.6-1.2-1.6-.6-2.2.2-.2.6-.3 1.1-.3.5-.1 1.1.1 1.6.4"/><path class="st2" d="M48 50c-.3 0-.6-.1-.8-.3 0-.1-5.1-5.7-13.2-5.7-1.7 0-3 .2-4.4.4-1.6.3-3.5.6-6.1.6C11.1 45 1 34.9 1 22.5S11.1 0 23.5 0 46 10.1 46 22.5c0 3.5-.8 6.8-2.3 9.9-.2.4-.6.6-1 .5-.4 0-.8-.4-.9-.8 0 0-.7-3-3.8-5-1.9-1.1-4-1.1-4-1.1-.5 0-1-.4-1-1 0-.5.4-1 1-1 .1 0 2 0 3.9.3.1-.6.1-1.2.1-1.8C38 14.5 31.5 8 23.5 8S9 14.5 9 22.5 15.5 37 23.5 37h.9c-.4-1.9-.4-3.9-.4-4 0-.5.4-1 .9-1s1 .3 1.1.8c0 0 .4 1.9 2.5 3.8 1.6 1.5 3.8 2.6 6.5 3.2l.3.1c10.9 2.5 13.6 8.4 13.7 8.6.2.5 0 1-.4 1.2-.2.2-.4.3-.6.3z"/></svg>
+										</a>
+										<a class="payments__link sber" href="#" title="Способы оплаты">
+											<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><style>.st3{fill:#7dc143}</style><path class="st3" d="M45.7 14 16 31 2 23v1c0 12.7 10.3 23 23 23s23-10.3 23-23c0-3.6-.8-7-2.3-10z"/><path class="st3" d="M44 11 16 27 2.5 19.2c.1-.7.3-1.4.5-2l13 7.4L42.8 9.4c.4.5.8 1 1.2 1.6z"/><path class="st3" d="M40.5 7 16 21 4.2 14.2l.9-1.8L16 18.7 38.8 5.6c.6.5 1.2.9 1.7 1.4z"/><path class="st3" d="M35.8 3.7 16 15 6.9 9.8c.4-.5.8-1.1 1.3-1.5l7.7 4.4 17.5-10c.9.3 1.6.6 2.4 1z"/></svg>
+										</a>
+										<a class="payments__link webmoney" href="#" title="Способы оплаты">
+											<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 48 48" style="enable-background:new 0 0 48 48" xml:space="preserve"><path fill="#0277bd" d="m16.839 14.527 4.829-4.243 4.242 4.83-4.829 4.242zM20.334 22.808l4.83-4.243 4.242 4.83-4.83 4.242zM23.637 30.994l4.83-4.242 4.242 4.83-4.83 4.241zM34.915 34.309l3.751-3.296 3.296 3.752-3.751 3.295zM31.89 26.988l3.653-3.208 3.208 3.652-3.652 3.208zM28.827 19.424l3.652-3.208 3.208 3.652-3.652 3.208zM25.572 12.339l3.652-3.208 3.208 3.652-3.652 3.208zM33.537 10.644l2.377-2.089 2.09 2.378-2.379 2.089zM36.553 17.73l2.378-2.089 2.089 2.378-2.378 2.089zM39.52 24.815l2.379-2.089 2.089 2.378-2.378 2.089z"/><path fill="#0277bd" d="m16.839 14.527 4.829-4.243 4.242 4.83-4.829 4.242zM20.334 22.808l4.83-4.242 4.242 4.83-4.83 4.241zM23.637 30.995l4.829-4.243 4.242 4.83-4.829 4.242zM34.915 34.309l3.751-3.296 3.296 3.752-3.751 3.295zM31.89 26.988l3.653-3.208 3.208 3.652-3.652 3.208zM28.827 19.424l3.652-3.208 3.208 3.652-3.652 3.208zM25.572 12.34l3.652-3.209 3.208 3.652-3.652 3.208zM33.537 10.644l2.377-2.089 2.09 2.378-2.379 2.089zM36.553 17.73l2.378-2.089 2.089 2.378-2.378 2.089zM39.52 24.814l2.378-2.089 2.09 2.378-2.379 2.089z"/><path fill="#0277bd" d="m32.373 35.204-4.722 4.148-7.542-8.586 2.194-1.928-5.498-6.258 2.134-1.875-5.628-6.408 8.585-7.543 2.719 3.095 4.836-4.247 2.628 2.992 2.061-1.811A19.865 19.865 0 0 0 24 4C12.954 4 4 12.954 4 24s8.954 20 20 20c4.662 0 8.94-1.608 12.341-4.282l-3.968-4.514z"/></svg>
+										</a>
 										<a class="payments__link visa" href="#" title="Способы оплаты">
-											<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 291.8 291.8" style="enable-background:new 0 0 291.8 291.8" xml:space="preserve"><path d="m119.3 100.2-14.6 91.1H128l14.6-91.1h-23.3zm70.6 37.1c-8.2-4-13.2-6.8-13.2-10.9.1-3.8 4.2-7.6 13.5-7.6 7.6-.2 13.2 1.6 17.4 3.4l2.1.9 3.2-19.1c-4.6-1.8-12-3.8-21-3.8-23.1 0-39.4 12-39.5 29.2-.2 12.7 11.7 19.7 20.5 23.9 9.1 4.3 12.1 7.1 12.1 11-.1 5.9-7.3 8.6-14.1 8.6-9.3 0-14.4-1.4-22-4.7l-3.1-1.4-3.3 19.8c5.5 2.4 15.6 4.6 26.1 4.7 24.6 0 40.5-11.8 40.7-30.2.3-9.8-5.9-17.5-19.4-23.8zm83-36.8h-18.1c-5.6 0-9.8 1.6-12.2 7.3l-34.8 83.5h24.6l6.8-18.1h27.5l3.5 18.2h21.7l-19-90.9zm-27 54.5c.5 0 9.4-29.5 9.4-29.5l7.1 29.5h-16.5zM85.1 100.2l-22.9 61.9-2.5-12.2c-4.2-14.1-17.5-29.4-32.4-37l21 78.3H73l36.8-91H85.1z" style="fill:#225ed5"/><path d="M51.9 112c-1.8-6.9-7.5-11.6-15.2-11.7H.4l-.4 1.6c28.3 7 52.1 28.5 59.8 48.7L51.9 112z" style="fill:#efc75e"/></svg>
+											<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 291.8 291.8" style="enable-background:new 0 0 291.8 291.8" xml:space="preserve"><path d="m119.3 100.2-14.6 91.1H128l14.6-91.1h-23.3zm70.6 37.1c-8.2-4-13.2-6.8-13.2-10.9.1-3.8 4.2-7.6 13.5-7.6 7.6-.2 13.2 1.6 17.4 3.4l2.1.9 3.2-19.1c-4.6-1.8-12-3.8-21-3.8-23.1 0-39.4 12-39.5 29.2-.2 12.7 11.7 19.7 20.5 23.9 9.1 4.3 12.1 7.1 12.1 11-.1 5.9-7.3 8.6-14.1 8.6-9.3 0-14.4-1.4-22-4.7l-3.1-1.4-3.3 19.8c5.5 2.4 15.6 4.6 26.1 4.7 24.6 0 40.5-11.8 40.7-30.2.3-9.8-5.9-17.5-19.4-23.8zm83-36.8h-18.1c-5.6 0-9.8 1.6-12.2 7.3l-34.8 83.5h24.6l6.8-18.1h27.5l3.5 18.2h21.7l-19-90.9zm-27 54.5c.5 0 9.4-29.5 9.4-29.5l7.1 29.5h-16.5zM85.1 100.2l-22.9 61.9-2.5-12.2c-4.2-14.1-17.5-29.4-32.4-37l21 78.3H73l36.8-91H85.1z" style="fill:#225ed5"/><path d="M51.9 112c-1.8-6.9-7.5-11.6-15.2-11.7H.4l-.4 1.6c28.3 7 52.1 28.5 59.8 48.7L51.9 112z" style="fill:#efc75e"/></svg>
+										</a>
+										<a class="payments__link walletone" href="#" title="Способы оплаты">
+											<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve"><path d="M492.2 158.1v196.8c-4.3 10.1-9.1 19.9-14.6 29.4-5.9 4.4-13.3 7-21.3 7-19.8 0-35.9-16.1-35.9-35.9V243.8L281.2 381c-6.8 6.8-15.9 10.3-25.2 10.3-4.7 0-9.4-.9-13.8-2.8-13.3-5.6-22-18.6-22-33.1V243.8L80.9 381c-10.3 10.2-25.7 13.1-39 7.5-2.7-1.1-5.1-2.5-7.4-4.2-5.5-9.4-10.4-19.3-14.6-29.4V156.6c0-11.9 5.8-22.4 14.6-28.9 5.9-4.4 13.3-7 21.2-7 19.8 0 35.9 16.1 35.9 35.9v113.1s137.7-137.1 138.6-138c6.5-6.8 15.7-11 25.8-11 19.8 0 35.9 16.1 35.9 35.9v113.1l139.3-137.2c10.3-10.1 25.7-13.1 39-7.5 3.3 1.4 6.3 3.2 8.9 5.4 7.9 6.5 12.8 16.1 13.1 26.7v1z" style="fill:#f0efeb"/><path d="M492.2 158.1v196.8c-4.3 10.1-9.1 20-14.6 29.4-5.9 4.4-13.3 7-21.3 7-19.8 0-35.9-16.1-35.9-35.9V243.8l-9 8.9c-14.1 13.9-36.8 13.7-50.7-.4-13.9-14.1-13.7-36.8.4-50.7l70-69c10.3-10.1 25.7-13.1 39-7.5 3.3 1.4 6.3 3.2 8.9 5.4 7.9 6.5 12.8 16.1 13.1 26.7.1.2.1.5.1.9z" style="fill:#ba1c34"/></svg>
 										</a>
 										<a class="payments__link mir" href="#" title="Способы оплаты">
 											<svg xmlns="http://www.w3.org/2000/svg" width="57" height="16"><g fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M15.36 0v.007c-.007 0-2.227-.007-2.819 2.096-.542 1.928-2.071 7.252-2.113 7.4h-.423S8.44 4.058 7.89 2.095C7.3-.007 5.073 0 5.073 0H0v16h5.073V6.498h.423L8.455 16h3.523l2.959-9.495h.423V16h5.073V0H15.36ZM33.89 0s-1.486.133-2.184 1.677l-3.593 7.825h-.423V0h-5.073v16h4.791s1.557-.14 2.255-1.677l3.523-7.825h.422V16h5.074V0H33.89ZM40.935 7.266V16h5.073v-5.1h5.496a5.486 5.486 0 0 0 5.179-3.634H40.935Z" fill="#4DB45E"/><path fill-rule="evenodd" clip-rule="evenodd" d="M11.28 0H0c.564 3.046 2.868 5.492 5.848 6.288a8.17 8.17 0 0 0 2.12.28h8.695c.078-.364.113-.734.113-1.118 0-3.012-2.46-5.45-5.496-5.45Z" transform="translate(40.224)" fill="url(#a)"/></g><defs><linearGradient id="a" x2="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(16.7745 0 0 16.6345 .001 -5.033)"><stop offset=".3" stop-color="#00B4E6"/><stop offset="1" stop-color="#088CCB"/></linearGradient></defs></svg>
-										</a>
-										<a class="payments__link mastercard" href="#" title="Способы оплаты">
-											<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 50 50"><path fill="#ff9800" d="M32 10a14 14 0 1 0 0 28 14 14 0 1 0 0-28Z"/><path fill="#d50000" d="M16 10a14 14 0 1 0 0 28 14 14 0 1 0 0-28Z"/><path fill="#ff3d00" d="M18 24c0 4.755 2.376 8.95 6 11.48 3.624-2.53 6-6.725 6-11.48s-2.376-8.95-6-11.48c-3.624 2.53-6 6.725-6 11.48z"/></svg>
-										</a>
-										<a class="payments__link iomoney" href="#" title="Способы оплаты">
-											<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><style>.st1{fill:#8b3ffd}</style><path class="st1" d="M32.3 7.2c-9.9 0-17.8 8-17.8 17.8 0 9.9 8 17.8 17.8 17.8s17.8-8 17.8-17.8-8-17.8-17.8-17.8zm0 24.4c-3.6 0-6.6-3-6.6-6.6s3-6.6 6.6-6.6c3.6 0 6.6 3 6.6 6.6-.1 3.6-3 6.6-6.6 6.6zM14.4 12.4v25.9H8.1L0 12.4h14.4z"/></svg>
-										</a>
-										<a class="payments__link iokassa" href="#" title="Способы оплаты">
-											<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><linearGradient id="a" gradientUnits="userSpaceOnUse" x1="32.194" y1="44.667" x2="32.194" y2="9.167" gradientTransform="matrix(1 0 0 -1 0 52)"><stop offset="0" style="stop-color:#0160d1"/><stop offset="1" style="stop-color:#00479c"/></linearGradient><path d="M32.2 7.3c-9.9 0-17.7 8-17.7 17.8 0 9.9 8 17.8 17.7 17.8 9.8 0 17.8-8 17.8-17.8S42 7.3 32.2 7.3zm0 24.4c-3.6 0-6.6-3-6.6-6.6s3-6.6 6.6-6.6c3.6 0 6.6 3 6.6 6.6-.1 3.6-3 6.6-6.6 6.6z" style="fill:url(#a)"/><linearGradient id="b" gradientUnits="userSpaceOnUse" x1="-.049" y1="25.42" x2="14.33" y2="25.42"><stop offset="0" style="stop-color:#0160d1"/><stop offset="1" style="stop-color:#00479c"/></linearGradient><path d="M14.3 12.5v25.8H8L0 12.5h14.3z" style="fill:url(#b)"/></svg>
-										</a>
-										<a class="payments__link qiwi" href="#" title="Способы оплаты">
-											<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><style>.st2{fill:#ff8d24}</style><path class="st2" d="M40 33.9c.1.8-.1 1.1-.4 1.1-.3 0-.7-.3-1.1-1-.4-.6-.6-1.4-.4-1.7.1-.2.4-.4.8-.2.7.2 1 1.3 1.1 1.8m-3 1.6c1 .7 1.3 1.5.8 2-.3.3-.8.5-1.4.5-.6 0-1.1-.2-1.5-.4-.9-.6-1.2-1.6-.6-2.2.2-.2.6-.3 1.1-.3.5-.1 1.1.1 1.6.4"/><path class="st2" d="M48 50c-.3 0-.6-.1-.8-.3 0-.1-5.1-5.7-13.2-5.7-1.7 0-3 .2-4.4.4-1.6.3-3.5.6-6.1.6C11.1 45 1 34.9 1 22.5S11.1 0 23.5 0 46 10.1 46 22.5c0 3.5-.8 6.8-2.3 9.9-.2.4-.6.6-1 .5-.4 0-.8-.4-.9-.8 0 0-.7-3-3.8-5-1.9-1.1-4-1.1-4-1.1-.5 0-1-.4-1-1 0-.5.4-1 1-1 .1 0 2 0 3.9.3.1-.6.1-1.2.1-1.8C38 14.5 31.5 8 23.5 8S9 14.5 9 22.5 15.5 37 23.5 37h.9c-.4-1.9-.4-3.9-.4-4 0-.5.4-1 .9-1s1 .3 1.1.8c0 0 .4 1.9 2.5 3.8 1.6 1.5 3.8 2.6 6.5 3.2l.3.1c10.9 2.5 13.6 8.4 13.7 8.6.2.5 0 1-.4 1.2-.2.2-.4.3-.6.3z"/></svg>
-										</a>
-										<a class="payments__link sber" href="#" title="Способы оплаты">
-											<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><style>.st3{fill:#7dc143}</style><path class="st3" d="M45.7 14 16 31 2 23v1c0 12.7 10.3 23 23 23s23-10.3 23-23c0-3.6-.8-7-2.3-10z"/><path class="st3" d="M44 11 16 27 2.5 19.2c.1-.7.3-1.4.5-2l13 7.4L42.8 9.4c.4.5.8 1 1.2 1.6z"/><path class="st3" d="M40.5 7 16 21 4.2 14.2l.9-1.8L16 18.7 38.8 5.6c.6.5 1.2.9 1.7 1.4z"/><path class="st3" d="M35.8 3.7 16 15 6.9 9.8c.4-.5.8-1.1 1.3-1.5l7.7 4.4 17.5-10c.9.3 1.6.6 2.4 1z"/></svg>
-										</a>
-										<a class="payments__link walletone" href="#" title="Способы оплаты">
-											<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve"><path d="M492.2 158.1v196.8c-4.3 10.1-9.1 19.9-14.6 29.4-5.9 4.4-13.3 7-21.3 7-19.8 0-35.9-16.1-35.9-35.9V243.8L281.2 381c-6.8 6.8-15.9 10.3-25.2 10.3-4.7 0-9.4-.9-13.8-2.8-13.3-5.6-22-18.6-22-33.1V243.8L80.9 381c-10.3 10.2-25.7 13.1-39 7.5-2.7-1.1-5.1-2.5-7.4-4.2-5.5-9.4-10.4-19.3-14.6-29.4V156.6c0-11.9 5.8-22.4 14.6-28.9 5.9-4.4 13.3-7 21.2-7 19.8 0 35.9 16.1 35.9 35.9v113.1s137.7-137.1 138.6-138c6.5-6.8 15.7-11 25.8-11 19.8 0 35.9 16.1 35.9 35.9v113.1l139.3-137.2c10.3-10.1 25.7-13.1 39-7.5 3.3 1.4 6.3 3.2 8.9 5.4 7.9 6.5 12.8 16.1 13.1 26.7v1z" style="fill:#f0efeb"/><path d="M492.2 158.1v196.8c-4.3 10.1-9.1 20-14.6 29.4-5.9 4.4-13.3 7-21.3 7-19.8 0-35.9-16.1-35.9-35.9V243.8l-9 8.9c-14.1 13.9-36.8 13.7-50.7-.4-13.9-14.1-13.7-36.8.4-50.7l70-69c10.3-10.1 25.7-13.1 39-7.5 3.3 1.4 6.3 3.2 8.9 5.4 7.9 6.5 12.8 16.1 13.1 26.7.1.2.1.5.1.9z" style="fill:#ba1c34"/></svg>
-										</a>
-										<a class="payments__link webmoney" href="#" title="Способы оплаты">
-											<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 48 48" style="enable-background:new 0 0 48 48" xml:space="preserve"><path fill="#0277bd" d="m16.839 14.527 4.829-4.243 4.242 4.83-4.829 4.242zM20.334 22.808l4.83-4.243 4.242 4.83-4.83 4.242zM23.637 30.994l4.83-4.242 4.242 4.83-4.83 4.241zM34.915 34.309l3.751-3.296 3.296 3.752-3.751 3.295zM31.89 26.988l3.653-3.208 3.208 3.652-3.652 3.208zM28.827 19.424l3.652-3.208 3.208 3.652-3.652 3.208zM25.572 12.339l3.652-3.208 3.208 3.652-3.652 3.208zM33.537 10.644l2.377-2.089 2.09 2.378-2.379 2.089zM36.553 17.73l2.378-2.089 2.089 2.378-2.378 2.089zM39.52 24.815l2.379-2.089 2.089 2.378-2.378 2.089z"/><path fill="#0277bd" d="m16.839 14.527 4.829-4.243 4.242 4.83-4.829 4.242zM20.334 22.808l4.83-4.242 4.242 4.83-4.83 4.241zM23.637 30.995l4.829-4.243 4.242 4.83-4.829 4.242zM34.915 34.309l3.751-3.296 3.296 3.752-3.751 3.295zM31.89 26.988l3.653-3.208 3.208 3.652-3.652 3.208zM28.827 19.424l3.652-3.208 3.208 3.652-3.652 3.208zM25.572 12.34l3.652-3.209 3.208 3.652-3.652 3.208zM33.537 10.644l2.377-2.089 2.09 2.378-2.379 2.089zM36.553 17.73l2.378-2.089 2.089 2.378-2.378 2.089zM39.52 24.814l2.378-2.089 2.09 2.378-2.379 2.089z"/><path fill="#0277bd" d="m32.373 35.204-4.722 4.148-7.542-8.586 2.194-1.928-5.498-6.258 2.134-1.875-5.628-6.408 8.585-7.543 2.719 3.095 4.836-4.247 2.628 2.992 2.061-1.811A19.865 19.865 0 0 0 24 4C12.954 4 4 12.954 4 24s8.954 20 20 20c4.662 0 8.94-1.608 12.341-4.282l-3.968-4.514z"/></svg>
 										</a>
 									</div>
 								</div>
@@ -3128,7 +3127,7 @@
 									<!-- <div class="contacts__label">Телефоны</div> -->
 									<!-- Телефон 1 -->
 									{% IF SETTINGS_STORE_PHONE_NUMBER1 %}
-									<div class="contacts__block contacts__phone">
+									<div class="contacts__phone">
 										<a class="contacts__link flex" href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE1}({SETTINGS_STORE_PHONE_CITY_CODE1}){SETTINGS_STORE_PHONE_NUMBER1}" title="{SETTINGS_STORE_PHONE_COUNTRY_CODE1}({SETTINGS_STORE_PHONE_CITY_CODE1}){SETTINGS_STORE_PHONE_NUMBER1}">
 											<div class="contacts__icon"><i class="icon-phone"></i></div>
 											<div class="contacts__content">
@@ -3139,7 +3138,7 @@
 									{% ENDIF SETTINGS_STORE_PHONE_NUMBER1 %}
 									<!-- Телефон 2 -->
 									{% IF SETTINGS_STORE_PHONE_NUMBER2 %}
-									<div class="contacts__block contacts__phone">
+									<div class="contacts__phone">
 										<a class="contacts__link flex" href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE2}({SETTINGS_STORE_PHONE_CITY_CODE2}){SETTINGS_STORE_PHONE_NUMBER2}" title="{SETTINGS_STORE_PHONE_COUNTRY_CODE2}({SETTINGS_STORE_PHONE_CITY_CODE2}){SETTINGS_STORE_PHONE_NUMBER2}">
 											<div class="contacts__icon"><i class="icon-phone"></i></div>
 											<div class="contacts__content">
@@ -3150,7 +3149,7 @@
 									{% ENDIF SETTINGS_STORE_PHONE_NUMBER2 %}
 									<!-- Телефон 3 -->
 									{% IF SETTINGS_STORE_PHONE_NUMBER3 %}
-									<div class="contacts__block contacts__phone">
+									<div class="contacts__phone">
 										<a class="contacts__link flex" href="tel:{SETTINGS_STORE_PHONE_COUNTRY_CODE3}({SETTINGS_STORE_PHONE_CITY_CODE3}){SETTINGS_STORE_PHONE_NUMBER3}" title="{SETTINGS_STORE_PHONE_COUNTRY_CODE3}({SETTINGS_STORE_PHONE_CITY_CODE3}){SETTINGS_STORE_PHONE_NUMBER3}">
 											<div class="contacts__icon"><i class="icon-phone"></i></div>
 											<div class="contacts__content">
@@ -3160,26 +3159,13 @@
 									</div>
 									{% ENDIF SETTINGS_STORE_PHONE_NUMBER3 %}
 
-									<div class="contacts__block contacts__callback">
+									<div class="contacts__callback">
 										<a class="button-secondary" data-fancybox data-src="#fancybox__callback"><span>Заказать звонок</span></a>
 									</div>
 
 								</div>
 					
-								<div class="contacts__blocks">
-									<!-- Почта -->
-									{% IF SETTINGS_STORE_EMAIL_MAIN %}
-									<div class="contacts__block contacts__email">
-										<div class="contacts__label">Электронная почта</div>
-										<a class="contacts__link flex" href="mailto:{SETTINGS_STORE_EMAIL_MAIN}" title="{SETTINGS_STORE_EMAIL_MAIN}">
-											<div class="contacts__icon"><i class="icon-mail"></i></div>
-											<div class="contacts__content">
-												<span itemprop="email">{SETTINGS_STORE_EMAIL_MAIN}</span>
-											</div>
-										</a>
-									</div>
-									{% ENDIF %}
-						
+								<div class="contacts__blocks">						
 									<!-- Адрес -->
 									{% IF SETTINGS_STORE_REGION %}
 									<div class="contacts__block contacts__region">
@@ -3188,6 +3174,19 @@
 											<div class="contacts__icon"><i class="icon-location"></i></div>
 											<div class="contacts__content">
 												<span itemprop="addressLocality">{SETTINGS_STORE_REGION}</span>
+											</div>
+										</a>
+									</div>
+									{% ENDIF %}
+
+									<!-- Почта -->
+									{% IF SETTINGS_STORE_EMAIL_MAIN %}
+									<div class="contacts__block contacts__email">
+										<div class="contacts__label">Электронная почта</div>
+										<a class="contacts__link flex" href="mailto:{SETTINGS_STORE_EMAIL_MAIN}" title="{SETTINGS_STORE_EMAIL_MAIN}">
+											<div class="contacts__icon"><i class="icon-mail"></i></div>
+											<div class="contacts__content">
+												<span itemprop="email">{SETTINGS_STORE_EMAIL_MAIN}</span>
 											</div>
 										</a>
 									</div>
@@ -3545,9 +3544,9 @@
 			pdtVisible('#pdt__sale');
 			pdtVisible('#pdt__best');
 			pdtVisible('#pdt__new');
-			swiperSlider('#pdt__sales');
 			indexNews();
 			swiperShow();
+			swiperSales();
 			counterDate();
 			swiperCatalog();
 			swiperOffers();

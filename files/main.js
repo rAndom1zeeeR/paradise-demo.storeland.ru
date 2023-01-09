@@ -3043,7 +3043,7 @@ function swiperSlider(id){
 
 // Слайдер на главной
 function swiperShow(){
-	var id = '#slideshow'
+	var id = '.slideshow'
 
 	var swiper = new Swiper(id + ' .swiper', {
 		loop: false,
@@ -3193,7 +3193,7 @@ function swiperOffers(){
 
 }
 
-// Слайдер Каталога
+// Слайдер Вы смотрели
 function swiperViewed(){
 	var id = '#pdt__viewed'
 	// Слайдер товаров
@@ -3248,6 +3248,38 @@ function swiperViewed(){
 		$(id).find('.swiper-navigation').removeClass('swiper-navigation-lock')
 	}
 
+}
+
+// Слайдер на главной
+function swiperSales(){
+	var id = '#pdt__sales'
+
+	var swiper = new Swiper(id + ' .swiper', {
+		loop: false,
+		preloadImages: false,
+		watchSlidesVisibility: true,
+		watchOverflow: true,
+		hashNavigation: false,
+		slidesPerView: '1',
+		spaceBetween: 48,
+		speed: 400,
+		lazy: {
+			enabled: true,
+			loadPrevNext: true,
+			loadOnTransitionStart: true,
+		},
+		navigation: {
+			nextEl: id + ' .swiper-button-next',
+			prevEl: id + ' .swiper-button-prev',
+		},
+	});
+
+	// Скрываем навигацию если слайдер заблокирован
+	if($(id).find('.swiper-button-lock').length){
+		$(id).find('.swiper-button-lock').parent().addClass('swiper-navigation-lock')
+	}else{
+		$(id).find('.swiper-navigation').removeClass('swiper-navigation-lock')
+	}
 }
 
 
