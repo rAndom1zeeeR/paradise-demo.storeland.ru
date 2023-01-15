@@ -3069,6 +3069,29 @@ function swiperShow(){
 			nextEl: id + ' .swiper-button-next',
 			prevEl: id + ' .swiper-button-prev',
 		},
+		breakpoints: {
+			0: {
+				slidesPerView: '1',
+			},
+			320: {
+				slidesPerView: '1',
+			},
+			480: {
+				slidesPerView: '1',
+			},
+			640: {
+				slidesPerView: '1.2',
+			},
+			768: {
+				slidesPerView: '1.4',
+			},
+			1024: {
+				slidesPerView: '1.6',
+			},
+			1200: {
+				slidesPerView: '1',
+			}
+		},
 	});
 
 	// Скрываем навигацию если слайдер заблокирован
@@ -3167,13 +3190,13 @@ function swiperOffers(){
 				slidesPerView: '1',
 			},
 			480: {
-				slidesPerView: '1',
+				slidesPerView: '2',
 			},
 			640: {
 				slidesPerView: '1',
 			},
 			768: {
-				slidesPerView: '2',
+				slidesPerView: '1',
 			},
 			1024: {
 				slidesPerView: '2',
@@ -3271,6 +3294,29 @@ function swiperSales(){
 		navigation: {
 			nextEl: id + ' .swiper-button-next',
 			prevEl: id + ' .swiper-button-prev',
+		},
+		breakpoints: {
+			0: {
+				slidesPerView: '1',
+			},
+			320: {
+				slidesPerView: '1',
+			},
+			480: {
+				slidesPerView: '1',
+			},
+			640: {
+				slidesPerView: '1',
+			},
+			768: {
+				slidesPerView: '1',
+			},
+			1024: {
+				slidesPerView: '2',
+			},
+			1200: {
+				slidesPerView: '1',
+			}
 		},
 	});
 

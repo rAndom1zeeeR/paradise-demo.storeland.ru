@@ -223,7 +223,7 @@
 
 							<!-- Если в тарифном плане подключен модуль сравнения товаров и он не выключен в настройках магазина -->
 							{% IFNOT SETTINGS_COMPARE_DISABLE && goods.IS_HAS_IN_COMPARE_LIST %}
-							<a class="add-compare added"
+							<a class="product__link add-compare added"
 								data-action-is-add="0"
 								data-action-url="{COMPARE_URL}"
 								data-action-add-url="{COMPARE_ADD_URL}"
@@ -248,7 +248,7 @@
 								<span>Убрать из сравнения</span>
 							</a>
 							{% ELSEIF SETTINGS_COMPARE_DISABLE=0 %}
-							<a class="add-compare"
+							<a class="product__link add-compare"
 								data-action-is-add="1"
 								data-action-url="{COMPARE_URL}"
 								data-action-add-url="{COMPARE_ADD_URL}"
@@ -277,7 +277,7 @@
 			
 							<!-- Если есть возможность добавить товар в Избранное -->
 							{% IF goods.IS_HAS_IN_FAVORITES_LIST %}
-							<a class="add-favorites added"
+							<a class="product__link add-favorites added"
 								data-action-is-add="0"
 								data-action-url="{FAVORITES_URL}"
 								data-action-add-url="{FAVORITES_ADD_URL}"
@@ -302,7 +302,7 @@
 								<span>Убрать из избранного</span>
 							</a>
 							{% ELSE %}
-							<a class="add-favorites"
+							<a class="product__link add-favorites"
 								data-action-is-add="1"
 								data-action-url="{FAVORITES_URL}"
 								data-action-add-url="{FAVORITES_ADD_URL}"
@@ -389,7 +389,7 @@
 		</div>
 		{% ELSE %}
 		<!-- Вывод товаров ТАБЛИЦЕЙ -->
-		<div class="row">
+		<div class="row row-medium">
 			<div class="products__grid products__ajax flex-stretch">
 				{% FOR goods %}
 				<div class="product__item 
@@ -472,7 +472,7 @@
 
 								<!-- Если в тарифном плане подключен модуль сравнения товаров и он не выключен в настройках магазина -->
 								{% IFNOT SETTINGS_COMPARE_DISABLE && goods.IS_HAS_IN_COMPARE_LIST %}
-								<a class="add-compare added"
+								<a class="product__link add-compare added"
 									data-action-is-add="0"
 									data-action-url="{COMPARE_URL}"
 									data-action-add-url="{COMPARE_ADD_URL}"
@@ -497,7 +497,7 @@
 									<span>Убрать из сравнения</span>
 								</a>
 								{% ELSEIF SETTINGS_COMPARE_DISABLE=0 %}
-								<a class="add-compare"
+								<a class="product__link add-compare"
 									data-action-is-add="1"
 									data-action-url="{COMPARE_URL}"
 									data-action-add-url="{COMPARE_ADD_URL}"
@@ -526,7 +526,7 @@
 				
 								<!-- Если есть возможность добавить товар в Избранное -->
 								{% IF goods.IS_HAS_IN_FAVORITES_LIST %}
-								<a class="add-favorites added"
+								<a class="product__link add-favorites added"
 									data-action-is-add="0"
 									data-action-url="{FAVORITES_URL}"
 									data-action-add-url="{FAVORITES_ADD_URL}"
@@ -551,7 +551,7 @@
 									<span>Убрать из избранного</span>
 								</a>
 								{% ELSE %}
-								<a class="add-favorites"
+								<a class="product__link add-favorites"
 									data-action-is-add="1"
 									data-action-url="{FAVORITES_URL}"
 									data-action-add-url="{FAVORITES_ADD_URL}"

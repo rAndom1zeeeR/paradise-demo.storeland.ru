@@ -561,15 +561,14 @@
 			<div class="container">
 				<div class="slideshow__inner flex-stretch">
 					<!-- Слайдер -->
-					<div class="slideshow">
+					<div class="slideshow loading">
 						<div class="swiper">
 							<div class="swiper-wrapper">
 								<!-- Слайд 1 -->
 								<div class="slideshow__item swiper-slide flex">
 									<a class="slideshow__image" href="{CATALOG_URL}" title="Наборы орешков с любовью собираем коробочки полные витаминов">
-										<div class="swiper-lazy-preloader"></div>
 										<picture>
-											<img class="swiper-lazy" 
+											<img class="lozad" 
 													data-src="{ASSETS_IMAGES_PATH}slide_1_1200.jpg?design=THEMENAME" 
 													alt="Наборы орешков с любовью собираем коробочки полные витаминов" 
 													width="656"
@@ -591,9 +590,8 @@
 								<!-- Слайд 2 -->
 								<div class="slideshow__item swiper-slide flex">
 									<a class="slideshow__image" href="{CATALOG_URL}" title="Наборы орешков с любовью собираем коробочки полные витаминов">
-										<div class="swiper-lazy-preloader"></div>
 										<picture>
-											<img class="swiper-lazy" 
+											<img class="lozad" 
 													data-src="{ASSETS_IMAGES_PATH}slide_2_1200.jpg?design=THEMENAME" 
 													alt="Наборы орешков с любовью собираем коробочки полные витаминов" 
 													width="656"
@@ -615,9 +613,8 @@
 								<!-- Слайд 3 -->
 								<div class="slideshow__item swiper-slide flex">
 									<a class="slideshow__image" href="{CATALOG_URL}" title="Пряная осень - Устраиваем распродажу специй для любыйх блюд">
-										<div class="swiper-lazy-preloader"></div>
 										<picture>
-											<img class="swiper-lazy" 
+											<img class="lozad" 
 													data-src="{ASSETS_IMAGES_PATH}slide_3_1200.jpg?design=THEMENAME" 
 													alt="Пряная осень - Устраиваем распродажу специй для любыйх блюд" 
 													width="656"
@@ -639,9 +636,8 @@
 								<!-- Слайд 4 -->
 								<div class="slideshow__item swiper-slide flex">
 									<a class="slideshow__image" href="{CATALOG_URL}" title="Сушенные ягоды - Запасаемся витаминами и экономим деньги">
-										<div class="swiper-lazy-preloader"></div>
 										<picture>
-											<img class="swiper-lazy" 
+											<img class="lozad" 
 													data-src="{ASSETS_IMAGES_PATH}slide_1_1200.jpg?design=THEMENAME" 
 													alt="Сушенные ягоды - Запасаемся витаминами и экономим деньги" 
 													width="656"
@@ -726,7 +722,7 @@
 
 												<!-- Если в тарифном плане подключен модуль сравнения товаров и он не выключен в настройках магазина -->
 												{% IFNOT SETTINGS_COMPARE_DISABLE && index_page_sale_goods.IS_HAS_IN_COMPARE_LIST %}
-												<a class="add-compare added"
+												<a class="product__link add-compare added"
 													data-action-is-add="0"
 													data-action-url="{COMPARE_URL}"
 													data-action-add-url="{COMPARE_ADD_URL}"
@@ -751,7 +747,7 @@
 													<span>Убрать из сравнения</span>
 												</a>
 												{% ELSEIF SETTINGS_COMPARE_DISABLE=0 %}
-												<a class="add-compare"
+												<a class="product__link add-compare"
 													data-action-is-add="1"
 													data-action-url="{COMPARE_URL}"
 													data-action-add-url="{COMPARE_ADD_URL}"
@@ -780,7 +776,7 @@
 								
 												<!-- Если есть возможность добавить товар в Избранное -->
 												{% IF index_page_sale_goods.IS_HAS_IN_FAVORITES_LIST %}
-												<a class="add-favorites added"
+												<a class="product__link add-favorites added"
 													data-action-is-add="0"
 													data-action-url="{FAVORITES_URL}"
 													data-action-add-url="{FAVORITES_ADD_URL}"
@@ -805,7 +801,7 @@
 													<span>Убрать из избранного</span>
 												</a>
 												{% ELSE %}
-												<a class="add-favorites"
+												<a class="product__link add-favorites"
 													data-action-is-add="1"
 													data-action-url="{FAVORITES_URL}"
 													data-action-add-url="{FAVORITES_ADD_URL}"
@@ -1052,7 +1048,7 @@
 				<div class="block__title">
 					<a class="title" href="{CATALOG_TOP_SALES_URL}" title="Перейти в Хиты продаж"><span>Пользуется спросом</span></a>
 				</div>
-				<div class="row-medium">
+				<div class="row row-medium">
 					<div class="products__grid flex-stretch">
 						{% FOR index_page_favorites_goods %}
 						<div class="product__item 
@@ -1135,7 +1131,7 @@
 
 										<!-- Если в тарифном плане подключен модуль сравнения товаров и он не выключен в настройках магазина -->
 										{% IFNOT SETTINGS_COMPARE_DISABLE && index_page_favorites_goods.IS_HAS_IN_COMPARE_LIST %}
-										<a class="add-compare added"
+										<a class="product__link add-compare added"
 											data-action-is-add="0"
 											data-action-url="{COMPARE_URL}"
 											data-action-add-url="{COMPARE_ADD_URL}"
@@ -1160,7 +1156,7 @@
 											<span>Убрать из сравнения</span>
 										</a>
 										{% ELSEIF SETTINGS_COMPARE_DISABLE=0 %}
-										<a class="add-compare"
+										<a class="product__link add-compare"
 											data-action-is-add="1"
 											data-action-url="{COMPARE_URL}"
 											data-action-add-url="{COMPARE_ADD_URL}"
@@ -1189,7 +1185,7 @@
 						
 										<!-- Если есть возможность добавить товар в Избранное -->
 										{% IF index_page_favorites_goods.IS_HAS_IN_FAVORITES_LIST %}
-										<a class="add-favorites added"
+										<a class="product__link add-favorites added"
 											data-action-is-add="0"
 											data-action-url="{FAVORITES_URL}"
 											data-action-add-url="{FAVORITES_ADD_URL}"
@@ -1214,7 +1210,7 @@
 											<span>Убрать из избранного</span>
 										</a>
 										{% ELSE %}
-										<a class="add-favorites"
+										<a class="product__link add-favorites"
 											data-action-is-add="1"
 											data-action-url="{FAVORITES_URL}"
 											data-action-add-url="{FAVORITES_ADD_URL}"
@@ -1315,6 +1311,11 @@
 
 		<!-- Специальные предложения -->
 		<section id="offers">
+			
+			<span class="offers__bg-1"></span>
+			<span class="offers__bg-2"></span>
+			<span class="offers__bg-3"></span>
+
 			<div class="container">
 
 				<div class="block__title block__nav flex">
@@ -1392,18 +1393,19 @@
 				</div>
 
 			</div>
+
 		</section>
 
 		<!-- Новинки -->
 		{% IFNOT index_page_new_goods_empty %}
-    <section id="pdt__new" class="pdt__visible loading" data-items="11">
+    <section id="pdt__new" class="pdt__visible loading">
 			<div class="container products__container">
 				<!-- <div class="block__title">
 					<a class="title" href="{CATALOG_NEW_URL}" title="Перейти в Новинки"><span>Новинки</span></a>
 				</div> -->
 
 				<!-- Слайдер -->
-				<div class="row-small">
+				<div class="row row-small">
 					<div class="products__grid flex-stretch">
 						<div class="pdt__new-item product__item">
 							<div class="pdt__new-title" title="Перейти в Новинки"><span>Новые поступления</span></div>
@@ -1493,7 +1495,7 @@
 
 										<!-- Если в тарифном плане подключен модуль сравнения товаров и он не выключен в настройках магазина -->
 										{% IFNOT SETTINGS_COMPARE_DISABLE && index_page_new_goods.IS_HAS_IN_COMPARE_LIST %}
-										<a class="add-compare added"
+										<a class="product__link add-compare added"
 											data-action-is-add="0"
 											data-action-url="{COMPARE_URL}"
 											data-action-add-url="{COMPARE_ADD_URL}"
@@ -1518,7 +1520,7 @@
 											<span>Убрать из сравнения</span>
 										</a>
 										{% ELSEIF SETTINGS_COMPARE_DISABLE=0 %}
-										<a class="add-compare"
+										<a class="product__link add-compare"
 											data-action-is-add="1"
 											data-action-url="{COMPARE_URL}"
 											data-action-add-url="{COMPARE_ADD_URL}"
@@ -1547,7 +1549,7 @@
 						
 										<!-- Если есть возможность добавить товар в Избранное -->
 										{% IF index_page_new_goods.IS_HAS_IN_FAVORITES_LIST %}
-										<a class="add-favorites added"
+										<a class="product__link add-favorites added"
 											data-action-is-add="0"
 											data-action-url="{FAVORITES_URL}"
 											data-action-add-url="{FAVORITES_ADD_URL}"
@@ -1572,7 +1574,7 @@
 											<span>Убрать из избранного</span>
 										</a>
 										{% ELSE %}
-										<a class="add-favorites"
+										<a class="product__link add-favorites"
 											data-action-is-add="1"
 											data-action-url="{FAVORITES_URL}"
 											data-action-add-url="{FAVORITES_ADD_URL}"
@@ -1729,7 +1731,7 @@
 				<div class="block__title">
 					<a class="title" href="{CATALOG_INDEX_PAGE_URL}" title="Перейти в Товары на главной"><span>Товары на главной</span></a>
 				</div>
-				<div class="row-medium">
+				<div class="row row-medium">
 					<div class="products__grid flex-stretch">
 						{% FOR index_page_goods %}
 						<div class="product__item 
@@ -1812,7 +1814,7 @@
 
 										<!-- Если в тарифном плане подключен модуль сравнения товаров и он не выключен в настройках магазина -->
 										{% IFNOT SETTINGS_COMPARE_DISABLE && index_page_goods.IS_HAS_IN_COMPARE_LIST %}
-										<a class="add-compare added"
+										<a class="product__link add-compare added"
 											data-action-is-add="0"
 											data-action-url="{COMPARE_URL}"
 											data-action-add-url="{COMPARE_ADD_URL}"
@@ -1837,7 +1839,7 @@
 											<span>Убрать из сравнения</span>
 										</a>
 										{% ELSEIF SETTINGS_COMPARE_DISABLE=0 %}
-										<a class="add-compare"
+										<a class="product__link add-compare"
 											data-action-is-add="1"
 											data-action-url="{COMPARE_URL}"
 											data-action-add-url="{COMPARE_ADD_URL}"
@@ -1866,7 +1868,7 @@
 						
 										<!-- Если есть возможность добавить товар в Избранное -->
 										{% IF index_page_goods.IS_HAS_IN_FAVORITES_LIST %}
-										<a class="add-favorites added"
+										<a class="product__link add-favorites added"
 											data-action-is-add="0"
 											data-action-url="{FAVORITES_URL}"
 											data-action-add-url="{FAVORITES_ADD_URL}"
@@ -1891,7 +1893,7 @@
 											<span>Убрать из избранного</span>
 										</a>
 										{% ELSE %}
-										<a class="add-favorites"
+										<a class="product__link add-favorites"
 											data-action-is-add="1"
 											data-action-url="{FAVORITES_URL}"
 											data-action-add-url="{FAVORITES_ADD_URL}"
@@ -1994,6 +1996,8 @@
 		<section id="promo">
 			<div class="container">
 				<div class="promo__inner">
+					<span class="promo__bg-1"></span>
+					<span class="promo__bg-2"></span>
 					<div class="promo__content">
 						<div class="promo__title">Конкурсы и акции</div>
 						<p class="promo__text">для наших подписчиков. Присоединяйтесь и получите 5% скидки на заказ!</p>
@@ -2667,7 +2671,7 @@
 
 					<!-- Слайдер -->
 					<div class="swiper">
-						<div class="swiper-wrapper products__grid">
+						<div class="products__grid swiper-wrapper">
 							{% FOR recently_viewed_goods %}
 							<div class="product__item swiper-slide
 									{% IF recently_viewed_goods.MAX_REST_VALUE = 0 %}product__empty{% ENDIF %}
@@ -2749,7 +2753,7 @@
 
 											<!-- Если в тарифном плане подключен модуль сравнения товаров и он не выключен в настройках магазина -->
 											{% IFNOT SETTINGS_COMPARE_DISABLE && recently_viewed_goods.IS_HAS_IN_COMPARE_LIST %}
-											<a class="add-compare added"
+											<a class="product__link add-compare added"
 												data-action-is-add="0"
 												data-action-url="{COMPARE_URL}"
 												data-action-add-url="{COMPARE_ADD_URL}"
@@ -2774,7 +2778,7 @@
 												<span>Убрать из сравнения</span>
 											</a>
 											{% ELSEIF SETTINGS_COMPARE_DISABLE=0 %}
-											<a class="add-compare"
+											<a class="product__link add-compare"
 												data-action-is-add="1"
 												data-action-url="{COMPARE_URL}"
 												data-action-add-url="{COMPARE_ADD_URL}"
@@ -2803,7 +2807,7 @@
 							
 											<!-- Если есть возможность добавить товар в Избранное -->
 											{% IF recently_viewed_goods.IS_HAS_IN_FAVORITES_LIST %}
-											<a class="add-favorites added"
+											<a class="product__link add-favorites added"
 												data-action-is-add="0"
 												data-action-url="{FAVORITES_URL}"
 												data-action-add-url="{FAVORITES_ADD_URL}"
@@ -2828,7 +2832,7 @@
 												<span>Убрать из избранного</span>
 											</a>
 											{% ELSE %}
-											<a class="add-favorites"
+											<a class="product__link add-favorites"
 												data-action-is-add="1"
 												data-action-url="{FAVORITES_URL}"
 												data-action-add-url="{FAVORITES_ADD_URL}"
@@ -2938,7 +2942,7 @@
 								<div class="form__field">
 									<input class="form__input form__phone" type="tel" name="form[{ANTISPAM_FORM_FIELD_NAME_CALLBACK_PHONE}]" value="{FORM_CALLBACK_PHONE}" placeholder="Номер телефона" autocomplete="off" required />
 									<button class="form__button button-secondary" type="submit" title="Заказать звонок">
-										<i class="icon-phone"></i>
+										<i class="icon-mail"></i>
 										<!-- <span>Заказать звонок</span> -->
 									</button>
 								</div>
@@ -3228,42 +3232,7 @@
 
 			<!-- Мобильное меню -->
 			<!-- TODO Переделать все. Проверить дата опен и контент -->
-			<div id="mobmenu">
-				<div class="mobmenu__nav">
-					<div class="mobmenu__nav-item button-primary" data-open="catalog"><span>Каталог товаров</span></div>
-					<div class="mobmenu__nav-item button-primary opened is-actived" data-open="menu"><span>Меню сайта</span></div>
-				</div>
-				<div class="mobmenu__content">
-					<div class="mobmenu__menu opened" data-content="menu">
-						<ul class="mainnav__list unstyled">
-							{% FOR menu %}
-								{% FOR header %}
-									{% FOR links %}
-									<li class="catalog__item">
-										<a class="mainnav__list-link {% IF menu.header.links.SELECTED %}is-actived{%ENDIF%} {% IF menu.header.links.NAME = Каталог %}mainnav__catalog{%ENDIF%}" href="{menu.header.links.URL}" title="{% IF menu.header.links.TITLE %}{menu.header.links.TITLE}{% ELSE%}{menu.header.links.NAME}{% ENDIF %}" itemprop="url">
-											<span itemprop="name">{menu.header.links.NAME}</span>
-										</a>
-									</li>
-									{% ENDFOR %}
-								{% ENDFOR %}
-							{% ENDFOR %}
-						</ul>
-					</div>
-					<div class="mobmenu__catalog" data-content="catalog">
-						<div class="catalog__items">
-							{% FOR catalog_full %}
-								{% IFNOT catalog_full.LEVEL = 0 && catalog_full.FIRST %}<div class="catalog__sub" data-level="{catalog_full.LEVEL}">{% ENDIF %}
-									<div class="catalog__item {% IF catalog_full.ISSET_VISIBLE_SUB %}parent{% ENDIF %} {% IF catalog_full.CURRENT_PARENT %}opened{% ENDIF %}" data-level="{catalog_full.LEVEL}" {% IF catalog_full.HIDE %}style="display: none;"{% ENDIF %}>
-										<a class="catalog__link flex {% IF catalog_full.CURRENT || catalog_full.CURRENT_PARENT %}opened{% ENDIF %}" href="{catalog_full.URL}" data-level="{catalog_full.LEVEL}">
-											<span class="catalog__name">{catalog_full.NAME}</span>
-											{% IF catalog_full.ISSET_VISIBLE_SUB %}<span class="catalog__open"></span>{% ENDIF %}
-										</a>
-									{% IF catalog_full.ISSET_SUB=0 %}</div>{% ENDIF %}
-								{% IF catalog_full.LAST %}{% FOR out %}</div> {% IFNOT catalog_full.out.LAST %}</div>{% ENDIF %}{% ENDFOR %}{% ENDIF %}
-							{% ENDFOR catalog_full %}
-					</div>
-				</div>
-			</div>
+			
 
 			<!-- Обратный звонок в модальном окне -->
 			<div id="fancybox__callback" class="modal" style="display:none">
