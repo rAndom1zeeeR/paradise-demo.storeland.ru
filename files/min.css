@@ -2,15 +2,18 @@
 /*** Основные переменные шаблона ***/
 /**************************************/
 :root {
-	--color-black: #000000;
+	--color-black: #301815;
 	--color-white: #ffffff;
-	--color-gray: #737373;
-	--color-lightgray: #C4C4C4;
-	--color-border: #999999;
-	--color-red: #E83B35;
-	--color-primary: #00DBDA;
-	--color-secondary: #0CF2B1;
-	--color-shadow: rgba(0, 0, 0, .1);
+	--color-gray: #C2B9B1;
+	--color-lightgray: #F2F0EE;
+	--color-border: #C2B9B1;
+	--color-red: #FD2437;
+	--color-primary: #FD8A4F;
+	--color-secondary: #6FCB59;
+	--color-tertiary: #EDFCE9;
+	--color-quaternary: #B780FC;
+	--color-bg: #FDFAF9;
+	--color-shadow: rgba(164, 139, 123, 0.2);
 }
 
 /**************************************/
@@ -90,7 +93,7 @@ h6 {font-size: 0.875rem;}
 /**************************************/
 #overlay {position: fixed;top: 0;left: 0;width: 100%;height: 100%;z-index: 10;opacity: 0;filter: alpha(opacity=0);visibility: hidden;background-color: transparent;-webkit-transition: opacity .25s ease,visibility 0s ease .25s;transition: opacity .25s ease,visibility 0s ease .25s;}
 #overlay.transparent {background-color: rgba(0, 0, 0, 0.5);}
-#overlay.opened {opacity: 1;filter: alpha(opacity=100);visibility: visible;-webkit-transition: opacity .25s ease,visibility 0s ease;transition: opacity .25s ease,visibility 0s ease;cursor: pointer;}
+#overlay.is-opened {opacity: 1;filter: alpha(opacity=100);visibility: visible;-webkit-transition: opacity .25s ease,visibility 0s ease;transition: opacity .25s ease,visibility 0s ease;cursor: pointer;}
 
 
 /**************************************/
@@ -156,8 +159,8 @@ h6 {font-size: 0.875rem;}
 /**************************************/
 /*** Выпадающие объекты ***/
 /**************************************/
-.dropdown__content {margin-top: 1rem;width: 25rem;padding: 1rem;background-color: var(--color-white);border: 1px solid var(--color-border);transform: scale(1,0);transform-origin: right top;transition: all 0.3s ease-in-out;right: 0;position: absolute;z-index: 11;}
-.dropdown.opened .dropdown__content {display: block;}
+.dropdown__content {box-shadow: 0 0 1.25rem 0 var(--color-shadow);margin-top: 1rem;width: 25rem;padding: 1rem;background-color: var(--color-white);border: 0;transform: scale(1,0);transform-origin: right top;transition: all 0.3s ease-in-out;right: 0;position: absolute;z-index: 11;}
+.dropdown.is-opened .dropdown__content {display: block;}
 @media all and (min-width: 1024px) {
 	.dropdown .dropdown__open:before {content: '';right: 0;bottom: -1rem;height: 2rem;width: 100%;display: block;position: absolute;}
 	.dropdown:hover .dropdown__content {transform: scale(1);}
@@ -180,9 +183,10 @@ h6 {font-size: 0.875rem;}
 .addto__mod {font-size: .75rem;margin-bottom: .625rem;}
 .addto__qty {margin-right: 1rem;}
 .addto__qty .qty__select {width: 1.5rem;height: 1.5rem;line-height: 1.5rem;border: 0;}
-.addto__qty .qty__input {width: 2.5rem;height: 1.5rem;}
+.addto__qty .qty__input {width: 2.5rem;height: 1.5rem;background-color: transparent;}
 .addto__price {flex-direction: column;align-items: flex-start;}
-.addto__price .price__now {margin-right: .5rem;}
+.addto__price .price__now {margin-right: 0;}
+.addto__price .price__old {display: none;}
 .addto__item .addto__remove {position: absolute;right: .25rem;top: 0;}
 .addto__total {margin: 1rem 0;display: none;}
 .addto__total-label {margin-right: .5rem;}

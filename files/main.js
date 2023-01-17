@@ -1195,9 +1195,9 @@ function Catalog() {
 			// Открыть фильтры по иконке
 			else if (filterIcon){
 				event.preventDefault();
-				$(event.target).toggleClass('opened');
-				$('#filters').toggleClass('opened');
-				$('#overlay').toggleClass('opened transparent');
+				$(event.target).toggleClass('is-opened');
+				$('#filters').toggleClass('is-opened');
+				$('#overlay').toggleClass('is-opened transparent');
 
 			}
 		});
@@ -2544,16 +2544,16 @@ function mainnav(id,rows,media){
 				mainNavList.append('<li class="mainnav__more"><a class="mainnav__link flex"><span>Ещё</span><i class="icon-chevron_down"></i></a></li>');
 
 				mainNav.find('.mainnav__more').on('click',function(){
-					if($(this).hasClass('opened')){
-						$(this).removeClass('opened');
-						mainNav.removeClass('opened');
-						mainNavOverflow.removeClass('opened');
-						$('#overlay').removeClass('opened');
+					if($(this).hasClass('is-opened')){
+						$(this).removeClass('is-opened');
+						mainNav.removeClass('is-opened');
+						mainNavOverflow.removeClass('is-opened');
+						$('#overlay').removeClass('is-opened');
 					} else{
-						$(this).addClass('opened');
-						mainNav.addClass('opened');
-						mainNavOverflow.addClass('opened');
-						$('#overlay').addClass('opened')
+						$(this).addClass('is-opened');
+						mainNav.addClass('is-opened');
+						mainNavOverflow.addClass('is-opened');
+						$('#overlay').addClass('is-opened')
 					}
 					// Определение положения кнопки еще
 					positionMore()
@@ -2753,41 +2753,24 @@ function openMenu() {
     var parent = $(this).closest('.parent');
     var sub = $(this).parent().next('.catalog__sub');
     var open = $(this).closest('.catalog__open');
-    if (parent.hasClass('opened')) {
+    if (parent.hasClass('is-opened')) {
       sub.slideUp(600);
-      parent.removeClass('opened');
-      open.removeClass('opened');
+      parent.removeClass('is-opened');
+      open.removeClass('is-opened');
     } else {
       sub.slideDown(600);
-      parent.addClass('opened');
-      open.addClass('opened');
+      parent.addClass('is-opened');
+      open.addClass('is-opened');
     }
   });
 
 	// Закрытие всего при нажатии на темную часть
 	$('#overlay').on('click', function(event){
 		event.preventDefault();
-		if($(this).hasClass('opened')){
+		if($(this).hasClass('is-opened')){
 			closeAll();
 		}
 	});
-
-	// Открытие элементов
-  $('[data-open]').on('click', function(event){
-    event.preventDefault();
-    var value = $(this).data('open');
-		$('[data-open]').removeClass('opened')
-		$('[data-opened]').removeClass('opened')
-    if ($('[data-opened="'+ value +'"]').hasClass('opened')){
-      $(this).removeClass('opened').parent().removeClass('opened');
-      $('#overlay').removeClass('opened');
-      $('[data-opened="'+ value +'"]').removeClass('opened');
-    }else{
-      $(this).addClass('opened').parent().addClass('opened');
-      $('#overlay').addClass('opened');
-      $('[data-opened="'+ value +'"]').addClass('opened');
-    }
-  });
 	
 	// Открытие подвала
 	$('.footer__title').on('click', function(event){
@@ -2799,18 +2782,85 @@ function openMenu() {
 			$(this).next().attr('style', '')
 		}
 	});
+
+	// Открытие элементов
+  $('[data-open]').on('click', function(event){
+    event.preventDefault();
+    var value = $(this).data('open');
+		$('[data-open]').removeClass('is-opened')
+		$('[data-opened]').removeClass('is-opened')
+    if ($('[data-opened="'+ value +'"]').hasClass('is-opened')){
+      $('#overlay').removeClass('is-opened');
+      $('[data-opened="'+ value +'"]').removeClass('is-opened');
+      $(this).removeClass('is-opened').parent().removeClass('is-opened');
+    }else{
+      $('#overlay').addClass('is-opened');
+      $('[data-opened="'+ value +'"]').addClass('is-opened');
+      $(this).addClass('is-opened').parent().addClass('is-opened');
+    }
+		// Поиск
+		if (value == 'search'){
+			$('#overlay').removeClass('is-opened');
+		}
+
+  });
+
+	// Открытие элементов
+  $('[data-toggle]').on('click', function(event){
+    event.preventDefault();
+    if ($(this).hasClass('is-actived')){
+      $(this).removeClass('is-actived').parent().removeClass('is-opened');
+			$(this).next().slideUp().removeClass('is-opened');
+    }else{
+			$('[data-toggle]').removeClass('is-actived').parent().removeClass('is-opened');
+			$('[data-toggled]').slideUp().removeClass('is-opened');
+      $(this).addClass('is-actived').parent().addClass('is-opened');
+			$(this).next().slideDown().addClass('is-opened');
+    }
+  });
+
+	// Меню на мобильных устройствах
+	$('.adaptive__icon').on('click',function(event){
+		event.preventDefault();
+		$('.adaptive__dropleft').addClass('is-show');
+	})
+
+	// Каталог на мобильных устройствах
+	$('.header-catalog__icon').on('click',function(event){
+		event.preventDefault();
+
+		if(getClientWidth() > 1024) {
+			console.log(getClientWidth())
+			return false
+		}
+
+		$('.adaptive__dropleft').addClass('is-show');
+	})
+
+	// Закрыть
+	$('.adaptive__close').on('click',function(event){
+		event.preventDefault();
+
+		$('.adaptive__dropleft').removeClass('is-show');
+		closeAll();
+	})
+
+	var slinky = $('#slinky-catalog').slinky({
+		title: true,
+		resize: true,
+	})
 }
 
 // Функция удаления классов всех активных элементов
 function closeAll() {
-	$('div, a, form, span, nav, ul, li').removeClass('opened');
+	$('div, a, form, span, nav, ul, li').removeClass('is-opened');
 	$('.overflowMenu').removeClass('is-actived');
-	$('.search__reset').click();
+	// $('.search__reset').click();
 	$('#overlay').click();
 	setTimeout(function(){
 		$('#overlay').removeClass('transparent');
-		$('.search__reset').click();
-		$('.search__input').blur(); 
+		// $('.search__reset').click();
+		// $('.search__input').blur(); 
 		$('#overlay').click();
 	},100)
 }
