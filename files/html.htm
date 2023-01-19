@@ -757,7 +757,7 @@
 													rel="nofollow"
 												>
 													<i class="icon-compare"></i>
-													<span>Убрать из сравнения</span>
+													<span>Сравнение</span>
 												</a>
 												{% ELSEIF SETTINGS_COMPARE_DISABLE=0 %}
 												<a class="product__link add-compare"
@@ -782,7 +782,7 @@
 													rel="nofollow"
 												>
 													<i class="icon-compare"></i>
-													<span>Добавить в сравнения</span>
+													<span>Cравнение</span>
 												</a>
 												{% ENDIF %}
 												<!-- //END Добавление товара в избранное и сравнение и в корзину -->
@@ -805,13 +805,13 @@
 													data-char-code="{CURRENCY_CHAR_CODE}"
 													data-add-tooltip="В избранное"
 													data-del-tooltip="В избранном"
-													data-tooltip="Убрать из избранного"
+													data-tooltip="Избранное"
 													title="Убрать &laquo;{index_page_sale_goods.NAME}&raquo; из Избранного"
 													href="{FAVORITES_DELETE_URL}?id={index_page_sale_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}"
 													rel="nofollow"
 												>
 													<i class="icon-favorites"></i>
-													<span>Убрать из избранного</span>
+													<span>Избранное</span>
 												</a>
 												{% ELSE %}
 												<a class="product__link add-favorites"
@@ -830,13 +830,13 @@
 													data-char-code="{CURRENCY_CHAR_CODE}"
 													data-add-tooltip="В избранное"
 													data-del-tooltip="В избранном"
-													data-tooltip="Добавить в избранное"
+													data-tooltip="Избранное"
 													title="Добавить &laquo;{index_page_sale_goods.NAME}&raquo; в Избранное"
 													href="{FAVORITES_ADD_URL}?id={index_page_sale_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}"
 													rel="nofollow"
 												>
 													<i class="icon-favorites"></i>
-													<span>Добавить в избранное</span>
+													<span>Избранное</span>
 												</a>
 												{% ENDIF %}
 								
@@ -889,7 +889,7 @@
 												<meta itemprop="offerCount" content="{% FOR mods %}{% IF index_page_sale_goods.mods.last %}{index_page_sale_goods.mods.length}{% ENDIF %}{% ENDFOR %}">
 											</div>
 								
-											<div class="flex justify-between">
+											<div class="product__inner flex justify-between">
 												<!-- Цена -->
 												<div class="product__price {CURRENCY_CHAR_CODE} {% IF index_page_sale_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT>index_page_sale_goods.MIN_PRICE_NOW %}has-price-old{% ELSEIF index_page_sale_goods.MIN_PRICE_OLD>index_page_sale_goods.MIN_PRICE_NOW %}has-price-old{% ENDIF %}" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
 													<meta itemprop="priceCurrency" content="{CURRENCY_CHAR_CODE}" />
@@ -1166,7 +1166,7 @@
 											rel="nofollow"
 										>
 											<i class="icon-compare"></i>
-											<span>Убрать из сравнения</span>
+											<span>Сравнение</span>
 										</a>
 										{% ELSEIF SETTINGS_COMPARE_DISABLE=0 %}
 										<a class="product__link add-compare"
@@ -1191,7 +1191,7 @@
 											rel="nofollow"
 										>
 											<i class="icon-compare"></i>
-											<span>Добавить в сравнения</span>
+											<span>Cравнение</span>
 										</a>
 										{% ENDIF %}
 										<!-- //END Добавление товара в избранное и сравнение и в корзину -->
@@ -1214,13 +1214,13 @@
 											data-char-code="{CURRENCY_CHAR_CODE}"
 											data-add-tooltip="В избранное"
 											data-del-tooltip="В избранном"
-											data-tooltip="Убрать из избранного"
+											data-tooltip="Избранное"
 											title="Убрать &laquo;{index_page_favorites_goods.NAME}&raquo; из Избранного"
 											href="{FAVORITES_DELETE_URL}?id={index_page_favorites_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}"
 											rel="nofollow"
 										>
 											<i class="icon-favorites"></i>
-											<span>Убрать из избранного</span>
+											<span>Избранное</span>
 										</a>
 										{% ELSE %}
 										<a class="product__link add-favorites"
@@ -1239,13 +1239,13 @@
 											data-char-code="{CURRENCY_CHAR_CODE}"
 											data-add-tooltip="В избранное"
 											data-del-tooltip="В избранном"
-											data-tooltip="Добавить в избранное"
+											data-tooltip="Избранное"
 											title="Добавить &laquo;{index_page_favorites_goods.NAME}&raquo; в Избранное"
 											href="{FAVORITES_ADD_URL}?id={index_page_favorites_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}"
 											rel="nofollow"
 										>
 											<i class="icon-favorites"></i>
-											<span>Добавить в избранное</span>
+											<span>Избранное</span>
 										</a>
 										{% ENDIF %}
 						
@@ -1530,7 +1530,7 @@
 											rel="nofollow"
 										>
 											<i class="icon-compare"></i>
-											<span>Убрать из сравнения</span>
+											<span>Сравнение</span>
 										</a>
 										{% ELSEIF SETTINGS_COMPARE_DISABLE=0 %}
 										<a class="product__link add-compare"
@@ -1555,7 +1555,7 @@
 											rel="nofollow"
 										>
 											<i class="icon-compare"></i>
-											<span>Добавить в сравнения</span>
+											<span>Cравнение</span>
 										</a>
 										{% ENDIF %}
 										<!-- //END Добавление товара в избранное и сравнение и в корзину -->
@@ -1578,13 +1578,13 @@
 											data-char-code="{CURRENCY_CHAR_CODE}"
 											data-add-tooltip="В избранное"
 											data-del-tooltip="В избранном"
-											data-tooltip="Убрать из избранного"
+											data-tooltip="Избранное"
 											title="Убрать &laquo;{index_page_new_goods.NAME}&raquo; из Избранного"
 											href="{FAVORITES_DELETE_URL}?id={index_page_new_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}"
 											rel="nofollow"
 										>
 											<i class="icon-favorites"></i>
-											<span>Убрать из избранного</span>
+											<span>Избранное</span>
 										</a>
 										{% ELSE %}
 										<a class="product__link add-favorites"
@@ -1603,13 +1603,13 @@
 											data-char-code="{CURRENCY_CHAR_CODE}"
 											data-add-tooltip="В избранное"
 											data-del-tooltip="В избранном"
-											data-tooltip="Добавить в избранное"
+											data-tooltip="Избранное"
 											title="Добавить &laquo;{index_page_new_goods.NAME}&raquo; в Избранное"
 											href="{FAVORITES_ADD_URL}?id={index_page_new_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}"
 											rel="nofollow"
 										>
 											<i class="icon-favorites"></i>
-											<span>Добавить в избранное</span>
+											<span>Избранное</span>
 										</a>
 										{% ENDIF %}
 						
@@ -1640,7 +1640,7 @@
 										<meta itemprop="offerCount" content="{% FOR mods %}{% IF index_page_new_goods.mods.last %}{index_page_new_goods.mods.length}{% ENDIF %}{% ENDFOR %}">
 									</div>
 						
-									<div class="flex justify-between">
+									<div class="product__inner flex justify-between">
 										<!-- Цена -->
 										<div class="product__price {CURRENCY_CHAR_CODE} {% IF index_page_new_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT>index_page_new_goods.MIN_PRICE_NOW %}has-price-old{% ELSEIF index_page_new_goods.MIN_PRICE_OLD>index_page_new_goods.MIN_PRICE_NOW %}has-price-old{% ENDIF %}" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
 											<meta itemprop="priceCurrency" content="{CURRENCY_CHAR_CODE}" />
@@ -1849,7 +1849,7 @@
 											rel="nofollow"
 										>
 											<i class="icon-compare"></i>
-											<span>Убрать из сравнения</span>
+											<span>Сравнение</span>
 										</a>
 										{% ELSEIF SETTINGS_COMPARE_DISABLE=0 %}
 										<a class="product__link add-compare"
@@ -1874,7 +1874,7 @@
 											rel="nofollow"
 										>
 											<i class="icon-compare"></i>
-											<span>Добавить в сравнения</span>
+											<span>Cравнение</span>
 										</a>
 										{% ENDIF %}
 										<!-- //END Добавление товара в избранное и сравнение и в корзину -->
@@ -1897,13 +1897,13 @@
 											data-char-code="{CURRENCY_CHAR_CODE}"
 											data-add-tooltip="В избранное"
 											data-del-tooltip="В избранном"
-											data-tooltip="Убрать из избранного"
+											data-tooltip="Избранное"
 											title="Убрать &laquo;{index_page_goods.NAME}&raquo; из Избранного"
 											href="{FAVORITES_DELETE_URL}?id={index_page_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}"
 											rel="nofollow"
 										>
 											<i class="icon-favorites"></i>
-											<span>Убрать из избранного</span>
+											<span>Избранное</span>
 										</a>
 										{% ELSE %}
 										<a class="product__link add-favorites"
@@ -1922,13 +1922,13 @@
 											data-char-code="{CURRENCY_CHAR_CODE}"
 											data-add-tooltip="В избранное"
 											data-del-tooltip="В избранном"
-											data-tooltip="Добавить в избранное"
+											data-tooltip="Избранное"
 											title="Добавить &laquo;{index_page_goods.NAME}&raquo; в Избранное"
 											href="{FAVORITES_ADD_URL}?id={index_page_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}"
 											rel="nofollow"
 										>
 											<i class="icon-favorites"></i>
-											<span>Добавить в избранное</span>
+											<span>Избранное</span>
 										</a>
 										{% ENDIF %}
 						
@@ -1959,7 +1959,7 @@
 										<meta itemprop="offerCount" content="{% FOR mods %}{% IF index_page_goods.mods.last %}{index_page_goods.mods.length}{% ENDIF %}{% ENDFOR %}">
 									</div>
 						
-									<div class="flex justify-between">
+									<div class="product__inner flex justify-between">
 										<!-- Цена -->
 										<div class="product__price {CURRENCY_CHAR_CODE} {% IF index_page_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT>index_page_goods.MIN_PRICE_NOW %}has-price-old{% ELSEIF index_page_goods.MIN_PRICE_OLD>index_page_goods.MIN_PRICE_NOW %}has-price-old{% ENDIF %}" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
 											<meta itemprop="priceCurrency" content="{CURRENCY_CHAR_CODE}" />
@@ -2243,18 +2243,18 @@
 					<div class="main__left sidebar">
 						<!-- Каталог -->
 						<div class="sidebar__block sidebar__block-catalog">
-							<div class="sidebar__title flex">
-								<i class="icon-catalog"></i>
-								<span>Каталог товаров</span>
-							</div>
+							<a class="sidebar__title flex" href="{CATALOG_URL}" title="Перейти в Каталог">
+								<i class="icon-chevron_left"></i>
+								<span>Каталог</span>
+							</a>
 							<div class="sidebar__content">
 								<ul class="catalog__items unstyled">
 									{% FOR catalog_full %}
 										{% IFNOT catalog_full.LEVEL = 0 && catalog_full.FIRST %}
 										<ul class="catalog__sub" data-level="{catalog_full.LEVEL}">
 										{% ENDIF %}
-											<li class="catalog__item {% IF catalog_full.ISSET_VISIBLE_SUB %}parent{% ENDIF %} {% IF catalog_full.CURRENT_PARENT %}is-actived{% ENDIF %}" data-level="{catalog_full.LEVEL}" {% IF catalog_full.HIDE %}style="display: none;"{% ENDIF %}>
-												<a class="catalog__link flex {% IF catalog_full.CURRENT %}is-actived{% ENDIF %}" href="{catalog_full.URL}" data-level="{catalog_full.LEVEL}">
+											<li class="catalog__item {% IF catalog_full.ISSET_VISIBLE_SUB %}parent{% ENDIF %} {% IF catalog_full.CURRENT_PARENT %}is-opened{% ENDIF %}" data-level="{catalog_full.LEVEL}" {% IF catalog_full.HIDE %}style="display: none;"{% ENDIF %}>
+												<a class="catalog__link flex {% IF catalog_full.CURRENT %}is-opened{% ENDIF %}" href="{catalog_full.URL}" data-level="{catalog_full.LEVEL}">
 													<span class="catalog__name">{catalog_full.NAME}</span>
 													{% IF catalog_full.ISSET_VISIBLE_SUB %}<span class="catalog__open"></span>{% ENDIF %}
 												</a>
@@ -2265,45 +2265,49 @@
 						</div>
 						{% IF SHOW_GOODS_PRICE_FILTERS || SHOW_GOODS_FILTERS %}
 						<!-- Если в тарифном плане подключен модуль фильтров по товарам -->
-						<div id="filters" class="sidebar__block sidebar__block-filters">
+						<div class="sidebar__block sidebar__block-filters {% FOR filter_attr_list %}{% FOR values %}{% IF filter_attr_list.values.CHECKED %}has-filters {% ENDIF %}{% ENDFOR %}{% ENDFOR %} {% FOR filter_prop_list %}{% FOR values %}{% IF filter_prop_list.values.CHECKED %}has-filters {% ENDIF %}{% ENDFOR %}{% ENDFOR %}">
 							<div class="sidebar__title flex">
 								<i class="icon-filter"></i>
 								<span>Фильтры</span>
+								<a class="filters__clear button-link button-icon" href="{PAGE_CANONICAL}" title="Очистить фильтры">
+									<i class="icon-close"></i>
+									<span>Сбросить</span>
+								</a>
 								<a class="sidebar__close" href="javascript:;" onclick="closeAll()"><i class="icon-close"></i></a>
 							</div>
-							<div class="sidebar__content {% FOR filter_attr_list %}{% FOR values %}{% IF filter_attr_list.values.CHECKED %}has-filters {% ENDIF %}{% ENDFOR %}{% ENDFOR %} {% FOR filter_prop_list %}{% FOR values %}{% IF filter_prop_list.values.CHECKED %}has-filters {% ENDIF %}{% ENDFOR %}{% ENDFOR %}">
+							<div class="sidebar__content">
+								<div class="filters__results">
+									<span data-result="{GOODS_PAGES_RESULTS}">Найдено {GOODS_PAGES_RESULTS} товар{GOODS_PAGES_RESULTS | gen_word_end("","а","ов")}</span>
+								</div>
+
 								<form action="" method="get" class="form__filters">
 									<!-- Если есть возможность фильтрации товаров по ценам -->
 									{% IF SHOW_GOODS_PRICE_FILTERS %}
 									<div class="filter__list filters-price filter__collapsible is-actived">
 										<a class="filter__title flex" title="Показать фильтры Цены" href="javascript:;">
 											<span class="filter__name">Цена</span>
-											<i class="icon-chevron_up"></i>
+											<i class="icon-chevron_down"></i>
 										</a>
-										<!-- <a class="filter__clear" title="Очистить фильтры" href="javascript:;">
-											<span>Сбросить</span>
-										</a> -->
-										<div class="filter__items filter__content">
+										<div class="filter__content">
 											<div class="priceSlider">
 												<input type="hidden" name="form[filter][available_price][min]" value="{GOODS_FILTER_MIN_AVAILABLE_PRICE}" />
 												<input type="hidden" name="form[filter][available_price][max]" value="{GOODS_FILTER_MAX_AVAILABLE_PRICE}" />
-												<!-- Ползунок фильтров по цене -->
-												<div id="goods-filter-price-slider"></div>
 												<!-- Фильтры по цене -->
 												<div class="goodsFilterPriceRangePointers flex justify-between">
 													<span class="min" style="display:none;">{GOODS_FILTER_MIN_AVAILABLE_PRICE}</span>
 													<span class="max" style="display:none;">{GOODS_FILTER_MAX_AVAILABLE_PRICE}</span>
-													<span>от</span>
 													<input id="goods-filter-min-price" class="form__input" type="text" name="form[filter][price][min]" value="{% IF GOODS_FILTER_MIN_PRICE %}{GOODS_FILTER_MIN_PRICE}{% ELSE %}{GOODS_FILTER_MIN_AVAILABLE_PRICE}{% ENDIF %}" min="1" onkeypress="return keyPress(this, event);" onpaste="return false;" />
-													<span>до</span>
 													<input id="goods-filter-max-price" class="form__input" type="text" name="form[filter][price][max]" value="{% IF GOODS_FILTER_MAX_PRICE %}{GOODS_FILTER_MAX_PRICE}{% ELSE %}{GOODS_FILTER_MAX_AVAILABLE_PRICE}{% ENDIF %}" min="1" onkeypress="return keyPress(this, event);" onpaste="return false;" />
 												</div>
+												<!-- Ползунок фильтров по цене -->
+												<div id="goods-filter-price-slider"></div>
 												<!-- Кнопки Фильтров -->
 												<div class="goodsFilterPriceSubmit flex justify-between">
-													<button class="button-primary button-small" type="submit" title="Показать">
+													<button class="button-link button-icon" type="submit" title="Показать">
+														<i class="icon-check"></i>
 														<span>Применить</span>
 													</button>
-													<a class="button-rotate button-link" href="{PAGE_CANONICAL}" title="Очистить фильтры">
+													<a class="button-link button-icon" href="{PAGE_CANONICAL}" title="Очистить фильтры">
 														<i class="icon-close"></i>
 														<span>Очистить</span>
 													</a>
@@ -2315,17 +2319,13 @@
 
 									<!-- Фильтры по характеристикам товаров (Например: Производитель, разрешение экрана, заряд аккомулятора) {% FOR values %}{% IF filter_attr_list.values.CHECKED %}is-actived {% ENDIF %}{% ENDFOR %} -->
 									{% FOR filter_attr_list %}
-									<div class="filter__list filter__collapsible {% FOR values %}{% IF filter_attr_list.values.CHECKED %}has-filters {% ENDIF %}{% ENDFOR %}">
+									<div class="filter__list filter__collapsible {% FOR values %}{% IF filter_attr_list.values.CHECKED %}is-actived {% ENDIF %}{% ENDFOR %}">
 										<a class="filter__title flex" title="Показать фильтры {filter_attr_list.NAME}" href="javascript:;">
 											<span class="filter__name">{filter_attr_list.NAME}</span>
-											<i class="icon-chevron_up"></i>
+											<i class="icon-chevron_down"></i>
 										</a>
-										<!-- <a class="filter__clear" title="Очистить фильтры" href="javascript:;">
-											<span>Сбросить</span>
-										</a> -->
 
 										<div class="filter__content">
-											<!-- <input class="filter__search" type="text" placeholder="Я ищу"> -->
 											<div class="filter__items">
 												{% FOR values %}
 												<div class="filter__item flex {% IF filter_attr_list.values.CHECKED %}is-checked{% ELSEIF filter_attr_list.values.NB_GOODS_FILTERED=0 %}is-disabled{% ENDIF %}">
@@ -2338,7 +2338,7 @@
 													/>
 													<label for="filterAttrVal{filter_attr_list.values.ID}" data-name="{filter_attr_list.values.VALUE}">
 														<span>{filter_attr_list.values.VALUE}</span>
-														<span>({filter_attr_list.values.NB_GOODS_FILTERED})</span>
+														<span>{filter_attr_list.values.NB_GOODS_FILTERED}</span>
 													</label>
 												</div>
 												{% ENDFOR %}
@@ -2350,17 +2350,13 @@
 
 									<!-- Фильтры по свойствам товарных модификаций (Например: Цвет, размер, модификация) {% FOR values %}{% IF filter_prop_list.values.CHECKED %}is-actived {% ENDIF %}{% ENDFOR %} -->
 									{% FOR filter_prop_list %}
-									<div class="filter__list filter__collapsible {% FOR values %}{% IF filter_prop_list.values.CHECKED %}has-filters {% ENDIF %}{% ENDFOR %}">
+									<div class="filter__list filter__collapsible {% FOR values %}{% IF filter_prop_list.values.CHECKED %}is-actived {% ENDIF %}{% ENDFOR %}">
 										<a class="filter__title flex" title="Показать фильтры {filter_prop_list.NAME}" href="javascript:;">
 											<span class="filter__name">{filter_prop_list.NAME}</span>
-											<i class="icon-chevron_up"></i>
+											<i class="icon-chevron_down"></i>
 										</a>
-										<!-- <a class="filter__clear" title="Очистить фильтры" href="javascript:;">
-											<span>Сбросить</span>
-										</a> -->
 
 										<div class="filter__content">
-											<!-- <input class="filter__search" type="text" placeholder="Я ищу"> -->
 											<div class="filter__items">
 												{% FOR values %}
 												<div class="filter__item flex {% IF filter_prop_list.values.CHECKED %}is-checked{% ELSEIF filter_prop_list.values.NB_GOODS_FILTERED=0 %}is-disabled{% ENDIF %}">
@@ -2373,7 +2369,7 @@
 													/>
 													<label for="filterPropVal{filter_prop_list.values.ID}" data-name="{filter_prop_list.values.VALUE}">
 														<span>{filter_prop_list.values.VALUE}</span>
-														<span>({filter_prop_list.values.NB_GOODS_FILTERED})</span>
+														<span>{filter_prop_list.values.NB_GOODS_FILTERED}</span>
 													</label>
 												</div>
 												{% ENDFOR %}
@@ -2383,11 +2379,14 @@
 									</div>
 									{% ENDFOR %}
 								</form>
+
 								<div class="filters__buttons">
-									<a class="button-secondary" href="{PAGE_CANONICAL}" title="Очистить фильтры">
+									<a class="filters__button button-empty button-icon" href="{PAGE_CANONICAL}" title="Очистить фильтры">
+										<i class="icon-close"></i>
 										<span>Сбросить фильтры</span>
 									</a>
 								</div>
+
 							</div>
 						</div>
 						{% ENDIF filters %}
@@ -2399,13 +2398,64 @@
 					<div class="main__right {% IFNOT IS_FULL_CATALOG && MOD_LNAME = catalog || MOD_LNAME = search || MOD_LNAME = discount %}has-sidebar{% ENDIF %}">
 						<!-- Основное блоки заголовков -->
 						<div id="page__title">
+							<!-- Заголовки страниц -->
+							<div class="block__title">
+								{% IF MOD_LNAME=user && ACT=login %}
+								<h1 class="title"><span>Войти или зарегистрироваться</span></h1>
+								{% ELSEIF MOD_LNAME=user && ACT=change %}
+								<h1 class="title"><span>Активация нового пароля</span></h1>
+								{% ELSEIF MOD_LNAME=user && ACT=recovery %}
+								<h1 class="title"><span>Восстановление пароля</span></h1>
+								{% ELSEIF MOD_LNAME=user && ACT=favorites %}
+								<h1 class="title"><span>Сохраненные товары</span></h1>
+								{% ELSEIF MOD_LNAME=user && ACT=history_list %}
+								<h1 class="title"><span>Мои заказы</span></h1>
+								{% ELSEIF MOD_LNAME=user && ACT=history_info %}
+								<h1 class="title"><span>Мой заказ</span></h1>
+								{% ELSEIF MOD_LNAME=user && ACT=settings %}
+								<h1 class="title"><span>Личный кабинет</span></h1>
+								{% ELSEIF MOD_LNAME=user && ACT=register %}
+								<h1 class="title"><span>Регистрация клиента</span></h1>
+								{% ELSEIF MOD_LNAME=order && ACT=stage %}
+								<h1 class="title"><span>Оформление заказа. Шаг {ORDER_STAGE_NUM} из 4</span></h1>
+								{% ELSEIF MOD_LNAME=search %}
+								<h1 class="title">
+									<span>
+										<div>Результат поиска по запросу: {% IFNOT search_query_empty %}&laquo;{SEARCH_QUERY}&raquo;{% ENDIF %}</div>
+										{% IF GOODS_PAGES_RESULTS > 0 %}<div class="subtitle">({GOODS_PAGES_RESULTS} товар{GOODS_PAGES_RESULTS | gen_word_end("","а","ов")} найд{GOODS_PAGES_RESULTS | gen_word_end("ен","ено","ено")} по запросу)</div>{% ENDIF %}
+									</span>
+								</h1>
+								{% ELSEIF MOD_LNAME=discount && ACT=index && ID %}
+								<h1 class="title"><span>{PROMOTIONAL_CAMPAIGN_NAME}</span></h1>
+								{% ELSEIF MOD_LNAME=discount && ACT=index %}
+								<h1 class="title"><span>Акции</span></h1>
+								{% ELSEIF MOD_LNAME=feedback %}
+								<h1 class="title"><span>Связь с администрацией</span></h1>
+								{% ELSEIF CURRENT_URL=NEWS_SHOP_URL || CURRENT_URL=NEWS_ARTICLES_URL || CURRENT_URL=NEWS_MASS_MEDIA_URL %}
+								<h1 class="title"><span>{NEWS_SECTION_NAME}</span></h1>
+								{% ELSEIF MOD_LNAME=news %}
+								<h1 class="title"><span>{PAGE_TITLE}</span></h1>
+								{% ELSEIF MOD_LNAME=compare %}
+								<h1 class="title"><span>{% IF compare_list_empty %}Ваш список сравнения пуст{% ELSE %}Сравнение товаров{% ENDIF %}</span></h1>
+								{% ELSEIF MOD_LNAME=page %}
+								<h1 class="title"><span>{PAGE_NAME}</span></h1>
+								{% ELSEIF MOD_LNAME= %}
+								<h1 class="title"><span>Внутренняя ошибка сервера. {MSG_HEADER}</span></h1>
+								{% ELSEIF MOD_LNAME=callback %}
+								<h1 class="title"><span>Заказ обратного звонка</span></h1>
+								{% ELSEIF MOD_LNAME=catalog %}
+								<h1 class="title"><span>{CATEGORY_NAME}</span></h1>
+								{% ELSEIF MOD_LNAME=cart %}
+								<h1 class="title"><a href="{CART_URL}" title="Корзина"><span>Корзина</span></a></h1>
+								{% ENDIF %}
+							</div>
+							
 							<!-- Хлебные крошки -->
-							{% IFNOT index_page %}
 							<div id="breadcrumbs">
 								<ul class="flex unstyled" itemscope itemtype="https://schema.org/BreadcrumbList">
 									<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="home">
 										<a itemprop="item" href="{INDEX_PAGE_URL}" title="Перейти на главную">
-											<i class="icon-home"></i>
+											<!-- <i class="icon-home"></i> -->
 											<span itemprop="name">Главная</span>
 											<meta itemprop="position" content="1" />
 										</a>
@@ -2602,59 +2652,7 @@
 									{% ENDIF %}
 								</ul>
 							</div>
-							{% ENDIF %}
 
-							<!-- Заголовки страниц -->
-							<div class="block__title">
-								{% IF MOD_LNAME=user && ACT=login %}
-								<h1 class="title"><span>Войти или зарегистрироваться</span></h1>
-								{% ELSEIF MOD_LNAME=user && ACT=change %}
-								<h1 class="title"><span>Активация нового пароля</span></h1>
-								{% ELSEIF MOD_LNAME=user && ACT=recovery %}
-								<h1 class="title"><span>Восстановление пароля</span></h1>
-								{% ELSEIF MOD_LNAME=user && ACT=favorites %}
-								<h1 class="title"><span>Сохраненные товары</span></h1>
-								{% ELSEIF MOD_LNAME=user && ACT=history_list %}
-								<h1 class="title"><span>Мои заказы</span></h1>
-								{% ELSEIF MOD_LNAME=user && ACT=history_info %}
-								<h1 class="title"><span>Мой заказ</span></h1>
-								{% ELSEIF MOD_LNAME=user && ACT=settings %}
-								<h1 class="title"><span>Личный кабинет</span></h1>
-								{% ELSEIF MOD_LNAME=user && ACT=register %}
-								<h1 class="title"><span>Регистрация клиента</span></h1>
-								{% ELSEIF MOD_LNAME=order && ACT=stage %}
-								<h1 class="title"><span>Оформление заказа. Шаг {ORDER_STAGE_NUM} из 4</span></h1>
-								{% ELSEIF MOD_LNAME=search %}
-								<h1 class="title">
-									<span>
-										<div>Результат поиска по запросу: {% IFNOT search_query_empty %}&laquo;{SEARCH_QUERY}&raquo;{% ENDIF %}</div>
-										{% IF GOODS_PAGES_RESULTS > 0 %}<div class="subtitle">({GOODS_PAGES_RESULTS} товар{GOODS_PAGES_RESULTS | gen_word_end("","а","ов")} найд{GOODS_PAGES_RESULTS | gen_word_end("ен","ено","ено")} по запросу)</div>{% ENDIF %}
-									</span>
-								</h1>
-								{% ELSEIF MOD_LNAME=discount && ACT=index && ID %}
-								<h1 class="title"><span>{PROMOTIONAL_CAMPAIGN_NAME}</span></h1>
-								{% ELSEIF MOD_LNAME=discount && ACT=index %}
-								<h1 class="title"><span>Акции</span></h1>
-								{% ELSEIF MOD_LNAME=feedback %}
-								<h1 class="title"><span>Связь с администрацией</span></h1>
-								{% ELSEIF CURRENT_URL=NEWS_SHOP_URL || CURRENT_URL=NEWS_ARTICLES_URL || CURRENT_URL=NEWS_MASS_MEDIA_URL %}
-								<h1 class="title"><span>{NEWS_SECTION_NAME}</span></h1>
-								{% ELSEIF MOD_LNAME=news %}
-								<h1 class="title"><span>{PAGE_TITLE}</span></h1>
-								{% ELSEIF MOD_LNAME=compare %}
-								<h1 class="title"><span>{% IF compare_list_empty %}Ваш список сравнения пуст{% ELSE %}Сравнение товаров{% ENDIF %}</span></h1>
-								{% ELSEIF MOD_LNAME=page %}
-								<h1 class="title"><span>{PAGE_NAME}</span></h1>
-								{% ELSEIF MOD_LNAME= %}
-								<h1 class="title"><span>Внутренняя ошибка сервера. {MSG_HEADER}</span></h1>
-								{% ELSEIF MOD_LNAME=callback %}
-								<h1 class="title"><span>Заказ обратного звонка</span></h1>
-								{% ELSEIF MOD_LNAME=catalog %}
-								<h1 class="title"><span>{CATEGORY_NAME}</span></h1>
-								{% ELSEIF MOD_LNAME=cart %}
-								<h1 class="title"><a href="{CART_URL}" title="Корзина"><span>Корзина</span></a></h1>
-								{% ENDIF %}
-							</div>
 						</div>
 
 						<!-- Основное описание страницы -->
@@ -2788,7 +2786,7 @@
 												rel="nofollow"
 											>
 												<i class="icon-compare"></i>
-												<span>Убрать из сравнения</span>
+												<span>Сравнение</span>
 											</a>
 											{% ELSEIF SETTINGS_COMPARE_DISABLE=0 %}
 											<a class="product__link add-compare"
@@ -2813,7 +2811,7 @@
 												rel="nofollow"
 											>
 												<i class="icon-compare"></i>
-												<span>Добавить в сравнения</span>
+												<span>Cравнение</span>
 											</a>
 											{% ENDIF %}
 											<!-- //END Добавление товара в избранное и сравнение и в корзину -->
@@ -2836,13 +2834,13 @@
 												data-char-code="{CURRENCY_CHAR_CODE}"
 												data-add-tooltip="В избранное"
 												data-del-tooltip="В избранном"
-												data-tooltip="Убрать из избранного"
+												data-tooltip="Избранное"
 												title="Убрать &laquo;{recently_viewed_goods.NAME}&raquo; из Избранного"
 												href="{FAVORITES_DELETE_URL}?id={recently_viewed_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}"
 												rel="nofollow"
 											>
 												<i class="icon-favorites"></i>
-												<span>Убрать из избранного</span>
+												<span>Избранное</span>
 											</a>
 											{% ELSE %}
 											<a class="product__link add-favorites"
@@ -2861,13 +2859,13 @@
 												data-char-code="{CURRENCY_CHAR_CODE}"
 												data-add-tooltip="В избранное"
 												data-del-tooltip="В избранном"
-												data-tooltip="Добавить в избранное"
+												data-tooltip="Избранное"
 												title="Добавить &laquo;{recently_viewed_goods.NAME}&raquo; в Избранное"
 												href="{FAVORITES_ADD_URL}?id={recently_viewed_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}"
 												rel="nofollow"
 											>
 												<i class="icon-favorites"></i>
-												<span>Добавить в избранное</span>
+												<span>Избранное</span>
 											</a>
 											{% ENDIF %}
 							
@@ -2898,7 +2896,7 @@
 											<meta itemprop="offerCount" content="{% FOR mods %}{% IF recently_viewed_goods.mods.last %}{recently_viewed_goods.mods.length}{% ENDIF %}{% ENDFOR %}">
 										</div>
 							
-										<div class="flex justify-between">
+										<div class="product__inner flex justify-between">
 											<!-- Цена -->
 											<div class="product__price {CURRENCY_CHAR_CODE} {% IF recently_viewed_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT>recently_viewed_goods.MIN_PRICE_NOW %}has-price-old{% ELSEIF recently_viewed_goods.MIN_PRICE_OLD>recently_viewed_goods.MIN_PRICE_NOW %}has-price-old{% ENDIF %}" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
 												<meta itemprop="priceCurrency" content="{CURRENCY_CHAR_CODE}" />
@@ -3743,7 +3741,6 @@
 			counterDate();
 			swiperCatalog();
 			swiperOffers();
-			swiperViewed();
 		});
 	</script>
 	{% ENDIF %}

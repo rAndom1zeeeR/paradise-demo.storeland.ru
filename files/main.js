@@ -695,7 +695,7 @@ function Product() {
 								notyStart(content, 'success');
 							}
 						} else if('error' == data.status) {
-							var content = '<div class="noty__addto noty_bad flex"><div class="noty__content"><div class="noty__title">Не удалось добавить в избранное</div><div class="noty__message">'+ data.message + '</div></div><div class="noty__buttons"><a class="button-primary" href="/user/login" title="Войти"><span>Войти</span></a></div></div>'
+							var content = '<div class="noty__addto noty_bad flex"><div class="noty__content"><div class="noty__title">Не удалось Избранное</div><div class="noty__message">'+ data.message + '</div></div><div class="noty__buttons"><a class="button-primary" href="/user/login" title="Войти"><span>Войти</span></a></div></div>'
 							// Если есть функция, которая отображает сообщения пользователю
 							if(typeof(Noty) == "function") {
 								notyStart(content, 'warning')
@@ -1151,7 +1151,7 @@ function Remove() {
 function Catalog() {
 	console.time('Catalog test');
 
-	var content = document.querySelector('.sidebar')
+	var content = document.querySelector('#main')
 
 	// Функции при клике на фильтры
 	this.onClick = function(){
@@ -1174,12 +1174,13 @@ function Catalog() {
 			// Открытие/Скрытие фильтров в сайдбаре
 			else if (filterTitle){
 				event.preventDefault();
-				if ($(event.target.parentElement).hasClass('is-actived')) {
-					$(event.target.parentElement.nextElementSibling).slideUp(600);
-					$(event.target.parentElement).removeClass('is-actived');
+				var parent = $(filterTitle).parent();
+				if (parent.hasClass('is-actived')) {
+					parent.find('.filter__content').slideUp(600);
+					parent.removeClass('is-actived');
 				} else {
-					$(event.target.parentElement.nextElementSibling).slideDown(600);
-					$(event.target.parentElement).addClass('is-actived');
+					parent.find('.filter__content').slideDown(600);
+					parent.addClass('is-actived');
 				}
 
 			}
@@ -1195,8 +1196,9 @@ function Catalog() {
 			// Открыть фильтры по иконке
 			else if (filterIcon){
 				event.preventDefault();
+				console.log('filterIcon', filterIcon);
 				$(event.target).toggleClass('is-opened');
-				$('#filters').toggleClass('is-opened');
+				$('.sidebar__block-filters').toggleClass('is-opened');
 				$('#overlay').toggleClass('is-opened transparent');
 
 			}
@@ -1208,12 +1210,12 @@ function Catalog() {
 	this.priceFilter = function(){
 
 		var
-				priceFilterMinAvailable = parseInt($('.goodsFilterPriceRangePointers .min').text()),  // Минимальное значение цены для фильтра
-				priceFilterMaxAvailable = parseInt($('.goodsFilterPriceRangePointers .max').text()),  // Максимальное значение цены для фильтра
-				priceSliderBlock = $('#goods-filter-price-slider'), // Максимальное значение цены для фильтра
-				priceInputMin = $("#goods-filter-min-price"), // Поле ввода текущего значения цены "От"
-				priceInputMax = $("#goods-filter-max-price"), // Поле ввода текущего значения цены "До"
-				priceSubmitButtonBlock = $(".goodsFilterPriceSubmit");  // Блок с кнопкой, которую есть смысл нажимать только тогда, когда изменялся диапазон цен.
+			priceFilterMinAvailable = parseInt($('.goodsFilterPriceRangePointers .min').text()),  // Минимальное значение цены для фильтра
+			priceFilterMaxAvailable = parseInt($('.goodsFilterPriceRangePointers .max').text()),  // Максимальное значение цены для фильтра
+			priceSliderBlock = $('#goods-filter-price-slider'), // Максимальное значение цены для фильтра
+			priceInputMin = $("#goods-filter-min-price"), // Поле ввода текущего значения цены "От"
+			priceInputMax = $("#goods-filter-max-price"), // Поле ввода текущего значения цены "До"
+			priceSubmitButtonBlock = $(".goodsFilterPriceSubmit");  // Блок с кнопкой, которую есть смысл нажимать только тогда, когда изменялся диапазон цен.
 
 		// Слайдер, который используется для удобства выбора цены
 		priceSliderBlock.slider({
@@ -1252,12 +1254,10 @@ function Catalog() {
 		// Активный фильтр цены
 		if (priceInputMin.val() > priceFilterMinAvailable || priceInputMax.val() < priceFilterMaxAvailable) {
 			$('.filters-price').addClass('has-filters');
-			$('.toolbar').addClass('has-filters');
-			$('#filters').addClass('has-filters');
+			$('.sidebar__block-filters').addClass('has-filters');
 		}else{
 			$('.filters-price').removeClass('has-filters');
-			$('.toolbar').removeClass('has-filters');
-			$('#filters').removeClass('has-filters');
+			// $('.sidebar__block-filters').removeClass('has-filters');
 		}
 
 	}
@@ -3295,6 +3295,7 @@ function swiperViewed(){
 			},
 			320: {
 				slidesPerView: '2',
+				spaceBetween: 8,
 			},
 			480: {
 				slidesPerView: '3',
@@ -3506,6 +3507,7 @@ $(document).ready(function(){
 	toTop();
 	cartSaleSum();
 	cartAjaxQuantity();
+	swiperViewed();
   mainnav('header .mainnav', '1', 991);
 
 	// Удаление классов загрузки для элементов страницы

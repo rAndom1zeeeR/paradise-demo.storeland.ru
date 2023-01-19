@@ -147,13 +147,6 @@ h6 {font-size: 0.875rem;}
 .form__date {flex-grow: 1;}
 
 
-/**************************************/
-/*** Навигация по страницам ***/
-/**************************************/
-.pages li {margin: 0 .5rem;font-size: 1.125rem;}
-.pages li.is-actived {font-weight: bold;}
-.pages li a {display: block;}
-.pages li.first a, .pages li.last a {font-size: 1.5rem;line-height: 1;width: 2.5rem;height: 2.5rem;line-height: 2.5rem;text-align: center;}
 
 
 /**************************************/

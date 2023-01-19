@@ -262,7 +262,7 @@
 							data-mod-price="{GOODS_MOD_PRICE_NOW}"
 							data-add-tooltip="В сравнение"
 							data-del-tooltip="В сравнении"
-							data-tooltip="Убрать из избранного"
+							data-tooltip="Избранное"
 							title="Убрать &laquo;{GOODS_NAME}&raquo; из списка сравнения с другими товарами"
 							href="{COMPARE_DELETE_URL}?id={GOODS_MOD_ID}&amp;return_to={CURRENT_URL | urlencode}"
 							rel="nofollow"
@@ -312,7 +312,7 @@
 							data-mod-price="{GOODS_MOD_PRICE_NOW}"
 							data-add-tooltip="В избранное"
 							data-del-tooltip="В избранном"
-							data-tooltip="Убрать из избранного"
+							data-tooltip="Избранное"
 							title="Убрать &laquo;{GOODS_NAME}&raquo; из Избранного"
 							href="{FAVORITES_DELETE_URL}?id={GOODS_MOD_ID}&amp;return_to={CURRENT_URL | urlencode}"
 							rel="nofollow"
@@ -336,7 +336,7 @@
 							data-mod-price="{GOODS_MOD_PRICE_NOW}"
 							data-add-tooltip="В избранное"
 							data-del-tooltip="В избранном"
-							data-tooltip="Убрать из избранного"
+							data-tooltip="Избранное"
 							title="Добавить &laquo;{GOODS_NAME}&raquo; в Избранное"
 							href="{FAVORITES_ADD_URL}?id={GOODS_MOD_ID}&amp;return_to={CURRENT_URL | urlencode}"
 							rel="nofollow"
@@ -875,7 +875,7 @@
 								rel="nofollow"
 							>
 								<i class="icon-compare"></i>
-								<span>Убрать из сравнения</span>
+								<span>Сравнение</span>
 							</a>
 							{% ELSEIF SETTINGS_COMPARE_DISABLE=0 %}
 							<a class="product__link add-compare"
@@ -900,7 +900,7 @@
 								rel="nofollow"
 							>
 								<i class="icon-compare"></i>
-								<span>Добавить в сравнения</span>
+								<span>Cравнение</span>
 							</a>
 							{% ENDIF %}
 							<!-- //END Добавление товара в избранное и сравнение и в корзину -->
@@ -923,13 +923,13 @@
 								data-char-code="{CURRENCY_CHAR_CODE}"
 								data-add-tooltip="В избранное"
 								data-del-tooltip="В избранном"
-								data-tooltip="Убрать из избранного"
+								data-tooltip="Избранное"
 								title="Убрать &laquo;{related_goods.NAME}&raquo; из Избранного"
 								href="{FAVORITES_DELETE_URL}?id={related_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}"
 								rel="nofollow"
 							>
 								<i class="icon-favorites"></i>
-								<span>Убрать из избранного</span>
+								<span>Избранное</span>
 							</a>
 							{% ELSE %}
 							<a class="product__link add-favorites"
@@ -948,13 +948,13 @@
 								data-char-code="{CURRENCY_CHAR_CODE}"
 								data-add-tooltip="В избранное"
 								data-del-tooltip="В избранном"
-								data-tooltip="Добавить в избранное"
+								data-tooltip="Избранное"
 								title="Добавить &laquo;{related_goods.NAME}&raquo; в Избранное"
 								href="{FAVORITES_ADD_URL}?id={related_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}"
 								rel="nofollow"
 							>
 								<i class="icon-favorites"></i>
-								<span>Добавить в избранное</span>
+								<span>Избранное</span>
 							</a>
 							{% ENDIF %}
 			
@@ -985,7 +985,7 @@
 							<meta itemprop="offerCount" content="{% FOR mods %}{% IF related_goods.mods.last %}{related_goods.mods.length}{% ENDIF %}{% ENDFOR %}">
 						</div>
 			
-						<div class="flex justify-between">
+						<div class="product__inner flex justify-between">
 							<!-- Цена -->
 							<div class="product__price {CURRENCY_CHAR_CODE} {% IF related_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT>related_goods.MIN_PRICE_NOW %}has-price-old{% ELSEIF related_goods.MIN_PRICE_OLD>related_goods.MIN_PRICE_NOW %}has-price-old{% ENDIF %}" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
 								<meta itemprop="priceCurrency" content="{CURRENCY_CHAR_CODE}" />
@@ -1143,7 +1143,7 @@
 								rel="nofollow"
 							>
 								<i class="icon-compare"></i>
-								<span>Убрать из сравнения</span>
+								<span>Сравнение</span>
 							</a>
 							{% ELSEIF SETTINGS_COMPARE_DISABLE=0 %}
 							<a class="product__link add-compare"
@@ -1168,7 +1168,7 @@
 								rel="nofollow"
 							>
 								<i class="icon-compare"></i>
-								<span>Добавить в сравнения</span>
+								<span>Cравнение</span>
 							</a>
 							{% ENDIF %}
 							<!-- //END Добавление товара в избранное и сравнение и в корзину -->
@@ -1191,13 +1191,13 @@
 								data-char-code="{CURRENCY_CHAR_CODE}"
 								data-add-tooltip="В избранное"
 								data-del-tooltip="В избранном"
-								data-tooltip="Убрать из избранного"
+								data-tooltip="Избранное"
 								title="Убрать &laquo;{related_views_goods.NAME}&raquo; из Избранного"
 								href="{FAVORITES_DELETE_URL}?id={related_views_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}"
 								rel="nofollow"
 							>
 								<i class="icon-favorites"></i>
-								<span>Убрать из избранного</span>
+								<span>Избранное</span>
 							</a>
 							{% ELSE %}
 							<a class="product__link add-favorites"
@@ -1216,13 +1216,13 @@
 								data-char-code="{CURRENCY_CHAR_CODE}"
 								data-add-tooltip="В избранное"
 								data-del-tooltip="В избранном"
-								data-tooltip="Добавить в избранное"
+								data-tooltip="Избранное"
 								title="Добавить &laquo;{related_views_goods.NAME}&raquo; в Избранное"
 								href="{FAVORITES_ADD_URL}?id={related_views_goods.MIN_PRICE_NOW_ID}&amp;return_to={CURRENT_URL | urlencode}"
 								rel="nofollow"
 							>
 								<i class="icon-favorites"></i>
-								<span>Добавить в избранное</span>
+								<span>Избранное</span>
 							</a>
 							{% ENDIF %}
 			
@@ -1253,7 +1253,7 @@
 							<meta itemprop="offerCount" content="{% FOR mods %}{% IF related_views_goods.mods.last %}{related_views_goods.mods.length}{% ENDIF %}{% ENDFOR %}">
 						</div>
 			
-						<div class="flex justify-between">
+						<div class="product__inner flex justify-between">
 							<!-- Цена -->
 							<div class="product__price {CURRENCY_CHAR_CODE} {% IF related_views_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT>related_views_goods.MIN_PRICE_NOW %}has-price-old{% ELSEIF related_views_goods.MIN_PRICE_OLD>related_views_goods.MIN_PRICE_NOW %}has-price-old{% ENDIF %}" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
 								<meta itemprop="priceCurrency" content="{CURRENCY_CHAR_CODE}" />
