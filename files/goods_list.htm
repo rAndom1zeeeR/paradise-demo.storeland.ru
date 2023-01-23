@@ -1,5 +1,18 @@
 <!-- В корне каталога товаров отобразим все корневые категории если они есть на сайте -->
 <div class="products">
+	<!-- Вывод категорий с главной -->
+	{% IF IS_FULL_CATALOG %}
+	<div class="special-categories">
+		<div class="row-small">
+			<div class="special-categories__items flex">
+				<a class="special-categories__item special-categories__item-best" href="{CATALOG_TOP_SALES_URL}" title="Перейти в Хиты продаж"><span>Хиты продаж</span></a>
+				<a class="special-categories__item special-categories__item-new" href="{CATALOG_NEW_URL}" title="Перейти в Новинки"><span>Новинки</span></a>
+				<a class="special-categories__item special-categories__item-discount" href="{DISCOUNT_URL}" title="Перейти в Распродажа"><span>Акции</span></a>
+			</div>
+		</div>
+	</div>
+	{% ENDIF %}
+
 	<!-- Вывод категорий -->
 	{% IFNOT nested_categories_list_empty %}
 	<div class="categories {% IF IS_FULL_CATALOG %}categories__full{% ENDIF %}">

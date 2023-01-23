@@ -1328,38 +1328,107 @@ function Goods() {
 			$('.goodsOpinionRating').rating();
 		}
 
-		// Показать/скрыть отзывы если больше 4
-		if($('.opinion__item').length > 4){
-			$('.opinion__buttons').show()
-		} else {
-			$('.opinion__buttons').hide()
-		}
+		goods.hideOpinion()
+		goods.hideFeatures()
+		goods.hideText()
+		goods.hideDescription()
+		goods.opinionBar()
+		goods.opinionAvatar()
 
 		// Выбор модификации
-		$('.modifications-props').each(function(){
-			a = $(this).find('select option:selected').attr('value');
-			$(this).find('.modifications__value[data-value="'+ a +'"]').addClass('is-actived');
-			$(this).find('select option:disabled').each(function(){
-				dis = $(this).attr('value');
-				$('.modifications__value[data-value="'+ dis +'"]').addClass('is-disabled');
-			});
+		// $('.modifications-props').each(function(){
+		// 	a = $(this).find('select option:selected').attr('value');
+		// 	$(this).find('.modifications__value[data-value="'+ a +'"]').addClass('is-actived');
+		// 	$(this).find('select option:disabled').each(function(){
+		// 		dis = $(this).attr('value');
+		// 		$('.modifications__value[data-value="'+ dis +'"]').addClass('is-disabled');
+		// 	});
 			
-		});
-		
-		goods.hideOpinion()
+		// });		
 
 	}
 
 	// Скрываем отзывы если их много
 	this.hideOpinion = function(){
-		$('.opinion__item').each(function(index){
-			if(index > 3){
-				$(this).addClass('is-hide')
-			}else{
-				$(this).addClass('is-show')
+		var item = $('.opinion__item').length
+		var visible = $('.opinion__item:visible').length
+		var button = $('.opinion__buttons')
+		// Скрываем кнопку
+		item > visible ? button.show() : button.hide()
+	}
 
-			}
+	// Скрываем хар-ки если их много
+	this.hideFeatures = function(){
+		var item = $('.features__item').length
+		var visible = $('.features__item:visible').length
+		var button = $('.features__more')
+		// Скрываем кнопку
+		item > visible ? button.show() : button.hide()
+	}
+
+	// Скрываем большое краткое описание
+	this.hideText = function(){
+		var content = $('.productView__text')
+		var height = content.height()
+		if (height > 239){
+			content.addClass('mask')
+		}
+	}
+
+	// Скрываем большое краткое описание
+	this.hideDescription = function(){
+		var content = $('.productView__description-content')
+		var height = content.height()
+		if (height > 119){
+			content.addClass('mask')
+		}
+	}
+
+	// Скрываем большое краткое описание
+	this.scrollContent = function($content, $obj){
+		var scrollTop = $content.offset().top + $content.height() - $(window).height();
+
+		if ($obj.hasClass('is-actived')) {
+			$('html, body').animate({scrollTop : scrollTop + 16}, 500);
+		} else {
+			$('html, body').animate({scrollTop : $content.offset().top - 64}, 500);
+		}
+	}
+
+	// Хорошие/Плохие отзывы
+	this.opinionBar = function(){
+		$('.opinion__total-count').each(function(){
+			var cnt_all = $(this).attr('content');
+			var cnt_this =  $(this).text();
+			var total = Math.floor(parseInt(cnt_this) / parseInt(cnt_all) * 100)
+			$(this).css({width: total+'%'})
 		})
+	}
+
+	// Первая буква имени в аватаре
+	this.opinionAvatar = function(){
+		$('.opinion__item').each(function(){
+			var avatar = $(this).find('.opinion__avatar span');
+			var name = $(this).find('.opinion__name span').text()[0];
+			avatar.text(name)
+		})
+	}
+
+	// 
+	this.opinionNavigate = function($obj, $nav){
+		console.log('obj2', $obj)
+		console.log('nav2', $nav)
+		$obj.find('[data-nav]').removeClass('is-actived')
+		$obj.find('[data-nav='+ $nav +']').addClass('is-actived')
+		$obj.find('[data-nav-content]').removeClass('is-show').addClass('is-hide')
+		$obj.find('[data-nav-content='+ $nav +']').removeClass('is-hide').addClass('is-show')
+		$obj.find('.opinion__buttons').addClass('is-hide')
+
+		if ($nav == 'all'){
+			$obj.find('[data-nav-content]').removeClass('is-hide').addClass('is-show')
+			$obj.find('.opinion__buttons').removeClass('is-hide').addClass('is-show')
+			goods.hideOpinion()
+		}
 	}
 
 	// Действия при клике
@@ -1378,15 +1447,19 @@ function Goods() {
 			var generally = event.target.closest('.generally label');
 			var opinionNav = event.target.closest('.opinion__nav');
 			var opinionAdd = event.target.closest('.opinion__add');
-			var opinionFormButton = event.target.closest('.opinion__form button');
+			var opinionForm = event.target.closest('.opinion__form button');
 			var opinionCaptcha = event.target.closest('.captcha__refresh');
-			var opinionMoreButton = event.target.closest('.opinion__buttons-showAll');
+			var opinionMore = event.target.closest('.opinion__more');
 			var qtyPlus = event.target.closest('.qty__select_plus');
 			var qtyMinus = event.target.closest('.qty__select_minus');
-			var modValue = event.target.closest('.modifications__value');
+			// var modValue = event.target.closest('.modifications__value');
 			var quantity = $(event.target.parentElement).parent().find('.qty__input');
+			var featuresMore = event.target.closest('.features__more');
+			var descriptionMore = event.target.closest('.productView__description-more');
+			var totalGood = event.target.closest('.opinion__total-good .opinion__total-label');
+			var totalBad = event.target.closest('.opinion__total-bad .opinion__total-label');
 
-			// Переключение для Положительный и Отрицательный отзыв
+			// Переключение для Положительный/Отрицательный отзыв
 			if (generally){
 				event.preventDefault();
 				var id = $(event.target.parentElement).attr('for')
@@ -1398,20 +1471,10 @@ function Goods() {
 			}
 			// Переключение для Положительный и Отрицательный отзыв
 			else if (opinionNav){
-				var id = $(opinionNav).attr('data-nav')
-				var parents = $(event.target.offsetParent)
-				
-				parents.find('[data-nav]').removeClass('is-actived')
-				parents.find('[data-nav='+ id +']').addClass('is-actived')
-				parents.find('[data-nav-content]').removeClass('is-show').addClass('is-hide')
-				parents.find('[data-nav-content='+ id +']').removeClass('is-hide').addClass('is-show')
-				parents.find('.opinion__buttons').addClass('is-hide')
+				var obj = $(event.target.offsetParent)
+				var nav = $(opinionNav).attr('data-nav')
 
-				if (id == 'all'){
-					parents.find('[data-nav-content]').removeClass('is-hide').addClass('is-show')
-					parents.find('.opinion__buttons').removeClass('is-hide').addClass('is-show')
-					goods.hideOpinion()
-				}
+				goods.opinionNavigate(obj, nav)
 
 			}
 			// Ссылка на отображение формы для добавление отзыва о товаре
@@ -1428,7 +1491,7 @@ function Goods() {
 
 			}
 			// Валидация формы на странице оформления заказа, а так же формы на страницы связи с администрацией
-			else if (opinionFormButton){
+			else if (opinionForm){
 				var form = $('.opinion__form');
 				form.validate({
 					errorPlacement: function(error, element) { }
@@ -1443,18 +1506,48 @@ function Goods() {
 
 			}
 			// Функция показать больше для Отзывов
-			else if (opinionMoreButton){
-				var button = $(opinionMoreButton);
-				changeTxt(event.target)
-				if (button.hasClass('is-actived')) {
-					button.removeClass('is-actived')
-					$('.opinion__item').removeClass('is-show').addClass('is-hide')
-					$('.opinion__item:nth-child(-n+3)').removeClass('is-hide').addClass('is-show')
-					$('html, body').animate({scrollTop : $('.productView__opinion').offset().top - 64}, 500);
-				} else {
-					button.addClass('is-actived')
-					$('.opinion__item').removeClass('is-hide').addClass('is-show')
-				}
+			else if (opinionMore){			
+				var content = $('.opinion__container')
+				var obj = $(event.target.parentElement)
+				obj.toggleClass('is-actived')
+				changeTxt(obj.find('span'))
+				$('.opinion__items').toggleClass('is-show')
+				// Скрол контента
+				goods.scrollContent(content, obj)
+
+			}
+			// Хар-ки
+			else if (featuresMore){
+				var content = $('.productView__features');
+				var obj = $(event.target.parentElement)
+				obj.toggleClass('is-actived')
+				changeTxt(obj.find('span'))
+				$('.features__items').toggleClass('is-show')
+				// Скрол контента
+				goods.scrollContent(content, obj)
+
+			}
+			// Описание
+			else if (descriptionMore){
+				var content = $('.productView__description');
+				var obj = $(event.target.parentElement)
+				obj.toggleClass('is-actived')
+				changeTxt(obj.find('span'))
+				$('.productView__description-content').toggleClass('mask')
+				// Скрол контента
+				goods.scrollContent(content, obj)
+
+			}
+			// Хорошие отзывы
+			else if (totalGood){
+				var obj = $(event.target.offsetParent)
+				goods.opinionNavigate(obj, 'good')
+
+			}
+			// Плохие отзывы
+			else if (totalBad){
+				var obj = $(event.target.offsetParent)
+				goods.opinionNavigate(obj, 'bad')
 
 			}
 			// Функция Плюс + для товара
@@ -1466,10 +1559,10 @@ function Goods() {
 				goods.quantityMinus(quantity)
 			}
 			// Новый модификации
-			else if (modValue){
-				event.preventDefault();
-				goods.newModification($(event.target.parentElement))
-			}
+			// else if (modValue){
+			// 	event.preventDefault();
+			// 	goods.newModification($(event.target.parentElement))
+			// }
 
 		});
 
@@ -1477,60 +1570,60 @@ function Goods() {
 
 	// Крутит изображение при обновлении картинки защиты от роботов
 	this.RefreshImageAction = function(img,num,cnt){
-			if(cnt>13) { return false; }
-			$(img).attr('src', $(img).attr('rel') + 'icon/refresh/' + num + '.gif');
-			num = (num==6)?0:num;
-			setTimeout(function(){
-				goods.RefreshImageAction(img, num+1, cnt+1)
-			}, 50);
+		if(cnt>13) { return false; }
+		$(img).attr('src', $(img).attr('rel') + 'icon/refresh/' + num + '.gif');
+		num = (num==6)?0:num;
+		setTimeout(function(){
+			goods.RefreshImageAction(img, num+1, cnt+1)
+		}, 50);
 	}
 
 	
-	// Инициализация табов на странице товара
-	this.initTabs = function(){
-		// Блок в котором находятся табы
-		var tabs = $('.productView__tabs');
-		if(!tabs.length) {
-			return false;
-		}
-		// Добавляем аткивные классы на первый элемент
-		tabs.find('[data-tab]').first().addClass('is-actived');
-		tabs.find('[data-tab-content]').first().addClass('is-show');
-		// Проверяет хэш и если по нему была открыта вкладка, то эта функция автоматически откроет её.
-		goods.checkTabHash();
-		// Если используется хеш, то скролим до контента
-		if(document.location.hash !== '') {
-			$('html, body').animate({scrollTop : jQuery('.tabs__content').offset().top - 68}, 600);
-		}
-		// Биндим изменение хэша - проверка какой таб нужно открыть.
-		$(window).bind('hashchange', function(){ goods.checkTabHash(); });
-	}
+	// // Инициализация табов на странице товара
+	// this.initTabs = function(){
+	// 	// Блок в котором находятся табы
+	// 	var tabs = $('.productView__tabs');
+	// 	if(!tabs.length) {
+	// 		return false;
+	// 	}
+	// 	// Добавляем аткивные классы на первый элемент
+	// 	tabs.find('[data-tab]').first().addClass('is-actived');
+	// 	tabs.find('[data-tab-content]').first().addClass('is-show');
+	// 	// Проверяет хэш и если по нему была открыта вкладка, то эта функция автоматически откроет её.
+	// 	goods.checkTabHash();
+	// 	// Если используется хеш, то скролим до контента
+	// 	if(document.location.hash !== '') {
+	// 		$('html, body').animate({scrollTop : jQuery('.tabs__content').offset().top - 68}, 600);
+	// 	}
+	// 	// Биндим изменение хэша - проверка какой таб нужно открыть.
+	// 	$(window).bind('hashchange', function(){ goods.checkTabHash(); });
+	// }
 
-	// Переключение табов
-	this.tabSwitch = function(nb){
-		var tabs = $('.productView__tabs');
-		var tab = tabs.find('[data-tab="'+ nb +'"]');
-		var content = tabs.find('[data-tab-content="'+ nb +'"]');
-		tabs.find('[data-tab]').removeClass('is-actived');
-		tabs.find('[data-tab-content]').removeClass('is-show');
-		tab.addClass('is-actived');
-		content.addClass('is-show');
-		document.location.hash = "#tab_" + nb;
-	}
+	// // Переключение табов
+	// this.tabSwitch = function(nb){
+	// 	var tabs = $('.productView__tabs');
+	// 	var tab = tabs.find('[data-tab="'+ nb +'"]');
+	// 	var content = tabs.find('[data-tab-content="'+ nb +'"]');
+	// 	tabs.find('[data-tab]').removeClass('is-actived');
+	// 	tabs.find('[data-tab-content]').removeClass('is-show');
+	// 	tab.addClass('is-actived');
+	// 	content.addClass('is-show');
+	// 	document.location.hash = "#tab_" + nb;
+	// }
 
-	// Проверяет хэш, переданый пользователем и открывает соответствующий раздел
-	this.checkTabHash = function(){
-		// Определяем текущий хэш страницы
-		var hash = window.location.hash.substr(1);
-		if(hash == 'goodsDataOpinionAdd') {
-			hash = 'tab_4';
-		}
-		if(!hash.length || hash.indexOf('tab_') == -1) {
-			return false;
-		}
-		// Открываем тот таб, который был указан в hash-е
-		goods.tabSwitch(hash.replace("tab_", ''))
-	}
+	// // Проверяет хэш, переданый пользователем и открывает соответствующий раздел
+	// this.checkTabHash = function(){
+	// 	// Определяем текущий хэш страницы
+	// 	var hash = window.location.hash.substr(1);
+	// 	if(hash == 'goodsDataOpinionAdd') {
+	// 		hash = 'tab_4';
+	// 	}
+	// 	if(!hash.length || hash.indexOf('tab_') == -1) {
+	// 		return false;
+	// 	}
+	// 	// Открываем тот таб, который был указан в hash-е
+	// 	goods.tabSwitch(hash.replace("tab_", ''))
+	// }
 
 	// Проверка кол-ва
 	this.checkQty = function($obj){
@@ -1812,19 +1905,19 @@ function Goods() {
 	}
 
 	// Кнопки для модификаций
-	this.newModification = function($obj){
+	// this.newModification = function($obj){
 
-		if($obj.hasClass('is-disabled')){
-			return false;
-		}
+	// 	if($obj.hasClass('is-disabled')){
+	// 		return false;
+	// 	}
 
-		$obj.parents().find('.modifications__value').removeClass('is-disabled is-actived')
-		$obj.addClass('is-actived');
-		var val = $obj.data('value');
-		$obj.parents().find('.modifications-props__select option[value="' + val + '"]').prop('selected',true);
-		$obj.parents().find('.modifications-props__select').trigger('change');
+	// 	$obj.parents().find('.modifications__value').removeClass('is-disabled is-actived')
+	// 	$obj.addClass('is-actived');
+	// 	var val = $obj.data('value');
+	// 	$obj.parents().find('.modifications-props__select option[value="' + val + '"]').prop('selected',true);
+	// 	$obj.parents().find('.modifications-props__select').trigger('change');
 
-	}
+	// }
 
 }
 
@@ -3039,7 +3132,7 @@ function swiperSlider(id){
 		simulateTouch: true,
 		grabCursor: true,
 		slidesPerView: '4',
-		spaceBetween: 32,
+		spaceBetween: 24,
 		nested: true,
 		preloadImages: false,
 		lazy: {

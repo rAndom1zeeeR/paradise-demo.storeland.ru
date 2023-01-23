@@ -59,7 +59,7 @@ p {margin: 0 0 1rem 0;line-height: 1.25;overflow: hidden;}
 .loading {overflow: hidden;white-space: nowrap;}
 .bold {font-weight: bold;}
 .disc li {line-height: 1.5;}
-.mask {overflow: hidden;mask-image: linear-gradient(to bottom, black 50%, transparent 90%);}
+.mask {overflow: hidden;-webkit-mask: linear-gradient(to bottom, black 50%, transparent 100%);mask: linear-gradient(to bottom, black 50%, transparent 100%);}
 .is-show {display: block;}
 .is-hide {display: none;}
 
@@ -138,8 +138,8 @@ h6 {font-size: 0.875rem;}
 .form__fields label em {display: none;}
 .form__fields label.required em {display: inline-block;}
 .form__field {position: relative;}
-.form__pp {margin-top: 1rem;font-size: .75rem;line-height: 1.5;}
-.form__pp [data-fancybox] {text-decoration: underline;display: inline;}
+.form__pp {margin-top: 1rem;color: var(--color-gray);font-size: .875rem;line-height: 1.5;}
+.form__pp [data-fancybox] {color: var(--color-gray);text-decoration: underline;display: inline;}
 .form__pp [data-fancybox]:hover {text-decoration: none;cursor: pointer;}
 .form__buttons {margin-top: 1rem;}
 .form__pass {position: relative;}

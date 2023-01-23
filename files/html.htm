@@ -1311,7 +1311,7 @@
 
 					<!-- Показать все -->
 					<div class="products__buttons">
-						<a class="pdt__visible-button button-link button-icon" title="Показать все">
+						<a class="pdt__visible-button button-link button-more" title="Показать все">
 							<span data-txt="Скрыть">Показать все</span>
 							<i class="icon-chevron_right"></i>
 						</a>
@@ -1675,7 +1675,7 @@
 
 					<!-- Показать все -->
 					<div class="products__buttons">
-						<a class="pdt__visible-button button-link button-icon" title="Показать все">
+						<a class="pdt__visible-button button-link button-more" title="Показать все">
 							<span data-txt="Скрыть">Показать все</span>
 							<i class="icon-chevron_right"></i>
 						</a>
@@ -1994,7 +1994,7 @@
 
 					<!-- Показать все -->
 					<div class="products__buttons">
-						<a class="pdt__visible-button button-link button-icon" title="Показать все">
+						<a class="pdt__visible-button button-link button-more" title="Показать все">
 							<span data-txt="Скрыть">Показать все</span>
 							<i class="icon-chevron_right"></i>
 						</a>
@@ -2073,7 +2073,7 @@
 										</div>
 										<!-- {% ENDIF %} -->
 										<div class="news__buttons flex justify-between">
-											<a class="news__button button-link button-icon" href="{news_list_all.URL}" title="Перейти к странице &laquo;{news_list_all.TITLE}&raquo;">
+											<a class="news__button button-link button-more" href="{news_list_all.URL}" title="Перейти к странице &laquo;{news_list_all.TITLE}&raquo;">
 												<span>Подробнее</span>
 												<i class="icon-chevron_right"></i>
 											</a>
@@ -2120,7 +2120,7 @@
 										</div>
 										<!-- {% ENDIF %} -->
 										<div class="news__buttons flex justify-between">
-											<a class="news__button button-link button-icon" href="{news_list_shop.URL}" title="Перейти к странице &laquo;{news_list_shop.TITLE}&raquo;">
+											<a class="news__button button-link button-more" href="{news_list_shop.URL}" title="Перейти к странице &laquo;{news_list_shop.TITLE}&raquo;">
 												<span>Подробнее</span>
 												<i class="icon-chevron_right"></i>
 											</a>
@@ -2167,7 +2167,7 @@
 										</div>
 										<!-- {% ENDIF %} -->
 										<div class="news__buttons flex justify-between">
-											<a class="news__button button-link button-icon" href="{news_list_articles.URL}" title="Перейти к странице &laquo;{news_list_articles.TITLE}&raquo;">
+											<a class="news__button button-link button-more" href="{news_list_articles.URL}" title="Перейти к странице &laquo;{news_list_articles.TITLE}&raquo;">
 												<span>Подробнее</span>
 												<i class="icon-chevron_right"></i>
 											</a>
@@ -2214,7 +2214,7 @@
 										</div>
 										<!-- {% ENDIF %} -->
 										<div class="news__buttons flex justify-between">
-											<a class="news__button button-link button-icon" href="{news_list_mass_media.URL}" title="Перейти к странице &laquo;{news_list_mass_media.TITLE}&raquo;">
+											<a class="news__button button-link button-more" href="{news_list_mass_media.URL}" title="Перейти к странице &laquo;{news_list_mass_media.TITLE}&raquo;">
 												<span>Подробнее</span>
 												<i class="icon-chevron_right"></i>
 											</a>
@@ -3691,10 +3691,11 @@
 		$(document).ready(function(){
 			goods.goodsModification();
 			goods.prodQty();
-			goods.initTabs();
+			// goods.initTabs();
 			goods.onInit();
 			goods.onClick();
 			goods.swiperTumbs();
+			counterDate();
 			swiperSlider('#related-views');
 			swiperSlider('#related-goods');
 		});
