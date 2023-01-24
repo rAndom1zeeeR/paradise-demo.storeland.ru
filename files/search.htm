@@ -591,39 +591,48 @@
 	<!-- Для полного отображения страницы товаров оторазим элементы навигации и обёрточные блоки -->
 	{% IFNOT ONLY_BODY && show_pages %}
 	<div class="toolbar-bottom flex">
-		<ol class="pages flex unstyled">
-			{% IF GOODS_PAGES_SHOW_FIRST %}
-			<li class="pages__item first">
-				<a class="pages__link" href="{GOODS_PAGINATE_URL | url_amp}&page=1" title="Первая страница"><span><i class="icon-chevron_left"></i></span></a>
-			</li>
-			<li class="pages__item prev">
-				<a class="pages__link" href="{GOODS_PAGINATE_URL | url_amp}&page={GOODS_PAGES_PREVIOUS}" title="Предыдущая страница"><span>{GOODS_PAGES_PREVIOUS}</span></a>
-			</li>
-			{% ENDIF %}
-			<li class="pages__item current"><a class="pages__link is-actived"><span>{GOODS_PAGES_CURRENT}</span></a></li>
-			{% IF GOODS_PAGES_SHOW_LAST %}
-			<li class="pages__item next">
-				<a class="pages__link" href="{GOODS_PAGINATE_URL | url_amp}&page={GOODS_PAGES_NEXT}" title="Следующая страница"><span>{GOODS_PAGES_NEXT}</span></a>
-			</li>
-			<li class="pages__item last">
-				<a class="pages__link" href="{GOODS_PAGINATE_URL | url_amp}&page={GOODS_PAGES_LAST}" title="Последняя страница"><span><i class="icon-chevron_right"></i></span></a>
-			</li>
-			{% ENDIF %}
-		</ol>
+		<form class="toolbar__form flex" action="">
+			<!-- Поисковый запрос -->
+			<input type="hidden" name="q" value="{SEARCH_QUERY}" />
+			<!-- Список фильтров, которые сейчас действуют на результаты поиска -->
+			{% FOR goods_filters %}
+			<input type="hidden" name="{goods_filters.NAME}" value="{goods_filters.VALUE}" />
+			{% ENDFOR %}
+			
+			<!-- Страницы -->
+			<ol class="pages flex unstyled">
+				{% IF GOODS_PAGES_SHOW_FIRST %}
+				<li class="pages__item first">
+					<a class="pages__link" href="{GOODS_PAGINATE_URL | url_amp}&page=1" title="Первая страница"><span><i class="icon-chevron_left"></i></span></a>
+				</li>
+				<li class="pages__item prev">
+					<a class="pages__link" href="{GOODS_PAGINATE_URL | url_amp}&page={GOODS_PAGES_PREVIOUS}" title="Предыдущая страница"><span>{GOODS_PAGES_PREVIOUS}</span></a>
+				</li>
+				{% ENDIF %}
+				<li class="pages__item current"><a class="pages__link is-actived"><span>{GOODS_PAGES_CURRENT}</span></a></li>
+				{% IF GOODS_PAGES_SHOW_LAST %}
+				<li class="pages__item next">
+					<a class="pages__link" href="{GOODS_PAGINATE_URL | url_amp}&page={GOODS_PAGES_NEXT}" title="Следующая страница"><span>{GOODS_PAGES_NEXT}</span></a>
+				</li>
+				<li class="pages__item last">
+					<a class="pages__link" href="{GOODS_PAGINATE_URL | url_amp}&page={GOODS_PAGES_LAST}" title="Последняя страница"><span><i class="icon-chevron_right"></i></span></a>
+				</li>
+				{% ENDIF %}
+			</ol>	
 
-		<!-- Показывать по: (Шаг для выбора пользователем лимита выдачи товаров на страницу от 1 до 100) -->
-		<div class="toolbar__show flex">
-			<label class="toolbar__label">Показать по:</label>
-			<div class="selectBox">
-				<select class="select" name="per_page" title="Лимит товаров на странице" onchange="this.form.submit();">
-					{% FOR goods_per_page_list %}
-						<option value="{goods_per_page_list.LIMIT}" {% IF goods_per_page_list.SELECTED %}selected="selected"{% ENDIF %}>{goods_per_page_list.LIMIT}</option>
-					{% ENDFOR %}
-				</select>
+			<!-- Показывать по: (Шаг для выбора пользователем лимита выдачи товаров на страницу от 1 до 100) -->
+			<div class="toolbar__show flex">
+				<label class="toolbar__label">Показать по:</label>
+				<div class="selectBox">
+					<select class="select" name="per_page" title="Лимит товаров на странице" onchange="this.form.submit();">
+						{% FOR goods_per_page_list %}
+							<option value="{goods_per_page_list.LIMIT}" {% IF goods_per_page_list.SELECTED %}selected="selected"{% ENDIF %}>{goods_per_page_list.LIMIT}</option>
+						{% ENDFOR %}
+					</select>
+				</div>
 			</div>
-		</div>
-		<!-- /END Показывать по: -->
 
+		</form>
 	</div>
 	{% ENDIF %}
 

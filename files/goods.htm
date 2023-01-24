@@ -1057,9 +1057,9 @@
 							{% IF related_goods.COUNT_MODIFICATION > 1 %}
 							<div class="product__props selectBox">
 								<select class="product__props-select select" name="form[properties][]">
-									{% FOR mods %}
+									{% FOR goods_mod_list %}
 										{% FOR goods_mod_distinctive_properties %}
-										<option value="{related_goods.mods.ID}">{related_goods.mods.goods_mod_distinctive_properties.VALUE}</option>
+										<option value="{related_goods.goods_mod_list.ID}">{related_goods.goods_mod_list.goods_mod_distinctive_properties.VALUE}</option>
 										{% ENDFOR goods_mod_distinctive_properties %}
 									{% ENDFOR values %}
 								</select>
@@ -1323,9 +1323,9 @@
 							{% IF related_views_goods.COUNT_MODIFICATION > 1 %}
 							<div class="product__props selectBox">
 								<select class="product__props-select select" name="form[properties][]">
-									{% FOR mods %}
+									{% FOR goods_mod_list %}
 										{% FOR goods_mod_distinctive_properties %}
-										<option value="{related_views_goods.mods.ID}">{related_views_goods.mods.goods_mod_distinctive_properties.VALUE}</option>
+										<option value="{related_views_goods.goods_mod_list.ID}">{related_views_goods.goods_mod_list.goods_mod_distinctive_properties.VALUE}</option>
 										{% ENDFOR goods_mod_distinctive_properties %}
 									{% ENDFOR values %}
 								</select>

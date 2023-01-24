@@ -211,7 +211,7 @@ h6 {font-size: 0.875rem;}
 .noty__price {margin-top: 1rem;}
 .noty__buttons {width: 100%;}
 @media all and (max-width: 479px) {
-	#noty_layout__bottomRight {left: 1rem;}
+	#noty_layout__bottomRight {left: auto;margin: 0 auto;max-width: 100%;}
 	.noty_body {padding: 1rem;}
 }
 

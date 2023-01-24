@@ -2239,7 +2239,7 @@
 			<div class="container">
 				<div class="main__inner flex-start">
 					<!-- Левая часть -->
-					{% IFNOT IS_FULL_CATALOG && MOD_LNAME = catalog || MOD_LNAME = search || MOD_LNAME = discount %}
+					{% IFNOT IS_FULL_CATALOG && MOD_LNAME = catalog %}
 					<div class="main__left sidebar">
 						<!-- Каталог -->
 						<div class="sidebar__block sidebar__block-catalog">
@@ -2395,7 +2395,7 @@
 					{% ENDIF %}
 
 					<!-- Правая часть -->
-					<div class="main__right {% IFNOT IS_FULL_CATALOG && MOD_LNAME = catalog || MOD_LNAME = search || MOD_LNAME = discount %}has-sidebar{% ENDIF %}">
+					<div class="main__right {% IFNOT IS_FULL_CATALOG && MOD_LNAME = catalog %}has-sidebar{% ENDIF %}">
 						<!-- Основное блоки заголовков -->
 						<div id="page__title">
 							<!-- Заголовки страниц -->
@@ -3447,7 +3447,7 @@
 
 							<!-- Название магазина -->
 							<meta itemprop="name" content="{SETTINGS_STORE_ORG_NAME}" />
-							<meta itemprop="image" content="{ASSETS_IMAGES_PATH}logo.png?design=VOLT">
+							<meta itemprop="image" content="{ASSETS_IMAGES_PATH}logo.png?design=THEMENAME">
 						</div>
 					</div>
 
@@ -3747,8 +3747,8 @@
 	{% ENDIF %}
 
 	<!-- Адаптивное меню -->
-	<link rel="stylesheet" href="{ASSETS_STYLES_PATH}slinky.min.css?design=VOLT">
-	<script defer type="text/javascript" src="{ASSETS_JS_PATH}slinky.min.js?design=VOLT"></script>
+	<link rel="stylesheet" href="{ASSETS_STYLES_PATH}slinky.min.css?design=THEMENAME">
+	<script defer type="text/javascript" src="{ASSETS_JS_PATH}slinky.min.js?design=THEMENAME"></script>
 	<!-- Слайдер. Карусель -->
 	<script defer type="text/javascript" src="{ASSETS_JS_PATH}swiper-bundle.min.js?design=THEMENAME"></script>
 	<!-- Модальные окна -->
