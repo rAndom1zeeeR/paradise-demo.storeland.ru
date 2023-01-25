@@ -1,6 +1,10 @@
 <!-- Форма карточки товара -->
-<div class="productViewBlock" itemscope itemtype="https://schema.org/Product" data-id="{GOODS_ID}">
+<div class="productViewBlock modal" itemscope itemtype="https://schema.org/Product" data-id="{GOODS_ID}">
 	<div class="productView flex-start {% IF GOODS_MOD_REST_VALUE=0 %}productView__empty{% ENDIF %} {% IF GOODS_MOD_MAX_DISCOUNT_ID %}has-campaign{% ENDIF %}">
+		<div class="modal__title">
+			<h2 class="title">Выбрать модификацию</h2>
+		</div>
+
 		<!-- Изображение товара  {% IF GOODS_IMAGE_ID = goods_images.ID %}style="display: none;"{% ENDIF %} -->
 		<div class="productView__images" data-id="{GOODS_IMAGE_ID}">
 			<!-- Предзагрузчик -->
@@ -358,8 +362,9 @@
 								<span>Уведомить</span>
 							</a>
 							<!-- Подробнее -->
-							<a class="productView__add button-link" href="{GOODS_URL}">
+							<a class="button-link button-more" href="{GOODS_URL}" title="Перейти в {GOODS_NAME}">
 								<span>Подробнее</span>
+								<i class="icon-chevron_right"></i>
 							</a>
 						</div>
 
@@ -706,9 +711,9 @@
 							<ol class="pages flex unstyled">
 							{% FOR opinion_pages_list %}
 								{% IF opinion_pages_list.CURRENT %}
-									<li class="is-actived"><span>{opinion_pages_list.PAGE}</span></li>
+									<li class="pages__item current"><a class="pages__link is-actived"><span>{opinion_pages_list.PAGE}</span></a></li>
 								{% ELSE %}
-									<li><a href="{GOODS_OPINION_PAGINATE_URL}&page={opinion_pages_list.PAGE}#tab_4">{opinion_pages_list.PAGE}</a></li>
+									<li class="pages__item"><a class="pages__link" href="{GOODS_OPINION_PAGINATE_URL}&page={opinion_pages_list.PAGE}#tab_4"><span>{opinion_pages_list.PAGE}</span></a></li>
 								{% ENDIF %}
 							{% ENDFOR %}
 							</ol>

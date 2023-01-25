@@ -9,6 +9,20 @@
 				<input type="hidden" name="fast_order" value="1" />
 				<input type="hidden" name="hash" value="{HASH}" />
 
+				<!--  -->
+				<div class="cartTable__buttons flex justify-between">
+					<div class="cartTable__count">
+						<span>{CART_COUNT_TOTAL} товар{CART_COUNT_TOTAL | gen_word_end("","а","ов")}</span>
+					</div>
+					<a class="cartTable__clear button-rotate button-link button-more" href="{CART_TRUNCATE_URL}" title="Очистить корзину">
+						<span>Очистить</span>
+						<i class="icon-close"></i>
+					</a>
+					<button class="cartTable__recalc button-rotate button-link" type="submit" title="Пересчитать">
+						<span>Пересчитать</span>
+					</button>
+				</div>
+
 				<div class="cartTable__items">
 					{% FOR cart_items %}
 					<div class="cartTable__item flex" data-id="{cart_items.GOODS_ID}" data-mod-id="{cart_items.GOODS_MOD_ID}">
@@ -20,7 +34,7 @@
 						<div class="cartTable__content flex">
 							<!-- Информация -->
 							<div class="cartTable__info">
-								<a class="cartTable__name" href="{cart_items.GOODS_URL}" title="{cart_items.GOODS_NAME}">{cart_items.GOODS_NAME}</a>
+								<a class="cartTable__name" href="{cart_items.GOODS_URL}" title="{cart_items.GOODS_NAME}"><span>{cart_items.GOODS_NAME}</span></a>
 
 								<!-- Если у товара есть отличительные свойства для модификации товара, допишем их к названию товара -->
 								{% IF cart_items.GOODS_MOD_ART_NUMBER %}
@@ -61,14 +75,19 @@
 										/>
 										<span class="qty__select qty__select_plus" title="Увеличить"><i class="icon-plus"></i></span>
 									</div>
+									<div class="cartTable__qty-price {CURRENCY_CHAR_CODE}">
+										<span data-price="{cart_items.GOODS_MOD_PRICE_NOW}">{cart_items.GOODS_MOD_PRICE_NOW | money_format}</span>
+										<span>/ 1 {cart_items.GOODS_MOD_MEASURE_NAME}</span>
+									</div>
+									
 								</div>
 
 								<!-- Цена -->
 								<div class="cartTable__price {CURRENCY_CHAR_CODE} {% IF cart_items.ORDER_LINE_PRICE_OLD > cart_items.ORDER_LINE_PRICE_NOW %}has-price-old{% ENDIF %}">
-									<div class="price__now cartPriceTotal" data-price="{cart_items.ORDER_LINE_PRICE_NOW}">{cart_items.ORDER_LINE_PRICE_NOW | money_format}</div>
 									{% IF cart_items.ORDER_LINE_PRICE_OLD > cart_items.ORDER_LINE_PRICE_NOW %}
 									<div class="price__old" data-price="{cart_items.ORDER_LINE_PRICE_OLD}">{cart_items.ORDER_LINE_PRICE_OLD | money_format}</div>
 									{% ENDIF %}
+									<div class="price__now cartPriceTotal" data-price="{cart_items.ORDER_LINE_PRICE_NOW}">{cart_items.ORDER_LINE_PRICE_NOW | money_format}</div>
 								</div>
 
 							</div>
@@ -87,16 +106,6 @@
 					{% ENDFOR %}
 				</div>
 
-				<div class="cartTable__buttons flex justify-between">
-					<a class="button-rotate button-link cartTable__clear" href="{CART_TRUNCATE_URL}" title="Очистить корзину">
-						<i class="icon-reload"></i>
-						<span>Очистить корзину</span>
-					</a>
-					<button class="button-rotate button-link cartTable__recalc" type="submit" title="Пересчитать">
-						<span>Пересчитать</span>
-					</button>
-				</div>
-
 			</form>
 
 			<!-- Сюда грузится форма оформления быстрого заказа -->
@@ -108,24 +117,43 @@
 		
 		<!-- Корзина: Итоговый блок -->
 		<div class="cartTotal">
+			<!-- Корзина: Элементы -->
 			<div class="cartTotal__items">
 				<!-- Корзина: Заголовок -->
-				<div class="cartTotal__title">Ваш заказ</div>
-
-				<!-- Корзина: Товары -->
-				<div class="cartTotal__item total__goods flex justify-between">
-					<div class="cartTotal__label">
-						<span>Товары (<span class="cart-count" data-cart-count="{CART_COUNT_TOTAL}">{CART_COUNT_TOTAL}</span>)</span>
-					</div>
+				<div class="cartTotal__item cartTotal__item-total flex justify-between">
+					<div class="cartTotal__title">Общая стоимость</div>
 					<div class="cartTotal__price {CURRENCY_CHAR_CODE}">
 						<span class="cartSumNow" data-value="{CART_SUM_NOW}">{CART_SUM_NOW | money_format}</span>
 					</div>
 				</div>
 
+				<!-- Корзина: Минимальная сумма заказа -->
+				{% IF SETTINGS_STORE_ORDER_MIN_ORDER_PRICE %}
+				<div class="cartTotal__item cartTotal__min flex is-hide">
+
+					<div class="cartTotal__min-icon">
+						<i class="icon-info"></i>
+					</div>
+
+					<div class="cartTotal__min-price {CURRENCY_CHAR_CODE}" data-price="{SETTINGS_STORE_ORDER_MIN_ORDER_PRICE}">{SETTINGS_STORE_ORDER_MIN_ORDER_PRICE | money_format}</div>
+
+					<div class="cartTotal__min-title">до мин. суммы заказа</div>
+
+					<div class="cartTotal__min-status flex justify-between">
+						<div class="cartTotal__min-bg">
+							<div class="cartTotal__min-bar"></div>
+						</div>
+						<div class="cartTotal__min-min {CURRENCY_CHAR_CODE}"><span class="num">0</span></div>
+						<div class="cartTotal__min-max {CURRENCY_CHAR_CODE}">{SETTINGS_STORE_ORDER_MIN_ORDER_PRICE | money_format}</div>
+					</div>
+
+				</div>
+				{% ENDIF %}
+
 				<!-- Скидки, действующие на заказ -->
 				{% FOR cart_discount %}
 				{% IF cart_discount.DISCOUNT_IS_ENABLED %}
-				<div class="cartTotal__item total__discount flex justify-between">
+				<div class="cartTotal__item cartTotal__item-discount flex justify-between">
 					<div class="cartTotal__label">
 						<span>{cart_discount.DISCOUNT_NAME}:</span>
 					</div>
@@ -138,7 +166,7 @@
 				{% ENDFOR %}
 			
 				<!-- Корзина: Купон -->
-				<div class="cartTotal__item total__coupons flex justify-between" style="display: none;">
+				<div class="cartTotal__item cartTotal__item-coupons flex justify-between" style="display: none;">
 					<div class="cartTotal__label">
 						<span>Купон:</span>
 					</div>
@@ -148,7 +176,7 @@
 				</div>
 
 				<!-- Корзина: Доставка -->
-				<div class="cartTotal__item total__delivery flex justify-between">
+				<div class="cartTotal__item cartTotal__item-delivery flex justify-between">
 					<div class="cartTotal__label">
 						<span>Доставка:</span>
 					</div>
@@ -157,43 +185,34 @@
 					</div>
 				</div>
 
-				<!-- Корзина: Минимальная сумма заказа -->
-				{% IF SETTINGS_STORE_ORDER_MIN_ORDER_PRICE %}
-				<div class="cartTotal__item cartTotal__min flex justify-between">
-					<div class="cartTotal__label cartTotal__min-label">
-						<div class="cartTotal__min-title">До мин. суммы заказа осталось</div>
-					</div>
-					<div class="cartTotal__price cartTotal__min-price {CURRENCY_CHAR_CODE}" data-price="{SETTINGS_STORE_ORDER_MIN_ORDER_PRICE}">{SETTINGS_STORE_ORDER_MIN_ORDER_PRICE | money_format}</div>
-				</div>
-				{% ENDIF %}
-
 				<!-- Корзина: Итого -->
-				<div class="cartTotal__item total__cart flex justify-between">
-					<b>Итого: </b>
+				<div class="cartTotal__item flex justify-between">
+					<b>Итого:</b>
 					<span class="cartTotal__price cartSumTotal price__now {CURRENCY_CHAR_CODE}" data-price="{CART_SUM_NOW_WITH_DELIVERY_AND_DISCOUNT}">{CART_SUM_NOW_WITH_DELIVERY_AND_DISCOUNT | money_format}</span>
 					<div style="display: none;" class="cartTotal__price cartSumNow" data-value="{CART_SUM_NOW}">{CART_SUM_NOW | money_format}</div>
 					<div style="display: none;" class="cartTotal__price cartSumTotalHide" data-value="{CART_SUM_NOW_WITH_DISCOUNT}">{CART_SUM_NOW_WITH_DISCOUNT | money_format}</div>
 					<div style="display: none;" class="cartTotal__price cartSumDiscount" data-value="{CART_SUM_NOW_WITH_DISCOUNT}">{CART_SUM_NOW_WITH_DISCOUNT | money_format}</div>
 				</div>
 
-				<!-- Корзина: Оформление -->
-				<div class="cartTotal__buttons total__buttons flex-center">
-					<button class="button-primary startOrder" type="submit" title="Перейти к быстрому оформлению заказа">
-						<span>Оформить </span><span>заказ</span>
-					</button>
-					<button class="button-primary confirmOrder is-disabled" type="submit" title="Перейти к быстрому оформлению заказа">
-						<span>Оформить </span><span>заказ</span>
-					</button>
-					<a class="button-secondary button-link closeOrder" title="Отменить заказ">
-						<span>Изменить </span><span>заказ</span>
-					</a>
-					<div class="form__pp">
-						<span>Нажимая на кнопку &laquo;Оформить заказ&raquo;, Вы соглашаетесь с</span>
-						<span data-fancybox data-src="#fancybox__pp">правилами обработки данных</span>
-					</div>
-				</div>
-
 			</div>
+
+			<!-- Корзина: Оформление -->
+			<div class="cartTotal__buttons total__buttons flex-center">
+				<button class="button-primary startOrder" type="submit" title="Перейти к быстрому оформлению заказа">
+					<span>Оформить </span><span>заказ</span>
+				</button>
+				<button class="button-primary confirmOrder is-disabled" type="submit" title="Перейти к быстрому оформлению заказа">
+					<span>Оформить </span><span>заказ</span>
+				</button>
+				<a class="button-link button-more closeOrder" title="Отменить заказ">
+					<span>Изменить </span><span>заказ</span>
+				</a>
+				<div class="form__pp">
+					<span>Нажимая на кнопку &laquo;Оформить заказ&raquo;, Вы соглашаетесь с</span>
+					<span data-fancybox data-src="#fancybox__pp">правилами обработки данных</span>
+				</div>
+			</div>
+
 		</div>
 	
   {% ENDIF %}

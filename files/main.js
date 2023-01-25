@@ -1804,11 +1804,11 @@ function Goods() {
 
 					// Старая цена товара
 					if(modificationPriceOld>modificationPriceNow) {
-						goodsPriceOld.css({'display':'inline-block'})
+						goodsPriceOld.removeClass('is-hide');
 						goodsPriceOld.html(modificationPriceOldFormated);
 						goodsPriceOld.parent().addClass('has-price-old')
 					} else {
-						goodsPriceOld.hide();
+						goodsPriceOld.addClass('is-hide');
 						goodsPriceOld.html('');
 						goodsPriceOld.parent().removeClass('has-price-old')
 					}
@@ -2046,12 +2046,14 @@ function Cart() {
 			var totalSum = parseInt($('.cartSumTotal').data('price'));
 			if(minPrice > totalSum) {
 				var diff = minPrice - totalSum
+				var bar = Math.floor(totalSum / minPrice * 100)
+				$('.cartTotal__min-bar').css({'width': bar+'%'})
 				$('.cartTotal__min-price').find('.num').text(addSpaces(diff))
 				$('.total__buttons button').attr('disabled', true).addClass('is-disabled');
-				$('.cartTotal__min').show();
+				$('.cartTotal__min').removeClass('is-hide');
 			}else{
 				$('.total__buttons button').attr('disabled', false).removeClass('is-disabled');
-				$('.cartTotal__min').hide();
+				$('.cartTotal__min').addClass('is-hide');
 			}
 		}
 	}
@@ -2252,7 +2254,6 @@ function Order(){
 
 		// Выбор оплаты по умолчанию
 		$('.order-payment__radio').each(function(){
-			console.log('each', $(this).parent())
 			var paymentDescription = $('.order-payment__radio:checked').parent().find('.order-payment__desc').html();
 			var payDesc = $('.order-payment__desc');
 			payDesc.html(paymentDescription);
@@ -2353,8 +2354,8 @@ function Order(){
 		var couponInput = $('.coupon__code');
 		var couponParent = couponInput.parent();
 		var resetBtn = $('.coupon__reset');
-		var totalCouponBlock = $('.total__coupons');
-		var totalDiscountBlock = $('.total__discount');
+		var totalCouponBlock = $('.cartTotal__item-coupons');
+		var totalDiscountBlock = $('.cartTotal__item-discount');
 
 		// Отправка формы
 		submitBtn.off('click').on('click', function(){

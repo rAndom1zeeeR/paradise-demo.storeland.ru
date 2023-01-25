@@ -19,28 +19,26 @@
   <!-- Страницы -->
   {% IF show_pages %}
   <ol class="pages flex unstyled">
-    {% IF NEWS_PAGES_SHOW_PREVIOUS %}   
-      <li class="first">
-        <a href="?sid={NEWS_SECTION_ID}&page={NEWS_PAGES_PREVIOUS}" title="Предыдущая страница">
-          <span><i class="icon-arrow_left"></i></span>
-        </a>
-      </li>
+    {% IF NEWS_PAGES_SHOW_PREVIOUS %}
+    <li class="pages__item first">
+      <a class="pages__link" href="?sid={NEWS_SECTION_ID}&page={NEWS_PAGES_PREVIOUS}" title="Первая страница"><span><i class="icon-chevron_left"></i></span></a>
+    </li>
     {% ENDIF %}
 
     {% FOR news_pages %}
       {% IF news_pages.CURRENT %}
-        <li class="is-actived"><span>{news_pages.PAGE}</span></li>
+				<li class="pages__item current"><a class="pages__link is-actived"><span>{news_pages.PAGE}</span></a></li>
       {% ELSE %}
-        <li><a href="?sid={NEWS_SECTION_ID}&page={news_pages.PAGE}"><span>{news_pages.PAGE}</span></a></li>
+				<li class="pages__item"><a class="pages__link" href="?sid={NEWS_SECTION_ID}&page={news_pages.PAGE}"><span>{news_pages.PAGE}</span></a></li>
       {% ENDIF %}
     {% ENDFOR %}
 
     {% IF NEWS_PAGES_SHOW_NEXT %}
-      <li class="last">
-        <a href="?sid={NEWS_SECTION_ID}&page={NEWS_PAGES_NEXT}" title="Следующая страница">
-          <span><i class="icon-arrow_right"></i></span>
-        </a>
-      </li>
+    <li class="pages__item last">
+      <a class="pages__link" href="?sid={NEWS_SECTION_ID}&page={NEWS_PAGES_NEXT}" title="Следующая страница">
+        <span><i class="icon-arrow_right"></i></span>
+      </a>
+    </li>
     {% ENDIF %}
   </ol>
   {% ENDIF %}
