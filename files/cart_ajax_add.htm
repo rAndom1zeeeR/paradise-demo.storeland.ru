@@ -3,7 +3,14 @@
 	<!-- Отображаем системное сообщение при добавлении товара в корзину -->
 	<div class="noty__addto flex">
 		<div class="noty__content">
-			<div class="noty__title">{% IF FORM_NOTICE_IS_GOOD %}Успешно!{% ELSE %}Ошибка!{% ENDIF %}</div>
+			<div class="noty__title">
+				{% IF FORM_NOTICE_IS_GOOD %}
+				<i class="icon-check"></i>
+				{% ELSE %}
+				<i class="icon-close"></i>
+				{% ENDIF %}
+				<span>Корзина</span>
+			</div>
 			<div class="noty__message">{FORM_NOTICE}</div>
 		</div>
 
@@ -44,7 +51,9 @@
 <!-- Блок для обновления данных корзины. Не виден пользователю -->
 <div style="display:none;" id="newCartWord">товар{CART_COUNT_TOTAL | gen_word_end("","а","ов")}</div>
 <div style="display:none;" id="newCartSumNow">{CART_SUM_NOW}</div>
+<div style="display:none;" id="newCartSumNowFormated">{CART_SUM_NOW | money_format}</div>
 <div style="display:none;" id="newCartSumOld">{CART_SUM_OLD}</div>
+<div style="display:none;" id="newCartSumOldFormated">{CART_SUM_OLD | money_format}</div>
 <div style="display:none;" id="newCartCount">{CART_COUNT_TOTAL}</div>
 <div style="display:none;" id="newCartData">
 	<div class="addto__title">
@@ -135,8 +144,8 @@
 <!-- Обновление данных корзины -->
 <script>
 $('.cart-wordend').html($('#newCartWord').html());
-$('.cartSumNow').attr('data-price', $('#newCartSumNow').html()).find('.num').html(addSpaces($('#newCartSumNow').html()));
-$('.cartSumOld').attr('data-price', $('#newCartSumOld').html()).find('.num').html(addSpaces($('#newCartSumOld').html()));
+$('.cartSumNow').attr('data-price', $('#newCartSumNow').html()).html(addSpaces($('#newCartSumNowFormated').html()));
+$('.cartSumOld').attr('data-price', $('#newCartSumOld').html()).html(addSpaces($('#newCartSumOldFormated').html()));
 $('.cart-count').attr('data-cart-count', $('#newCartCount').html()).html($('#newCartCount').html());
 $('.addto__cart').html($('#newCartData').html());
 // Обновление скидки

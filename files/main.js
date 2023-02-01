@@ -74,10 +74,10 @@ function toTop() {
 function notyStart($content, $type) {
   new Noty({
     text: $content,
-    layout: "bottomRight",
+    layout: 'center',
     type: $type,
-    theme: "",
-    textAlign: "center",
+    theme: '',
+    textAlign: 'center',
     animation: {
       open: 'animated fadeInUp',
       close: 'animated fadeOutDown',
@@ -85,12 +85,12 @@ function notyStart($content, $type) {
       speed: 400
     },
     timeout: "2000",
-    progressBar: true,
+    progressBar: false,
     closable: true,
     closeOnSelfClick: true,
+		closeWith: ['click', 'button'],
     modal: false,
     dismissQueue: false,
-    onClose: true,
     killer: false
   }).show();
 }
@@ -399,313 +399,333 @@ function Product() {
 	}
 
 	// Добавление в Сравнение и Избранное
-	this.addTo = function(){
+	this.addTo = function () {
+		// Определяем заголовок уведомления
+		function checkMessage(str){
+			if (str.indexOf('добавлен') != -1) {
+				return 'Успешно добавлен!';
+			} else {
+				return 'Успешно удалён!';
+			}
+		}
+
+		// Создать сообщение действия
+		function createNoty(title, message, status, link, link_name) {
+			return `
+				<div class="noty__addto ${status} flex">
+					<div class="noty__content">
+						<div class="noty__title">${title}</div>
+						<div class="noty__message">${message}</div>
+					</div>
+					<div class="noty__buttons">
+						<a class="button-primary" href="${link}" title="${link_name}"><span>${link_name}</span></a>
+					</div>
+				</div>
+			`;
+		}
+
+		// Рендер товара в списке
+		function createItem(pDataid, pUrl, pName, pImg, pDataChar, pDataPrice, delUrl) {
+			return `
+				<div class="addto__item flex" data-id="${pDataid}">
+					<a class="addto__image flex-center" href="${pUrl}" title="${pName}"><img src="${pImg}" /></a>
+					<div class="addto__content">
+						<a class="addto__name" href="${pUrl}" title="${pName}"><span>${pName}</span></a>
+						<div class="addto__price ${pDataChar}">
+							<div class="price__now"><span title="${pDataPrice} российских рублей"><span class="num">${pDataPrice}</span><span>р.</span></span></div>
+						</div>
+						<div class="addto__actions">
+							<a class="addto__remove button-rotate button-link" href="${delUrl}?id=${pDataid}" data-id="${pDataid}" title="Убрать товар из списка"><i class="icon-close"></i></a>
+						</div>
+					</div>
+				</div>
+			`;
+		}
+
+		// Функция обновления ссылки
+		function updateLink(a,from,to,newIsAddStatus,newTitle){
+			// Обновляем ссылку, на которую будет уходить запрос и информацию о ней
+			a.attr('href', a.attr('href').replace(new RegExp(from), to))
+				.attr('title', newTitle)
+				.attr('data-action-is-add', newIsAddStatus)
+		}
+
 		// Добавление/удаление товара Сравнение
-		$('.add-compare').off('click').on('click', function(){
+		var blockCompare = '.compare'
+		var addCompare = '.add-compare'
+		var addtoComapre = '.addto__compare'
+
+		$(addCompare).off('click').on('click', function () {
 			// Объект ссылки, по которой кликнули
-			var
-				a = $(this)
+			var 
+				a = $(this),
 				isAdd = a.attr('data-action-is-add'),
 				addUrl = a.attr('data-action-add-url'),
 				delUrl = a.attr('data-action-delete-url'),
 				addTitle = a.attr('data-action-add-title'),
 				delTitle = a.attr('data-action-delete-title'),
-				pageUrl = a.attr('data-action-url'),
+				aText = a.find('span'),
 				pName = a.attr('data-prodname'),
 				pUrl = a.attr('data-produrl'),
 				pImg = a.attr('data-prodimg'),
 				pDataid = a.attr('data-id'),
 				pDataPrice = a.attr('data-mod-price'),
 				pDataChar = a.attr('data-char-code'),
-				pDataMod = a.attr('data-mod-id'),
-				aText = a.find('span'),
-				addTooltip = a.attr('data-add-tooltip'),
-				delTooltip = a.attr('data-del-tooltip'),
+				// addTooltip = a.attr('data-add-tooltip'),
+				// delTooltip = a.attr('data-del-tooltip'),
+				// pDataMod = a.attr('data-mod-id'),
+				// actionUrl = a.attr('data-action-url'),
 				requestUrl = a.attr('href');
-	
-			var atl = $(this).closest('.product__links');
-			var atlS = $(this).closest('.product__shop');
+			
 			var flag = 0;
-	
-			$('.addto__compare .addto__item').each(function(){
-				if($(this).attr('data-id') == pDataid){
-					flag = 1;
+
+			// Проверка элемента в объекте
+			$(addtoComapre).find('.addto__item').each(function () {
+				if ($(this).attr('data-id') == pDataid) {
+					flag = 1
 				}
-				if(flag == 1){
-					$(this).remove();
-					return false;
+				
+				if (flag == 1) {
+					$(this).remove()
+					return false
 				}
-				return flag;
-			});
-	
-			// Если в ссылке присутствует идентификатор, который мы можем узнать только вытащив его с текущей страницы
-			if( /GET_GOODS_MOD_ID_FROM_PAGE/.test(requestUrl)) {
-				requestUrl = requestUrl.replace(new RegExp('GET_GOODS_MOD_ID_FROM_PAGE'), $('.goodsModificationId').val());
-			}
-	
+
+				return flag
+			})
+
 			// Если есть информация о том какие URL адреса будут изменены, то можено не перегружать страницу и сделать запрос через ajax
-			if(addUrl && delUrl) {
+			if (addUrl && delUrl) {
 				$.ajax({
-					url : requestUrl,
-					type : "POST",
+					url: requestUrl,
+					type: 'POST',
 					dataType: 'json',
-					cache : false,
-					data : {
+					cache: false,
+					data: {
 						'ajax_q': 1
 					},
-					success: function(data) {
-						if(flag == 0){
-							if($('.addto__compare').length){
-								$('.addto__compare .addto__items').prepend('' +
-									'<div class="addto__item flex" data-id="'+ pDataid +'">' +
-										'<a class="addto__image flex-center" href="'+ pUrl +'" title="'+ pName +'"><img src="'+ pImg +'" /></a>' +
-										'<div class="addto__content">' +
-											'<a class="addto__name" href="'+ pUrl +'" title="'+ pName +'"><span>'+ pName +'</span></a>' +
-											'<div class="addto__price '+ pDataChar +'">' +
-												'<div class="price__now"><span title="'+ pDataPrice +' российских рублей"><span class="num">'+ pDataPrice +'</span> <span>р.</span></span></div>' +
-											'</div>' +
-											'<div class="addto__actions">' +
-												'<a class="addto__remove button-rotate button-link" href="'+ delUrl +'?id='+ pDataid +'" data-id="'+ pDataid +'" title="Убрать товар из списка сравнения" onclick="remove.fromCompare($(this))"><i class="icon-close"></i></a>' +
-											'</div>' +
-										'</div>' +
-									'</div>' +
-								'');
+					success: function (data) {							
+						if ('ok' == data.status) {
+							// Рендер элементов в список
+							if (flag == 0) {
+								if ($(addtoComapre).length) {
+									$(addtoComapre).find('.addto__items').prepend(createItem(pDataid, pUrl, pName, pImg, pDataChar, pDataPrice, delUrl));
+								}
 							}
-						}
-						if('ok' == data.status) {
-							if(isAdd == 1) {
-								var
-									from = addUrl,
-									to = delUrl,
-									newIsAddStatus = 0,
-									newTitle = delTitle ? delTitle : '',
-									newTooltip = delTooltip ? delTooltip : '';
-								a.addClass('added');
-								atl.addClass('added');
-								atlS.addClass('added');
-							} else {
-								var
-									from = delUrl,
-									to = addUrl,
-									newIsAddStatus = 1,
-									newTitle = addTitle ? addTitle : '',
-									newTooltip = addTooltip ? addTooltip : '';
-								a.removeClass('added');
-								atl.removeClass('added');
-								atlS.removeClass('added');
-							}
-	
+
 							// Если указано, что изменилось число товаров на сравнении
-							if(typeof(data.compare_goods_count) != 'undefined') {
+							var countCompare = data.compare_goods_count;
+							if (typeof (countCompare) != 'undefined') {
 								// Блок информации о том, что есть товары на сравнении
-								var sidecount = $('.compare-count');
-								// Если на сравнении больше нет товаров
+								var sidecount = $(blockCompare).find('[data-count]')
 								// Указываем информацию о новом количестве товаров на сравнении
-								// Блок обновления списка сравнения в каталога
-								sidecount.animate({opacity: 0,display: "none"},500,function(){
-									sidecount.text(data.compare_goods_count);
-									$('.compare-count').attr('data-count', data.compare_goods_count);
-									if(data.compare_goods_count > 0){
-										$('.compare').addClass('has-items');
-									}else{
-										$('.compare').removeClass('has-items');
-										$('.compare-count').attr('data-count', '0').text('0');
-										$('.add-compare').removeAttr("title").removeClass("added");
+								sidecount.animate({ opacity: 0, display: 'none' }, 500, function () {
+									sidecount.text(countCompare).attr('data-count', countCompare)
+									if (countCompare > 0) {
+										$(blockCompare).addClass('has-items')
+									} else {
+										$(blockCompare).removeClass('has-items')
+										sidecount.attr('data-count', '0').text('0')
+										$(addCompare).removeAttr('title').removeClass('added')
 									}
-								}).animate({display: "inline",opacity: 1} , 500 );
+								}).animate({ display: 'inline', opacity: 1 }, 500)
 							}
-	
-							// Обновляем ссылку, на которую будет уходить запрос и информацию о ней
-							a.attr('href', a.attr('href').replace(new RegExp(from), to))
-								.attr('title', newTitle)
-								.attr('data-tooltip', newTooltip)
-								.attr('data-action-is-add', newIsAddStatus);
-	
-							// Если рядом с ссылкой в виде круга есть текстовая надпись с описанием действия
-							if(aText.length) {
-								aText.text(a.attr(isAdd == 1 ? 'data-del-tooltip' : 'data-add-tooltip'));
-							}
-	
-							// Меняем заголовок уведомления
-							if (data.message.indexOf("добавлен") != -1) {
-								var msg = 'Успешно добавлен!'
+							
+							// Проверка статуса добавления товара
+							if (isAdd == 1) {
+								// Обновляем ссылку, на которую будет уходить запрос и информацию о ней
+								updateLink(a,addUrl,delUrl,0,delTitle ? delTitle : '')
+								a.addClass('added').parent().addClass('added')
+								
+								// Обновляем ссылку у всех товаров на странице
+								$(addCompare).each(function(){
+									if ($(this).attr('data-id') == pDataid) {
+										$(this).addClass('added')
+										updateLink($(this),addUrl,delUrl,0,delTitle ? delTitle : '')
+									}
+								})
+
 							} else {
-								var msg = 'Успешно удалён!'
+								// Обновляем ссылку, на которую будет уходить запрос и информацию о ней
+								updateLink(a,delUrl,addUrl,1,addTitle ? addTitle : '')
+								a.removeClass('added').parent().removeClass('added')
+								
+								// Обновляем ссылку у всех товаров на странице
+								$(addCompare).each(function(){
+									if ($(this).attr('data-id') == pDataid) {
+										$(this).removeClass('added')
+										updateLink($(this),delUrl,addUrl,1,addTitle ? addTitle : '')
+									}
+								})
+
 							}
-	
-							// Скилет уведомления
-							var content = '<div class="noty__addto noty_good flex"><div class="noty__content"><div class="noty__title">'+ msg +'</div><div class="noty__message">'+ data.message + '</div></div><div class="noty__buttons"><a class="button-primary" href="/compare" title="В сравнение"><span>Перейти в сравнение</span></a></div></div>'
+
+							// Обновление текстовой надписи с описанием действия
+							if (aText.length) {
+								aText.text(a.attr(isAdd == 1 ? 'data-del-tooltip' : 'data-add-tooltip'))
+							}
+
+							// Сообщение уведомления
+							var content = createNoty(checkMessage(data.message), data.message, 'noty_good', '/compare', 'Перейти в Сравнение');
 							
 							// Если есть функция, которая отображает сообщения пользователю
-							if(typeof(Noty) == "function") {
-								notyStart(content, 'success');
+							if (typeof (Noty) == 'function') {
+								notyStart(content, 'success')
 							}
-						} else if('error' == data.status) {
-							var content = '<div class="noty__addto noty_bad flex"><div class="noty__content"><div class="noty__title">Не удалось добавить в сравнение</div><div class="noty__message">'+ data.message + '</div></div><div class="noty__buttons"><a class="button-primary" href="/compare" title="В сравнение"><span>Перейти в сравнение</span></a></div></div>'
+						} else if ('error' == data.status) {
+							// Сообщение уведомления
+							var content = createNoty('Не удалось добавить!', data.message, 'noty_bad', '/compare', 'Перейти в Сравнение');
+							
 							// Если есть функция, которая отображает сообщения пользователю
-							if(typeof(Noty) == "function") {
+							if (typeof (Noty) == 'function') {
 								notyStart(content, 'warning')
 							}
 						}
 					},
-					error: function() {
+					error: function () {
 						console.log('Error Ajax add-compare')
+						notyStart('Error Ajax add-compare', 'warning')
 					}
 				});
+
 				return false;
 			}
 		});
-	
+
 		// Добавление/удаление товара Избранное
-		$('.add-favorites').off('click').on('click', function(){
+		var blockFavorites = '.favorites'
+		var addFavorites = '.add-favorites'
+		var addtoFavorites = '.addto__favorites'
+
+		$(addFavorites).off('click').on('click', function () {
 			// Объект ссылки, по которой кликнули
-			var
-				a = $(this)
+			var 
+				a = $(this),
 				isAdd = a.attr('data-action-is-add'),
 				addUrl = a.attr('data-action-add-url'),
 				delUrl = a.attr('data-action-delete-url'),
 				addTitle = a.attr('data-action-add-title'),
 				delTitle = a.attr('data-action-delete-title'),
-				pageUrl = a.attr('data-action-url'),
+				aText = a.find('span'),
 				pName = a.attr('data-prodname'),
 				pUrl = a.attr('data-produrl'),
 				pImg = a.attr('data-prodimg'),
 				pDataid = a.attr('data-id'),
 				pDataPrice = a.attr('data-mod-price'),
 				pDataChar = a.attr('data-char-code'),
-				pDataMod = a.attr('data-mod-id'),
-				aText = a.find('span'),
-				addTooltip = a.attr('data-add-tooltip'),
-				delTooltip = a.attr('data-del-tooltip'),
+				// addTooltip = a.attr('data-add-tooltip'),
+				// delTooltip = a.attr('data-del-tooltip'),
+				// pDataMod = a.attr('data-mod-id'),
+				// actionUrl = a.attr('data-action-url'),
 				requestUrl = a.attr('href');
-	
-			var atl = $(this).closest('.product__links');
-			var atlS = $(this).closest('.product__shop');
+			
 			var flag = 0;
-	
-			$('.addto__favorites .addto__item').each(function(){
-				if($(this).attr('data-id') == pDataid){
+
+			// Проверка элемента в объекте
+			$(addtoFavorites).find('.addto__item').each(function () {
+				if ($(this).attr('data-id') == pDataid) {
 					flag = 1;
 				}
-				if(flag == 1){
+
+				if (flag == 1) {
 					$(this).remove();
 					return false;
 				}
+
 				return flag;
 			});
-	
-			// Если в ссылке присутствует идентификатор, который мы можем узнать только вытащив его с текущей страницы
-			if( /GET_GOODS_MOD_ID_FROM_PAGE/.test(requestUrl)) {
-				requestUrl = requestUrl.replace(new RegExp('GET_GOODS_MOD_ID_FROM_PAGE'), $('.goodsModificationId').val());
-			}
-	
+
 			// Если есть информация о том какие URL адреса будут изменены, то можено не перегружать страницу и сделать запрос через ajax
-			if(addUrl && delUrl) {
+			if (addUrl && delUrl) {
 				$.ajax({
-					url : requestUrl,
-					type : "POST",
+					url: requestUrl,
+					type: 'POST',
 					dataType: 'json',
-					cache : false,
-					data : {
+					cache: false,
+					data: {
 						'ajax_q': 1
 					},
-					success: function(data) {
-						if(flag == 0){
-							$('.addto__favorites .addto__items').prepend('' +
-								'<div class="addto__item flex" data-id="'+ pDataid +'">' +
-									'<a class="addto__image flex-center" href="'+ pUrl +'" title="'+ pName +'"><img src="'+ pImg +'" /></a>' +
-									'<div class="addto__content">' +
-										'<a class="addto__name" href="'+ pUrl +'" title="'+ pName +'"><span>'+ pName +'</span></a>' +
-										'<div class="addto__price '+ pDataChar +'">' +
-											'<div class="price__now"><span title="'+ pDataPrice +' российских рублей"><span class="num">'+ pDataPrice +'</span></div>' +
-										'</div>' +
-										'<div class="addto__actions">' +
-											'<a class="addto__remove button-rotate button-link" href="'+ delUrl +'?id='+ pDataid +'" data-id="'+ pDataid +'" title="Убрать товар из списка избранного" onclick="remove.fromFavorites($(this))"><i class="icon-close"></i></a>' +
-										'</div>' +
-									'</div>' +
-								'</div>' +
-							'');
-						}
-						if('ok' == data.status) {
-							if(isAdd == 1) {
-								var
-									from = addUrl,
-									to = delUrl
-									newIsAddStatus = 0,
-									newTitle = delTitle ? delTitle : '',
-									newTooltip = delTooltip ? delTooltip : '';
-								a.addClass('added');
-								atl.addClass('added');
-								atlS.addClass('added');
-							} else {
-								var
-									from = delUrl,
-									to = addUrl,
-									newIsAddStatus = 1,
-									newTitle = addTitle ? addTitle : '',
-									newTooltip = addTooltip ? addTooltip : '';
-								a.removeClass('added');
-								atl.removeClass('added');
-								atlS.removeClass('added');
+					success: function (data) {							
+						if ('ok' == data.status) {
+							// Рендер элементов в список
+							if (flag == 0) {
+								if ($(addtoFavorites).length) {
+									$(addtoFavorites).find('.addto__items').prepend(createItem(pDataid, pUrl, pName, pImg, pDataChar, pDataPrice, delUrl));
+								}
 							}
-	
-							// Если указано, что изменилось число товаров на сравнении
-							if(typeof(data.favorites_goods_count) != 'undefined') {
-								// Блок информации о том, что есть товары на сравнении
-								var sidecount = $('.favorites-count');
-								// Если на сравнении больше нет товаров
-								// Указываем информацию о новом количестве товаров на сравнении
-								// Блок обновления списка сравнения в каталога
-								sidecount.animate({opacity: 0,display: "none"},500,function(){
-									sidecount.text(data.favorites_goods_count);
-									$('.favorites-count').attr('data-count', data.favorites_goods_count);
-									if(data.favorites_goods_count > 0){
-										$('.favorites').addClass('has-items');
-									}else{
-										$('.favorites').removeClass('has-items');
-										$('.favorites-count').attr('data-count', '0').text('0');
-										$('.add-favorites').removeAttr('title').removeClass('added');
+
+							// Если указано, что изменилось число товаров в избранном
+							var countFavorites = data.favorites_goods_count;
+							if (typeof (countFavorites) != 'undefined') {
+								// Блок информации о том, что есть товары в избранном
+								var sidecount = $(blockFavorites).find('[data-count]')
+								// Указываем информацию о новом количестве товаров в избранном
+								sidecount.animate({ opacity: 0, display: 'none' }, 500, function () {
+									sidecount.text(countFavorites).attr('data-count', countFavorites)
+									if (countFavorites > 0) {
+										$(blockFavorites).addClass('has-items');
+									} else {
+										$(blockFavorites).removeClass('has-items');
+										sidecount.attr('data-count', '0').text('0');
+										$(addFavorites).removeAttr('title').removeClass('added');
 									}
-								}).animate({display: "inline",opacity: 1} , 500 );
+								}).animate({ display: 'inline', opacity: 1 }, 500);
 							}
-	
-							// Обновляем ссылку, на которую будет уходить запрос и информацию о ней
-							a.attr('href', a.attr('href').replace(new RegExp(from), to))
-								.attr('title', newTitle)
-								.attr('data-tooltip', newTooltip)
-								.attr('data-action-is-add', newIsAddStatus);
-	
-							// Если рядом с ссылкой в виде круга есть текстовая надпись с описанием действия
-							if(aText.length) {
+
+							// Проверка статуса добавления товара
+							if (isAdd == 1) {
+								// Обновляем ссылку, на которую будет уходить запрос и информацию о ней
+								updateLink(a, addUrl,delUrl,0,delTitle ? delTitle : '')
+								a.addClass('added').parent().addClass('added')
+								
+								// Обновляем ссылку у всех товаров на странице
+								$(addFavorites).each(function(){
+									if ($(this).attr('data-id') == pDataid) {
+										$(this).addClass('added')
+										updateLink($(this),addUrl,delUrl,0,delTitle ? delTitle : '')
+									}
+								})
+							} else {
+								// Обновляем ссылку, на которую будет уходить запрос и информацию о ней
+								updateLink(a, delUrl,addUrl,1,addTitle ? addTitle : '')
+								a.removeClass('added').parent().removeClass('added')
+								
+								// Обновляем ссылку у всех товаров на странице
+								$(addFavorites).each(function(){
+									if ($(this).attr('data-id') == pDataid) {
+										$(this).removeClass('added')
+										updateLink($(this),delUrl,addUrl,1,addTitle ? addTitle : '')
+									}
+								})
+							}
+
+							// Обновление текстовой надписи с описанием действия
+							if (aText.length) {
 								aText.text(a.attr(isAdd == 1 ? 'data-del-tooltip' : 'data-add-tooltip'));
 							}
-	
-							// Меняем заголовок уведомления
-							if (data.message.indexOf("добавлен") != -1) {
-								var msg = 'Успешно добавлен!'
-							} else {
-								var msg = 'Успешно удалён!'
-							}
-	
-							// Скилет уведомления
-							var content = '<div class="noty__addto noty_good flex"><div class="noty__content"><div class="noty__title">'+ msg +'</div><div class="noty__message">'+ data.message + '</div></div><div class="noty__buttons"><a class="button-primary" href="/user/favorites" title="Избранное"><span>Перейти в избранное</span></a></div></div>'
-	
+
+							// Сообщение уведомления
+							var content = createNoty(checkMessage(data.message), data.message, 'noty_good', '/user/favorites', 'Перейти в Избранное');
+
 							// Если есть функция, которая отображает сообщения пользователю
-							if(typeof(Noty) == "function") {
+							if (typeof (Noty) == 'function') {
 								notyStart(content, 'success');
 							}
-						} else if('error' == data.status) {
-							var content = '<div class="noty__addto noty_bad flex"><div class="noty__content"><div class="noty__title">Не удалось Избранное</div><div class="noty__message">'+ data.message + '</div></div><div class="noty__buttons"><a class="button-primary" href="/user/login" title="Войти"><span>Войти</span></a></div></div>'
+						} else if ('error' == data.status) {
+							// Сообщение уведомления
+							var content = createNoty('Не удалось добавить!', data.message, 'noty_bad', '/user/login', 'Войти');
+							
 							// Если есть функция, которая отображает сообщения пользователю
-							if(typeof(Noty) == "function") {
-								notyStart(content, 'warning')
+							if (typeof (Noty) == 'function') {
+								notyStart(content, 'warning');
 							}
 						}
 					},
-					error: function() {
-						console.log('Error Ajax add-compare')
+					error: function () {
+						console.log('Error Ajax add-favorites');
+						notyStart('Error Ajax add-favorites', 'warning');
 					}
 				});
+
 				return false;
 			}
 		});
@@ -2919,14 +2939,23 @@ function openMenu() {
 		$('.adaptive__dropleft').addClass('is-show');
 	})
 
+	// Открыть поиск
+	$('.adaptive-search__icon, .search__icon').on('click',function(event){
+		event.preventDefault();
+		console.log('event', event)
+		$('.search').addClass('is-opened');
+		$('#overlay').addClass('is-opened');
+	})
+
 	// Каталог на мобильных устройствах
 	$('.header-catalog__icon').on('click',function(event){
 		event.preventDefault();
 
 		if(getClientWidth() > 1024) {
-			console.log(getClientWidth())
+			window.location = this.href;
 			return false
 		}
+		console.log('wwww')
 
 		$('.adaptive__dropleft').addClass('is-show');
 	})

@@ -167,7 +167,7 @@
 
 						<!-- Шапка. Контакты -->
 						<div class="header-adaptive">
-							<div class="adaptive-search__icon addto__link">
+							<div class="adaptive-search__icon  addto__link">
 								<i class="icon-search"></i>
 							</div>
 
@@ -187,11 +187,11 @@
 					<div class="header__inner flex">
 						<!-- Каталог -->
 						<div class="header-catalog dropdown">
-							<div class="header-catalog__icon button-icon button-big" data-open="catalog">
+							<a class="header-catalog__icon button-icon button-big" href="{CATALOG_URL}" title="Перейти в каталог">
 								<i class="icon-catalog"></i>
 								<span>Каталог</span>
-							</div>
-							<div class="header-catalog__content dropdown__content" data-opened="catalog">
+							</a>
+							<div class="header-catalog__content dropdown__content">
 								<ul class="catalog__items unstyled">
 									{% FOR catalog_full %}
 									{% IF catalog_full.FIRST %}{% IFNOT catalog_full.LEVEL = 0 %}<ul data-level="{catalog_full.LEVEL}" class="catalog__sub unstyled">{% ENDIF %}{% ENDIF %}
@@ -245,8 +245,9 @@
 										<div class="search-results__goods">
 											<div class="search-results__title">Товары</div>
 										</div>
-										<div class="search-results__showAll">
-											<span>Все результаты</span>
+										<div class="search-results__showAll button-link button-more">
+											<span>Посмотреть все</span>
+											<i class="icon-chevron_right"></i>
 										</div>
 									</div>
 								</div>
@@ -548,7 +549,9 @@
 										{% FOR header %}
 											{% FOR links %}
 											<li class="mainnav__item">
-												<a class="mainnav__link {% IF menu.header.links.SELECTED %}is-actived{%ENDIF%} {% IF menu.header.links.NAME = Каталог %}_catalog{% ENDIF %}" href="{menu.header.links.URL}" title="{% IF menu.header.links.TITLE %}{menu.header.links.TITLE}{% ELSE%}{menu.header.links.NAME}{% ENDIF %}" itemprop="url">
+												<a class="mainnav__link {% IF menu.header.links.SELECTED %}is-actived{% ENDIF %} {% IF menu.header.links.NAME = Акции %}mainnav__link-discount{% ENDIF %}" 
+													href="{menu.header.links.URL}" 
+													title="{% IF menu.header.links.TITLE %}{menu.header.links.TITLE}{% ELSE%}{menu.header.links.NAME}{% ENDIF %}" itemprop="url">
 													<span itemprop="name">{menu.header.links.NAME}</span>
 												</a>
 											</li>
@@ -687,6 +690,10 @@
 					<div id="pdt__sales" class="loading">
 						<div class="block__title">
 							<a class="title" href="{DISCOUNT_URL}" title="Перейти в Распродажа"><span>Товар дня</span></a>
+							<a class="button-link button-more" href="{DISCOUNT_URL}" title="Перейти в Распродажа">
+								<span>Все товары</span>
+								<i class="icon-chevron_right"></i>
+							</a>
 						</div>
 						<!-- Слайдер -->
 						<div class="swiper">
@@ -2996,9 +3003,29 @@
 							<div class="footer__social">
 								<div class="footer__social-row">
 									<div class="social__links flex">
+										<a class="social__link vk" href="https://vk.com/" title="VK.com" target="_blank">
+											<i class="icon-vk"></i>
+											<span>vk</span>
+										</a>
+										<a class="social__link viber" href="https://viber.com/" title="Viber.com" target="_blank">
+											<i class="icon-viber"></i>
+											<span>viber</span>
+										</a>
+										<a class="social__link youtube" href="https://youtube.com/" title="YouTube.com" target="_blank">
+											<i class="icon-youtube"></i>
+											<span>YouTube</span>
+										</a>
+										<a class="social__link odnoklassniki" href="https://ok.ru/" title="Odnoklassniki" target="_blank">
+											<i class="icon-odnoklassniki"></i>
+											<span>odnoklassniki</span>
+										</a>
 										<a class="social__link telegram" href="https://www.telegram.com/" title="telegram.com" target="_blank">
 											<i class="icon-telegram"></i>
 											<span>telegram</span>
+										</a>
+										<a class="social__link whatsapp" href="https://whatsapp.com/" title="Whatsapp.com" target="_blank">
+											<i class="icon-whatsapp"></i>
+											<span>whatsapp</span>
 										</a>
 										<!-- <a class="social__link instagram" href="https://www.instagram.com/" title="Instagram.com" target="_blank">
 											<i class="icon-instagram"></i>
@@ -3007,14 +3034,6 @@
 										<!-- <a class="social__link tiktok" href="https://tiktok.com/" title="tiktok.com" target="_blank">
 											<i class="icon-tiktok"></i>
 											<span>tiktok</span>
-										</a> -->
-										<a class="social__link viber" href="https://viber.com/" title="Viber.com" target="_blank">
-											<i class="icon-viber"></i>
-											<span>viber</span>
-										</a>
-										<a class="social__link whatsapp" href="https://whatsapp.com/" title="Whatsapp.com" target="_blank">
-											<i class="icon-whatsapp"></i>
-											<span>whatsapp</span>
 										</a>
 										<a class="social__link facebook" href="https://www.facebook.com/" title="FaceBook.com" target="_blank">
 											<i class="icon-facebook"></i>
@@ -3023,19 +3042,7 @@
 										<a class="social__link twitter" href="https://twitter.com/" title="Twitter.com" target="_blank">
 											<i class="icon-twitter"></i>
 											<span>twitter</span>
-										</a>
-										<a class="social__link odnoklassniki" href="https://ok.ru/" title="Odnoklassniki" target="_blank">
-											<i class="icon-odnoklassniki"></i>
-											<span>odnoklassniki</span>
-										</a>
-										<a class="social__link vk" href="https://vk.com/" title="VK.com" target="_blank">
-											<i class="icon-vk"></i>
-											<span>vk</span>
-										</a>
-										<a class="social__link youtube" href="https://youtube.com/" title="YouTube.com" target="_blank">
-											<i class="icon-youtube"></i>
-											<span>YouTube</span>
-										</a>
+										</a> -->
 									</div>
 								</div>
 							</div>
@@ -3234,7 +3241,7 @@
 
 		<!-- Наверх -->
 		<div id="toTop" class="toTop">
-			<i class="icon-arrow_up"></i>
+			<i class="icon-chevron_up"></i>
 		</div>
 
 		<noindex>
