@@ -37,10 +37,13 @@
 	{% IF nested_categories_list_empty && goods_empty %}
 		{% IF goods_filters_empty %}
 		<div class="notice attention">Нет товаров в выбранной категории</div>
-		<a class="button-secondary" href="{CATALOG_URL}" title="Вернуться в каталог">Вернуться в каталог</a>
+		<a class="notice__button button-secondary" href="{CATALOG_URL}" title="Вернуться в каталог">Вернуться в каталог</a>
 		{% ELSE %}
 		<div class="notice attention">Нет товаров для выбранных условий</div>
-		<a class="button-secondary" href="{PAGE_CANONICAL}" title="Очистить фильтры">Очистить фильтры</a>
+		<a class="notice__button button-empty button-icon" href="{PAGE_CANONICAL}" title="Очистить фильтры">
+			<i class="icon-close"></i>
+			<span>Очистить фильтры</span>
+		</a>
 		{% ENDIF %}
 	{% ENDIF %}
 	<!-- /Если нет товаров, выводим сообщение пользователю -->
@@ -273,6 +276,20 @@
 			
 						</div>
 
+						<!-- Доступность товара -->
+						<div class="product__available {% IF goods.MAX_REST_VALUE = 0 %}rest-zero{% ELSEIF goods.MAX_REST_VALUE > 9 %}rest-alot{% ELSE %}rest-few{% ENDIF %}">
+							<div class="goodsModRestValue" data-value="{goods.MAX_REST_VALUE}">
+								<b>
+									{% IF goods.MAX_REST_VALUE = 0 %}
+										Нет
+									{% ELSE %}
+									{goods.MAX_REST_VALUE}
+									{% ENDIF %}
+								</b>
+								<span>в наличии</span>
+							</div>
+						</div>
+
 						<!-- Название товара -->
 						<a class="product__name product__margin flex" href="{goods.URL_MIN_PRICE_NOW | url_amp}" title="{goods.NAME}">
 							<span itemprop="name">{goods.NAME}</span>
@@ -285,6 +302,17 @@
 							<span>{goods.DESCRIPTION_SHORT}</span>
 						</div>
 						{% ENDIF %}
+
+						<div class="product__attr product__margin">
+							{% FOR mods %}
+								{% FOR goods_attr_list %}
+									<div class="product__attr-item">
+										<span class="product__attr-name">{goods.mods.goods_attr_list.NAME}:</span>
+										<span class="product__attr-value">{goods.mods.goods_attr_list.VALUE}</span>
+									</div>
+								{% ENDFOR %}
+							{% ENDFOR %}
+						</div>
 			
 						<!-- Цена для поисковиков -->
 						<div itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer">

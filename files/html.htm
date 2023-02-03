@@ -167,9 +167,11 @@
 
 						<!-- Шапка. Контакты -->
 						<div class="header-adaptive">
-							<div class="adaptive-search__icon  addto__link">
+							<div class="adaptive-search__icon addto__link">
 								<i class="icon-search"></i>
 							</div>
+
+							<div class="adaptive-search__content"></div>
 
 							<div class="adaptive-menu__icon adaptive__icon addto__link">
 								<i class="icon-menu"></i>
@@ -2028,28 +2030,14 @@
 		</section>
 
 		<!-- Новости -->
-		{% IF news_list_all_empty=0 || news_list_shop_empty=0 || news_list_articles_empty=0 || news_list_mass_media_empty=0 %}
+		{% IF news_list_all_empty=0 || news_list_shop_empty=0 %}
 		<section id="news" class="loading">
 			<div class="container">
-				<div class="block__title block__nav flex">
-
-					<div class="news__navs flex">
-						{% IFNOT news_list_all_empty %}<a href="#" class="news__nav is-actived" data-tab="news_list_all">Новости</a>{% ENDIF %}
-						{% IFNOT news_list_shop_empty %}<a href="#" class="news__nav is-actived" data-tab="news_list_shop">Новости</a>{% ENDIF %}
-						{% IFNOT news_list_articles_empty %}<a href="#" class="news__nav {% IF news_list_shop_empty %}is-actived{% ENDIF %}" data-tab="news_list_articles">Статьи</a>{% ENDIF %}
-						{% IFNOT news_list_mass_media_empty %}<a href="#" class="news__nav {% IF news_list_shop_empty && news_list_articles_empty %}is-actived{% ENDIF %}" data-tab="news_list_mass_media">Материалы СМИ</a>{% ENDIF %}
-					</div>
-
-					<div class="swiper-navigation flex">
-						<div class="swiper-button-prev"></div>
-						<div class="swiper-button-next"></div>
-					</div>
-				</div>
 
 
 				<!-- Список ВСЕХ новостей магазина. Если в настройках отмечено "Группировать новости в блоке навигации на сайте" -->
 				{% IFNOT news_list_all_empty %}
-				<div id="news_list_all" class="tabs__content loading is-show" data-tab-content="news_list_all">
+				<div id="news_list_all" data-content="news_list_all">
 					<div class="swiper">
 						<div class="swiper-wrapper">
 							{% FOR news_list_all %}
@@ -2096,11 +2084,18 @@
 
 				<!-- Список Новости -->
 				{% IFNOT news_list_shop_empty %}
-				<div id="news_list_shop" class="tabs__content loading is-show" data-tab-content="news_list_shop">
-					<div class="swiper">
-						<div class="swiper-wrapper">
+				<div id="news_list_shop" data-content="news_list_shop">
+					<div class="row row-small">
+						<div class="flex-stretch">
+							<div class="pdt__news-item news__item">
+								<a class="pdt__news-title" href="{NEWS_ALL_URL}" title="Перейти в Новинки"><span>Статьи и новости</span></a>
+								<a class="pdt__news-button button-link button-icon" href="{NEWS_ALL_URL}" title="Посмотреть всё">
+									<span data-txt="Скрыть">Посмотреть всё</span>
+									<i class="icon-chevron_right"></i>
+								</a>
+							</div>
 							{% FOR news_list_shop %}
-							<div class="swiper-slide">
+							{% IF news_list_shop.index > 2 %}{break}{% ENDIF %}
 								<article class="news__item">
 									<a class="news__image flex-center" href="{news_list_shop.URL}" title="Перейти к странице &laquo;{news_list_shop.TITLE}&raquo;">
 										<img class="lozad" 
@@ -2134,106 +2129,11 @@
 										</div>
 									</div>
 								</article>
-							</div>
-							{% ENDFOR %}
-						</div>						
-					</div>
-				</div>
-				{% ENDIF news_list_shop_empty %}
-
-				<!-- Список Статьи -->
-				{% IFNOT news_list_articles_empty %}
-				<div id="news_list_articles" class="tabs__content loading {% IF news_list_shop_empty %}is-show{% ENDIF %}" data-tab-content="news_list_articles">
-					<div class="swiper">
-						<div class="swiper-wrapper">
-							{% FOR news_list_articles %}
-							<div class="swiper-slide">
-								<article class="news__item">
-									<a class="news__image flex-center" href="{news_list_articles.URL}" title="Перейти к странице &laquo;{news_list_articles.TITLE}&raquo;">
-										<img class="lozad" 
-												data-src="{% IF news_list_articles.IMG %}{news_list_articles.IMG}{% ELSE %}{ASSETS_IMAGES_PATH}news.png?design=THEMENAME{% ENDIF %}" 
-												alt="{news_list_articles.TITLE}" 
-												width="260"
-												height="260"
-										/>
-										{% IF news_list_articles.SHOW_TIME %}
-										<time class="news__date" datetime="{news_list_articles.TIME | date('d.m.Y')}">
-											<i class="icon-calendar"></i>
-											<span>{news_list_articles.TIME | date('d.m.Y')}</span>
-										</time>
-										{% ENDIF %}
-									</a>
-
-									<div class="news__content">
-										<a class="news__title" href="{news_list_articles.URL}" title="Перейти к странице &laquo;{news_list_articles.TITLE}&raquo;">
-											<span>{news_list_articles.TITLE}</span>
-										</a>
-										<!-- {% IF news_list_articles.TEXT_SHORT %} -->
-										<div class="news__desc">
-											<span>{news_list_articles.TEXT_SHORT}</span>
-										</div>
-										<!-- {% ENDIF %} -->
-										<div class="news__buttons flex justify-between">
-											<a class="news__button button-link button-more" href="{news_list_articles.URL}" title="Перейти к странице &laquo;{news_list_articles.TITLE}&raquo;">
-												<span>Подробнее</span>
-												<i class="icon-chevron_right"></i>
-											</a>
-										</div>
-									</div>
-								</article>
-							</div>
-							{% ENDFOR %}
+							{% ENDFOR %}					
 						</div>
 					</div>
 				</div>
-				{% ENDIF news_list_articles_empty %}
-
-				<!-- Список Блог -->
-				{% IFNOT news_list_mass_media_empty %}
-				<div id="news_list_mass_media" class="tabs__content loading {% IF news_list_shop_empty && news_list_articles_empty %}is-show{% ENDIF %}" data-tab-content="news_list_mass_media">
-					<div class="swiper">
-						<div class="swiper-wrapper">
-							{% FOR news_list_mass_media %}
-							<div class="swiper-slide">
-								<article class="news__item">
-									<a class="news__image flex-center" href="{news_list_mass_media.URL}" title="Перейти к странице &laquo;{news_list_mass_media.TITLE}&raquo;">
-										<img class="lozad" 
-												data-src="{% IF news_list_mass_media.IMG %}{news_list_mass_media.IMG}{% ELSE %}{ASSETS_IMAGES_PATH}news.png?design=THEMENAME{% ENDIF %}" 
-												alt="{news_list_mass_media.TITLE}"
-												width="260"
-												height="260" 
-										/>
-										{% IF news_list_mass_media.SHOW_TIME %}
-										<time class="news__date" datetime="{news_list_mass_media.TIME | date('d.m.Y')}">
-											<i class="icon-calendar"></i>
-											<span>{news_list_mass_media.TIME | date('d.m.Y')}</span>
-										</time>
-										{% ENDIF %}
-									</a>
-
-									<div class="news__content">
-										<a class="news__title" href="{news_list_mass_media.URL}" title="Перейти к странице &laquo;{news_list_mass_media.TITLE}&raquo;">
-											<span>{news_list_mass_media.TITLE}</span>
-										</a>
-										<!-- {% IF news_list_mass_media.TEXT_SHORT %} -->
-										<div class="news__desc">
-											<span>{news_list_mass_media.TEXT_SHORT}</span>
-										</div>
-										<!-- {% ENDIF %} -->
-										<div class="news__buttons flex justify-between">
-											<a class="news__button button-link button-more" href="{news_list_mass_media.URL}" title="Перейти к странице &laquo;{news_list_mass_media.TITLE}&raquo;">
-												<span>Подробнее</span>
-												<i class="icon-chevron_right"></i>
-											</a>
-										</div>
-									</div>
-								</article>
-							</div>
-							{% ENDFOR %}
-						</div>	
-					</div>
-				</div>
-				{% ENDIF news_list_mass_media_empty %}
+				{% ENDIF news_list_shop_empty %}
 
 			</div>
 		</section>
@@ -2310,14 +2210,14 @@
 												<div id="goods-filter-price-slider"></div>
 												<!-- Кнопки Фильтров -->
 												<div class="goodsFilterPriceSubmit flex justify-between">
-													<button class="button-link button-icon" type="submit" title="Показать">
-														<i class="icon-check"></i>
-														<span>Применить</span>
-													</button>
 													<a class="button-link button-icon" href="{PAGE_CANONICAL}" title="Очистить фильтры">
 														<i class="icon-close"></i>
 														<span>Очистить</span>
 													</a>
+													<button class="button-link button-icon" type="submit" title="Показать">
+														<i class="icon-check"></i>
+														<span>Применить</span>
+													</button>
 												</div>
 											</div>
 										</div>

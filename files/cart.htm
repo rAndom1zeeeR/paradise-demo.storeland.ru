@@ -88,6 +88,9 @@
 									<div class="price__old" data-price="{cart_items.ORDER_LINE_PRICE_OLD}">{cart_items.ORDER_LINE_PRICE_OLD | money_format}</div>
 									{% ENDIF %}
 									<div class="price__now cartPriceTotal" data-price="{cart_items.ORDER_LINE_PRICE_NOW}">{cart_items.ORDER_LINE_PRICE_NOW | money_format}</div>
+									<div class="cartTable__price-qty">
+										<span>{cart_items.ORDER_LINE_QUANTITY}</span>
+									</div>
 								</div>
 
 							</div>

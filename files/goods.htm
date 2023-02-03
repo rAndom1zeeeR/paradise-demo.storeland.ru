@@ -70,7 +70,7 @@
 			<div class="productView__inner flex justify-between">
 
 				<!-- Доступность товара -->
-				<div class="productView__available productView__margin {% IF GOODS_MOD_REST_VALUE = 0 %}zero{% ELSEIF GOODS_MOD_REST_VALUE > 9 %}rest-alot{% ELSE %}few{% ENDIF %}">
+				<div class="productView__available productView__margin {% IF GOODS_MOD_REST_VALUE = 0 %}rest-zero{% ELSEIF GOODS_MOD_REST_VALUE > 9 %}rest-alot{% ELSE %}rest-few{% ENDIF %}">
 					<div class="goodsModRestValue" data-value="{GOODS_MOD_REST_VALUE}" data-measure="{GOODS_MOD_MEASURE_NAME}">
 						<b>
 							{% IF GOODS_MOD_REST_VALUE = 0 %}

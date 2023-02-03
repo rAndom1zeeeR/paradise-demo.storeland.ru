@@ -86,6 +86,7 @@ h6 {font-size: 14px;}
 .notice.attention {background-color: #fcf8e3;color: #8a6d3b;border-color: #faebcc;}
 .notice.information {background-color: #d9edf7;color: #31708f;border-color: #bce8f1;}
 .notice a {color: inherit;font-weight: 600;text-decoration: underline;display: inline;}
+.notice__button {margin-bottom: 32px;}
 
 
 /**************************************/
@@ -124,7 +125,7 @@ h6 {font-size: 14px;}
 .table-box .hide {display: none;}
 @media all and (max-width: 767px) {
 .scroll {width: 100%;overflow-x: auto;margin-bottom: 16px;}
-.scroll::-webkit-scrollbar {width: 0;height: 16px;}
+.scroll::-webkit-scrollbar {width: 0;height: 8px;}
 }
 
 
@@ -163,19 +164,19 @@ h6 {font-size: 14px;}
 /**************************************/
 /*** Выпадающий контент. Корзина, Сравнение, Избранное ***/
 /**************************************/
-.addto__title {margin-bottom: 24px;display: none;font-size: 18px;font-weight: bold;}
+.addto__title {margin-bottom: 16px;display: none;font-size: 18px;font-weight: bold;}
 .addto__empty {font-size: 18px;font-weight: bold;}
 .addto__items {max-height: 280px;overflow-y: auto;}
-.addto__items::-webkit-scrollbar {width: 8px;}
+.addto__items::-webkit-scrollbar {width: 4px;}
 .addto__item {position: relative;}
-.addto__item + .addto__item {margin-top: 24px;}
+.addto__item + .addto__item {margin-top: 16px;}
 .addto__image {width: 80px;height: 80px;}
 .addto__content {width: calc(100% - 80px);padding-left: 16px;flex-grow: 1;}
 .addto__name {margin-bottom: 10px;padding-right: 32px;max-height: 48px;line-height: 24px;overflow: hidden;display: block;}
 .addto__name span {display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;text-overflow: ellipsis;}
 .addto__mod {font-size: 12px;margin-bottom: 10px;}
-.addto__qty {margin-right: 16px;}
-.addto__qty .qty__select {width: 24px;height: 24px;line-height: 24px;border: 0;}
+.addto__qty.qty {margin-right: 16px;background-color: transparent;}
+.addto__qty .qty__select {width: 24px;height: 24px;line-height: 26px;border: 0;font-size: 12px;}
 .addto__qty .qty__input {height: 24px;background-color: transparent;}
 .addto__price {flex-direction: column;align-items: flex-start;}
 .addto__price .price__now {margin-right: 0;}
