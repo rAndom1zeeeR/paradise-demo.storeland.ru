@@ -124,34 +124,44 @@ function changeTxt(txtObject) {
 ///////////////////////////////////////
 function Quantity() {
 
+	// Функции кликов
+	this.onClick = function(input){
+		console.log('onClick func')
+		const plusQty = event.target.closest('.qty__select_plus')
+		const minusQty = event.target.closest('.qty__select_minus')
+		// console.log('onClick event', event)
+		// console.log('onClick input', input)
+		// console.log('onClick event.target', event.target)
+	
+		// Действия
+		if (plusQty) {
+			event.preventDefault()
+			quantity.plus(input)
+			quantity.check(input)
+			// console.log('onClick plusQty2', plusQty)
+		} else if (minusQty) {
+			event.preventDefault()
+			quantity.minus(input)
+			quantity.check(input)
+			// console.log('onClick minusQty2', minusQty)
+		} else {
+			return false
+		}
+	
+	}
+	
 	// Функция Плюс + для товара. //JS
 	this.plus = function(obj){
-		// console.log('plus', obj)
-		const currentVal = parseInt(obj.value);
-		// console.log('plus currentVal', currentVal)
-		if (!isNaN(currentVal)){
-			obj.value = currentVal + 1;
-			// obj.trigger('keyup');
-			// obj.trigger('change');
-		}
-		return false;
+		return obj.value = parseInt(obj.value) + 1;
 	}
 
 	// Функция Минус - для товара. //JS
 	this.minus = function(obj){
-		// console.log('minus', obj)
-		const currentVal = parseInt(obj.value);
-		// console.log('minus currentVal', currentVal)
-		if (!isNaN(currentVal)){
-			obj.value = currentVal - 1;
-			// obj.trigger('keyup');
-			// obj.trigger('change');
-		}
-		return false;
+		return obj.value = parseInt(obj.value) - 1;
 	}
 
 	// Проверка кол-ва. //JS
-	this.checkQty = function(obj){
+	this.check = function(obj){
 		// Количество
 		let val = parseInt(obj.value);
 		// Проверка максимальныго остатка
@@ -191,16 +201,26 @@ function Quantity() {
 		}
 	}
 
+	// Сообщение пользователю
+	this.notyMessage = function(message){
+		return `
+			<div class="noty__addto">
+				<div class="noty__message">${message}</div>
+			</div>
+		`;
+	}
+
 	// Изменение кол-ва в карточке. //JS
-	this.goodsQty = function(obj){
-		// console.log('goodsQty obj', obj)
+	this.updGoods = function(obj){
+		console.log('goods obj', obj)
 		const block = obj.closest('.productViewBlock')
+		console.log('goods block', block)
 
 		// Если не карточка товара
 		if (block == null) return false
 
 		// Объявляем переменные цены
-		const val = obj.value
+		const val = block.querySelector('.qty__input').value
 		const priceNow = block.querySelector('.price__now').getAttribute('data-price')
 		const priceOld = block.querySelector('.price__old').getAttribute('data-price')
 		const multiNow = parseInt(val * priceNow);
@@ -210,61 +230,63 @@ function Quantity() {
 		block.querySelector('.goodsDataMainModificationId').value = val;
 		block.querySelector('.price__now').querySelector('.num').innerHTML = addSpaces(multiNow);
 		block.querySelector('.price__old').querySelector('.num').innerHTML = addSpaces(multiOld);
-		
-		// console.log('goodsQty val', val)
-		// console.log('goodsQty priceNow', priceNow)
-		// console.log('goodsQty priceOld', priceOld)
+		console.log('goods val', val)
+		console.log('goods priceNow', priceNow)
+		console.log('goods priceOld', priceOld)
+		console.log('goods multiNow', multiNow)
+		console.log('goods multiOld', multiOld)
 	}
 
 	// Действия в карточке товара
-	this.onClickGoods = function(){
-		const block = document.querySelector('.productView__qty')
+	this.onGoods = function(obj){
+		const block = obj || document.querySelector('.productView__qty')
 		const input = block.querySelector('.qty__input')
-		// console.log('onClickGoods', block)
+		console.log('onGoods', block)
 		// Если не карточка товара
 		if (block == null) return false
 
-		// Функции кликов
-		function updateQty(event){
-			const plusQty = event.target.closest('.qty__select_plus')
-			const minusQty = event.target.closest('.qty__select_minus')
-			// console.log('updateQty event', event)
-			// console.log('updateQty input', input)
-			// console.log('updateQty event.target', event.target)
-
-			// Действия
-			if (plusQty) {
-				event.preventDefault()
-				quantity.plus(input)
-				quantity.checkQty(input)
-				quantity.goodsQty(input)
-				// console.log('updateQty plusQty2', plusQty)
-			} else if (minusQty) {
-				event.preventDefault()
-				quantity.minus(input)
-				quantity.checkQty(input)
-				quantity.goodsQty(input)
-				// console.log('updateQty minusQty2', minusQty)
-			} else {
-				return false
-			}
-
-		}
-
 		// Нажатия
-		block.addEventListener('click', updateQty)
+		block.addEventListener('click', function(event){
+			quantity.onClick(input)
+			quantity.updGoods(input.closest('.productViewBlock'))
+		})
+
 		// Изменения
-		block.querySelector('.qty__input').addEventListener('change', function(){
-			quantity.checkQty(this)
-			quantity.goodsQty(this)
-			// console.log('event change', event)
-			// console.log('this change', this)
+		input.addEventListener('change', function(){
+			quantity.check(this)
+			quantity.updGoods(this.closest('.productViewBlock'))
+		})
+
+	}
+
+	// Действия в выпадающей корзине
+	this.onAddto = function(){
+		var elements = document.querySelectorAll('.addto__qty')
+		// console.log('onAddto', elements)
+
+		elements.forEach((element) => {			
+			const input = element.querySelector('.qty__input')
+			// Если не карточка товара
+			if (element == null) return false
+
+			// Нажатие
+			element.addEventListener('click', function(event){
+				quantity.onClick(input)
+				quantity.updAddto(input)
+			})
+
+			// Изменение
+			input.addEventListener('change', function(){
+				quantity.check(this)
+				quantity.updAddto(this)
+			})
+
 		})
 	}
 
-	// Счетчик +- в выпадающей корзине
-	this.addtoQty = function(obj){
-		// console.log('addtoQty obj', obj)
+	// Выпадающая корзина
+	this.updAddto = function(obj){
+		console.log('updAddto obj', obj)
 
 		const url = '/cart'
 		const item = obj.closest('.addto__item')
@@ -275,70 +297,12 @@ function Quantity() {
 		data.append('only_body', '1');
 
 		// Обновить корзину
-		quantity.updateCart(url, data, mod, priceNow);
+		quantity.updAddtoCart(url, data, mod, priceNow);
 		
 	}
 
-	// Действия в выпадающей корзине
-	this.onClickAddto = function(){
-		var elements = document.querySelectorAll('.addto__qty')
-		// console.log('onClickAddto', elements)
-
-		elements.forEach((element) => {
-			
-			const input = element.querySelector('.qty__input')
-			// Если не карточка товара
-			if (element == null) return false
-
-			// Функции кликов
-			function updateQty(event){
-				const plusQty = event.target.closest('.qty__select_plus')
-				const minusQty = event.target.closest('.qty__select_minus')
-				// console.log('updateQty event', event)
-				// console.log('updateQty input', input)
-				// console.log('updateQty event.target', event.target)
-
-				// Действия
-				if (plusQty) {
-					event.preventDefault()
-					quantity.plus(input)
-					quantity.checkQty(input)
-					quantity.addtoQty(input)
-					// console.log('updateQty plusQty2', plusQty)
-				} else if (minusQty) {
-					event.preventDefault()
-					quantity.minus(input)
-					quantity.checkQty(input)
-					quantity.addtoQty(input)
-					// console.log('updateQty minusQty2', minusQty)
-				} else {
-					return false
-				}
-
-			}
-
-			// Нажатие
-			element.addEventListener('click', updateQty)
-			// Изменение
-			element.querySelector('.qty__input').addEventListener('change', function(){
-				quantity.checkQty(this)
-				quantity.addtoQty(this)
-			})
-
-		})
-	}
-
-	// Сообщение пользователю
-	this.notyMessage = function(message){
-		return `
-			<div class="noty__addto">
-				<div class="noty__message">${message}</div>
-			</div>
-		`;
-	}
-
-	// Обновление корзины
-	this.updateCart = function(url, data, mod, priceNow) {
+	// Обновление выпадающей корзины
+	this.updAddtoCart = function(url, data, mod, priceNow) {
 		fetch(url, {
 			method: "POST",
 			body: data
@@ -348,24 +312,25 @@ function Quantity() {
 		// Преобразуем в html
 		.then((html) => {
 			// Convert the HTML string into a document object
-			var parser = new DOMParser();
-			var doc = parser.parseFromString(html, 'text/html');
+			const parser = new DOMParser();
+			const doc = parser.parseFromString(html, 'text/html');
 			// Обновить цену
-			var price = doc.querySelector('.cartTable__item[data-mod-id="' + mod + '"] .cartTable__price').innerHTML;
+			const price = doc.querySelector('.cartTable__item[data-mod-id="' + mod + '"] .cartTable__price').innerHTML;
 			priceNow.innerHTML = price;
 			// Обновить кол-во
-			var newCount = doc.querySelector('.cart-count').innerHTML;
-			quantity.updateCartCount(newCount);
+			const newCount = doc.querySelector('.cart-count').innerHTML;
+			quantity.updAddtoCount(newCount);
 			// Обновить сумму
-			var newSum = doc.querySelector('.cartSumTotal').innerHTML;
-			quantity.updateCartSum(newSum);
-
-		});
+			const newSum = doc.querySelector('.cartSumTotal').innerHTML;
+			quantity.updAddtoSum(newSum);
+			console.log('updAddto newSum', newSum)
+		})
+		.catch((error) => console.error(error));
 
 	}
 
 	// Обновление счетчика кол-ва корзины
-	this.updateCartCount = function(count){
+	this.updAddtoCount = function(count){
 		const elements = document.querySelectorAll('.cart-count')
 		elements.forEach((element) => {
 			element.innerHTML = count
@@ -374,14 +339,85 @@ function Quantity() {
 	}
 
 	// Обновление итоговой цены
-	this.updateCartSum = function(sum){
+	this.updAddtoSum = function(sum){
 		const elements = document.querySelectorAll('.cartSumNow')
 		elements.forEach((element) => {
 			element.innerHTML = sum
 		})
 	}
+
+	// Действия в корзине
+	this.onCart = function(){
+		var elements = document.querySelectorAll('.cartTable__qty')
+		console.log('onCart', elements)
+
+		elements.forEach((element) => {
+			const input = element.querySelector('.qty__input')
+			// Если не карточка товара
+			if (element == null) return false
+
+			// Нажатие
+			element.addEventListener('click', function(event){
+				quantity.onClick(input)
+				quantity.updCart(input)
+			})
+
+			// Изменение
+			input.addEventListener('change', function(){
+				quantity.check(this)
+				quantity.updCart(this)
+			})
+
+		})
+
+	}
+
+	// Выпадающая корзина
+	this.updCart = function(obj){
+		console.log('updAddto obj', obj)
+
+		const url = '/cart'
+		const item = obj.closest('.cartTable__item')
+		const mod = item.getAttribute('data-mod-id')
+		const priceNow = item.querySelector('.cartTable__price')
+		const form = item.closest('.cartTable__form')
+		const data = new FormData(form)
+		data.append('only_body', '1');
+
+		// Обновить корзину
+		quantity.updCartContent(url, data, mod, priceNow);
+		
+	}
+
+	// Обновление в корзине
+	this.updCartContent = function(url, data, mod, priceNow) {
+		fetch(url, {
+			method: "POST",
+			body: data
+		})
+		// Получаем ответ
+		.then((response) => response.text())
+		// Преобразуем в html
+		.then((html) => {
+			// Convert the HTML string into a document object
+			const parser = new DOMParser();
+			const doc = parser.parseFromString(html, 'text/html');
+			// Обновить цену
+			const price = doc.querySelector('.cartTable__item[data-mod-id="' + mod + '"] .cartTable__price').innerHTML;
+			priceNow.innerHTML = price;
+			// Обновить кол-во
+			const newCount = doc.querySelector('.cart-count').innerHTML;
+			quantity.updAddtoCount(newCount);
+			// Обновить итого
+			const newTotal = doc.querySelector('.cartTotal__items').innerHTML
+			document.querySelector('.cartTotal__items').innerHTML = newTotal;
+		})
+		.catch(console.error(error));
+
+	}
 	
 }
+
 
 
 ///////////////////////////////////////
@@ -1153,6 +1189,7 @@ function Product() {
 				goods.goodsModification($('.fancybox-content.productViewBlock'));
 				// quantity.goodsQty($('.fancybox-content.productViewBlock'));
 				goods.onClick();
+				quantity.onGoods();
 			}
 		} else {
 			$.get(href, function(content) {
@@ -1167,6 +1204,7 @@ function Product() {
 				goods.goodsModification($('.fancybox-content.productViewBlock'));
 				// quantity.goodsQty($('.fancybox-content.productViewBlock'));
 				goods.onClick();
+				quantity.onGoods();
 			});
 		}
 	}
@@ -1642,6 +1680,7 @@ function Goods() {
 		var height = content.height()
 		if (height > 239){
 			content.addClass('mask')
+			content.next().removeClass('is-hide')
 		}
 	}
 
@@ -1649,8 +1688,9 @@ function Goods() {
 	this.hideDescription = function(){
 		var content = $('.productView__description-content')
 		var height = content.height()
-		if (height > 119){
+		if (height > 129){
 			content.addClass('mask')
+			content.next().removeClass('is-hide')
 		}
 	}
 
@@ -3682,12 +3722,11 @@ $(document).ready(function(){
 	openMenu();
 	toTop();
 	cartSaleSum();
-	// quantity.addtoQty();
 	swiperViewed();
   mainnav('header .mainnav', '1', 991);
 	appendSearch()
 	fixedMenu()
-	quantity.onClickAddto()
+	quantity.onAddto()
 
 	// Удаление классов загрузки для элементов страницы
 	$('.loading').addClass('loaded');

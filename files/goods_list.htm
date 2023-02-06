@@ -37,13 +37,16 @@
 	{% IF nested_categories_list_empty && goods_empty %}
 		{% IF goods_filters_empty %}
 		<div class="notice attention">Нет товаров в выбранной категории</div>
-		<a class="notice__button button-secondary" href="{CATALOG_URL}" title="Вернуться в каталог">Вернуться в каталог</a>
+		<div class="notice__buttons">
+			<a class="notice__button button-secondary" href="{CATALOG_URL}" title="Вернуться в каталог">Вернуться в каталог</a>
+		</div>
 		{% ELSE %}
 		<div class="notice attention">Нет товаров для выбранных условий</div>
-		<a class="notice__button button-empty button-icon" href="{PAGE_CANONICAL}" title="Очистить фильтры">
-			<i class="icon-close"></i>
-			<span>Очистить фильтры</span>
-		</a>
+		<div class="notice__buttons">
+			<a class="notice__button button-empty" href="{PAGE_CANONICAL}" title="Очистить фильтры">
+				<span>Очистить фильтры</span>
+			</a>
+		</div>
 		{% ENDIF %}
 	{% ENDIF %}
 	<!-- /Если нет товаров, выводим сообщение пользователю -->

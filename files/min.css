@@ -86,7 +86,8 @@ h6 {font-size: 14px;}
 .notice.attention {background-color: #fcf8e3;color: #8a6d3b;border-color: #faebcc;}
 .notice.information {background-color: #d9edf7;color: #31708f;border-color: #bce8f1;}
 .notice a {color: inherit;font-weight: 600;text-decoration: underline;display: inline;}
-.notice__button {margin-bottom: 32px;}
+.notice__buttons {margin-bottom: 32px;}
+.notice__buttons + .toolbar {display: none;}
 
 
 /**************************************/
@@ -153,7 +154,7 @@ h6 {font-size: 14px;}
 /**************************************/
 /*** Выпадающие объекты ***/
 /**************************************/
-.dropdown__content {box-shadow: 0 0 20px 0 var(--color-shadow);margin-top: 16px;width: 400px;padding: 16px;background-color: var(--color-white);border: 0;transform: scale(1,0);transform-origin: right top;transition: all 0.3s ease-in-out;right: 0;position: absolute;z-index: 11;}
+.dropdown__content {box-shadow: 0 0 20px 0 var(--color-shadow);margin-top: 16px;width: 400px;padding: 16px;background-color: var(--color-white);border: 0;border-radius: 12px;transform: scale(1,0);transform-origin: right top;transition: all 0.3s ease-in-out;right: 0;position: absolute;z-index: 11;}
 .dropdown.is-opened .dropdown__content {display: block;}
 @media all and (min-width: 1024px) {
 	.dropdown .dropdown__open:before {content: '';right: 0;bottom: -16px;height: 32px;width: 100%;display: block;position: absolute;}
@@ -189,7 +190,6 @@ h6 {font-size: 14px;}
 .has-items .addto__empty {display: none;}
 .has-items .addto__buttons {display: flex;}
 .has-items .addto__total {display: flex;}
-.addto__login {width: 224px;}
 
 
 

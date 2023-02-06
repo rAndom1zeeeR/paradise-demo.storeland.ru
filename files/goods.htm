@@ -511,7 +511,7 @@
 			</div>
 
 			<!-- Показать/Скрыть -->
-			<div class="productView__description-more">
+			<div class="productView__description-more is-hide">
 				<div class="button-link button-more">
 					<span data-txt="Скрыть полное описание">Показать полное описание</span>
 					<i class="icon-chevron_right"></i>
@@ -625,7 +625,7 @@
 
 										{% IF opinion_list.DATE %}
 										<div class="opinion__date">
-											<span>{opinion_list.DATE | date('d.m.Y')}.</span>
+											<span>{opinion_list.DATE | date('d.m.Y')}</span>
 										</div>
 										<meta itemprop="datePublished" content="{opinion_list.DATE | date('d.m.Y')}">
 										{% ENDIF %}

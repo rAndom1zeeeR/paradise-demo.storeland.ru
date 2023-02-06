@@ -3600,11 +3600,7 @@
 	<script async type="text/javascript">
 		$(document).ready(function(){
 			goods.goodsModification();
-			quantity.onClickGoods();
-			// quantity.addtoQty()
-			// quantity.onClick(document.querySelector('.addto__qty'));
-			// quantity.goodsQty();
-			// goods.initTabs();
+			quantity.onGoods();
 			goods.onInit();
 			goods.onClick();
 			goods.swiperTumbs();
@@ -3623,7 +3619,7 @@
 	// Загрузка основных функций шаблона
 	$(document).ready(function(){
 		cart.onClick();
-		// quantity.cartQty();
+		quantity.onCart();
 		cart.minSum();
 	});
 	</script>
