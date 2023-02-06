@@ -435,6 +435,7 @@
 							</div>
 
 							<!-- Корзина -->
+							{% IFNOT MOD_LNAME = cart %}
 							<div class="addto__block cart dropdown {% IF CART_COUNT_TOTAL > 0 %}has-items{% ENDIF %}">
 								<a class="addto__link cart__icon dropdown__open" href="{CART_URL}" title="Перейти в корзину">
 									<i class="icon-cart"></i>
@@ -533,6 +534,7 @@
 								</div>
 
 							</div>
+							{% ENDIF %}
 
 						</div>
 
@@ -905,11 +907,11 @@
 													<meta itemprop="availability" content="{% IF index_page_sale_goods.MAX_REST_VALUE>0 %}http://schema.org/InStock{% ELSE %}http://schema.org/OutOfStock{% ENDIF %}" />
 													<meta itemprop="priceValidUntil" content="{index_page_sale_goods.MAX_DISCOUNT_EXPIRED_AT | date('Y-m-d')}" />
 													{% IF index_page_sale_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT>index_page_sale_goods.MIN_PRICE_NOW %}
-													<span class="price__old {CURRENCY_CHAR_CODE}">{index_page_sale_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT | money_format}</span>
+													<span class="price__old {CURRENCY_CHAR_CODE}" data-price="{index_page_sale_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT}">{index_page_sale_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT | money_format}</span>
 													{% ELSEIF index_page_sale_goods.MIN_PRICE_OLD>index_page_sale_goods.MIN_PRICE_NOW %}
-													<span class="price__old {CURRENCY_CHAR_CODE}">{index_page_sale_goods.MIN_PRICE_OLD | money_format}</span>
+													<span class="price__old {CURRENCY_CHAR_CODE}" data-price="{index_page_sale_goods.MIN_PRICE_OLD}">{index_page_sale_goods.MIN_PRICE_OLD | money_format}</span>
 													{% ENDIF %}
-													<span class="price__now {CURRENCY_CHAR_CODE}" itemprop="price" content="{index_page_sale_goods.MIN_PRICE_NOW}">{index_page_sale_goods.MIN_PRICE_NOW | money_format}</span>
+													<span class="price__now {CURRENCY_CHAR_CODE}" data-price="{index_page_sale_goods.MIN_PRICE_NOW}" itemprop="price">{index_page_sale_goods.MIN_PRICE_NOW | money_format}</span>
 												</div>
 
 												<!-- Добавление товара в избранное и сравнение и в корзину -->
@@ -1292,11 +1294,11 @@
 											<meta itemprop="availability" content="{% IF index_page_favorites_goods.MAX_REST_VALUE>0 %}http://schema.org/InStock{% ELSE %}http://schema.org/OutOfStock{% ENDIF %}" />
 											<meta itemprop="priceValidUntil" content="{index_page_favorites_goods.MAX_DISCOUNT_EXPIRED_AT | date('Y-m-d')}" />
 											{% IF index_page_favorites_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT>index_page_favorites_goods.MIN_PRICE_NOW %}
-											<span class="price__old {CURRENCY_CHAR_CODE}">{index_page_favorites_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT | money_format}</span>
+											<span class="price__old {CURRENCY_CHAR_CODE}" data-price="{index_page_favorites_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT}">{index_page_favorites_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT | money_format}</span>
 											{% ELSEIF index_page_favorites_goods.MIN_PRICE_OLD>index_page_favorites_goods.MIN_PRICE_NOW %}
-											<span class="price__old {CURRENCY_CHAR_CODE}">{index_page_favorites_goods.MIN_PRICE_OLD | money_format}</span>
+											<span class="price__old {CURRENCY_CHAR_CODE}" data-price="{index_page_favorites_goods.MIN_PRICE_OLD}">{index_page_favorites_goods.MIN_PRICE_OLD | money_format}</span>
 											{% ENDIF %}
-											<span class="price__now {CURRENCY_CHAR_CODE}" itemprop="price" content="{index_page_favorites_goods.MIN_PRICE_NOW}">{index_page_favorites_goods.MIN_PRICE_NOW | money_format}</span>
+											<span class="price__now {CURRENCY_CHAR_CODE}" data-price="{index_page_favorites_goods.MIN_PRICE_NOW}" itemprop="price">{index_page_favorites_goods.MIN_PRICE_NOW | money_format}</span>
 										</div>
 
 										{% IF index_page_favorites_goods.COUNT_MODIFICATION > 1 %}
@@ -1656,11 +1658,11 @@
 											<meta itemprop="availability" content="{% IF index_page_new_goods.MAX_REST_VALUE>0 %}http://schema.org/InStock{% ELSE %}http://schema.org/OutOfStock{% ENDIF %}" />
 											<meta itemprop="priceValidUntil" content="{index_page_new_goods.MAX_DISCOUNT_EXPIRED_AT | date('Y-m-d')}" />
 											{% IF index_page_new_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT>index_page_new_goods.MIN_PRICE_NOW %}
-											<span class="price__old {CURRENCY_CHAR_CODE}">{index_page_new_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT | money_format}</span>
+											<span class="price__old {CURRENCY_CHAR_CODE}" data-price="{index_page_new_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT}">{index_page_new_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT | money_format}</span>
 											{% ELSEIF index_page_new_goods.MIN_PRICE_OLD>index_page_new_goods.MIN_PRICE_NOW %}
-											<span class="price__old {CURRENCY_CHAR_CODE}">{index_page_new_goods.MIN_PRICE_OLD | money_format}</span>
+											<span class="price__old {CURRENCY_CHAR_CODE}" data-price="{index_page_new_goods.MIN_PRICE_OLD}">{index_page_new_goods.MIN_PRICE_OLD | money_format}</span>
 											{% ENDIF %}
-											<span class="price__now {CURRENCY_CHAR_CODE}" itemprop="price" content="{index_page_new_goods.MIN_PRICE_NOW}">{index_page_new_goods.MIN_PRICE_NOW | money_format}</span>
+											<span class="price__now {CURRENCY_CHAR_CODE}" data-price="{index_page_new_goods.MIN_PRICE_NOW}" itemprop="price">{index_page_new_goods.MIN_PRICE_NOW | money_format}</span>
 										</div>
 
 										{% IF index_page_new_goods.COUNT_MODIFICATION > 1 %}
@@ -1975,11 +1977,11 @@
 											<meta itemprop="availability" content="{% IF index_page_goods.MAX_REST_VALUE>0 %}http://schema.org/InStock{% ELSE %}http://schema.org/OutOfStock{% ENDIF %}" />
 											<meta itemprop="priceValidUntil" content="{index_page_goods.MAX_DISCOUNT_EXPIRED_AT | date('Y-m-d')}" />
 											{% IF index_page_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT>index_page_goods.MIN_PRICE_NOW %}
-											<span class="price__old {CURRENCY_CHAR_CODE}">{index_page_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT | money_format}</span>
+											<span class="price__old {CURRENCY_CHAR_CODE}" data-price="{index_page_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT}">{index_page_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT | money_format}</span>
 											{% ELSEIF index_page_goods.MIN_PRICE_OLD>index_page_goods.MIN_PRICE_NOW %}
-											<span class="price__old {CURRENCY_CHAR_CODE}">{index_page_goods.MIN_PRICE_OLD | money_format}</span>
+											<span class="price__old {CURRENCY_CHAR_CODE}" data-price="{index_page_goods.MIN_PRICE_OLD}">{index_page_goods.MIN_PRICE_OLD | money_format}</span>
 											{% ENDIF %}
-											<span class="price__now {CURRENCY_CHAR_CODE}" itemprop="price" content="{index_page_goods.MIN_PRICE_NOW}">{index_page_goods.MIN_PRICE_NOW | money_format}</span>
+											<span class="price__now {CURRENCY_CHAR_CODE}" data-price="{index_page_goods.MIN_PRICE_NOW}" itemprop="price">{index_page_goods.MIN_PRICE_NOW | money_format}</span>
 										</div>
 
 										{% IF index_page_goods.COUNT_MODIFICATION > 1 %}
@@ -2810,11 +2812,11 @@
 												<meta itemprop="availability" content="{% IF recently_viewed_goods.MAX_REST_VALUE>0 %}http://schema.org/InStock{% ELSE %}http://schema.org/OutOfStock{% ENDIF %}" />
 												<meta itemprop="priceValidUntil" content="{recently_viewed_goods.MAX_DISCOUNT_EXPIRED_AT | date('Y-m-d')}" />
 												{% IF recently_viewed_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT>recently_viewed_goods.MIN_PRICE_NOW %}
-												<span class="price__old {CURRENCY_CHAR_CODE}">{recently_viewed_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT | money_format}</span>
+												<span class="price__old {CURRENCY_CHAR_CODE}" data-price="{recently_viewed_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT}">{recently_viewed_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT | money_format}</span>
 												{% ELSEIF recently_viewed_goods.MIN_PRICE_OLD>recently_viewed_goods.MIN_PRICE_NOW %}
-												<span class="price__old {CURRENCY_CHAR_CODE}">{recently_viewed_goods.MIN_PRICE_OLD | money_format}</span>
+												<span class="price__old {CURRENCY_CHAR_CODE}" data-price="{recently_viewed_goods.MIN_PRICE_OLD}">{recently_viewed_goods.MIN_PRICE_OLD | money_format}</span>
 												{% ENDIF %}
-												<span class="price__now {CURRENCY_CHAR_CODE}" itemprop="price" content="{recently_viewed_goods.MIN_PRICE_NOW}">{recently_viewed_goods.MIN_PRICE_NOW | money_format}</span>
+												<span class="price__now {CURRENCY_CHAR_CODE}" data-price="{recently_viewed_goods.MIN_PRICE_NOW}" itemprop="price">{recently_viewed_goods.MIN_PRICE_NOW | money_format}</span>
 											</div>
 
 											{% IF recently_viewed_goods.COUNT_MODIFICATION > 1 %}
@@ -3530,10 +3532,10 @@
 	{% IF FORM_NOTICE %}
 	<script async type="text/javascript">
 		// Модальное окно уведомления при отправке сообщения
-		var type = '{% IF FORM_NOTICE_IS_GOOD %}success{% ELSE %}warning{% ENDIF %}';
-		var text = '<div class="noty__addto"><div class="noty__message">{FORM_NOTICE | nl2br}</div></div>'
+		var contentMsg = '<div class="noty__addto"><div class="noty__message">{FORM_NOTICE | nl2br}</div></div>'
+		var typeMsg = '{% IF FORM_NOTICE_IS_GOOD %}success{% ELSE %}warning{% ENDIF %}';
 		setTimeout(function(){
-			notyStart(text, type)
+			notyStart(contentMsg, typeMsg)
 		}, 1000);
 	</script>
 	{% ENDIF %}
@@ -3548,6 +3550,7 @@
 			product.quickViewMod();
 			product.onCart();
 			product.onNotify();
+			// quantity.onClick();
 		});
 	</script>
 	{% ENDIF %}
@@ -3597,7 +3600,10 @@
 	<script async type="text/javascript">
 		$(document).ready(function(){
 			goods.goodsModification();
-			goods.prodQty();
+			quantity.onClickGoods();
+			// quantity.addtoQty()
+			// quantity.onClick(document.querySelector('.addto__qty'));
+			// quantity.goodsQty();
 			// goods.initTabs();
 			goods.onInit();
 			goods.onClick();
@@ -3617,7 +3623,7 @@
 	// Загрузка основных функций шаблона
 	$(document).ready(function(){
 		cart.onClick();
-		cart.quantity();
+		// quantity.cartQty();
 		cart.minSum();
 	});
 	</script>

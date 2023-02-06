@@ -119,11 +119,11 @@
           {% FOR goods_mod_info %}
           <div class="compare__item swiper-slide" data-index="{goods_mod_info.index}">
             <div class="compare__price product__price {CURRENCY_CHAR_CODE} {% IF goods_mod_info.PRICE_NOW_WITHOUT_DISCOUNT>goods_mod_info.PRICE_NOW %}has-price-old{% ELSEIF goods_mod_info.PRICE_OLD>goods_mod_info.PRICE_NOW %}has-price-old{% ENDIF %}" data-id="{goods_mod_info.GOODS_MOD_ID}">
-              <span class="price__now {CURRENCY_CHAR_CODE}" itemprop="price" content="{goods_mod_info.PRICE_NOW}">{goods_mod_info.PRICE_NOW | money_format}</span>
+              <span class="price__now {CURRENCY_CHAR_CODE}" itemprop="price" data-price="{goods_mod_info.PRICE_NOW}">{goods_mod_info.PRICE_NOW | money_format}</span>
 	            {% IF goods_mod_info.PRICE_NOW_WITHOUT_DISCOUNT > goods_mod_info.PRICE_NOW %}
-              <span class="price__old {CURRENCY_CHAR_CODE}" content="{goods_mod_info.PRICE_NOW_WITHOUT_DISCOUNT}">{goods_mod_info.PRICE_NOW_WITHOUT_DISCOUNT | money_format}</span>
+              <span class="price__old {CURRENCY_CHAR_CODE}" data-price="{goods_mod_info.PRICE_NOW_WITHOUT_DISCOUNT}">{goods_mod_info.PRICE_NOW_WITHOUT_DISCOUNT | money_format}</span>
               {% ELSEIF goods_mod_info.PRICE_OLD > goods_mod_info.PRICE_NOW %}
-              <span class="price__old {CURRENCY_CHAR_CODE}" content="{goods_mod_info.PRICE_OLD}">{goods_mod_info.PRICE_OLD | money_format}</span>
+              <span class="price__old {CURRENCY_CHAR_CODE}" data-price="{goods_mod_info.PRICE_OLD}">{goods_mod_info.PRICE_OLD | money_format}</span>
               {% ENDIF %}
             </div>
           </div>

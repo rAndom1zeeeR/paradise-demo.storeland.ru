@@ -228,7 +228,7 @@ h6 {font-size: 14px;}
 /**************************************/
 /*** Показать пароль ***/
 /**************************************/
-.form__showPass {position: absolute;bottom: 8px;right: 8px;cursor: pointer;z-index: 2;}
+.form__showPass {position: absolute;bottom: 16px;right: 16px;cursor: pointer;z-index: 2;}
 .form__showPass:before {content: '\e911';font-size: 24px;font-family: 'icomoon';vertical-align: middle;}
 .form__showPass.is-actived:before {content: '\e912';}
 
@@ -236,7 +236,6 @@ h6 {font-size: 14px;}
 #capslock {margin-top: 16px;display: none;}
 .capslock__icon i {margin-right: 8px;font-size: 24px;color: var(--color-red);}
 .capslock__text {margin-top: 8px;}
-
 
 
 /**************************************/

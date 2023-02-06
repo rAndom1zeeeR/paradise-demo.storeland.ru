@@ -12,7 +12,8 @@
 				<!--  -->
 				<div class="cartTable__buttons flex justify-between">
 					<div class="cartTable__count">
-						<span>{CART_COUNT_TOTAL} товар{CART_COUNT_TOTAL | gen_word_end("","а","ов")}</span>
+						<span class="cart-count" data-cart-count="{CART_COUNT_TOTAL}">{CART_COUNT_TOTAL}</span>
+						<span>товар{CART_COUNT_TOTAL | gen_word_end("","а","ов")}</span>
 					</div>
 					<a class="cartTable__clear button-rotate button-link button-more" href="{CART_TRUNCATE_URL}" title="Очистить корзину">
 						<span>Очистить</span>

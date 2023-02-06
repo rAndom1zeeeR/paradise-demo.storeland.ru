@@ -226,11 +226,11 @@
 									<meta itemprop="availability" content="{% IF favorites_goods.MAX_REST_VALUE>0 %}http://schema.org/InStock{% ELSE %}http://schema.org/OutOfStock{% ENDIF %}" />
 									<meta itemprop="priceValidUntil" content="{favorites_goods.MAX_DISCOUNT_EXPIRED_AT | date('Y-m-d')}" />
 									{% IF favorites_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT>favorites_goods.MIN_PRICE_NOW %}
-									<span class="price__old {CURRENCY_CHAR_CODE}">{favorites_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT | money_format}</span>
+									<span class="price__old {CURRENCY_CHAR_CODE}" data-price="{favorites_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT}">{favorites_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT | money_format}</span>
 									{% ELSEIF favorites_goods.MIN_PRICE_OLD>favorites_goods.MIN_PRICE_NOW %}
-									<span class="price__old {CURRENCY_CHAR_CODE}">{favorites_goods.MIN_PRICE_OLD | money_format}</span>
+									<span class="price__old {CURRENCY_CHAR_CODE}" data-price="{favorites_goods.MIN_PRICE_OLD}">{favorites_goods.MIN_PRICE_OLD | money_format}</span>
 									{% ENDIF %}
-									<span class="price__now {CURRENCY_CHAR_CODE}" itemprop="price" content="{favorites_goods.MIN_PRICE_NOW}">{favorites_goods.MIN_PRICE_NOW | money_format}</span>
+									<span class="price__now {CURRENCY_CHAR_CODE}" data-price="{favorites_goods.MIN_PRICE_NOW}" itemprop="price">{favorites_goods.MIN_PRICE_NOW | money_format}</span>
 								</div>
 
 								{% IF favorites_goods.COUNT_MODIFICATION > 1 %}

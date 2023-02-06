@@ -6,54 +6,47 @@
 		</div>
 
 		<!-- Изображение товара  {% IF GOODS_IMAGE_ID = goods_images.ID %}style="display: none;"{% ENDIF %} -->
-		<div class="productView__images" data-id="{GOODS_IMAGE_ID}">
-			<!-- Предзагрузчик -->
-			<div class="preloader"><div class="preloading"></div></div>
-			
+		<div class="productView__images" data-id="{GOODS_IMAGE_ID}">			
 			<!-- Главное изображение -->
-			<a class="productView__image flex-center" href="{% IF GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{GOODS_IMAGE_LARGE}{% ENDIF %}" data-fancybox="images">
-				<img class="lozad" data-src="{% IF GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{GOODS_IMAGE_MEDIUM}{% ENDIF %}" title="{GOODS_NAME}" alt="{GOODS_NAME}" itemprop="image" />
-
-				<!-- Стикеры -->
-				<div class="productView__sticker flex">
-					{% IF GOODS_IS_NEW %}
-					<span class="sticker__new"></span>
-					{% ENDIF %}
-					{% IF GOODS_IS_TOP %}
-					<span class="sticker__best"></span>
-					{% ENDIF %}
-					<!-- {% IF GOODS_IS_PLACE_ON_INDEX_PAGE %}
-					<span class="sticker__sale"></span>
-					{% ENDIF %} -->
-				</div>
-
-				<!-- Среднее значение по результатам всех отзывов об этом товаре -->
-				{% IFNOT SETTINGS_OPINION_DISABLE %}
-				<div class="productView__ratings flex {% IF GOODS_OPINION_RATING_CNT_ALL = 0 %}is-empty{% ENDIF %}">
-					<i class="icon-star"></i>
-					<div class="productView__ratings-count">{GOODS_OPINION_RATING_VALUE_ROUND | divide('2')}</div>
-				</div>
-				{% ENDIF %}
-
-			</a>
-
-			<!-- Дополнительные изображения -->
-			{% IFNOT goods_images_empty %}
-			<div class="thumblist">
-				<div class="swiper">
-					<div class="swiper-wrapper thumblist__items">
-						{% FOR goods_images %}
-						{% IF goods_images.ID = GOODS_IMAGE_ID %}{continue}{% ENDIF %}
-						<div class="swiper-slide thumblist__item" data-index="{goods_images.index}" data-count="">
-							<a class="thumblist__image flex-center" href="{goods_images.LARGE}" data-fancybox="images">
-								<img class="lozad" src="{ASSETS_IMAGES_PATH}placeholder.png?design=THEMENAME" data-src="{goods_images.MEDIUM}" alt="{goods_images.NAME}" itemprop="image" />
-							</a>
-						</div>
-						{% ENDFOR %}
+			<div class="swiper">
+				<div class="swiper-wrapper">
+					{% FOR goods_images %}
+					<div class="swiper-slide" data-index="{goods_images.index}" data-count="">
+						<a class="productView__image loading flex-center" href="{goods_images.LARGE}" data-fancybox="images">
+							<img src="{goods_images.MEDIUM}" alt="{goods_images.NAME}" itemprop="image" />
+						</a>
 					</div>
+					{% ENDFOR %}
+				</div>
+				<div class="swiper-navigate flex">
+					<div class="swiper-button-prev"></div>
+					<div class="swiper-pagination"></div>
+					<div class="swiper-button-next"></div>
 				</div>
 			</div>
+
+			<!-- Стикеры -->
+			<div class="productView__sticker flex">
+				{% IF GOODS_IS_NEW %}
+				<span class="sticker__new"></span>
+				{% ENDIF %}
+				{% IF GOODS_IS_TOP %}
+				<span class="sticker__best"></span>
+				{% ENDIF %}
+				<!-- {% IF GOODS_IS_PLACE_ON_INDEX_PAGE %}
+				<span class="sticker__sale"></span>
+				{% ENDIF %} -->
+			</div>
+
+			<!-- Среднее значение по результатам всех отзывов об этом товаре -->
+			{% IFNOT SETTINGS_OPINION_DISABLE %}
+			<div class="productView__ratings flex {% IF GOODS_OPINION_RATING_CNT_ALL = 0 %}is-empty{% ENDIF %}">
+				<i class="icon-star"></i>
+				<div class="productView__ratings-count">{GOODS_OPINION_RATING_VALUE_ROUND | divide('2')}</div>
+			</div>
 			{% ENDIF %}
+
+			
 
 			<!-- Изображение для смены модификаций -->
 			{% FOR goods_images %}
@@ -259,11 +252,11 @@
 								<meta itemprop="priceCurrency" content="{CURRENCY_CHAR_CODE}" />
 								<link itemprop="url" href="{GOODS_URL}" />
 								{% IF GOODS_MOD_PRICE_NOW_WITHOUT_DISCOUNT>GOODS_MOD_PRICE_NOW %}
-								<span class="price__old {CURRENCY_CHAR_CODE}" content="{GOODS_MOD_PRICE_NOW_WITHOUT_DISCOUNT}" data-price-old="{GOODS_MOD_PRICE_NOW_WITHOUT_DISCOUNT}">{GOODS_MOD_PRICE_NOW_WITHOUT_DISCOUNT | money_format}</span>
+								<span class="price__old {CURRENCY_CHAR_CODE}" data-price="{GOODS_MOD_PRICE_NOW_WITHOUT_DISCOUNT}">{GOODS_MOD_PRICE_NOW_WITHOUT_DISCOUNT | money_format}</span>
 								{% ELSEIF GOODS_MOD_PRICE_OLD>GOODS_MOD_PRICE_NOW %}
-								<span class="price__old {CURRENCY_CHAR_CODE}" content="{GOODS_MOD_PRICE_OLD}" data-price-old="{GOODS_MOD_PRICE_OLD}">{GOODS_MOD_PRICE_OLD | money_format}</span>
+								<span class="price__old {CURRENCY_CHAR_CODE}" data-price="{GOODS_MOD_PRICE_OLD}">{GOODS_MOD_PRICE_OLD | money_format}</span>
 								{% ENDIF %}
-								<span class="price__now {CURRENCY_CHAR_CODE}" itemprop="price" content="{GOODS_MOD_PRICE_NOW}" data-price="{GOODS_MOD_PRICE_NOW}">{GOODS_MOD_PRICE_NOW | money_format}</span>
+								<span class="price__now {CURRENCY_CHAR_CODE}" data-price="{GOODS_MOD_PRICE_NOW}" itemprop="price">{GOODS_MOD_PRICE_NOW | money_format}</span>
 							</div>
 
 							<!-- Количество -->
@@ -1052,11 +1045,11 @@
 								<meta itemprop="availability" content="{% IF related_goods.MAX_REST_VALUE>0 %}http://schema.org/InStock{% ELSE %}http://schema.org/OutOfStock{% ENDIF %}" />
 								<meta itemprop="priceValidUntil" content="{related_goods.MAX_DISCOUNT_EXPIRED_AT | date('Y-m-d')}" />
 								{% IF related_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT>related_goods.MIN_PRICE_NOW %}
-								<span class="price__old {CURRENCY_CHAR_CODE}">{related_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT | money_format}</span>
+								<span class="price__old {CURRENCY_CHAR_CODE}" data-price="{related_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT}">{related_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT | money_format}</span>
 								{% ELSEIF related_goods.MIN_PRICE_OLD>related_goods.MIN_PRICE_NOW %}
-								<span class="price__old {CURRENCY_CHAR_CODE}">{related_goods.MIN_PRICE_OLD | money_format}</span>
+								<span class="price__old {CURRENCY_CHAR_CODE}" data-price="{related_goods.MIN_PRICE_OLD}">{related_goods.MIN_PRICE_OLD | money_format}</span>
 								{% ENDIF %}
-								<span class="price__now {CURRENCY_CHAR_CODE}" itemprop="price" content="{related_goods.MIN_PRICE_NOW}">{related_goods.MIN_PRICE_NOW | money_format}</span>
+								<span class="price__now {CURRENCY_CHAR_CODE}" data-price="{related_goods.MIN_PRICE_NOW}" itemprop="price">{related_goods.MIN_PRICE_NOW | money_format}</span>
 							</div>
 
 							{% IF related_goods.COUNT_MODIFICATION > 1 %}
@@ -1318,11 +1311,11 @@
 								<meta itemprop="availability" content="{% IF related_views_goods.MAX_REST_VALUE>0 %}http://schema.org/InStock{% ELSE %}http://schema.org/OutOfStock{% ENDIF %}" />
 								<meta itemprop="priceValidUntil" content="{related_views_goods.MAX_DISCOUNT_EXPIRED_AT | date('Y-m-d')}" />
 								{% IF related_views_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT>related_views_goods.MIN_PRICE_NOW %}
-								<span class="price__old {CURRENCY_CHAR_CODE}">{related_views_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT | money_format}</span>
+								<span class="price__old {CURRENCY_CHAR_CODE}" data-price="{related_views_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT}">{related_views_goods.MIN_PRICE_NOW_WITHOUT_DISCOUNT | money_format}</span>
 								{% ELSEIF related_views_goods.MIN_PRICE_OLD>related_views_goods.MIN_PRICE_NOW %}
-								<span class="price__old {CURRENCY_CHAR_CODE}">{related_views_goods.MIN_PRICE_OLD | money_format}</span>
+								<span class="price__old {CURRENCY_CHAR_CODE}" data-price="{related_views_goods.MIN_PRICE_OLD}">{related_views_goods.MIN_PRICE_OLD | money_format}</span>
 								{% ENDIF %}
-								<span class="price__now {CURRENCY_CHAR_CODE}" itemprop="price" content="{related_views_goods.MIN_PRICE_NOW}">{related_views_goods.MIN_PRICE_NOW | money_format}</span>
+								<span class="price__now {CURRENCY_CHAR_CODE}" data-price="{related_views_goods.MIN_PRICE_NOW}" itemprop="price">{related_views_goods.MIN_PRICE_NOW | money_format}</span>
 							</div>
 
 							{% IF related_views_goods.COUNT_MODIFICATION > 1 %}
