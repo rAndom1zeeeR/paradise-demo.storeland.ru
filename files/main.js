@@ -412,7 +412,7 @@ function Quantity() {
 			const newTotal = doc.querySelector('.cartTotal__items').innerHTML
 			document.querySelector('.cartTotal__items').innerHTML = newTotal;
 		})
-		.catch(console.error(error));
+		.catch((error) => console.error(error));
 
 	}
 	
@@ -1607,7 +1607,7 @@ function Goods() {
 			slidesPerView: '1',
 			spaceBetween: 0,
 			nested: true,
-			autoHeight: true,
+			autoHeight: false,
 			preloadImages: false,
 			lazy: {
 				enabled: false,
@@ -1626,6 +1626,13 @@ function Goods() {
 				clickable: true,
 			},
 		});
+
+		// Скрываем навигацию если слайдер заблокирован
+		if($(id).find('.swiper-button-disabled').length == 2){
+			$(id).find('.swiper-navigate').addClass('swiper-navigation-lock')
+		}else{
+			$(id).find('.swiper-navigate').removeClass('swiper-navigation-lock')
+		}
 	}
 
 	// Функции при инициализации товара

@@ -154,6 +154,14 @@
 				</div>
 				{% ENDIF %}
 
+				<!-- Корзина: Итого -->
+				<div class="cartTotal__item flex justify-between">
+					<b>Товары (<span class="cart-count" data-cart-count="{CART_COUNT_TOTAL}">{CART_COUNT_TOTAL}</span>):</b>
+					<span class="cartTotal__price cartSumNow price__now {CURRENCY_CHAR_CODE}" data-price="{CART_SUM_NOW}">{CART_SUM_NOW | money_format}</span>
+					<div style="display: none;" class="cartTotal__price cartSumTotalHide" data-value="{CART_SUM_NOW_WITH_DISCOUNT}">{CART_SUM_NOW_WITH_DISCOUNT | money_format}</div>
+					<div style="display: none;" class="cartTotal__price cartSumDiscount" data-value="{CART_SUM_NOW_WITH_DISCOUNT}">{CART_SUM_NOW_WITH_DISCOUNT | money_format}</div>
+				</div>
+
 				<!-- Скидки, действующие на заказ -->
 				{% FOR cart_discount %}
 				{% IF cart_discount.DISCOUNT_IS_ENABLED %}
@@ -187,14 +195,6 @@
 					<div class="cartTotal__price {CURRENCY_CHAR_CODE}">
 						<span class="cartSumDelivery" data-value="{CART_SUM_DELIVERY}">{CART_SUM_DELIVERY | money_format}</span>
 					</div>
-				</div>
-
-				<!-- Корзина: Итого -->
-				<div class="cartTotal__item flex justify-between">
-					<b>Товары (<span class="cart-count" data-cart-count="{CART_COUNT_TOTAL}">{CART_COUNT_TOTAL}</span>):</b>
-					<span class="cartTotal__price cartSumNow price__now {CURRENCY_CHAR_CODE}" data-price="{CART_SUM_NOW}">{CART_SUM_NOW | money_format}</span>
-					<div style="display: none;" class="cartTotal__price cartSumTotalHide" data-value="{CART_SUM_NOW_WITH_DISCOUNT}">{CART_SUM_NOW_WITH_DISCOUNT | money_format}</div>
-					<div style="display: none;" class="cartTotal__price cartSumDiscount" data-value="{CART_SUM_NOW_WITH_DISCOUNT}">{CART_SUM_NOW_WITH_DISCOUNT | money_format}</div>
 				</div>
 
 			</div>
