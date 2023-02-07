@@ -411,6 +411,8 @@ function Quantity() {
 			// Обновить итого
 			const newTotal = doc.querySelector('.cartTotal__items').innerHTML
 			document.querySelector('.cartTotal__items').innerHTML = newTotal;
+			// Обновить минимальную сумму заказа
+			cart.minSum()
 		})
 		.catch((error) => console.error(error));
 
@@ -2240,6 +2242,7 @@ function Cart() {
 				$('.total__buttons button').attr('disabled', true).addClass('is-disabled');
 				$('.cartTotal__min').removeClass('is-hide');
 			}else{
+				console.log('else')
 				$('.total__buttons button').attr('disabled', false).removeClass('is-disabled');
 				$('.cartTotal__min').addClass('is-hide');
 			}
@@ -2839,16 +2842,7 @@ function mainnav(id,rows,media){
 						mainNavOverflow.addClass('is-opened');
 						$('#overlay').addClass('is-opened')
 					}
-					// Определение положения кнопки еще
-					positionMore()
 				});
-				
-				// Определение положения кнопки еще
-				function positionMore(){
-					var morePos = mainNav.find('.mainnav__more').position().left;
-					var contentPos = parseInt(morePos) - mainNavOverflow.width() / 4;
-					mainNavOverflow.css({'left' : contentPos})
-				}
 
 				return false;
 			}
