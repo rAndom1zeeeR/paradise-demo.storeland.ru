@@ -236,10 +236,8 @@
 								{% IF favorites_goods.COUNT_MODIFICATION > 1 %}
 								<div class="product__props selectBox">
 									<select class="product__props-select select" name="form[properties][]">
-										{% FOR mods %}
-											{% FOR goods_mod_distinctive_properties %}
-											<option value="{favorites_goods.mods.ID}">{favorites_goods.mods.goods_mod_distinctive_properties.VALUE}</option>
-											{% ENDFOR goods_mod_distinctive_properties %}
+										{% FOR goods_attr_list %}
+											<option value="{favorites_goods.goods_attr_list.ID}">{favorites_goods.goods_attr_list.VALUE}</option>
 										{% ENDFOR values %}
 									</select>
 								</div>

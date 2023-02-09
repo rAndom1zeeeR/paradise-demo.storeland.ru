@@ -194,7 +194,7 @@
         <div class="compare__content swiper-wrapper">
           {% FOR values %}
           <div class="compare__item swiper-slide" data-index="{goods_attr_list.values.index}">
-            <span>{% IF goods_attr_list.values.VALUE %}{goods_attr_list.values.VALUE}{% ELSE %}<i class="icon-close"></i>{% ENDIF %}</span>
+            <span>{% IF goods_attr_list.values.VALUE %}{goods_attr_list.values.VALUE}{% ELSE %}<i class="icon-minus"></i>{% ENDIF %}</span>
           </div>
           {% ENDFOR %}
         </div>

@@ -394,8 +394,16 @@
 				<div class="productView__right productView__margin">
 					<!-- Краткое описание -->
 					{% IF GOODS_DESCRIPTION_SHORT %}
-					<div class="productView__text" itemprop="description">
-						<span>{GOODS_DESCRIPTION_SHORT}</span>
+					<div class="productView__text">
+						<div class="productView__text-content" itemprop="description">
+							<span>{GOODS_DESCRIPTION_SHORT}</span>
+						</div>
+						<div class="productView__text-more is-hide">
+							<div class="button-link button-more">
+								<span data-txt="Скрыть описание">Показать описание</span>
+								<i class="icon-chevron_right"></i>
+							</div>
+						</div>
 					</div>
 					{% ENDIF %}
 					
@@ -496,18 +504,20 @@
 			<h4>О товаре:</h4>
 
 			<!-- Блок описания товара. Показываем его если есть описание товара -->
-			<div class="productView__description-content htmlDataBlock">
-				{% IF GOODS_DESCRIPTION_LARGE %}
-				<div class="GOODS_DESCRIPTION_LARGE">{GOODS_DESCRIPTION_LARGE}</div>
-				{% ENDIF %}
-				<!-- Короткое SEO-описание -->
-				{% IF GOODS_SEO_DESCRIPTION_SHORT %}
-				<div class="GOODS_SEO_DESCRIPTION_SHORT">{GOODS_SEO_DESCRIPTION_SHORT}</div>
-				{% ENDIF %}
-				<!-- Полное SEO-описание -->
-				{% IF GOODS_SEO_DESCRIPTION_LARGE %}
-				<div class="GOODS_SEO_DESCRIPTION_LARGE">{GOODS_SEO_DESCRIPTION_LARGE}</div>
-				{% ENDIF %}
+			<div class="productView__description-content">
+				<div class="htmlDataBlock">
+					{% IF GOODS_DESCRIPTION_LARGE %}
+					<div class="GOODS_DESCRIPTION_LARGE">{GOODS_DESCRIPTION_LARGE}</div>
+					{% ENDIF %}
+					<!-- Короткое SEO-описание -->
+					{% IF GOODS_SEO_DESCRIPTION_SHORT %}
+					<div class="GOODS_SEO_DESCRIPTION_SHORT">{GOODS_SEO_DESCRIPTION_SHORT}</div>
+					{% ENDIF %}
+					<!-- Полное SEO-описание -->
+					{% IF GOODS_SEO_DESCRIPTION_LARGE %}
+					<div class="GOODS_SEO_DESCRIPTION_LARGE">{GOODS_SEO_DESCRIPTION_LARGE}</div>
+					{% ENDIF %}
+				</div>
 			</div>
 
 			<!-- Показать/Скрыть -->
@@ -588,7 +598,7 @@
 			</div>
 			{% ENDIF %}
 			
-			<div class="row">
+			<div class="">
 				<div class="flex-start">
 					{% IFNOT opinion_list_empty %}
 					<!-- Контент отзывов -->

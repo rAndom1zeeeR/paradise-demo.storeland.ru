@@ -74,7 +74,7 @@ function toTop() {
 function notyStart($content, $type) {
   new Noty({
     text: $content,
-    layout: 'center',
+    layout: 'bottomCenter',
     type: $type,
     theme: '',
     textAlign: 'center',
@@ -1685,9 +1685,9 @@ function Goods() {
 
 	// Скрываем большое краткое описание
 	this.hideText = function(){
-		var content = $('.productView__text')
+		var content = $('.productView__text-content')
 		var height = content.height()
-		if (height > 239){
+		if (height > 129){
 			content.addClass('mask')
 			content.next().removeClass('is-hide')
 		}
@@ -1777,6 +1777,7 @@ function Goods() {
 			var qtyInput = $(event.target.parentElement).parent().find('.qty__input');
 			var featuresMore = event.target.closest('.features__more');
 			var descriptionMore = event.target.closest('.productView__description-more');
+			var shortDescriptionMore = event.target.closest('.productView__text-more');
 			var totalGood = event.target.closest('.opinion__total-good .opinion__total-label');
 			var totalBad = event.target.closest('.opinion__total-bad .opinion__total-label');
 
@@ -1858,6 +1859,14 @@ function Goods() {
 				// Скрол контента
 				goods.scrollContent(content, obj)
 
+			}
+			// 
+			else if (shortDescriptionMore) {
+				var content = $('.productView__text');
+				var obj = $(event.target.parentElement)
+				obj.toggleClass('is-actived')
+				changeTxt(obj.find('span'))
+				$('.productView__text-content').toggleClass('mask')
 			}
 			// Хорошие отзывы
 			else if (totalGood){
@@ -2242,7 +2251,6 @@ function Cart() {
 				$('.total__buttons button').attr('disabled', true).addClass('is-disabled');
 				$('.cartTotal__min').removeClass('is-hide');
 			}else{
-				console.log('else')
 				$('.total__buttons button').attr('disabled', false).removeClass('is-disabled');
 				$('.cartTotal__min').addClass('is-hide');
 			}
@@ -3494,7 +3502,7 @@ function swiperViewed(){
 		simulateTouch: true,
 		grabCursor: true,
 		slidesPerView: '5',
-		spaceBetween: 0,
+		spaceBetween: 16,
 		nested: true,
 		preloadImages: false,
 		lazy: {

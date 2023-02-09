@@ -118,7 +118,7 @@ h6 {font-size: 14px;}
 /*** Таблицы ***/
 /**************************************/
 .table-box {margin-bottom: 16px;width: 100%;background-color: var(--color-white);border-collapse: collapse;line-height: 18px;text-align: center;border-radius: 0;}
-.table-box th, .table-box td {border: 1px solid var(--color-border);line-height: 18px;padding: 12px 10px;text-align: center;white-space: nowrap;}
+.table-box th, .table-box td {border: 1px solid var(--color-border);line-height: 18px;padding: 12px 10px;text-align: center;white-space: wrap;}
 .table-box thead td, .table-box tfoot td {font-weight: bold;border: 1px solid var(--color-border);line-height: 18px;padding: 12px;text-align: center;}
 .table-box tfoot td {font-weight: bold;}
 .table-box tbody tr td.cell1 {text-align: right;width: 50%;}
@@ -169,7 +169,7 @@ h6 {font-size: 14px;}
 .addto__empty {font-size: 18px;font-weight: bold;}
 .addto__items {max-height: 280px;overflow-y: auto;}
 .addto__items::-webkit-scrollbar {width: 4px;}
-.addto__item {position: relative;}
+.addto__item {position: relative;overflow: hidden;}
 .addto__item + .addto__item {margin-top: 16px;}
 .addto__image {width: 80px;height: 80px;}
 .addto__content {width: calc(100% - 80px);padding-left: 16px;flex-grow: 1;}
@@ -182,8 +182,8 @@ h6 {font-size: 14px;}
 .addto__price {flex-direction: column;align-items: flex-start;}
 .addto__price .price__now {margin-right: 0;}
 .addto__price .price__old {display: none;}
-.addto__item .addto__remove {position: absolute;right: 4px;top: 0;}
-.addto__total {margin: 16px 0;display: none;}
+.addto__item .addto__remove {position: absolute;right: 6px;top: 0;}
+.addto__total {margin: 16px 0;display: none;border-top: 1px solid var(--color-lightgray);padding-top: 16px;}
 .addto__total-label {margin-right: 8px;}
 .addto__buttons {margin-top: 16px;display: none;}
 .has-items .addto__title {display: block;}

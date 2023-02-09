@@ -303,14 +303,6 @@
 
 										{% ELSE %}
 
-										{% IF SETTINGS_COMPARE_DISABLE=0 %}
-										<li>
-											<a class="mainnav__link" href="{COMPARE_URL}" title="Сравнение" rel="nofollow">
-												<span>Сравнение</span>
-											</a>
-										</li>
-										{% ENDIF %}
-
 										<li>
 											<a class="mainnav__link" href="{USER_LOGIN_URL}" title="Вход" rel="nofollow">
 												<span>Вход</span>
@@ -3467,7 +3459,7 @@
 			</div>
 
 			<!-- Политика конфиденциальности в модальном окне -->
-			<div id="fancybox__pp" style="display:none">
+			<div id="fancybox__pp" class="modal" style="display:none">
 				<div class="modal__title">
 					<h2 class="title">Политика приватности</h2>
 				</div>
