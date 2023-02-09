@@ -217,9 +217,9 @@
 								</div>
 								<!-- Форма поиска -->
 								<form class="search__form" action="{QUICK_SEARCH_URL}" method="get" itemprop="potentialAction" itemscope itemtype="https://schema.org/SearchAction">
-									<meta itemprop="target" content="{SEARCH_URL}?q={query}" />
+									<meta itemprop="target" content="{SEARCH_URL}?q={q}" />
 									<input type="hidden" name="goods_search_field_id" value="0" />
-									<input class="search__input" type="text" name="query" value="{FORM_SEARCH_Q}" placeholder="Поиск" autocomplete="off" itemprop="query" />
+									<input class="search__input" type="text" name="q" value="{FORM_SEARCH_Q}" placeholder="Поиск" autocomplete="off" itemprop="query" />
 									<!-- Найти -->
 									<button class="search__submit button-tertiary" type="submit" title="Искать">
 										<i class="icon-search"></i>
@@ -3533,7 +3533,7 @@
 	{% ENDIF %}
 
 	<!-- Функции товара -->
-	{% IF index_page || MOD_LNAME = catalog || MOD_LNAME = discount || MOD_LNAME = search || MOD_LNAME = goods || MOD_LNAME = user && ACT=favorites %}
+	{% IF index_page || MOD_LNAME = catalog || MOD_LNAME = discount || MOD_LNAME = search || MOD_LNAME = goods || MOD_LNAME = compare || MOD_LNAME = user && ACT=favorites %}
 	<script async type="text/javascript">
 		$(document).ready(function(){
 			product.default();
@@ -3560,7 +3560,8 @@
 	{% IF MOD_LNAME = user %}
 	<script async type="text/javascript">
 		$(document).ready(function(){
-			password.onClick();
+			password.onPass();
+			password.onReg();
 			password.capsWarning();
 		});
 	</script>
@@ -3623,7 +3624,8 @@
 	<script type="text/javascript">
 	// Загрузка основных функций шаблона
 	$(document).ready(function(){
-		password.onClick();
+		password.onPass();
+		password.onReg();
 		password.capsWarning();
 		order.onInit();
 	});

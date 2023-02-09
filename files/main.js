@@ -427,32 +427,35 @@ function Quantity() {
 ///////////////////////////////////////
 function Password() {
 
-	this.onClick = function(){
-		var content = document.querySelector('#main')
+	this.onPass = function(){
+		var content = document.querySelector('.form__showPass')
 		// Если нет контента
 		if(!content){
 			return false
 		}
 		
 		content.addEventListener('click', function(event){
-			// console.log('Password event1', event)
-			// console.log('Password event1.target', event.target)
-			// Объявление переменных
-			var pass = event.target.closest('.form__showPass');
-			var reg = event.target.closest('#registration');
+			password.showPass($(content));
+		});
+	}
 
-			if (pass){
-				password.showPass($(pass));
-			} else if (reg){
-				password.registration($(reg));
-			}
+	// Регистрация
+	this.onReg = function(){
+		var content = document.getElementById('registration')
+		// Если нет контента
+		if(!content){
+			return false
+		}
+		
+		content.addEventListener('click', function(event){
+			password.registration($(content));
 		});
 	}
 	
 	// Показать пароль
 	// Превращает поле пароля в текстовое поле и обратно
   this.showPass = function($obj){
-		// console.log('showPass', $obj)
+		console.log('showPass', $obj)
 		$obj.toggleClass('is-actived')
 		// Объект у которого изменяем тип с password на text
 		var inputObject = $obj.parent().find('#sites_client_pass');
@@ -479,7 +482,6 @@ function Password() {
 	}
 
 	this.registration = function($obj){
-		// console.log('registration1', $obj)
 		if($obj.prop('checked')) {
 			$obj.attr('checked', true);
 			$('.form__pass').slideDown();
@@ -1263,7 +1265,9 @@ function Product() {
 					keyboard: false,
 					baseClass: "fastOrder",
 					afterShow: function(){
-						password.onClick();
+						console.log('fast order');
+						password.onPass();
+						password.onReg();
 						password.capsWarning();
 						order.onInit();
 						order.onSelect();
@@ -2281,7 +2285,8 @@ function Cart() {
 				OrderAjaxBlock.html($(data).find('.order_fast__content').wrap('<div></div>').html()).show('slow');
 				$('html, body').delay(400).animate({scrollTop : globalOrder.offset().top - 96 - 48}, 800);
 				preload();
-				password.onClick();
+				password.onPass();
+				password.onReg();
 				password.capsWarning();
 				order.onInit();
 				order.onSelect();
@@ -2549,38 +2554,46 @@ function Order(){
 	
 	// Отправка купона при оформлении заказа
 	this.coupons = function(){
-		var submitBtn = $('.coupon__button');
+		var couponButton = $('.coupon__button');
 		var couponInput = $('.coupon__code');
 		var couponParent = couponInput.parent();
 		var resetBtn = $('.coupon__reset');
 		var totalCouponBlock = $('.cartTotal__item-coupons');
 		var totalDiscountBlock = $('.cartTotal__item-discount');
-
+	
 		// Отправка формы
-		submitBtn.off('click').on('click', function(){
+		couponButton.off('click').on('click', function(){
 			var url = '/order/stage/confirm';
 			var val = couponInput.val();
 			var oldVal = couponInput.attr('data-value');
 			couponInput.attr('data-value', val);
-
+	
+			// console.log('---', )
+			console.log('val', val)
+			console.log('oldVal', oldVal)
+	
 			// Если ничего не ввели
 			if(val == ''){
 				couponInput.addClass('error')
 				return false;
 			}
-
+	
 			// Если купон не изменился
 			if(val == oldVal){
 				couponInput.removeClass('focus');
+				notyStart('Вы уже вводили данный купон', 'warning')
 				return false;
 			}
-
-
+	
+	
 			// Получаем данные формы, которые будем отправлять на сервер
 			var formData = $('#order_form').serializeArray();
 			formData.push({name: 'ajax_q', value: 1});
 			formData.push({name: 'only_body', value: 1});
 			formData.push({name: 'form[coupon_code]', value: val});
+	
+			console.log('formData', formData)
+	
 			$.ajax({
 				type: "POST",
 				cache: false,
@@ -2601,19 +2614,31 @@ function Order(){
 					}else {
 						totalCouponBlock.hide();
 					}
-
+	
+					// console.log('data', data)
+					// console.log('$(data)', $(data))
+					// console.log('discountBlock', discountBlock)
+					// console.log('discountName', discountName)
+					// console.log('discountPrice', discountPrice)
+					// console.log('discountPercent', discountPercent)
+	
 					// Получаем новую итоговую стоимость заказа
 					var totalBlock = $(data).closest('#order_form').find('.order-total');
 					var totalSum = totalBlock.find('.cartSumNowWithDiscount').data('price');
 					var deliveryPrice = parseInt($('.cartSumDelivery:eq(0) .num').text());
 					var newTotalSum = totalSum + deliveryPrice;
-
+	
+					// console.log('totalBlock', totalBlock)
+					// console.log('totalSum', totalSum)
+					// console.log('deliveryPrice', deliveryPrice)
+					// console.log('newTotalSum', newTotalSum)
+	
 					// Записываем название и размер скидки по купону
 					totalCouponBlock.find('.cartTotal__label span').html(discountName);
 					totalCouponBlock.find('.cartSumCoupons').html(discountPrice);
 					totalCouponBlock.show();
 					totalDiscountBlock.hide();
-
+	
 					// Проверяем купон
 					var cartSumTotal = $('.cartSumTotal:eq(0) .num').text().toString().replace(/\s/g, '')
 					if (newTotalSum > cartSumTotal) {
@@ -2622,18 +2647,24 @@ function Order(){
 						totalCouponBlock.hide();
 						totalDiscountBlock.show();
 						$('.cartSumTotal .num').text(addSpaces(newTotalSum));
+						// console.log('Купон не применен')
+						notyStart('Купон не применен', 'warning')
 					} else if (newTotalSum == cartSumTotal) {
 						if (discountName) {
 							couponInput.addClass('focus');
 							couponParent.addClass('success');
 							totalCouponBlock.show();
+							// console.log('Скидка уже используется')
+							notyStart('Скидка уже используется', 'warning')
 						}else{
 							couponInput.val("").addClass('error');
 							couponParent.addClass('error');
 							totalCouponBlock.hide();
+							// console.log('Купон error')
+							notyStart('Купон не применен', 'warning')
 						}
 					} else {
-						couponInput.addClass('focus');
+						couponInput.removeClass('error').addClass('focus');
 						couponParent.removeClass('error').addClass('success');
 						totalCouponBlock.show();
 						// Обновляем значение итоговой стоимости
@@ -2643,8 +2674,10 @@ function Order(){
 						$('.cartSumTotalHide').attr('data-value', newTotalSum);
 						$('.cartSumTotalHide .num').text(addSpaces(newTotalSum));
 						$('.cartSumDiscount .num').text(addSpaces(totalSum));
+						// console.log('Купон успешно применен')
+						notyStart('Купон успешно применен!', 'success')
 					}
-
+	
 					// Тестирование. Проверка переменных
 					// console.log('---', )
 					// console.log('discountName', discountName)
@@ -2661,7 +2694,7 @@ function Order(){
 				}
 			});
 		});
-
+	
 		// Сброс
 		resetBtn.on('click', function(){
 			couponInput.val('').trigger('input');
@@ -2678,10 +2711,11 @@ function Order(){
 				$('.cartSumTotalHide').attr('data-value', newTotalSum);
 				$('.cartSumTotalHide .num').text(addSpaces(newTotalSum));
 				couponInput.val("").attr("placeholder", "Введите купон").removeClass('focus').removeClass('error');
+				couponInput.attr('data-value', '')
 				couponParent.removeClass('error').removeClass('success');
 			}, 500);
 		});
-
+	
 		// Отображение кнопки Сброс
 		couponInput.on('input',function(){
 			if($(this).val()) {
@@ -2690,7 +2724,7 @@ function Order(){
 				resetBtn.removeClass('focus')
 			}
 		});
-
+	
 	}
 
 	// Оформление заказа в выпадающей корзине
@@ -2712,7 +2746,8 @@ function Order(){
 					baseClass: "fastOrder",
 					afterShow: function(){
 						preload();
-						password.onClick();
+						password.onPass();
+						password.onReg();
 						password.capsWarning();
 						order.onInit();
 						order.onSelect();

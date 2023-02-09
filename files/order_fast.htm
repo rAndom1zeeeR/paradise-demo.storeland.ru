@@ -322,7 +322,7 @@
 					</div>
 					<div class="form__fields">
 						<div class="form__field fields__comment {% IF SETTINGS_ORDER_FIELDS_COMMENT=1 %}required{% ENDIF %}">
-							<label for="quickDeliveryComment" class="form__label {% IF SETTINGS_ORDER_FIELDS_COMMENT=1 %}required{% ENDIF %}"><span>Комментарий</span><em>*</em></label>
+							<!-- <label for="quickDeliveryComment" class="form__label {% IF SETTINGS_ORDER_FIELDS_COMMENT=1 %}required{% ENDIF %}"><span>Комментарий</span><em>*</em></label> -->
 							<textarea id="quickDeliveryComment" class="textarea" cols="100" rows="3" name="form[delivery][comment]" placeholder="Комментарий {% IF SETTINGS_ORDER_FIELDS_COMMENT=1 %}*{% ENDIF %}" {% IF SETTINGS_ORDER_FIELDS_COMMENT=1 %}required{% ENDIF %}>{ORDER_FORM_DELIVERY_COMMENT}</textarea>
 						</div>
 					</div>

@@ -1263,7 +1263,7 @@ main {margin: 40px 0;position: relative;display: block;}
 .cartTable__order {margin-top: 16px;}
 .cartTable__order .form__registration {margin: 0 8px;}
 .cartTable__order .form__label {display: none;}
-.order_fast__form [order] {margin-top: 32px;padding: 16px;width: 100%;background-color: var(--color-white);border-radius: 12px;}
+.order_fast__form [order] {margin-top: 16px;padding: 16px;width: 100%;background-color: var(--color-white);border-radius: 12px;}
 .order_fast__form [order]:first-child {margin-top: 0;}
 .order_fast__form label.error {display: none !important;}
 .order_fast__form select {height: 56px;border-radius: 12px;}
@@ -1282,6 +1282,7 @@ main {margin: 40px 0;position: relative;display: block;}
 .order-payment__item + .order-payment__item {margin-top: 12px;}
 .order-payment__desc {margin-top: 12px;width: 100%;}
 .coupon__code {border-radius: 56px;padding: 0 88px 0 32px;}
+.coupon__code.focus {border-color: var(--color-secondary);}
 .coupon__button {color: var(--color-white);background-color: var(--color-secondary);padding: 0;font-size: 24px;width: 56px;height: 56px;line-height: 64px;border-radius: 100%;position: absolute;top: 0;right: 0;text-align: center;}
 .coupon__button:hover {color: var(--color-white);background-color: var(--color-primary);}
 .coupon__button span {display: none;}
@@ -1293,6 +1294,7 @@ main {margin: 40px 0;position: relative;display: block;}
 	.form__fields-trio .form__field {width: 100%;}
 	.form__fields-trio .form__field + .form__field {margin-top: 16px;}
 	.form__fields-trio .deliveryConvenientDate {width: calc(50% - 16px);}
+	.order_fast__content {padding: 0 8px 8px 8px;}
 }
 
 
@@ -2106,8 +2108,9 @@ footer .container {position: relative;}
 .noty_bad .noty__title:before {content: '\e90b';background-color: var(--color-red);line-height: 24px;}
 .noty__title {border-bottom: 1px solid rgba(255, 255, 255, 0.2);padding-bottom: 16px;font-size: 18px;font-weight: bold;margin-bottom: 16px;width: 100%;position: relative;}
 .noty__title:before {margin-right: 8px;color: var(--color-white);font-size: 12px;width: 24px;height: 24px;line-height: 28px;border-radius: 100%;text-align: center;display: inline-block;font-family: 'icomoon';}
-.noty__message {line-height: 1.5;display: block;}
+.noty__message {line-height: 1.5;display: block;padding-right: 32px;}
 .noty__message a {color: var(--color-white);font-weight: bold;}
+.noty__content .noty__message {padding-right: 0;}
 .noty__buttons {margin-top: 16px;display: none;text-align: center;}
 .noty__addto.flex {display: none;}
 .noty__addto.flex:last-child {display: flex;}
