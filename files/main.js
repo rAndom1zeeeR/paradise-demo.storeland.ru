@@ -2184,11 +2184,11 @@ function Cart() {
 			var close = event.target.closest('.closeOrder')
 			var clear = event.target.closest('.cartTable__clear')
 			var make = event.target.closest('.confirmOrder')
+			var title = event.target.closest('.cartTable__title')
 
-			if (qtyPlus){
-				// quantity.plus(qtyInput)
-			} else if (qtyMinus){
-				// quantity.minus(qtyInput)
+			if (title){
+				$(title).toggleClass('is-actived')
+				$(title).next().slideToggle()
 			} else if (remove){
 				cart.removeItem($(event.target.parentElement))
 			} else if (start){
@@ -2279,7 +2279,7 @@ function Cart() {
 			data: quickFormData,
 			success: function(data) {
 				OrderAjaxBlock.html($(data).find('.order_fast__content').wrap('<div></div>').html()).show('slow');
-				$('html, body').delay(400).animate({scrollTop : globalOrder.offset().top + 96}, 800);
+				$('html, body').delay(400).animate({scrollTop : globalOrder.offset().top - 96 - 48}, 800);
 				preload();
 				password.onClick();
 				password.capsWarning();

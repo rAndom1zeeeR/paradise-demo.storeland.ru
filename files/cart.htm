@@ -9,7 +9,7 @@
 				<input type="hidden" name="fast_order" value="1" />
 				<input type="hidden" name="hash" value="{HASH}" />
 
-				<!--  -->
+				<!-- Навигация корзины -->
 				<div class="cartTable__buttons flex justify-between">
 					<div class="cartTable__count">
 						<span class="cart-count" data-cart-count="{CART_COUNT_TOTAL}">{CART_COUNT_TOTAL}</span>
@@ -24,6 +24,13 @@
 					</button>
 				</div>
 
+				<!-- Сворачивание активной корзины -->
+				<div class="cartTable__title flex justify-between ">
+					<span>Корзина</span>
+					<i class="icon-chevron_down"></i>
+				</div>
+
+				<!-- Список элементов -->
 				<div class="cartTable__items">
 					{% FOR cart_items %}
 					<div class="cartTable__item flex" data-id="{cart_items.GOODS_ID}" data-mod-id="{cart_items.GOODS_MOD_ID}">
@@ -106,6 +113,14 @@
 						
 					</div>
 					{% ENDFOR %}
+				</div>
+
+				<!-- Изменить заказ -->
+				<div class="cartTable__change flex justify-between ">
+					<a class="button-link button-more closeOrder" title="Отменить заказ">
+						<i class="icon-chevron_left"></i>
+						<span>Изменить заказ</span>
+					</a>
 				</div>
 
 			</form>
@@ -206,7 +221,7 @@
 					<span>Оформить </span><span>заказ</span>
 				</button>
 				<a class="button-link button-more closeOrder" title="Отменить заказ">
-					<span>Изменить </span><span>заказ</span>
+					<span>Отменить </span><span>заказ</span>
 				</a>
 				<div class="form__pp">
 					<span>Нажимая на кнопку &laquo;Оформить заказ&raquo;, Вы соглашаетесь с</span>
