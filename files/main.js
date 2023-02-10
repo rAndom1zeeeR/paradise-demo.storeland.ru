@@ -1592,6 +1592,11 @@ function Catalog() {
 
 	}
 
+	this.activeFilterCount = function(){
+		var count = $('.toolbar__form input[name^="form[filter][attr]"]').length;
+		$('.filters__result').attr('data-result', count).text(count)
+	}
+
 	console.timeEnd('Catalog test');
 
 }
@@ -2180,9 +2185,6 @@ function Cart() {
 			// console.log('event1', event)
 			// console.log('event1.target', event.target)
 			// Объявление переменных
-			var qtyPlus = event.target.closest('.qty__select_plus');
-			var qtyMinus = event.target.closest('.qty__select_minus');
-			var qtyInput = $(event.target.parentElement).parent().find('input');
 			var remove = event.target.closest('.cartTable__remove');
 			var start = event.target.closest('.startOrder')
 			var close = event.target.closest('.closeOrder')
@@ -2325,12 +2327,11 @@ function Order(){
 		// Валидация формы
 		$('.order_fast__form').validate({
 			validClass: "valid",
-			errorPlacement: function(error, element) {
-			}
+			errorPlacement: function(error, element) {}
 		});
 
 		// Выключение кнопки оформления заказа если не все поля заполнены
-		$(".order_fast__form [required]").blur(function(){
+		$(".order_fast__form [required]").on('input', function(){
 			if($('.order_fast__form').valid()) {
 				$('.total__buttons button').attr('title', 'Оформить заказ').removeClass('is-disabled');
 			} else {
@@ -3774,7 +3775,7 @@ $(document).ready(function(){
 
 	// Удаление классов загрузки для элементов страницы
 	$('.loading').addClass('loaded');
-	$('div, section, ul, a').removeClass('loading');
+	$('div, section, ul, a, body').removeClass('loading');
 
 	// Отправка формы по Ctrl+Enter
   $('form').bind('keypress', function(e){

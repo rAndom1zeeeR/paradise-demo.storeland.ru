@@ -666,7 +666,8 @@ main {margin: 40px 0;position: relative;display: block;}
 .filters__icon {color: var(--color-black);background-color: var(--color-lightgray);font-weight: bold;}
 .filters__icon:hover {color: var(--color-secondary);background-color: var(--color-tertiary);}
 .filters__icon i {font-size: 20px;}
-.filters__result {margin-left: 8px;color: var(--color-white);background-color: var(--color-red);border-radius: 100%;width: 24px;height: 24px;line-height: 24px; font-size: 12px;font-weight: bold;}
+.filters__result {margin-left: 8px;color: var(--color-white);background-color: var(--color-red);border-radius: 100%;width: 24px;height: 24px;line-height: 24px; font-size: 12px;font-weight: bold;transition: all 0.3s ease;}
+.loading .filters__result {opacity: 0;}
 .filters__clear {color: var(--color-gray);position: absolute;right: 0;font-size: 14px;display: none;}
 .filters__clear i {font-size: 10px;margin-right: 0;}
 .has-filters .filters__clear {display: flex;}

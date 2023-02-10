@@ -37,7 +37,7 @@
 	<link rel="stylesheet" type="text/css" href="{ASSETS_STYLES_PATH}min.css?design=THEMENAME" />
 	<link rel="stylesheet" type="text/css" href="{ASSETS_STYLES_PATH}main.css?design=THEMENAME" />
 	<!-- Подключаемые скрипты -->
-	<script type="text/javascript" src="{ASSETS_JS_PATH}jquery-3.6.0.min.js?design=THEMENAME"></script>
+	<script type="text/javascript" src="{ASSETS_JS_PATH}jquery.min.js?design=THEMENAME"></script>
 	<!-- Дополнительные скрипты -->
 	<script type="text/javascript">
 		// Если отключен JS
@@ -51,7 +51,7 @@
 	</script>
 </head>
 
-<body class="nojs
+<body class="nojs loading
 	{% IF index_page %}mod-index{% ENDIF %}
 	{% IF MOD_LNAME = user && ACT=favorites %}mod-favorites{% ENDIF %}
 	{% IF MOD_LNAME = cart %}mod-cart{% ENDIF %}
@@ -3583,6 +3583,7 @@
 	$(document).ready(function(){
 		catalog.onClick();
 		catalog.priceFilter();
+		catalog.activeFilterCount();
 	});
 	</script>
 	<script defer type="text/javascript" src="{ASSETS_JS_PATH}jqueryui.js?design=THEMENAME"></script>
