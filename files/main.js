@@ -2310,6 +2310,7 @@ function Cart() {
 		$('.qty__input').removeAttr('readonly');
 		$('.startOrder').removeClass('is-disabled');
 		$('.cartTable__order').hide('slow');
+		$('.cartTable__items').show()
 		$('html, body').delay(400).animate({scrollTop : jQuery('#main').offset().top}, 800);
 	}
 
@@ -3772,6 +3773,7 @@ $(document).ready(function(){
 	appendSearch()
 	fixedMenu()
 	quantity.onAddto()
+	catalogItems.hover()
 
 	// Удаление классов загрузки для элементов страницы
 	$('.loading').addClass('loaded');
@@ -3830,5 +3832,59 @@ $(window).resize(function(){
   }
   mainnav('header .mainnav', '1', 991);
 });
+
+
+function CatalogItems(){
+	this.hover = function(){
+		console.log('hover')
+		const items = document.querySelectorAll('.catalog__items-main .catalog__item')
+		const subItems = document.querySelectorAll('.catalog__items-sub .catalog__item')
+		
+		items.forEach((element) => {
+			element.addEventListener('mouseenter', () => {
+				catalogItems.onHover(element)
+			})
+		})
+
+		// subItems.forEach((element) => {
+		// 	element.classList.remove('is-show')
+		// })
+
+	}
+
+	this.onHover = function(element){
+		// console.log('element', element)
+		// console.log('data-id', element.getAttribute('data-id'))
+		const id = element.getAttribute('data-id')
+		const parent = element.matches('.parent')
+		const subItems = document.querySelectorAll('.catalog__items-sub .catalog__item')
+		if (parent) {
+			console.log('parent', parent)
+			// element.classList.add('is-show')
+			// $('.catalog__item').removeClass('is-show')
+			subItems.forEach((element) => element.classList.remove('is-show'))
+			$('.catalog__item[data-id="'+ id +'"]').addClass('is-show')
+			
+			// subItems.forEach((element) => {
+			// 	element.classList.remove('is-show')
+			// 	console.log('attr', element.hasAttribute('data-id'))
+			// 	if (element.matches('[data-id="'+ id +'"]')) {
+			// 		console.log('id=id', this);
+			// 	}
+			// })
+		} else {
+			// $('.catalog__item').removeClass('is-show')
+			// element.classList.remove('is-show')
+			subItems.forEach((element) => element.classList.remove('is-show'))
+			return false
+		}
+	}
+
+}
+
+// Объявляем конструктор Количества
+var catalogItems = new CatalogItems();
+
+
 
 console.timeEnd('time test');

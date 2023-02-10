@@ -194,17 +194,33 @@
 								<span>Каталог</span>
 							</a>
 							<div class="header-catalog__content dropdown__content">
-								<ul class="catalog__items unstyled">
-									{% FOR catalog_full %}
-									{% IF catalog_full.FIRST %}{% IFNOT catalog_full.LEVEL = 0 %}<ul data-level="{catalog_full.LEVEL}" class="catalog__sub unstyled">{% ENDIF %}{% ENDIF %}
-									<li class="catalog__item {% IF catalog_full.ISSET_VISIBLE_SUB %}parent{% ENDIF %} {% IF catalog_full.CURRENT_PARENT %}is-opened{% ENDIF %}" {% IF catalog_full.HIDE %}style="display:none;"{% ENDIF %} data-level="{catalog_full.LEVEL}">
-										<a class="catalog__link flex {% IF catalog_full.CURRENT %}is-opened{% ENDIF %}" href="{catalog_full.URL}" data-level="{catalog_full.LEVEL}">
-											<span>{catalog_full.NAME}</span>
-											{% IF catalog_full.ISSET_VISIBLE_SUB %}<i class="icon-chevron_right"></i>{% ENDIF %}
-										</a>
-										{% IF catalog_full.ISSET_SUB=0 %}</li>{% ENDIF %}
-									{% IF catalog_full.LAST %}{% FOR out %}</li> {% IFNOT catalog_full.out.LAST %}</ul>{% ENDIF %}{% ENDFOR %}{% ENDIF %}
-								{% ENDFOR %}
+								<div class="container">
+									<div class="header-catalog__inner flex-start">
+										<ul class="catalog__items catalog__items-main unstyled">
+											{% FOR catalog_full %}
+												{% IF catalog_full.LEVEL > 0 %}{continue}{% ENDIF %}
+												<li class="catalog__item {% IF catalog_full.ISSET_VISIBLE_SUB %}parent{% ENDIF %} {% IF catalog_full.CURRENT_PARENT %}is-opened{% ENDIF %}" data-level="{catalog_full.LEVEL}" data-id="{catalog_full.ID}" {% IF catalog_full.HIDE %}style="display:none;"{% ENDIF %}>
+													<a class="catalog__link flex {% IF catalog_full.CURRENT %}is-opened{% ENDIF %}" href="{catalog_full.URL}" data-level="{catalog_full.LEVEL}">
+														<span>{catalog_full.NAME}</span>
+														{% IF catalog_full.ISSET_VISIBLE_SUB %}<i class="icon-chevron_right"></i>{% ENDIF %}
+													</a>
+												</li>
+											{% ENDFOR %}
+										</ul>
+
+										<ul class="catalog__items catalog__items-sub unstyled">
+											{% FOR catalog_full %}
+											{% IF catalog_full.FIRST %}{% IFNOT catalog_full.LEVEL = 0 %}<ul data-level="{catalog_full.LEVEL}" class="catalog__sub unstyled">{% ENDIF %}{% ENDIF %}
+											<li class="catalog__item {% IF catalog_full.ISSET_VISIBLE_SUB %}parent{% ENDIF %} {% IF catalog_full.CURRENT_PARENT %}is-opened{% ENDIF %}" data-level="{catalog_full.LEVEL}" data-id="{catalog_full.ID}" {% IF catalog_full.HIDE %}style="display:none;"{% ENDIF %}>
+												<a class="catalog__link flex {% IF catalog_full.CURRENT %}is-opened{% ENDIF %}" href="{catalog_full.URL}" data-level="{catalog_full.LEVEL}">
+													<span>{catalog_full.NAME}</span>
+													{% IF catalog_full.ISSET_VISIBLE_SUB %}<i class="icon-chevron_right"></i>{% ENDIF %}
+												</a>
+												{% IF catalog_full.ISSET_SUB=0 %}</li>{% ENDIF %}
+											{% IF catalog_full.LAST %}{% FOR out %}</li> {% IFNOT catalog_full.out.LAST %}</ul>{% ENDIF %}{% ENDFOR %}{% ENDIF %}
+										{% ENDFOR %}
+									</div>
+								</div>
 							</div>
 						</div>
 
