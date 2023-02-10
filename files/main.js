@@ -1587,14 +1587,15 @@ function Catalog() {
 			$('.sidebar__block-filters').addClass('has-filters');
 		}else{
 			$('.filters-price').removeClass('has-filters');
-			// $('.sidebar__block-filters').removeClass('has-filters');
 		}
 
 	}
 
 	this.activeFilterCount = function(){
 		var count = $('.toolbar__form input[name^="form[filter][attr]"]').length;
-		$('.filters__result').attr('data-result', count).text(count)
+		var result = $('.filters__result')
+		result.attr('data-result', count).text(count)
+		count == 0 ? result.addClass('is-hide') : result.removeClass('is-hide')
 	}
 
 	console.timeEnd('Catalog test');
@@ -1716,10 +1717,11 @@ function Goods() {
 	this.scrollContent = function($content, $obj){
 		console.log('$content', $content)
 		console.log('$obj', $obj)
-		var scrollTop = $content.offset().top + $content.height() - $(window).height();
+		console.log('$obj top', $content.offset().top)
+		// var scrollTop = $content.offset().top + $content.height() - $(window).height();
 
 		if ($obj.hasClass('is-actived')) {
-			$('html, body').animate({scrollTop : scrollTop + 16}, 500);
+			$('html, body').animate({scrollTop : $content.offset().top - 96}, 500);
 		} else {
 			$('html, body').animate({scrollTop : $content.offset().top - 96}, 500);
 		}
