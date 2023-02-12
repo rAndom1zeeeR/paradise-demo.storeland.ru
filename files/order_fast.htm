@@ -10,6 +10,30 @@
 		{% ELSE %}
 		<div class="order_fast__content">
 			<form class="order_fast__form" action="{ORDER_STAGE_CONFIRM_WITHOUT_DOMAIN_URL}" method="post">
+
+				<!-- Корзина: Минимальная сумма заказа -->
+				{% IF SETTINGS_STORE_ORDER_MIN_ORDER_PRICE %}
+				<div class="cartTotal__min flex is-hide" order="0">
+
+					<div class="cartTotal__min-icon">
+						<i class="icon-info"></i>
+					</div>
+
+					<div class="cartTotal__min-price {CURRENCY_CHAR_CODE}" data-price="{SETTINGS_STORE_ORDER_MIN_ORDER_PRICE}">{SETTINGS_STORE_ORDER_MIN_ORDER_PRICE | money_format}</div>
+
+					<div class="cartTotal__min-title" data-price="{% IF SETTINGS_STORE_ORDER_MIN_PRICE_WITHOUT_DELIVERY %}{CART_SUM_NOW_WITH_DISCOUNT}{% ELSE %}{CART_SUM_NOW_WITH_DELIVERY_AND_DISCOUNT}{% ENDIF %}">до мин. суммы заказа</div>
+
+					<div class="cartTotal__min-status flex justify-between">
+						<div class="cartTotal__min-bg">
+							<div class="cartTotal__min-bar"></div>
+						</div>
+						<div class="cartTotal__min-min {CURRENCY_CHAR_CODE}"><span class="num">0</span></div>
+						<div class="cartTotal__min-max {CURRENCY_CHAR_CODE}">{SETTINGS_STORE_ORDER_MIN_ORDER_PRICE | money_format}</div>
+					</div>
+
+				</div>
+				{% ENDIF %}
+
 				<!-- Способ доставки-->
 				<div class="order_fast__block delivery" order="1">
 					<div class="block__title">
@@ -337,7 +361,7 @@
 					</div>
 					<div class="form__fields coupon__order">
 						<input type="hidden" name="oldPromoDiscount" value="0">
-						<input type="hidden" name="orderSumDefaul" value="{CART_SUM_NOW}">
+						<input class="orderSumDefaul" type="hidden" name="orderSumDefaul" value="{CART_SUM_NOW}">
 						<input class="coupon__code form__input" type="text" name="form[coupon_code]" value="{ORDER_FORM_COUPON_CODE}" placeholder="Введите код"/>
 						<a class="coupon__button" title="Применить" href="javascript:void(0)">
 							<i class="icon-check"></i>
@@ -372,7 +396,9 @@
 <!-- Блок для обновления данных корзины. Не виден пользователю -->
 <div style="display:none;" id="newCartWord">товар{CART_COUNT_TOTAL | gen_word_end("","а","ов")}</div>
 <div style="display:none;" id="newCartSumNow">{CART_SUM_NOW}</div>
+<div style="display:none;" id="newCartSumNowFormated">{CART_SUM_NOW | money_format}</div>
 <div style="display:none;" id="newCartSumOld">{CART_SUM_OLD}</div>
+<div style="display:none;" id="newCartSumOldFormated">{CART_SUM_OLD | money_format}</div>
 <div style="display:none;" id="newCartCount">{CART_COUNT_TOTAL}</div>
 <div style="display:none;" id="newCartData">
 	<div class="addto__title">
@@ -442,15 +468,30 @@
 		</form>
 	</div>
 
-	<div class="addto__total {CURRENCY_CHAR_CODE} flex justify-between">
-		<div class="addto__total_block">
+	<div class="addto__total {CURRENCY_CHAR_CODE}">
+		<!-- Скидки, действующие на заказ -->
+		<div class="addto__total-block">
+			{% FOR cart_discount %}
+				{% IF cart_discount.DISCOUNT_IS_ENABLED %}
+				<div class="addto__discount flex justify-between">
+					<div class="cartTotal__label">
+						<span>{cart_discount.DISCOUNT_NAME}:</span>
+					</div>
+					<div class="cartTotal__price {CURRENCY_CHAR_CODE}">
+						<span class="discountValue" data-value="{cart_discount.DISCOUNT_VALUE}">{cart_discount.DISCOUNT_VALUE}</span>
+						{% IF cart_discount.IS_PERCENT %}<span class="percent">%</span>{% ELSE %}<span class="num"></span>{% ENDIF %}
+					</div>
+				</div>
+				{% ENDIF %}
+			{% ENDFOR %}
+		</div>
+
+		<!-- Итого -->
+		<div class="addto__total-block flex justify-between">
 			<span class="addto__total_label">Итого:</span>
-			<span class="price__now cartSumNow" data-price="{CART_SUM_NOW}">{CART_SUM_NOW | money_format}</span>
+			<span class="price__now cartSumNow" data-price="{CART_SUM_NOW_WITH_DELIVERY_AND_DISCOUNT}">{CART_SUM_NOW_WITH_DELIVERY_AND_DISCOUNT | money_format}</span>
 		</div>
-		<div class="addto__total_block">
-			<span class="addto__total_label">Скидка:</span>
-			<span class="price__now cartSumOld" data-price="{CART_SUM_OLD}">{CART_SUM_OLD | money_format}</span>
-		</div>
+
 	</div>
 
 	<div class="addto__empty">В корзине пока ничего нет</div>
@@ -463,11 +504,10 @@
 <!-- Обновление данных корзины -->
 <script>
 $('.cart-wordend').html($('#newCartWord').html());
-$('.cartSumNow').attr('data-price', $('#newCartSumNow').html()).find('.num').html(addSpaces($('#newCartSumNow').html()));
-$('.cartSumOld').attr('data-price', $('#newCartSumOld').html()).find('.num').html(addSpaces($('#newCartSumOld').html()));
+$('.cartSumNow').attr('data-price', $('#newCartSumNow').html()).html(addSpaces($('#newCartSumNowFormated').html()));
+$('.cartSumOld').attr('data-price', $('#newCartSumOld').html()).html(addSpaces($('#newCartSumOldFormated').html()));
 $('.cart-count').attr('data-cart-count', $('#newCartCount').html()).html($('#newCartCount').html());
 $('.addto__cart').html($('#newCartData').html());
 // Обновление скидки
-// cartSaleSum();
 quantity.onAddto();
 </script>

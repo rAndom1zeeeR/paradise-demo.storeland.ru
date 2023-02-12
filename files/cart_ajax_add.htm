@@ -118,15 +118,30 @@
 		</form>
 	</div>
 
-	<div class="addto__total {CURRENCY_CHAR_CODE} flex justify-between">
-		<div class="addto__total_block">
+	<div class="addto__total {CURRENCY_CHAR_CODE}">
+		<!-- Скидки, действующие на заказ -->
+		<div class="addto__total-block">
+			{% FOR cart_discount %}
+				{% IF cart_discount.DISCOUNT_IS_ENABLED %}
+				<div class="addto__discount flex justify-between">
+					<div class="cartTotal__label">
+						<span>{cart_discount.DISCOUNT_NAME}:</span>
+					</div>
+					<div class="cartTotal__price {CURRENCY_CHAR_CODE}">
+						<span class="discountValue" data-value="{cart_discount.DISCOUNT_VALUE}">{cart_discount.DISCOUNT_VALUE}</span>
+						{% IF cart_discount.IS_PERCENT %}<span class="percent">%</span>{% ELSE %}<span class="num"></span>{% ENDIF %}
+					</div>
+				</div>
+				{% ENDIF %}
+			{% ENDFOR %}
+		</div>
+
+		<!-- Итого -->
+		<div class="addto__total-block flex justify-between">
 			<span class="addto__total_label">Итого:</span>
-			<span class="price__now cartSumNow" data-price="{CART_SUM_NOW}">{CART_SUM_NOW | money_format}</span>
+			<span class="price__now cartSumNow" data-price="{CART_SUM_NOW_WITH_DELIVERY_AND_DISCOUNT}">{CART_SUM_NOW_WITH_DELIVERY_AND_DISCOUNT | money_format}</span>
 		</div>
-		<div class="addto__total_block">
-			<span class="addto__total_label">Скидка:</span>
-			<span class="price__now cartSumOld" data-price="{CART_SUM_OLD}">{CART_SUM_OLD | money_format}</span>
-		</div>
+
 	</div>
 
 	<div class="addto__empty">В корзине пока ничего нет</div>
@@ -144,6 +159,5 @@ $('.cartSumOld').attr('data-price', $('#newCartSumOld').html()).html(addSpaces($
 $('.cart-count').attr('data-cart-count', $('#newCartCount').html()).html($('#newCartCount').html());
 $('.addto__cart').html($('#newCartData').html());
 // Обновление скидки
-// cartSaleSum();
 quantity.onAddto();
 </script>
