@@ -199,7 +199,7 @@
 										<ul class="catalog__items catalog__items-main unstyled">
 											{% FOR catalog_full %}
 												{% IF catalog_full.LEVEL > 0 %}{continue}{% ENDIF %}
-												<li class="catalog__item {% IF catalog_full.ISSET_VISIBLE_SUB %}parent{% ENDIF %} {% IF catalog_full.CURRENT_PARENT %}is-opened{% ENDIF %}" data-level="{catalog_full.LEVEL}" data-id="{catalog_full.ID}" {% IF catalog_full.HIDE %}style="display:none;"{% ENDIF %}>
+												<li class="catalog__item {% IF catalog_full.ISSET_VISIBLE_SUB %}parent{% ENDIF %} {% IF catalog_full.CURRENT_PARENT || catalog_full.CURRENT %}is-opened{% ENDIF %}" data-level="{catalog_full.LEVEL}" data-id="{catalog_full.ID}" {% IF catalog_full.HIDE %}style="display:none;"{% ENDIF %}>
 													<a class="catalog__link flex {% IF catalog_full.CURRENT %}is-opened{% ENDIF %}" href="{catalog_full.URL}" data-level="{catalog_full.LEVEL}">
 														<span>{catalog_full.NAME}</span>
 														{% IF catalog_full.ISSET_VISIBLE_SUB %}<i class="icon-chevron_right"></i>{% ENDIF %}
@@ -529,7 +529,7 @@
 											<span class="addto__total_label">Скидка:</span>
 											<span class="addto__total_discount">
 												<span class="discountValue" data-value="{cart_discount.DISCOUNT_VALUE}">{cart_discount.DISCOUNT_VALUE}</span>
-						{% IF cart_discount.IS_PERCENT %}<span class="percent">%</span>{% ELSE %}<span class="num"></span>{% ENDIF %}
+												{% IF cart_discount.IS_PERCENT %}<span class="percent">%</span>{% ELSE %}<span class="num"></span>{% ENDIF %}
 											</span>
 										</div>
 										{% ENDIF %}
@@ -975,9 +975,10 @@
 													<select class="product__props-select select" name="form[properties][]">
 														{% FOR mods %}
 															{% FOR goods_mod_distinctive_properties %}
+															{% IF index_page_sale_goods.mods.goods_mod_distinctive_properties.index > 1 %}{continue}{% ENDIF %}
 															<option value="{index_page_sale_goods.mods.ID}">{index_page_sale_goods.mods.goods_mod_distinctive_properties.VALUE}</option>
 															{% ENDFOR goods_mod_distinctive_properties %}
-														{% ENDFOR values %}
+														{% ENDFOR mods %}
 													</select>
 												</div>
 												{% ENDIF COUNT_MODIFICATION %}
@@ -1325,9 +1326,10 @@
 											<select class="product__props-select select" name="form[properties][]">
 												{% FOR mods %}
 													{% FOR goods_mod_distinctive_properties %}
+													{% IF index_page_favorites_goods.mods.goods_mod_distinctive_properties.index > 1 %}{continue}{% ENDIF %}
 													<option value="{index_page_favorites_goods.mods.ID}">{index_page_favorites_goods.mods.goods_mod_distinctive_properties.VALUE}</option>
 													{% ENDFOR goods_mod_distinctive_properties %}
-												{% ENDFOR values %}
+												{% ENDFOR mods %}
 											</select>
 										</div>
 										{% ENDIF COUNT_MODIFICATION %}
@@ -1689,9 +1691,10 @@
 											<select class="product__props-select select" name="form[properties][]">
 												{% FOR mods %}
 													{% FOR goods_mod_distinctive_properties %}
+													{% IF index_page_new_goods.mods.goods_mod_distinctive_properties.index > 1 %}{continue}{% ENDIF %}
 													<option value="{index_page_new_goods.mods.ID}">{index_page_new_goods.mods.goods_mod_distinctive_properties.VALUE}</option>
 													{% ENDFOR goods_mod_distinctive_properties %}
-												{% ENDFOR values %}
+												{% ENDFOR mods %}
 											</select>
 										</div>
 										{% ENDIF COUNT_MODIFICATION %}
@@ -2008,9 +2011,10 @@
 											<select class="product__props-select select" name="form[properties][]">
 												{% FOR mods %}
 													{% FOR goods_mod_distinctive_properties %}
+													{% IF index_page_goods.mods.goods_mod_distinctive_properties.index > 1 %}{continue}{% ENDIF %}
 													<option value="{index_page_goods.mods.ID}">{index_page_goods.mods.goods_mod_distinctive_properties.VALUE}</option>
 													{% ENDFOR goods_mod_distinctive_properties %}
-												{% ENDFOR values %}
+												{% ENDFOR mods %}
 											</select>
 										</div>
 										{% ENDIF COUNT_MODIFICATION %}
@@ -2181,7 +2185,7 @@
 										{% IFNOT catalog_full.LEVEL = 0 && catalog_full.FIRST %}
 										<ul class="catalog__sub" data-level="{catalog_full.LEVEL}">
 										{% ENDIF %}
-											<li class="catalog__item {% IF catalog_full.ISSET_VISIBLE_SUB %}parent{% ENDIF %} {% IF catalog_full.CURRENT_PARENT %}is-opened{% ENDIF %}" data-level="{catalog_full.LEVEL}" {% IF catalog_full.HIDE %}style="display: none;"{% ENDIF %}>
+											<li class="catalog__item {% IF catalog_full.ISSET_VISIBLE_SUB %}parent{% ENDIF %} {% IF catalog_full.CURRENT || catalog_full.CURRENT_PARENT %}is-opened{% ENDIF %}" data-level="{catalog_full.LEVEL}" {% IF catalog_full.HIDE %}style="display: none;"{% ENDIF %}>
 												<a class="catalog__link flex {% IF catalog_full.CURRENT %}is-opened{% ENDIF %}" href="{catalog_full.URL}" data-level="{catalog_full.LEVEL}">
 													<span class="catalog__name">{catalog_full.NAME}</span>
 													{% IF catalog_full.ISSET_VISIBLE_SUB %}<span class="catalog__open"></span>{% ENDIF %}
@@ -2842,10 +2846,11 @@
 											<div class="product__props selectBox">
 												<select class="product__props-select select" name="form[properties][]">
 													{% FOR goods_mod_list %}
+														{% IF recently_viewed_goods.goods_mod_list.index > 1 %}{continue}{% ENDIF %}
 														{% FOR goods_mod_distinctive_properties %}
 														<option value="{recently_viewed_goods.goods_mod_list.ID}">{recently_viewed_goods.goods_mod_list.goods_mod_distinctive_properties.VALUE}</option>
 														{% ENDFOR goods_mod_distinctive_properties %}
-													{% ENDFOR values %}
+													{% ENDFOR goods_mod_list %}
 												</select>
 											</div>
 											{% ENDIF COUNT_MODIFICATION %}
@@ -3182,7 +3187,7 @@
 							{% IFNOT catalog_full.LEVEL = 0 && catalog_full.FIRST %}
 							<ul class="catalog__sub" data-level="{catalog_full.LEVEL}">
 							{% ENDIF %}
-								<li class="catalog__item {% IF catalog_full.ISSET_VISIBLE_SUB %}parent{% ENDIF %} {% IF catalog_full.CURRENT_PARENT %}is-opened{% ENDIF %}" data-level="{catalog_full.LEVEL}" {% IF catalog_full.HIDE %}style="display: none;"{% ENDIF %}>
+								<li class="catalog__item {% IF catalog_full.ISSET_VISIBLE_SUB %}parent{% ENDIF %} {% IF catalog_full.CURRENT_PARENT || catalog_full.CURRENT %}is-opened{% ENDIF %}" data-level="{catalog_full.LEVEL}" {% IF catalog_full.HIDE %}style="display: none;"{% ENDIF %}>
 									<a class="catalog__link flex {% IF catalog_full.CURRENT %}is-opened{% ENDIF %}" href="{catalog_full.URL}" data-level="{catalog_full.LEVEL}">
 										<span class="catalog__name">{catalog_full.NAME}</span>
 										{% IF catalog_full.ISSET_VISIBLE_SUB %}<span class="catalog__open"></span>{% ENDIF %}
@@ -3207,7 +3212,7 @@
 							{% FOR header %}
 								{% FOR links %}
 								<li>
-									<a class="catalog__link flex {% IF menu.header.links.SELECTED %}is-actived{%ENDIF%} {% IF menu.header.links.NAME = Каталог %}is-catalog{% ENDIF %}" href="{menu.header.links.URL}" title="{% IF menu.header.links.TITLE %}{menu.header.links.TITLE}{% ELSE%}{menu.header.links.NAME}{% ENDIF %}">
+									<a class="catalog__link flex {% IF menu.header.links.SELECTED %}is-actived{% ENDIF %} {% IF menu.header.links.NAME = Акции %}mainnav__link-discount{% ENDIF %}" href="{menu.header.links.URL}" title="{% IF menu.header.links.TITLE %}{menu.header.links.TITLE}{% ELSE%}{menu.header.links.NAME}{% ENDIF %}">
 										<span>{menu.header.links.NAME}</span>
 									</a>
 								</li>
@@ -3306,7 +3311,7 @@
 							<i class="icon-cart"></i>
 						</div>
 						<div class="adaprive__navigate-title">
-							<span class="cartSumNow {CURRENCY_CHAR_CODE}" data-price="{CART_SUM_NOW}">{CART_SUM_NOW | money_format}</span>
+							<span class="cartSumNow {CURRENCY_CHAR_CODE}" data-price="{CART_SUM_NOW_WITH_DISCOUNT}">{CART_SUM_NOW_WITH_DISCOUNT | money_format}</span>
 							<span class="adaprive__navigate-label">Корзина</span>
 						</div>
 					</a>
@@ -3529,7 +3534,6 @@
 			product.quickViewMod();
 			product.onCart();
 			product.onNotify();
-			// quantity.onClick();
 		});
 	</script>
 	{% ENDIF %}
@@ -3581,10 +3585,10 @@
 	<script async type="text/javascript">
 		$(document).ready(function(){
 			goods.goodsModification();
-			quantity.onGoods();
 			goods.onInit();
 			goods.onClick();
 			goods.swiperTumbs();
+			quantity.onGoods();
 			counterDate();
 			swiperSlider('#related-views');
 			swiperSlider('#related-goods');
@@ -3600,8 +3604,8 @@
 	// Загрузка основных функций шаблона
 	$(document).ready(function(){
 		cart.onClick();
-		quantity.onCart();
 		cart.minSum();
+		quantity.onCart();
 	});
 	</script>
 	<script defer type="text/javascript" src="{ASSETS_JS_PATH}air-datepicker.js?design=THEMENAME"></script>

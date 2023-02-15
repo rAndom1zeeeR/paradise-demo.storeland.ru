@@ -191,6 +191,7 @@ h6 {font-size: 14px;}
 .has-items .addto__buttons {display: flex;}
 .has-items .addto__total {display: flex;}
 .addto__total-block {max-width: 50%;}
+.addto__total_label {margin-right: 4px;}
 
 
 

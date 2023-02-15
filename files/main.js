@@ -332,8 +332,8 @@ function Quantity() {
 			quantity.updAddtoSum(newSum);
 			console.log('updAddto newSum', newSum)
 			// Обновить скидку
-			const newDiscount = doc.querySelector('.cartTotal__item-discount .cartTotal__price').innerHTML;
-			quantity.updAddtoDiscount(newDiscount);
+			const newDiscount = doc.querySelector('.cartTotal__item-discount .cartTotal__price');
+			newDiscount ? quantity.updAddtoDiscount(newDiscount.innerHTML) : false
 		})
 		.catch((error) => console.error(error));
 
@@ -1209,7 +1209,6 @@ function Product() {
 				product.addCart();
 				product.addTo();
 				goods.goodsModification($('.fancybox-content.productViewBlock'));
-				// quantity.goodsQty($('.fancybox-content.productViewBlock'));
 				goods.onClick();
 				quantity.onGoods();
 			}
@@ -1224,7 +1223,6 @@ function Product() {
 				product.addCart();
 				product.addTo();
 				goods.goodsModification($('.fancybox-content.productViewBlock'));
-				// quantity.goodsQty($('.fancybox-content.productViewBlock'));
 				goods.onClick();
 				quantity.onGoods();
 			});
@@ -1800,10 +1798,7 @@ function Goods() {
 			var opinionForm = event.target.closest('.opinion__form button');
 			var opinionCaptcha = event.target.closest('.captcha__refresh');
 			var opinionMore = event.target.closest('.opinion__more');
-			var qtyPlus = event.target.closest('.qty__select_plus');
-			var qtyMinus = event.target.closest('.qty__select_minus');
 			// var modValue = event.target.closest('.modifications__value');
-			var qtyInput = $(event.target.parentElement).parent().find('.qty__input');
 			var featuresMore = event.target.closest('.features__more');
 			var descriptionMore = event.target.closest('.productView__description-more');
 			var shortDescriptionMore = event.target.closest('.productView__text-more');
@@ -1908,14 +1903,6 @@ function Goods() {
 				var obj = $(event.target.offsetParent)
 				goods.opinionNavigate(obj, 'bad')
 
-			}
-			// Функция Плюс + для товара
-			else if (qtyPlus){
-				// quantity.plus(qtyInput)
-			}
-			// Функция Минус - для товара
-			else if (qtyMinus){
-				// quantity.minus(qtyInput)
 			}
 			// Новый модификации
 			// else if (modValue){
@@ -2253,8 +2240,6 @@ function Cart() {
 				cache:false,
 				success:function(data){
 					$('.page-cart').html($(data).find('.page-cart').html());
-					// Кол-во в корзине
-					// quantity.cartQty();
 					// Вызов функции быстрого заказа в корзине
 					cart.minSum();
 				}
@@ -2276,10 +2261,10 @@ function Cart() {
 				var bar = Math.floor(totalSum / minPrice * 100)
 				$('.cartTotal__min-bar').css({'width': bar+'%'})
 				$('.cartTotal__min-price').find('.num').text(addSpaces(diff))
-				$('.total__buttons button').attr('disabled', true).addClass('is-disabled');
+				$('.total__buttons button').not('.confirmOrder').attr('disabled', true).addClass('is-disabled');
 				$('.cartTotal__min').removeClass('is-hide');
 			}else{
-				$('.total__buttons button').attr('disabled', false).removeClass('is-disabled');
+				$('.total__buttons button').not('.confirmOrder').attr('disabled', false).removeClass('is-disabled');
 				$('.cartTotal__min').addClass('is-hide');
 			}
 		}
@@ -2356,19 +2341,23 @@ function Order(){
 		// Выключение кнопки оформления заказа если не все поля заполнены
 		$(".order_fast__form [required]").on('input', function(){
 			if($('.order_fast__form').valid()) {
+				console.log('true')
 				$('.total__buttons button').attr('title', 'Оформить заказ').removeClass('is-disabled');
 			} else {
+				console.log('false')
 				$('.total__buttons button').attr('title', 'Заполните все поля').addClass('is-disabled');
 			}
 		});
 
 		// Проверка обязательных полей
-		if($('.order_fast__form').valid()) {
-			$('.total__buttons button').attr('title', 'Оформить заказ').removeClass('is-disabled');
-		}else{
-			$('.total__buttons button').attr('title', 'Заполните все поля').addClass('is-disabled');
-			$(".order_fast__form input, .order_fast__form textarea, .order_fast__form select").removeClass('error');
-		}
+		setTimeout(() => {
+			if($('.order_fast__form').valid()) {
+				$('.total__buttons button').attr('title', 'Оформить заказ').removeClass('is-disabled');
+			}else{
+				$('.total__buttons button').attr('title', 'Заполните все поля').addClass('is-disabled');
+				$(".order_fast__form input, .order_fast__form textarea, .order_fast__form select").removeClass('error');
+			}
+		}, 100);
 
 	}
 
@@ -3176,7 +3165,7 @@ function openMenu() {
 	$('.header-catalog__icon, .adaprive__navigate-catalog').on('click',function(event){
 		event.preventDefault();
 
-		if(getClientWidth() > 1024) {
+		if(getClientWidth() > 1023) {
 			window.location = this.href;
 			return false
 		}
@@ -3859,7 +3848,6 @@ function CatalogItems(){
 	this.hover = function(){
 		console.log('hover')
 		const items = document.querySelectorAll('.catalog__items-main .catalog__item')
-		const subItems = document.querySelectorAll('.catalog__items-sub .catalog__item')
 		
 		items.forEach((element) => {
 			element.addEventListener('mouseenter', () => {
@@ -3896,6 +3884,7 @@ function CatalogItems(){
 		} else {
 			// $('.catalog__item').removeClass('is-show')
 			// element.classList.remove('is-show')
+			const subItems = document.querySelectorAll('.catalog__items-sub .catalog__item')
 			subItems.forEach((element) => element.classList.remove('is-show'))
 			return false
 		}

@@ -236,9 +236,12 @@
 								{% IF favorites_goods.COUNT_MODIFICATION > 1 %}
 								<div class="product__props selectBox">
 									<select class="product__props-select select" name="form[properties][]">
-										{% FOR goods_attr_list %}
-											<option value="{favorites_goods.goods_attr_list.ID}">{favorites_goods.goods_attr_list.VALUE}</option>
-										{% ENDFOR values %}
+										{% FOR goods_mod_list %}
+											{% IF favorites_goods.goods_mod_list.index > 1 %}{continue}{% ENDIF %}
+											{% FOR goods_mod_property_list %}
+											<option value="{favorites_goods.goods_mod_list.ID}">{favorites_goods.goods_mod_list.goods_mod_property_list.VALUE}</option>
+											{% ENDFOR goods_mod_property_list %}
+										{% ENDFOR goods_mod_list %}
 									</select>
 								</div>
 								{% ENDIF COUNT_MODIFICATION %}

@@ -287,10 +287,11 @@
 							<div class="product__props selectBox">
 								<select class="product__props-select select" name="form[properties][]">
 									{% FOR mods %}
+										{% IF goods.mods.index > 1 %}{continue}{% ENDIF %}
 										{% FOR goods_mod_distinctive_properties %}
 										<option value="{goods.mods.ID}">{goods.mods.goods_mod_distinctive_properties.VALUE}</option>
 										{% ENDFOR goods_mod_distinctive_properties %}
-									{% ENDFOR values %}
+									{% ENDFOR mods %}
 								</select>
 							</div>
 							{% ENDIF COUNT_MODIFICATION %}
@@ -575,10 +576,11 @@
 								<div class="product__props selectBox">
 									<select class="product__props-select select" name="form[properties][]">
 										{% FOR mods %}
+											{% IF goods.mods.index > 1 %}{continue}{% ENDIF %}
 											{% FOR goods_mod_distinctive_properties %}
 											<option value="{goods.mods.ID}">{goods.mods.goods_mod_distinctive_properties.VALUE}</option>
 											{% ENDFOR goods_mod_distinctive_properties %}
-										{% ENDFOR values %}
+										{% ENDFOR mods %}
 									</select>
 								</div>
 								{% ENDIF COUNT_MODIFICATION %}

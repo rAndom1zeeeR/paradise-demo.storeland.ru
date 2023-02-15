@@ -78,7 +78,7 @@
 					{% FOR goods_order_fields %}
 						{% IF goods_order_fields.ID = 1 || goods_order_fields.ID = 2 || goods_order_fields.ID = 5 || goods_order_fields.ID = 11 || goods_order_fields.ID = 13 %}
 						<a class="toolbar__sort-item {% IF goods_order_fields.SELECTED %}is-actived{% ENDIF %}" href="?goods_search_field_id={goods_order_fields.ID}">
-							{% IF goods_order_fields.ID = 1%}
+							{% IF goods_order_fields.ID = 1 %}
 								Цена ↓
 							{% ELSEIF goods_order_fields.ID = 2 %}
 								Цена ↑
@@ -341,10 +341,11 @@
 							<div class="product__props selectBox">
 								<select class="product__props-select select" name="form[properties][]">
 									{% FOR mods %}
+										{% IF goods.mods.index > 1 %}{continue}{% ENDIF %}
 										{% FOR goods_mod_distinctive_properties %}
 										<option value="{goods.mods.ID}">{goods.mods.goods_mod_distinctive_properties.VALUE}</option>
 										{% ENDFOR goods_mod_distinctive_properties %}
-									{% ENDFOR values %}
+									{% ENDFOR mods %}
 								</select>
 							</div>
 							{% ENDIF COUNT_MODIFICATION %}
@@ -649,10 +650,11 @@
 								<div class="product__props selectBox">
 									<select class="product__props-select select" name="form[properties][]">
 										{% FOR mods %}
+											{% IF goods.mods.index > 1 %}{continue}{% ENDIF %}
 											{% FOR goods_mod_distinctive_properties %}
 											<option value="{goods.mods.ID}">{goods.mods.goods_mod_distinctive_properties.VALUE}</option>
 											{% ENDFOR goods_mod_distinctive_properties %}
-										{% ENDFOR values %}
+										{% ENDFOR mods %}
 									</select>
 								</div>
 								{% ENDIF COUNT_MODIFICATION %}

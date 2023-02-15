@@ -6,7 +6,7 @@
 #noty_layout__topRight {top: 30px;right: 20px;width: 320px;}
 #noty_layout__bottom {bottom: 0;left: 0;width: 100%;max-width: 100%;}
 #noty_layout__bottomLeft {bottom: 20px;left: 20px;width: 320px;}
-#noty_layout__bottomCenter {bottom: 5%;left: 50%;width: 320px;-webkit-transform: translate(-webkit-calc(-50% - .5px)) translateZ(0) scale(1, 1);transform: translate(calc(-50% - .5px)) translateZ(0) scale(1, 1);}
+#noty_layout__bottomCenter {bottom: 5%;left: 50%;width: 460px;-webkit-transform: translate(-webkit-calc(-50% - .5px)) translateZ(0) scale(1, 1);transform: translate(calc(-50% - .5px)) translateZ(0) scale(1, 1);}
 #noty_layout__bottomRight {bottom: 16px;right: 16px;max-width: 320px;width: auto;}
 #noty_layout__center {top: 50%;left: 50%;width: 460px;-webkit-transform: translate(-webkit-calc(-50% - .5px), -webkit-calc(-50% - .5px)) translateZ(0) scale(1, 1);transform: translate(calc(-50% - .5px), calc(-50% - .5px)) translateZ(0) scale(1, 1);}
 #noty_layout__centerLeft {top: 50%;left: 20px;width: 320px;-webkit-transform: translate(0, -webkit-calc(-50% - .5px)) translateZ(0) scale(1, 1);transform: translate(0, calc(-50% - .5px)) translateZ(0) scale(1, 1);}
