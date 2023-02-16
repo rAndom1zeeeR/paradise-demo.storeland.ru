@@ -447,7 +447,7 @@
 							<div class="addto__block cart dropdown {% IF CART_COUNT_TOTAL > 0 %}has-items{% ENDIF %}">
 								<a class="addto__link cart__icon dropdown__open" href="{CART_URL}" title="Перейти в корзину">
 									<i class="icon-cart"></i>
-									<span class="cartSumNow {CURRENCY_CHAR_CODE}" data-price="{CART_SUM_NOW}">{CART_SUM_NOW | money_format}</span>
+									<span class="cartSumNowDiscount {CURRENCY_CHAR_CODE}" data-price="{CART_SUM_NOW_WITH_DISCOUNT}">{CART_SUM_NOW_WITH_DISCOUNT | money_format}</span>
 									<span class="addto__count cart-count" data-cart-count="{CART_COUNT_TOTAL}">{CART_COUNT_TOTAL}</span>
 								</a>
 
@@ -461,7 +461,7 @@
 									</div>
 
 									<div class="addto__items">
-										<form class="addto__cart_form" action="{CART_URL}" method="post">
+										<form class="addto__form" action="{CART_URL}" method="post">
 											<input type="hidden" name="fast_order" value="1" />
 											<input type="hidden" name="hash" value="{HASH}" />
 											{% FOR cart_items %}
@@ -523,22 +523,22 @@
 
 									<div class="addto__total {CURRENCY_CHAR_CODE} flex justify-between">
 										<!-- Скидки, действующие на заказ -->
-										{% FOR cart_discount %}
-										{% IF cart_discount.DISCOUNT_IS_ENABLED %}
-										<div class="addto__total-block">
-											<span class="addto__total_label">Скидка:</span>
-											<span class="addto__total_discount">
-												<span class="discountValue" data-value="{cart_discount.DISCOUNT_VALUE}">{cart_discount.DISCOUNT_VALUE}</span>
-												{% IF cart_discount.IS_PERCENT %}<span class="percent">%</span>{% ELSE %}<span class="num"></span>{% ENDIF %}
+										<div class="addto__total-block addto__total-discount is-disabled">
+											<span class="addto__total-label">Скидка:</span>
+											<span class="addto__total-price">
+												{% FOR cart_discount %}
+													{% IF cart_discount.DISCOUNT_IS_ENABLED %}
+														<span class="discountValue" data-value="{cart_discount.DISCOUNT_VALUE}">{cart_discount.DISCOUNT_VALUE}</span>
+														{% IF cart_discount.IS_PERCENT %}<span class="percent">%</span>{% ELSE %}<span class="num"></span>{% ENDIF %}
+													{% ENDIF %}
+												{% ENDFOR %}
 											</span>
 										</div>
-										{% ENDIF %}
-										{% ENDFOR %}
 
 										<!-- Итого -->
 										<div class="addto__total-block">
-											<span class="addto__total_label">Итого:</span>
-											<span class="price__now cartSumNow" data-price="{CART_SUM_NOW_WITH_DELIVERY_AND_DISCOUNT}">{CART_SUM_NOW_WITH_DELIVERY_AND_DISCOUNT | money_format}</span>
+											<span class="addto__total-label">Итого:</span>
+											<span class="addto__total-price cartSumNowDiscount" data-price="{CART_SUM_NOW_WITH_DISCOUNT}">{CART_SUM_NOW_WITH_DISCOUNT | money_format}</span>
 										</div>
 
 									</div>
@@ -3311,7 +3311,7 @@
 							<i class="icon-cart"></i>
 						</div>
 						<div class="adaprive__navigate-title">
-							<span class="cartSumNow {CURRENCY_CHAR_CODE}" data-price="{CART_SUM_NOW_WITH_DISCOUNT}">{CART_SUM_NOW_WITH_DISCOUNT | money_format}</span>
+							<span class="cartSumNowDiscount {CURRENCY_CHAR_CODE}" data-price="{CART_SUM_NOW_WITH_DISCOUNT}">{CART_SUM_NOW_WITH_DISCOUNT | money_format}</span>
 							<span class="adaprive__navigate-label">Корзина</span>
 						</div>
 					</a>
@@ -3534,6 +3534,9 @@
 			product.quickViewMod();
 			product.onCart();
 			product.onNotify();
+			quantityProduct.onProduct();
+			// quantityProduct.updProduct()
+			
 		});
 	</script>
 	{% ENDIF %}
@@ -3588,7 +3591,7 @@
 			goods.onInit();
 			goods.onClick();
 			goods.swiperTumbs();
-			quantity.onGoods();
+			quantityGoods.onGoods();
 			counterDate();
 			swiperSlider('#related-views');
 			swiperSlider('#related-goods');
@@ -3605,7 +3608,7 @@
 	$(document).ready(function(){
 		cart.onClick();
 		cart.minSum();
-		quantity.onCart();
+		quantityCart.onCart();
 	});
 	</script>
 	<script defer type="text/javascript" src="{ASSETS_JS_PATH}air-datepicker.js?design=THEMENAME"></script>

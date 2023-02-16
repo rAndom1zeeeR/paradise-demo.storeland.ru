@@ -122,117 +122,138 @@ function changeTxt(txtObject) {
 ///////////////////////////////////////
 /*** Кол-во ***/
 ///////////////////////////////////////
-function Quantity() {
+class Quantity {
+	constructor () {}
 
-	// Функции кликов
-	this.onClick = function(input){
-		console.log('onClick func')
-		const plusQty = event.target.closest('.qty__select_plus')
-		const minusQty = event.target.closest('.qty__select_minus')
-		// console.log('onClick event', event)
-		// console.log('onClick input', input)
-		// console.log('onClick event.target', event.target)
-	
-		// Действия
-		if (plusQty) {
-			event.preventDefault()
-			quantity.plus(input)
-			quantity.check(input)
-			// console.log('onClick plusQty2', plusQty)
-		} else if (minusQty) {
-			event.preventDefault()
-			quantity.minus(input)
-			quantity.check(input)
-			// console.log('onClick minusQty2', minusQty)
-		} else {
-			return false
-		}
-	
-	}
-	
 	// Функция Плюс + для товара. //JS
-	this.plus = function(obj){
-		return obj.value = parseInt(obj.value) + 1;
-	}
+	plus(obj) {
+		console.log('plus obj', obj)
+		obj.value = parseInt(obj.value) + 1
+		obj.setAttribute('value', obj.value)
+		obj.dispatchEvent(new Event('input'));
+		return false
+	};
 
 	// Функция Минус - для товара. //JS
-	this.minus = function(obj){
-		return obj.value = parseInt(obj.value) - 1;
-	}
+	minus(obj) {
+		console.log('minus obj', obj)
+		obj.value = parseInt(obj.value) - 1
+		obj.setAttribute('value', obj.value)
+		obj.dispatchEvent(new Event('input'));
+		return false
+	};
 
 	// Проверка кол-ва. //JS
-	this.check = function(obj){
+	check(obj) {
+		console.log('check obj', obj);
 		// Количество
 		let val = parseInt(obj.value);
 		// Проверка максимальныго остатка
 		const max = parseInt(obj.getAttribute('max'));
 
 		// Если вводят 0 то заменяем на 1
-		if(val < 1){
+		if (!val || val < 1) {
 			obj.value = 1;
 			val = 1;
-			obj.previousElementSibling.classList.add('qty__disable')
-			return false
+			obj.previousElementSibling.classList.add('qty__disable');
+			return false;
 		} else {
-			obj.previousElementSibling.classList.remove('qty__disable')
+			obj.previousElementSibling.classList.remove('qty__disable');
 		}
 
 		// Если товара нет в наличии
-		if (max == 0){
-			obj.value = 1
-			obj.previousElementSibling.classList.add('qty__disable')
-			obj.nextElementSibling.classList.add('qty__disable')
+		if (max == 0) {
+			obj.value = 1;
+			obj.previousElementSibling.classList.add('qty__disable');
+			obj.nextElementSibling.classList.add('qty__disable');
 			// Сообщение пользователю
-			const message = quantity.notyMessage('Внимание! Вы пытаетесь положить в корзину товар которого нет в наличии')
-			notyStart(message, 'warning')
-			return false
+			const message = quantity.notyMessage('Внимание! Вы пытаетесь положить в корзину товар которого нет в наличии');
+			notyStart(message, 'warning');
+			return false;
 		}
 
 		// Если добавляют больше
-		if(val > max){
+		if (val > max) {
 			obj.value = max;
 			val = max;
-			obj.nextElementSibling.classList.add('qty__disable')
+			obj.nextElementSibling.classList.add('qty__disable');
 			// Сообщение пользователю
-			const message = quantity.notyMessage('Внимание! Вы пытаетесь положить в корзину товара больше, чем есть в наличии')
-			notyStart(message, 'warning')
+			const message = quantity.notyMessage('Внимание! Вы пытаетесь положить в корзину товара больше, чем есть в наличии');
+			notyStart(message, 'warning');
+			return false;
 		} else {
-			obj.nextElementSibling.classList.remove('qty__disable')
+			obj.nextElementSibling.classList.remove('qty__disable');
 		}
-	}
+		
+	};
 
 	// Сообщение пользователю
-	this.notyMessage = function(message){
-		return `
-			<div class="noty__addto">
-				<div class="noty__message">${message}</div>
-			</div>
-		`;
-	}
+	notyMessage(message) {
+		return `<div class="noty__addto"><div class="noty__message">${message}</div></div>`;
+	};
+}
 
-	// Изменение кол-ва в карточке. //JS
-	this.updGoods = function(obj){
-		console.log('goods obj', obj)
-		const block = obj.closest('.productViewBlock')
-		// console.log('goods block', block)
+// Кол-во в карточке
+class QuantityGoods extends Quantity {
+	constructor () {
+		super()
+		console.log('QuantityGoods');
+	};
+
+	// Действия в карточке товара
+	onGoods() {
+		const qty = document.querySelector('.productView__qty')
+		const qtyMinus = qty.querySelector('.qty__select_minus')
+		const qtyPlus = qty.querySelector('.qty__select_plus')
+		const qtyInput = qty.querySelector('.qty__input')
 
 		// Если не карточка товара
-		if (block == null) return false
+		if (qty == null) return false;
+
+		// Минус
+		qtyMinus.addEventListener('click', function () {
+			quantityGoods.minus(qtyInput)
+			// quantityGoods.check(qtyInput)
+			// quantityGoods.updGoods(qtyInput)
+		})
+
+		// Плюс
+		qtyPlus.addEventListener('click', function () {
+			quantityGoods.plus(qtyInput)
+			// quantityGoods.check(qtyInput)
+			// quantityGoods.updGoods(qtyInput)
+		})
+
+		// Изменение
+		qtyInput.addEventListener('input', function () {
+			quantityGoods.check(qtyInput)
+			quantityGoods.updGoods(qtyInput)
+		});
+
+	};
+
+	// Изменение кол-ва в карточке. //JS
+	updGoods(obj) {
+		// console.log('goods obj', obj);
+		const block = obj.closest('.productViewBlock');
+		// console.log('goods block', block)
+		// Если не карточка товара
+		if (block == null) return false;
 
 		// Объявляем переменные цены
-		const val = block.querySelector('.qty__input').value
+		const val = block.querySelector('.qty__input').value;
 		block.querySelector('.goodsDataMainModificationId').value = val;
-		
+
 		// Обновление цены
-		const blockNow = block.querySelector('.price__now')
-		const priceNow = blockNow.getAttribute('data-price')
+		const blockNow = block.querySelector('.price__now');
+		const priceNow = blockNow.getAttribute('data-price');
 		const multiNow = parseInt(val * priceNow);
 		blockNow.querySelector('.num').innerHTML = addSpaces(multiNow);
 
 		// Обновление старой цены
-		const blockOld = block.querySelector('.price__old')
-		if (blockOld){
-			const priceOld = blockOld.getAttribute('data-price') || 1
+		const blockOld = block.querySelector('.price__old');
+		if (blockOld) {
+			const priceOld = blockOld.getAttribute('data-price');
 			const multiOld = parseInt(val * priceOld);
 			blockOld.querySelector('.num').innerHTML = addSpaces(multiOld);
 		}
@@ -242,77 +263,84 @@ function Quantity() {
 		// console.log('goods priceOld', priceOld)
 		// console.log('goods multiNow', multiNow)
 		// console.log('goods multiOld', multiOld)
-	}
+	};
 
-	// Действия в карточке товара
-	this.onGoods = function(obj){
-		const block = obj || document.querySelector('.productView__qty')
-		const input = block.querySelector('.qty__input')
-		console.log('onGoods', block)
-		// Если не карточка товара
-		if (block == null) return false
+}
 
-		// Нажатия
-		block.addEventListener('click', function(event){
-			quantity.onClick(input)
-			quantity.updGoods(input.closest('.productViewBlock'))
-		})
-
-		// Изменения
-		input.addEventListener('change', function(){
-			quantity.check(this)
-			quantity.updGoods(this.closest('.productViewBlock'))
-		})
-
+// Кол-во в выпадающей корзине
+class QuantityAddto extends Quantity {
+	constructor () {
+		super()
+		console.log('QuantityAddto');
 	}
 
 	// Действия в выпадающей корзине
-	this.onAddto = function(){
-		var elements = document.querySelectorAll('.addto__qty')
-		// console.log('onAddto', elements)
+	onAddto() {
+		const elements = document.querySelectorAll('.addto__qty');
+		console.log('onAddto', elements)
 
-		elements.forEach((element) => {			
-			const input = element.querySelector('.qty__input')
+		elements.forEach((element) => {
+			const qtyMinus = element.querySelector('.qty__select_minus')
+			const qtyPlus = element.querySelector('.qty__select_plus')
+			const qtyInput = element.querySelector('.qty__input')
 			// Если не карточка товара
-			if (element == null) return false
+			if (element == null) return false;
 
-			// Нажатие
-			element.addEventListener('click', function(event){
-				quantity.onClick(input)
-				quantity.updAddto(input)
+			// Минус
+			qtyMinus.addEventListener('click', function () {
+				quantityAddto.minus(qtyInput)
+				// quantityAddto.check(qtyInput)
+				// quantityAddto.updAddto(qtyInput)
+				// quantityAddto.updQty(element, qtyInput)
+			})
+
+			// Плюс
+			qtyPlus.addEventListener('click', function () {
+				quantityAddto.plus(qtyInput)
+				// quantityAddto.check(qtyInput)
+				// quantityAddto.updAddto(qtyInput)
+				// quantityAddto.updQty(element, qtyInput)
 			})
 
 			// Изменение
-			input.addEventListener('change', function(){
-				quantity.check(this)
-				quantity.updAddto(this)
-			})
+			qtyInput.addEventListener('input', function () {
+				quantityAddto.check(this);
+				quantityAddto.updAddto(this);
+				quantityProduct.updProdValue(this)
+				// console.log('this', this)
+				// console.log('element', element)
+				// quantityAddto.updQty(element, qtyInput)
+			});
 
-		})
-	}
+
+		});
+	};
 
 	// Выпадающая корзина
-	this.updAddto = function(obj){
-		console.log('updAddto obj', obj)
+	updAddto(obj) {
+		// console.log('updAddto obj', obj);
 
-		const url = '/cart'
-		const item = obj.closest('.addto__item')
-		const mod = item.getAttribute('data-mod-id')
-		const priceNow = item.querySelector('.price__now')
-		const form = item.closest('.addto__cart_form')
-		const data = new FormData(form)
+		if (!obj) return false
+
+		const item = obj.closest('.addto__item');
+		const mod = item.getAttribute('data-mod-id');
+		const priceNow = item.querySelector('.price__now');
+		const form = item.closest('.addto__form');
+		const data = new FormData(form);
 		data.append('only_body', '1');
 
 		// Обновить корзину
-		quantity.updAddtoCart(url, data, mod, priceNow);
-		
-	}
+		setTimeout(() => {
+			quantityAddto.getAddtoCart(data, mod, priceNow);				
+		}, 100);
+
+	};
 
 	// Обновление выпадающей корзины
-	this.updAddtoCart = function(url, data, mod, priceNow) {
-		fetch(url, {
+	getAddtoCart($data, $mod, $priceNow) {
+		fetch('/cart', {
 			method: "POST",
-			body: data
+			body: $data
 		})
 		// Получаем ответ
 		.then((response) => response.text())
@@ -321,97 +349,162 @@ function Quantity() {
 			// Convert the HTML string into a document object
 			const parser = new DOMParser();
 			const doc = parser.parseFromString(html, 'text/html');
-			// Обновить цену
-			const price = doc.querySelector('.cartTable__item[data-mod-id="' + mod + '"] .cartTable__price').innerHTML;
-			priceNow.innerHTML = price;
-			// Обновить кол-во
-			const newCount = doc.querySelector('.cart-count').innerHTML;
-			quantity.updAddtoCount(newCount);
-			// Обновить сумму
-			const newSum = doc.querySelector('.cartSumTotal').innerHTML;
-			quantity.updAddtoSum(newSum);
-			console.log('updAddto newSum', newSum)
-			// Обновить скидку
-			const newDiscount = doc.querySelector('.cartTotal__item-discount .cartTotal__price');
-			newDiscount ? quantity.updAddtoDiscount(newDiscount.innerHTML) : false
+			quantityAddto.updAddtoContent(doc, $mod, $priceNow)
+
 		})
 		.catch((error) => console.error(error));
+	};
 
-	}
+	// Обновление выпадающей корзины
+	updAddtoContent($doc, $mod, $priceNow) {
+		// Обновить цену
+		const price = $doc.querySelector('.cartTable__item[data-mod-id="' + $mod + '"] .cartTable__price');
+		$priceNow.innerHTML = price.innerHTML;
+		// Обновить кол-во
+		const newCount = $doc.querySelector('.cart-count').innerHTML;
+		quantityAddto.updAddtoCount(newCount);
+		// Обновить сумму
+		const newSum = $doc.querySelector('.cartSumTotal').innerHTML;
+		quantityAddto.updAddtoSum(newSum);
+		// console.log('updAddto newSum', newSum);
+		// Обновить скидку
+		const newDiscount = $doc.querySelector('.cartTotal__item-discount .cartTotal__price');
+		const totalDiscount = document.querySelector('.addto__total-discount')
+		if (newDiscount){
+			// console.log('updAddto newDiscount1', newDiscount);
+			totalDiscount.classList.remove('is-disabled')
+			quantityAddto.updAddtoDiscount(newDiscount.innerHTML)
+		} else {
+			// console.log('updAddto newDiscount2', newDiscount);
+			totalDiscount.classList.add('is-disabled')
+		}
+
+	};
 
 	// Обновление счетчика кол-ва корзины
-	this.updAddtoCount = function(count){
-		const elements = document.querySelectorAll('.cart-count')
+	updAddtoCount(count) {
+		const elements = document.querySelectorAll('.cart-count');
 		elements.forEach((element) => {
-			element.innerHTML = count
-			element.setAttribute('data-cart-count', count)
-		})
-	}
+			element.innerHTML = count;
+			element.setAttribute('data-cart-count', count);
+		});
+	};
 
 	// Обновление итоговой цены
-	this.updAddtoSum = function(sum){
-		const elements = document.querySelectorAll('.cartSumNow')
+	updAddtoSum(sum) {
+		const elements = document.querySelectorAll('.cartSumNowDiscount');
 		elements.forEach((element) => {
-			element.innerHTML = sum
-		})
-	}
+			element.innerHTML = sum;
+		});
+	};
 
 	// Обновление итоговой скидки
-	this.updAddtoDiscount = function(sum){
-		const elements = document.querySelectorAll('.addto__total .addto__total_discount')
-		elements.forEach((element) => {
-			element.innerHTML = sum
-		})
+	updAddtoDiscount(sum) {
+		// console.log('sum', sum);
+		const element = document.querySelector('.addto__total-discount .addto__total-price');
+		element.innerHTML = sum;
+	};
+	
+	// Отображаем скидку 
+	updAddtoSale() {
+		console.log('updAddtoSale');
+		const value = document.querySelector('.discountValue')
+		// Если корзина пуста
+		if (!value) return false
+		// Если есть скидки
+		const discount = value.closest('.addto__total-discount')
+		if (value){
+			discount.classList.remove('is-disabled')
+		} else {
+			discount.classList.add('is-disabled')
+		}
+
+	};
+
+	// Обновление кол-ва
+	// updQty(element, qtyInput) {
+	// 	const qtyId = element.closest('.addto__item').getAttribute('data-id')
+	// 	const prodInput = document.querySelector('.product__item[data-id="'+ qtyId +'"] .qty__input')
+	// 	// quantityProduct.updInput(prodInput, qtyInput)
+	// 	prodInput.value = qtyInput.value
+	// 	prodInput.dispatchEvent(new Event('change'));
+		
+	// };
+
+	// updAddtoInput(addtoInput, qtyInput) {
+	// 	addtoInput.value = qtyInput.value
+	// 	addtoInput.dispatchEvent(new Event('change'));
+	// }
+
+}
+
+// Кол-во в корзине
+class QuantityCart extends Quantity {
+	constructor () {
+		super()
+		// console.log('QuantityCart');
 	}
 
-	// Действия в корзине
-	this.onCart = function(){
-		var elements = document.querySelectorAll('.cartTable__qty')
-		console.log('onCart', elements)
+	// Действия в выпадающей корзине
+	onCart() {
+		const elements = document.querySelectorAll('.cartTable__qty');
+		// console.log('cartTable__qty', elements)
 
 		elements.forEach((element) => {
-			const input = element.querySelector('.qty__input')
+			const qtyMinus = element.querySelector('.qty__select_minus')
+			const qtyPlus = element.querySelector('.qty__select_plus')
+			const qtyInput = element.querySelector('.qty__input')
 			// Если не карточка товара
-			if (element == null) return false
+			if (element == null) return false;
 
-			// Нажатие
-			element.addEventListener('click', function(event){
-				quantity.onClick(input)
-				quantity.updCart(input)
+			// Минус
+			qtyMinus.addEventListener('click', function () {
+				quantityCart.minus(qtyInput)
+				// quantityCart.check(qtyInput)
+				// quantityCart.updCart(qtyInput)
+			})
+
+			// Плюс
+			qtyPlus.addEventListener('click', function () {
+				quantityCart.plus(qtyInput)
+				// quantityCart.check(qtyInput)
+				// quantityCart.updCart(qtyInput)
 			})
 
 			// Изменение
-			input.addEventListener('change', function(){
-				quantity.check(this)
-				quantity.updCart(this)
-			})
+			qtyInput.addEventListener('input', function () {
+				quantityCart.check(this);
+				quantityCart.updCart(this);
+			});
 
-		})
-
-	}
+		});
+	};
 
 	// Корзина
-	this.updCart = function(obj){
-		console.log('updAddto obj', obj)
+	updCart(obj) {
+		// console.log('updCart obj', obj);
 
-		const url = '/cart'
-		const item = obj.closest('.cartTable__item')
-		const mod = item.getAttribute('data-mod-id')
-		const priceNow = item.querySelector('.cartTable__price')
-		const form = item.closest('.cartTable__form')
-		const data = new FormData(form)
+		if (!obj) return false
+
+		const item = obj.closest('.cartTable__item');
+		const mod = item.getAttribute('data-mod-id');
+		const priceNow = item.querySelector('.cartTable__price');
+		const form = item.closest('.cartTable__form');
+		const data = new FormData(form);
 		data.append('only_body', '1');
 
 		// Обновить корзину
-		quantity.updCartContent(url, data, mod, priceNow);
-		
-	}
+		setTimeout(() => {
+			quantityCart.getCart(data, mod, priceNow);		
+		}, 100);
+
+	};
 
 	// Обновление в корзине
-	this.updCartContent = function(url, data, mod, priceNow) {
-		fetch(url, {
+	getCart($data, $mod, $priceNow) {
+		fetch('/cart', {
 			method: "POST",
-			body: data
+			body: $data
 		})
 		// Получаем ответ
 		.then((response) => response.text())
@@ -420,22 +513,184 @@ function Quantity() {
 			// Convert the HTML string into a document object
 			const parser = new DOMParser();
 			const doc = parser.parseFromString(html, 'text/html');
-			// Обновить цену
-			const price = doc.querySelector('.cartTable__item[data-mod-id="' + mod + '"] .cartTable__price').innerHTML;
-			priceNow.innerHTML = price;
-			// Обновить кол-во
-			const newCount = doc.querySelector('.cart-count').innerHTML;
-			quantity.updAddtoCount(newCount);
-			// Обновить итого
-			const newTotal = doc.querySelector('.cartTotal__items').innerHTML
-			document.querySelector('.cartTotal__items').innerHTML = newTotal;
-			// Обновить минимальную сумму заказа
-			cart.minSum()
+			quantityCart.updCartContent(doc, $mod, $priceNow)
+			// console.log('getCart doc', doc);
 		})
 		.catch((error) => console.error(error));
 
+	};
+
+	// Обновление в корзине
+	updCartContent($doc, $mod, $priceNow) {
+		// console.log('doc2', $doc);
+		// console.log('mod2', $mod);
+		// console.log('priceNow2', $priceNow);
+		// Обновить цену
+		const price = $doc.querySelector('.cartTable__item[data-mod-id="' + $mod + '"] .cartTable__price');
+		$priceNow.innerHTML = price.innerHTML;
+		// Обновить кол-во
+		const newCount = $doc.querySelector('.cart-count').innerHTML;
+		quantityAddto.updAddtoCount(newCount);
+		// Обновить итого
+		const newTotal = $doc.querySelector('.cartTotal__items').innerHTML;
+		document.querySelector('.cartTotal__items').innerHTML = newTotal;
+		// Обновить минимальную сумму заказа
+		cart.minSum();
+		// console.log('price', price);
+		// console.log('newCount', newCount);
+		// console.log('newTotal', newTotal);
+
+	};
+
+}
+
+// Кол-во продуктов
+class QuantityProduct extends QuantityAddto {
+	constructor () {
+		super()
+		// console.log('QuantityProduct');
 	}
-	
+
+	// Действия в выпадающей корзине
+	onProduct() {
+		const elements = document.querySelectorAll('.product__qty');
+		// console.log('onProduct', elements)
+		// Если нет элемента
+		if (elements == null) return false;
+
+		elements.forEach((element) => {
+			const qtyMinus = element.querySelector('.qty__select_minus')
+			const qtyPlus = element.querySelector('.qty__select_plus')
+			const qtyInput = element.querySelector('.qty__input')
+			// const qtyId = element.closest('[data-id]').getAttribute('data-id')
+			// console.log('qtyId', qtyId)
+			// const addtoInput = document.querySelector('.addto__item[data-id="'+ qtyId +'"] .qty__input')
+			// console.log('element', element)
+			// console.log('qtyInput', qtyInput)
+			// console.log('qtyId', qtyId)
+			// console.log('addtoIdInput', addtoInput)
+
+			// Минус
+			qtyMinus.addEventListener('click', function () {
+				quantityProduct.minus(qtyInput)
+				// quantityProduct.check(qtyInput)
+				// console.log('Минус qtyInput', qtyInput)
+				// quantityProduct.updProdInput(addtoInput, qtyInput)
+				// quantityProduct.updAddto(qtyInput)
+			})
+
+			// Плюс
+			qtyPlus.addEventListener('click', function () {
+				quantityProduct.plus(qtyInput)
+				// quantityProduct.check(qtyInput)
+				// console.log('Плюс qtyInput', qtyInput)
+				// quantityProduct.updProdInput(addtoInput, qtyInput)
+				// quantityProduct.updAddto(qtyInput)
+			})
+
+			// Изменение
+			qtyInput.addEventListener('input', function () {
+				quantityProduct.check(this)
+				quantityProduct.updAddtoValue(this)
+				// console.log('addtoInput11', addtoInput)
+				// console.log('qtyInput11', qtyInput)
+				// quantityProduct.updProdInput(addtoInput, qtyInput)
+				// quantityProduct.updAddto(this);
+			})
+
+		})
+	};
+
+	updAddtoValue(obj) {
+		const val = obj.value
+		const id = obj.closest('[data-id]').getAttribute('data-id')
+		const item = document.querySelector('.addto__item[data-id="'+ id +'"] .qty__input')
+		
+		if (!item) {return false}
+		item.value = val
+		item.dispatchEvent(new Event('input'));
+		// console.log('val3', val);
+		// console.log('id3', id);
+		// console.log('item3', item);
+	}
+
+	updProdValue(obj) {
+		const val = obj.value
+		const id = obj.closest('[data-id]').getAttribute('data-id')
+		const item = document.querySelector('.product__item[data-id="'+ id +'"] .qty__input')
+		
+		if (!item) {return false}
+		item.value = val
+		// console.log('val4', val);
+		// console.log('id4', id);
+		// console.log('item4', item);
+	}
+
+	// updProdInput(addtoInput, qtyInput) {
+	// 	addtoInput.value = qtyInput.value
+	// 	addtoInput.dispatchEvent(new Event('change'));
+	// 	// console.log('addtoInput.value', addtoInput.value)
+	// 	// console.log('qtyInput.value', qtyInput.value)
+	// }
+
+	// Обновление кол-ва из корзины в товар
+	// updProduct() {
+	// 	const prods = document.querySelectorAll('.product__qty');
+	// 	const addtos = document.querySelectorAll('.addto__qty');
+	// 	addtos.forEach((element) => { 
+	// 		const input = element.querySelector('.qty__input')
+	// 		const val = input.value
+	// 		const id = element.closest('[data-id]').getAttribute('data-id')
+	// 		console.log('input', input);
+	// 		console.log('val', val);
+	// 		console.log('id', id);
+			
+	// 		const item = document.querySelector('.product__item[data-id="'+ id +'"] .qty__input')
+	// 		if (!item) {return false}
+	// 		item.value = val
+			
+	// 	})
+	// }
+
+	// // Обновление кол-ва из товара в корзине
+	// updQuantityProds() {
+	// 	const prods = document.querySelectorAll('.product__qty');
+	// 	prods.forEach((element) => {
+	// 		const input = element.querySelector('.qty__input')
+	// 		const id = element.closest('[data-id]').getAttribute('data-id')
+	// 		input.addEventListener('input', function () {
+	// 			const item = document.querySelector('.addto__item[data-id="'+ id +'"] .qty__input')
+	// 			if (!item) {return false}
+	// 			item.value = input.value
+	// 			item.dispatchEvent(new Event('input'));
+	// 		})
+	// 	})
+
+	// 	// addtos.forEach((element) => {
+	// 	// 	const input = element.querySelector('.qty__input')
+	// 	// 	const id = element.closest('[data-id]').getAttribute('data-id')
+	// 	// 	input.addEventListener('input', function () {
+	// 	// 		const item = document.querySelector('.product__item[data-id="'+ id +'"] .qty__input')
+	// 	// 		if (!item) {return false}
+	// 	// 		item.value = input.value
+	// 	// 	})
+	// 	// })
+	// }
+
+	// updQuantityAddtos() {
+	// 	const addtos = document.querySelectorAll('.addto__qty');
+
+	// 	addtos.forEach((element) => {
+	// 		const input = element.querySelector('.qty__input')
+	// 		const id = element.closest('[data-id]').getAttribute('data-id')
+	// 		input.addEventListener('input', function () {
+	// 			const item = document.querySelector('.product__item[data-id="'+ id +'"] .qty__input')
+	// 			if (!item) {return false}
+	// 			item.value = input.value
+	// 		})
+	// 	})
+	// }
+
 }
 
 
@@ -473,7 +728,7 @@ function Password() {
 	// Показать пароль
 	// Превращает поле пароля в текстовое поле и обратно
   this.showPass = function($obj){
-		console.log('showPass', $obj)
+		// console.log('showPass', $obj)
 		$obj.toggleClass('is-actived')
 		// Объект у которого изменяем тип с password на text
 		var inputObject = $obj.parent().find('#sites_client_pass');
@@ -643,8 +898,8 @@ function Product() {
 
 	// Запуск функции активного класса товара в других категориях
 	this.inCartAll = function ($id, $val){
-		console.log('$id', $id)
-		console.log('$val', $val)
+		// console.log('$id', $id)
+		// console.log('$val', $val)
 		if (!$val){
 			var $val = 1;
 		}
@@ -656,10 +911,10 @@ function Product() {
 			// Обновление данных
 			$(this).addClass('product__inCart').find('.product__addCart span').text(added);
 			count.text(newCount)
-			console.log('this', $(this))
-			console.log('added', added)
-			console.log('count', count.text())
-			console.log('new', newCount)
+			// console.log('this', $(this))
+			// console.log('added', added)
+			// console.log('count', count.text())
+			// console.log('new', newCount)
 		});
 	}
 
@@ -1210,7 +1465,7 @@ function Product() {
 				product.addTo();
 				goods.goodsModification($('.fancybox-content.productViewBlock'));
 				goods.onClick();
-				quantity.onGoods();
+				quantityGoods.onGoods();
 			}
 		} else {
 			$.get(href, function(content) {
@@ -1224,7 +1479,7 @@ function Product() {
 				product.addTo();
 				goods.goodsModification($('.fancybox-content.productViewBlock'));
 				goods.onClick();
-				quantity.onGoods();
+				quantityGoods.onGoods();
 			});
 		}
 	}
@@ -1281,7 +1536,7 @@ function Product() {
 					keyboard: false,
 					baseClass: "fastOrder",
 					afterShow: function(){
-						console.log('fast order');
+						// console.log('fast order');
 						password.onPass();
 						password.onReg();
 						password.capsWarning();
@@ -1542,7 +1797,7 @@ function Catalog() {
 			// Открыть фильтры по иконке
 			else if (filterIcon){
 				event.preventDefault();
-				console.log('filterIcon', filterIcon);
+				// console.log('filterIcon', filterIcon);
 				$(event.target).toggleClass('is-opened');
 				$('.sidebar__block-filters').toggleClass('is-opened');
 				$('#overlay').toggleClass('is-opened transparent');
@@ -1731,9 +1986,9 @@ function Goods() {
 
 	// Скрываем большое краткое описание
 	this.scrollContent = function($content, $obj){
-		console.log('$content', $content)
-		console.log('$obj', $obj)
-		console.log('$obj top', $content.offset().top)
+		// console.log('$content', $content)
+		// console.log('$obj', $obj)
+		// console.log('$obj top', $content.offset().top)
 		// var scrollTop = $content.offset().top + $content.height() - $(window).height();
 
 		if ($obj.hasClass('is-actived')) {
@@ -1764,8 +2019,8 @@ function Goods() {
 
 	// 
 	this.opinionNavigate = function($obj, $nav){
-		console.log('obj2', $obj)
-		console.log('nav2', $nav)
+		// console.log('obj2', $obj)
+		// console.log('nav2', $nav)
 		$obj.find('[data-nav]').removeClass('is-actived')
 		$obj.find('[data-nav='+ $nav +']').addClass('is-actived')
 		$obj.find('[data-nav-content]').removeClass('is-show').addClass('is-hide')
@@ -2209,7 +2464,7 @@ function Cart() {
 			} else if (close){
 				cart.orderClose();
 			} else if (make){
-				console.log('make', make)
+				// console.log('make', make)
 				event.preventDefault()
 				var form = $(".order_fast__form");
 				form.validate({
@@ -2254,8 +2509,8 @@ function Cart() {
 		if($('.cartTotal__min').length) {
 			var minPrice = parseInt($('.cartTotal__min-price').attr('data-price'));
 			var totalSum = parseInt($('.cartTotal__min-title').attr('data-price'));
-			console.log('minPrice', minPrice);
-			console.log('totalSum', totalSum);
+			// console.log('minPrice', minPrice);
+			// console.log('totalSum', totalSum);
 			if(minPrice > totalSum) {
 				var diff = minPrice - totalSum
 				var bar = Math.floor(totalSum / minPrice * 100)
@@ -2341,10 +2596,10 @@ function Order(){
 		// Выключение кнопки оформления заказа если не все поля заполнены
 		$(".order_fast__form [required]").on('input', function(){
 			if($('.order_fast__form').valid()) {
-				console.log('true')
+				// console.log('true')
 				$('.total__buttons button').attr('title', 'Оформить заказ').removeClass('is-disabled');
 			} else {
-				console.log('false')
+				// console.log('false')
 				$('.total__buttons button').attr('title', 'Заполните все поля').addClass('is-disabled');
 			}
 		});
@@ -2582,8 +2837,8 @@ function Order(){
 			couponInput.attr('data-value', val);
 	
 			// console.log('---', )
-			console.log('val', val)
-			console.log('oldVal', oldVal)
+			// console.log('val', val)
+			// console.log('oldVal', oldVal)
 	
 			// Если ничего не ввели
 			if(val == ''){
@@ -2605,7 +2860,7 @@ function Order(){
 			formData.push({name: 'only_body', value: 1});
 			formData.push({name: 'form[coupon_code]', value: val});
 	
-			console.log('formData', formData)
+			// console.log('formData', formData)
 	
 			$.ajax({
 				type: "POST",
@@ -2629,11 +2884,11 @@ function Order(){
 					}
 	
 					// console.log('data', data)
-					console.log('$(data)', $(data))
-					console.log('discountBlock', discountBlock)
-					console.log('discountName', discountName)
-					console.log('discountPrice', discountPrice)
-					console.log('discountPercent', discountPercent)
+					// console.log('$(data)', $(data))
+					// console.log('discountBlock', discountBlock)
+					// console.log('discountName', discountName)
+					// console.log('discountPrice', discountPrice)
+					// console.log('discountPercent', discountPercent)
 	
 					// Получаем новую итоговую стоимость заказа
 					var totalBlock = $(data).closest('#order_form').find('.order-total');
@@ -2641,10 +2896,10 @@ function Order(){
 					var deliveryPrice = totalBlock.find('.cartSumDelivery').attr('data-price');
 					var newTotalSum = parseInt(totalSum) + parseInt(deliveryPrice);
 	
-					console.log('totalBlock', totalBlock)
-					console.log('totalSum', totalSum)
-					console.log('deliveryPrice', deliveryPrice)
-					console.log('newTotalSum', newTotalSum)
+					// console.log('totalBlock', totalBlock)
+					// console.log('totalSum', totalSum)
+					// console.log('deliveryPrice', deliveryPrice)
+					// console.log('newTotalSum', newTotalSum)
 	
 					// Записываем название и размер скидки по купону
 					totalCouponBlock.find('.cartTotal__label span').html(discountName);
@@ -2660,7 +2915,7 @@ function Order(){
 						totalCouponBlock.hide();
 						totalDiscountBlock.show();
 						$('.cartSumTotal .num').text(addSpaces(newTotalSum));
-						console.log('Купон не применен')
+						// console.log('Купон не применен')
 						notyStart('Купон не применен', 'warning')
 					} else if (newTotalSum == cartSumTotal) {
 						if (discountName) {
@@ -2673,7 +2928,7 @@ function Order(){
 							couponInput.val("").addClass('error');
 							couponParent.addClass('error');
 							totalCouponBlock.hide();
-							console.log('Купон error')
+							// console.log('Купон error')
 							notyStart('Купон не применен', 'warning')
 						}
 					} else {
@@ -2795,6 +3050,14 @@ var cart = new Cart();
 var order = new Order();
 // Объявляем конструктор Количества
 var quantity = new Quantity();
+// Объявляем конструктор Счетчиков Товара
+var quantityGoods = new QuantityGoods();
+// Объявляем конструктор Счетчиков Выпадающей корзины
+var quantityAddto = new QuantityAddto();
+// Объявляем конструктор Счетчиков Корзины
+var quantityCart = new QuantityCart();
+// Объявляем конструктор Счетчиков 
+var quantityProduct = new QuantityProduct();
 
 
 console.timeEnd('start test');
@@ -3156,7 +3419,7 @@ function openMenu() {
 	// Открыть поиск
 	$('.adaptive-search__icon, .search__icon').on('click',function(event){
 		event.preventDefault();
-		console.log('event', event)
+		// console.log('event', event)
 		$('.search, .adaptive-search__content').addClass('is-opened');
 		$('#overlay').addClass('is-opened');
 	})
@@ -3212,8 +3475,8 @@ function cartSaleSum(){
 	$('.addto__cart .addto__item').each(function(){
 		var priceNow = $(this).find('.price__now').data('price')
 		var priceOld = $(this).find('.price__old').data('price')
-		console.log('priceNow', priceNow)
-		console.log('priceOld', priceOld)
+		// console.log('priceNow', priceNow)
+		// console.log('priceOld', priceOld)
 		if(typeof(priceOld) !== 'undefined'){
 			if(priceOld > priceNow){
 				var diff = priceOld - priceNow;
@@ -3782,7 +4045,7 @@ $(document).ready(function(){
   mainnav('header .mainnav', '1', 991);
 	appendSearch()
 	fixedMenu()
-	quantity.onAddto()
+	quantityAddto.onAddto()
 	catalogItems.hover()
 
 	// Удаление классов загрузки для элементов страницы
@@ -3865,10 +4128,10 @@ function CatalogItems(){
 		// console.log('element', element)
 		// console.log('data-id', element.getAttribute('data-id'))
 		const id = element.getAttribute('data-id')
-		const parent = element.matches('.parent')
+		const parent = element.contains('.parent')
 		const subItems = document.querySelectorAll('.catalog__items-sub .catalog__item')
 		if (parent) {
-			console.log('parent', parent)
+			// console.log('parent', parent)
 			// element.classList.add('is-show')
 			// $('.catalog__item').removeClass('is-show')
 			subItems.forEach((element) => element.classList.remove('is-show'))
@@ -3877,7 +4140,7 @@ function CatalogItems(){
 			// subItems.forEach((element) => {
 			// 	element.classList.remove('is-show')
 			// 	console.log('attr', element.hasAttribute('data-id'))
-			// 	if (element.matches('[data-id="'+ id +'"]')) {
+			// 	if (element.contains('[data-id="'+ id +'"]')) {
 			// 		console.log('id=id', this);
 			// 	}
 			// })

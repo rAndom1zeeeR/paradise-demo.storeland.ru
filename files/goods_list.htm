@@ -602,7 +602,7 @@
 												maxlength="4" 
 												{% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}max="{goods.MAX_REST_VALUE}"{% ENDIF %} 
 												min="1" 
-												value="1" 
+												value="{% IF goods.NB_GOODS_IN_CART %}{goods.NB_GOODS_IN_CART}{% ELSE %}1{% ENDIF %}" 
 												title="Количество, {goods.MEASURE_NAME}"
 												autocomplete="off" 
 												onkeypress="return keyPress(this, event);" 
