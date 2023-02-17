@@ -341,9 +341,9 @@
 							<div class="product__props selectBox">
 								<select class="product__props-select select" name="form[properties][]">
 									{% FOR mods %}
-										{% IF goods.mods.index > 1 %}{continue}{% ENDIF %}
 										{% FOR goods_mod_distinctive_properties %}
-										<option value="{goods.mods.ID}">{goods.mods.goods_mod_distinctive_properties.VALUE}</option>
+											{% IF goods.mods.goods_mod_distinctive_properties.index > 1 %}{continue}{% ENDIF %}
+											<option value="{goods.mods.ID}" name="{goods.mods.goods_mod_distinctive_properties.NAME}">{goods.mods.goods_mod_distinctive_properties.VALUE}</option>
 										{% ENDFOR goods_mod_distinctive_properties %}
 									{% ENDFOR mods %}
 								</select>
@@ -643,19 +643,19 @@
 									{% ELSEIF goods.MIN_PRICE_OLD>goods.MIN_PRICE_NOW %}
 									<span class="price__old {CURRENCY_CHAR_CODE}" data-price="{goods.MIN_PRICE_OLD}">{goods.MIN_PRICE_OLD | money_format}</span>
 									{% ENDIF %}
-									<span class="price__now {CURRENCY_CHAR_CODE}" itemprop="price" data-price="{goods.MIN_PRICE_NOW}">{goods.MIN_PRICE_NOW | money_format}</span>
+									<span class="price__now {CURRENCY_CHAR_CODE}" data-price="{goods.MIN_PRICE_NOW}" itemprop="price">{goods.MIN_PRICE_NOW | money_format}</span>
 								</div>
 
 								{% IF goods.COUNT_MODIFICATION > 1 %}
 								<div class="product__props selectBox">
 									<select class="product__props-select select" name="form[properties][]">
-										{% FOR mods %}
-											{% IF goods.mods.index > 1 %}{continue}{% ENDIF %}
-											{% FOR goods_mod_distinctive_properties %}
-											<option value="{goods.mods.ID}">{goods.mods.goods_mod_distinctive_properties.VALUE}</option>
-											{% ENDFOR goods_mod_distinctive_properties %}
-										{% ENDFOR mods %}
-									</select>
+									{% FOR mods %}
+										{% FOR goods_mod_distinctive_properties %}
+											{% IF goods.mods.goods_mod_distinctive_properties.index > 1 %}{continue}{% ENDIF %}
+											<option value="{goods.mods.ID}" name="{goods.mods.goods_mod_distinctive_properties.NAME}">{goods.mods.goods_mod_distinctive_properties.VALUE}</option>
+										{% ENDFOR goods_mod_distinctive_properties %}
+									{% ENDFOR mods %}
+								</select>
 								</div>
 								{% ENDIF COUNT_MODIFICATION %}
 							</div>

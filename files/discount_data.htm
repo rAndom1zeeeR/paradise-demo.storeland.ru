@@ -287,9 +287,9 @@
 							<div class="product__props selectBox">
 								<select class="product__props-select select" name="form[properties][]">
 									{% FOR mods %}
-										{% IF goods.mods.index > 1 %}{continue}{% ENDIF %}
 										{% FOR goods_mod_distinctive_properties %}
-										<option value="{goods.mods.ID}">{goods.mods.goods_mod_distinctive_properties.VALUE}</option>
+											{% IF goods.mods.goods_mod_distinctive_properties.index > 1 %}{continue}{% ENDIF %}
+											<option value="{goods.mods.ID}">{goods.mods.goods_mod_distinctive_properties.VALUE}</option>
 										{% ENDFOR goods_mod_distinctive_properties %}
 									{% ENDFOR mods %}
 								</select>
@@ -537,6 +537,26 @@
 							<a class="product__img flex-center" href="{goods.URL_MIN_PRICE_NOW | url_amp}" title="{goods.NAME}" itemprop="url" data-id="{goods.IMAGE_ID}">
 								<img class="lozad" src="{ASSETS_IMAGES_PATH}placeholder.png?design=THEMENAME" data-src="{% IF goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{goods.NAME}" />
 							</a>
+
+							<!-- Кол-во -->
+							<div class="product__qty flex-center">
+								<div class="qty flex {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}has-max{% ENDIF %}">
+									<span class="qty__select qty__select_minus" title="Уменьшить"><i class="icon-minus"></i></span>
+									<input class="qty__input" 
+												type="text" 
+												name="form[goods_mod_quantity]" 
+												maxlength="4" 
+												{% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}max="{goods.MAX_REST_VALUE}"{% ENDIF %} 
+												min="1" 
+												value="{% IF goods.NB_GOODS_IN_CART %}{goods.NB_GOODS_IN_CART}{% ELSE %}1{% ENDIF %}" 
+												title="Количество, {goods.MEASURE_NAME}"
+												autocomplete="off" 
+												onkeypress="return keyPress(this, event);" 
+												onpaste="return false;" 
+									/>
+									<span class="qty__select qty__select_plus" title="Увеличить"><i class="icon-plus"></i></span>
+								</div>
+							</div>
 				
 						</div>
 						
@@ -576,9 +596,9 @@
 								<div class="product__props selectBox">
 									<select class="product__props-select select" name="form[properties][]">
 										{% FOR mods %}
-											{% IF goods.mods.index > 1 %}{continue}{% ENDIF %}
 											{% FOR goods_mod_distinctive_properties %}
-											<option value="{goods.mods.ID}">{goods.mods.goods_mod_distinctive_properties.VALUE}</option>
+												{% IF goods.mods.goods_mod_distinctive_properties.index > 1 %}{continue}{% ENDIF %}
+												<option value="{goods.mods.ID}">{goods.mods.goods_mod_distinctive_properties.VALUE}</option>
 											{% ENDFOR goods_mod_distinctive_properties %}
 										{% ENDFOR mods %}
 									</select>

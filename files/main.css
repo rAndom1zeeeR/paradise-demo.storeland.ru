@@ -353,7 +353,7 @@ main {margin: 40px 0;position: relative;display: block;}
 	.products__grid .product__item:hover .product__links {opacity: 1;transform: translateY(0);}
 }
 @media all and (min-width: 1200px) {
-	.has-sidebar .product__img {height: 268px;}
+	.has-sidebar .product__img {height: 269px;}
 }
 @media all and (max-width: 1199px) {
 	.product__img {height: 220px;}

@@ -876,6 +876,26 @@
 											<a class="product__img flex-center" href="{index_page_sale_goods.URL_MIN_PRICE_NOW | url_amp}" title="{index_page_sale_goods.NAME}" itemprop="url" data-id="{index_page_sale_goods.IMAGE_ID}">
 												<img class="lozad" src="{ASSETS_IMAGES_PATH}placeholder.png?design=THEMENAME" data-src="{% IF index_page_sale_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{index_page_sale_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{index_page_sale_goods.NAME}" />
 											</a>
+
+											<!-- Кол-во -->
+											<div class="product__qty flex-center">
+												<div class="qty flex {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}has-max{% ENDIF %}">
+													<span class="qty__select qty__select_minus" title="Уменьшить"><i class="icon-minus"></i></span>
+													<input class="qty__input" 
+																type="text" 
+																name="form[goods_mod_quantity]" 
+																maxlength="4" 
+																{% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}max="{index_page_sale_goods.MAX_REST_VALUE}"{% ENDIF %} 
+																min="1" 
+																value="{% IF index_page_sale_goods.NB_GOODS_IN_CART %}{index_page_sale_goods.NB_GOODS_IN_CART}{% ELSE %}1{% ENDIF %}" 
+																title="Количество, {index_page_sale_goods.MEASURE_NAME}"
+																autocomplete="off" 
+																onkeypress="return keyPress(this, event);" 
+																onpaste="return false;" 
+													/>
+													<span class="qty__select qty__select_plus" title="Увеличить"><i class="icon-plus"></i></span>
+												</div>
+											</div>
 								
 										</div>
 										
@@ -975,8 +995,8 @@
 													<select class="product__props-select select" name="form[properties][]">
 														{% FOR mods %}
 															{% FOR goods_mod_distinctive_properties %}
-															{% IF index_page_sale_goods.mods.goods_mod_distinctive_properties.index > 1 %}{continue}{% ENDIF %}
-															<option value="{index_page_sale_goods.mods.ID}">{index_page_sale_goods.mods.goods_mod_distinctive_properties.VALUE}</option>
+																{% IF index_page_sale_goods.mods.goods_mod_distinctive_properties.index > 1 %}{continue}{% ENDIF %}
+																<option value="{index_page_sale_goods.mods.ID}">{index_page_sale_goods.mods.goods_mod_distinctive_properties.VALUE}</option>
 															{% ENDFOR goods_mod_distinctive_properties %}
 														{% ENDFOR mods %}
 													</select>
@@ -1286,6 +1306,26 @@
 									<a class="product__img flex-center" href="{index_page_favorites_goods.URL_MIN_PRICE_NOW | url_amp}" title="{index_page_favorites_goods.NAME}" itemprop="url" data-id="{index_page_favorites_goods.IMAGE_ID}">
 										<img class="lozad" src="{ASSETS_IMAGES_PATH}placeholder.png?design=THEMENAME" data-src="{% IF index_page_favorites_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{index_page_favorites_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{index_page_favorites_goods.NAME}" />
 									</a>
+
+									<!-- Кол-во -->
+									<div class="product__qty flex-center">
+										<div class="qty flex {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}has-max{% ENDIF %}">
+											<span class="qty__select qty__select_minus" title="Уменьшить"><i class="icon-minus"></i></span>
+											<input class="qty__input" 
+														type="text" 
+														name="form[goods_mod_quantity]" 
+														maxlength="4" 
+														{% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}max="{index_page_favorites_goods.MAX_REST_VALUE}"{% ENDIF %} 
+														min="1" 
+														value="{% IF index_page_favorites_goods.NB_GOODS_IN_CART %}{index_page_favorites_goods.NB_GOODS_IN_CART}{% ELSE %}1{% ENDIF %}" 
+														title="Количество, {index_page_favorites_goods.MEASURE_NAME}"
+														autocomplete="off" 
+														onkeypress="return keyPress(this, event);" 
+														onpaste="return false;" 
+											/>
+											<span class="qty__select qty__select_plus" title="Увеличить"><i class="icon-plus"></i></span>
+										</div>
+									</div>
 						
 								</div>
 								
@@ -1326,8 +1366,8 @@
 											<select class="product__props-select select" name="form[properties][]">
 												{% FOR mods %}
 													{% FOR goods_mod_distinctive_properties %}
-													{% IF index_page_favorites_goods.mods.goods_mod_distinctive_properties.index > 1 %}{continue}{% ENDIF %}
-													<option value="{index_page_favorites_goods.mods.ID}">{index_page_favorites_goods.mods.goods_mod_distinctive_properties.VALUE}</option>
+														{% IF index_page_favorites_goods.mods.goods_mod_distinctive_properties.index > 1 %}{continue}{% ENDIF %}
+														<option value="{index_page_favorites_goods.mods.ID}">{index_page_favorites_goods.mods.goods_mod_distinctive_properties.VALUE}</option>
 													{% ENDFOR goods_mod_distinctive_properties %}
 												{% ENDFOR mods %}
 											</select>
@@ -1651,6 +1691,26 @@
 									<a class="product__img flex-center" href="{index_page_new_goods.URL_MIN_PRICE_NOW | url_amp}" title="{index_page_new_goods.NAME}" itemprop="url" data-id="{index_page_new_goods.IMAGE_ID}">
 										<img class="lozad" src="{ASSETS_IMAGES_PATH}placeholder.png?design=THEMENAME" data-src="{% IF index_page_new_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{index_page_new_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{index_page_new_goods.NAME}" />
 									</a>
+
+									<!-- Кол-во -->
+									<div class="product__qty flex-center">
+										<div class="qty flex {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}has-max{% ENDIF %}">
+											<span class="qty__select qty__select_minus" title="Уменьшить"><i class="icon-minus"></i></span>
+											<input class="qty__input" 
+														type="text" 
+														name="form[goods_mod_quantity]" 
+														maxlength="4" 
+														{% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}max="{index_page_new_goods.MAX_REST_VALUE}"{% ENDIF %} 
+														min="1" 
+														value="{% IF index_page_new_goods.NB_GOODS_IN_CART %}{index_page_new_goods.NB_GOODS_IN_CART}{% ELSE %}1{% ENDIF %}" 
+														title="Количество, {index_page_new_goods.MEASURE_NAME}"
+														autocomplete="off" 
+														onkeypress="return keyPress(this, event);" 
+														onpaste="return false;" 
+											/>
+											<span class="qty__select qty__select_plus" title="Увеличить"><i class="icon-plus"></i></span>
+										</div>
+									</div>
 						
 								</div>
 								
@@ -1691,8 +1751,8 @@
 											<select class="product__props-select select" name="form[properties][]">
 												{% FOR mods %}
 													{% FOR goods_mod_distinctive_properties %}
-													{% IF index_page_new_goods.mods.goods_mod_distinctive_properties.index > 1 %}{continue}{% ENDIF %}
-													<option value="{index_page_new_goods.mods.ID}">{index_page_new_goods.mods.goods_mod_distinctive_properties.VALUE}</option>
+														{% IF index_page_new_goods.mods.goods_mod_distinctive_properties.index > 1 %}{continue}{% ENDIF %}
+														<option value="{index_page_new_goods.mods.ID}">{index_page_new_goods.mods.goods_mod_distinctive_properties.VALUE}</option>
 													{% ENDFOR goods_mod_distinctive_properties %}
 												{% ENDFOR mods %}
 											</select>
@@ -1971,6 +2031,26 @@
 									<a class="product__img flex-center" href="{index_page_goods.URL_MIN_PRICE_NOW | url_amp}" title="{index_page_goods.NAME}" itemprop="url" data-id="{index_page_goods.IMAGE_ID}">
 										<img class="lozad" src="{ASSETS_IMAGES_PATH}placeholder.png?design=THEMENAME" data-src="{% IF index_page_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{index_page_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{index_page_goods.NAME}" />
 									</a>
+
+									<!-- Кол-во -->
+									<div class="product__qty flex-center">
+										<div class="qty flex {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}has-max{% ENDIF %}">
+											<span class="qty__select qty__select_minus" title="Уменьшить"><i class="icon-minus"></i></span>
+											<input class="qty__input" 
+														type="text" 
+														name="form[goods_mod_quantity]" 
+														maxlength="4" 
+														{% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}max="{index_page_goods.MAX_REST_VALUE}"{% ENDIF %} 
+														min="1" 
+														value="{% IF index_page_goods.NB_GOODS_IN_CART %}{index_page_goods.NB_GOODS_IN_CART}{% ELSE %}1{% ENDIF %}" 
+														title="Количество, {index_page_goods.MEASURE_NAME}"
+														autocomplete="off" 
+														onkeypress="return keyPress(this, event);" 
+														onpaste="return false;" 
+											/>
+											<span class="qty__select qty__select_plus" title="Увеличить"><i class="icon-plus"></i></span>
+										</div>
+									</div>
 						
 								</div>
 								
@@ -2011,8 +2091,8 @@
 											<select class="product__props-select select" name="form[properties][]">
 												{% FOR mods %}
 													{% FOR goods_mod_distinctive_properties %}
-													{% IF index_page_goods.mods.goods_mod_distinctive_properties.index > 1 %}{continue}{% ENDIF %}
-													<option value="{index_page_goods.mods.ID}">{index_page_goods.mods.goods_mod_distinctive_properties.VALUE}</option>
+														{% IF index_page_goods.mods.goods_mod_distinctive_properties.index > 1 %}{continue}{% ENDIF %}
+														<option value="{index_page_goods.mods.ID}">{index_page_goods.mods.goods_mod_distinctive_properties.VALUE}</optio>
 													{% ENDFOR goods_mod_distinctive_properties %}
 												{% ENDFOR mods %}
 											</select>
@@ -2807,6 +2887,26 @@
 										<a class="product__img flex-center" href="{recently_viewed_goods.URL_MIN_PRICE_NOW | url_amp}" title="{recently_viewed_goods.NAME}" itemprop="url" data-id="{recently_viewed_goods.IMAGE_ID}">
 											<img class="lozad" src="{ASSETS_IMAGES_PATH}placeholder.png?design=THEMENAME" data-src="{% IF recently_viewed_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{recently_viewed_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{recently_viewed_goods.NAME}" />
 										</a>
+
+										<!-- Кол-во -->
+										<div class="product__qty flex-center">
+											<div class="qty flex {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}has-max{% ENDIF %}">
+												<span class="qty__select qty__select_minus" title="Уменьшить"><i class="icon-minus"></i></span>
+												<input class="qty__input" 
+															type="text" 
+															name="form[goods_mod_quantity]" 
+															maxlength="4" 
+															{% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}max="{recently_viewed_goods.MAX_REST_VALUE}"{% ENDIF %} 
+															min="1" 
+															value="{% IF recently_viewed_goods.NB_GOODS_IN_CART %}{recently_viewed_goods.NB_GOODS_IN_CART}{% ELSE %}1{% ENDIF %}" 
+															title="Количество, {recently_viewed_goods.MEASURE_NAME}"
+															autocomplete="off" 
+															onkeypress="return keyPress(this, event);" 
+															onpaste="return false;" 
+												/>
+												<span class="qty__select qty__select_plus" title="Увеличить"><i class="icon-plus"></i></span>
+											</div>
+										</div>
 							
 									</div>
 									
@@ -2847,8 +2947,8 @@
 												<select class="product__props-select select" name="form[properties][]">
 													{% FOR goods_mod_list %}
 														{% IF recently_viewed_goods.goods_mod_list.index > 1 %}{continue}{% ENDIF %}
-														{% FOR goods_mod_distinctive_properties %}
-														<option value="{recently_viewed_goods.goods_mod_list.ID}">{recently_viewed_goods.goods_mod_list.goods_mod_distinctive_properties.VALUE}</option>
+															{% FOR goods_mod_distinctive_properties %}
+															<option value="{recently_viewed_goods.goods_mod_list.ID}">{recently_viewed_goods.goods_mod_list.goods_mod_distinctive_properties.VALUE}</option>
 														{% ENDFOR goods_mod_distinctive_properties %}
 													{% ENDFOR goods_mod_list %}
 												</select>
