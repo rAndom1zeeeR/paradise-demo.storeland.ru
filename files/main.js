@@ -37,8 +37,7 @@ function userAgent(){
 
 // Добавляет пробел 1000 -> 1 000  /  10000 -> 10 000
 function addSpaces(nStr){
-  nStr = String(nStr)
-	return nStr.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
+	return String(nStr).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')
 }
 
 // Предзагрузчик
@@ -125,6 +124,7 @@ function changeTxt(txtObject) {
 class Quantity {
 	// Функция Плюс + для товара. //JS
 	plus(obj) {
+		console.log('plus obj1', obj);
 		obj.value = parseInt(obj.value) + 1
 		obj.setAttribute('value', obj.value)
 		obj.dispatchEvent(new Event('input'));
@@ -133,6 +133,7 @@ class Quantity {
 
 	// Функция Минус - для товара. //JS
 	minus(obj) {
+		console.log('minus obj2', obj);
 		obj.value = parseInt(obj.value) - 1
 		obj.setAttribute('value', obj.value)
 		obj.dispatchEvent(new Event('input'));
@@ -190,6 +191,9 @@ class Quantity {
 
 // Кол-во в карточке
 class QuantityGoods extends Quantity {
+	// Статус запуска функции
+	once = false;
+
 	constructor () {
 		super()
 		console.log('QuantityGoods extends Quantity');
@@ -204,6 +208,9 @@ class QuantityGoods extends Quantity {
 
 		// Если не карточка товара
 		if (qty == null) return false;
+
+		// Если функция уже запущена
+		if (this.once) return false;
 
 		// Минус
 		qtyMinus.addEventListener('click', function () {
@@ -220,6 +227,9 @@ class QuantityGoods extends Quantity {
 			quantityGoods.check(qtyInput)
 			quantityGoods.updGoods(qtyInput)
 		});
+
+		// Статус запуска функции
+		this.once = true
 
 	};
 
@@ -255,7 +265,7 @@ class QuantityGoods extends Quantity {
 class QuantityAddto extends Quantity {
 	constructor () {
 		super()
-		console.log('QuantityAddto extends Quantity');
+		// console.log('QuantityAddto extends Quantity');
 	}
 
 	// Действия в выпадающей корзине
@@ -337,7 +347,7 @@ class QuantityAddto extends Quantity {
 		const newCount = $doc.querySelector('.cart-count').innerHTML;
 		quantityAddto.updAddtoCount(newCount);
 		// Обновить сумму
-		const newSum = $doc.querySelector('.cartSumTotal').innerHTML;
+		const newSum = $doc.querySelector('.cartSumDiscount').innerHTML;
 		quantityAddto.updAddtoSum(newSum);
 		// console.log('updAddto newSum', newSum);
 		// Обновить скидку
@@ -355,32 +365,29 @@ class QuantityAddto extends Quantity {
 	};
 
 	// Обновление счетчика кол-ва корзины
-	updAddtoCount(count) {
+	updAddtoCount($count) {
 		const elements = document.querySelectorAll('.cart-count');
-		elements.forEach((element) => {
-			element.innerHTML = count;
-			element.setAttribute('data-cart-count', count);
-		});
+		elements.forEach((el) => {
+			el.innerHTML = $count;
+			el.setAttribute('data-cart-count', $count);
+		})
 	};
 
 	// Обновление итоговой цены
-	updAddtoSum(sum) {
+	updAddtoSum($sum) {
 		const elements = document.querySelectorAll('.cartSumNowDiscount');
-		elements.forEach((element) => {
-			element.innerHTML = sum;
-		});
+		elements.forEach((el) => el.innerHTML = $sum);
 	};
 
 	// Обновление итоговой скидки
-	updAddtoDiscount(sum) {
-		// console.log('sum', sum);
+	updAddtoDiscount($sum) {
 		const element = document.querySelector('.addto__total-discount .addto__total-price');
-		element.innerHTML = sum;
+		element.innerHTML = $sum;
 	};
 	
 	// Отображаем скидку 
 	updAddtoSale() {
-		console.log('updAddtoSale');
+		// console.log('updAddtoSale');
 		const value = document.querySelector('.discountValue')
 		// Если корзина пуста
 		if (!value) return false
@@ -394,71 +401,48 @@ class QuantityAddto extends Quantity {
 
 	};
 
-	// Обновление кол-ва
-	// updQty(element, qtyInput) {
-	// 	const qtyId = element.closest('.addto__item').getAttribute('data-id')
-	// 	const prodInput = document.querySelector('.product__item[data-id="'+ qtyId +'"] .qty__input')
-	// 	// quantityProduct.updInput(prodInput, qtyInput)
-	// 	prodInput.value = qtyInput.value
-	// 	prodInput.dispatchEvent(new Event('change'));
-		
-	// };
-
-	// updAddtoInput(addtoInput, qtyInput) {
-	// 	addtoInput.value = qtyInput.value
-	// 	addtoInput.dispatchEvent(new Event('change'));
-	// }
-
 }
 
 // Кол-во в корзине
 class QuantityCart extends Quantity {
 	constructor () {
 		super()
-		// console.log('QuantityCart');
+		// console.log('QuantityCart extends Quantity');
 	}
 
 	// Действия в выпадающей корзине
 	onCart() {
 		const elements = document.querySelectorAll('.cartTable__qty');
-		// console.log('cartTable__qty', elements)
+		// Если не элементов
+		if (elements == null) return false;
 
-		elements.forEach((element) => {
-			const qtyMinus = element.querySelector('.qty__select_minus')
-			const qtyPlus = element.querySelector('.qty__select_plus')
-			const qtyInput = element.querySelector('.qty__input')
-			// Если не карточка товара
-			if (element == null) return false;
+		elements.forEach((el) => {
+			const qtyMinus = el.querySelector('.qty__select_minus')
+			const qtyPlus = el.querySelector('.qty__select_plus')
+			const qtyInput = el.querySelector('.qty__input')
 
 			// Минус
 			qtyMinus.addEventListener('click', function () {
 				quantityCart.minus(qtyInput)
-				// quantityCart.check(qtyInput)
-				// quantityCart.updCart(qtyInput)
 			})
 
 			// Плюс
 			qtyPlus.addEventListener('click', function () {
 				quantityCart.plus(qtyInput)
-				// quantityCart.check(qtyInput)
-				// quantityCart.updCart(qtyInput)
 			})
 
 			// Изменение
 			qtyInput.addEventListener('input', function () {
 				quantityCart.check(this);
 				quantityCart.updCart(this);
-			});
+			})
 
-		});
+		})
 	};
 
 	// Корзина
 	updCart(obj) {
 		// console.log('updCart obj', obj);
-
-		if (!obj) return false
-
 		const item = obj.closest('.cartTable__item');
 		const mod = item.getAttribute('data-mod-id');
 		const priceNow = item.querySelector('.cartTable__price');
@@ -487,7 +471,6 @@ class QuantityCart extends Quantity {
 			const parser = new DOMParser();
 			const doc = parser.parseFromString(html, 'text/html');
 			quantityCart.updCartContent(doc, $mod, $priceNow)
-			// console.log('getCart doc', doc);
 		})
 		.catch((error) => console.error(error));
 
@@ -495,9 +478,6 @@ class QuantityCart extends Quantity {
 
 	// Обновление в корзине
 	updCartContent($doc, $mod, $priceNow) {
-		// console.log('doc2', $doc);
-		// console.log('mod2', $mod);
-		// console.log('priceNow2', $priceNow);
 		// Обновить цену
 		const price = $doc.querySelector('.cartTable__item[data-mod-id="' + $mod + '"] .cartTable__price');
 		$priceNow.innerHTML = price.innerHTML;
@@ -509,10 +489,6 @@ class QuantityCart extends Quantity {
 		document.querySelector('.cartTotal__items').innerHTML = newTotal;
 		// Обновить минимальную сумму заказа
 		cart.minSum();
-		// console.log('price', price);
-		// console.log('newCount', newCount);
-		// console.log('newTotal', newTotal);
-
 	};
 
 }
@@ -521,59 +497,40 @@ class QuantityCart extends Quantity {
 class QuantityProduct extends Quantity {
 	constructor () {
 		super()
-		console.log('QuantityProduct');
+		// console.log('QuantityProduct');
 	}
 
 	// Действия в выпадающей корзине
 	onProduct() {
 		const elements = document.querySelectorAll('.product__qty');
-		// console.log('onProduct', elements)
 		// Если нет элемента
 		if (elements == null) return false;
 
-		elements.forEach((element) => {
-			const qtyMinus = element.querySelector('.qty__select_minus')
-			const qtyPlus = element.querySelector('.qty__select_plus')
-			const qtyInput = element.querySelector('.qty__input')
-			// const qtyId = element.closest('[data-id]').getAttribute('data-id')
-			// console.log('qtyId', qtyId)
-			// const addtoInput = document.querySelector('.addto__item[data-id="'+ qtyId +'"] .qty__input')
-			// console.log('element', element)
-			// console.log('qtyInput', qtyInput)
-			// console.log('qtyId', qtyId)
-			// console.log('addtoIdInput', addtoInput)
+		elements.forEach((el) => {
+			const qtyMinus = el.querySelector('.qty__select_minus')
+			const qtyPlus = el.querySelector('.qty__select_plus')
+			const qtyInput = el.querySelector('.qty__input')
 
 			// Минус
 			qtyMinus.addEventListener('click', function () {
 				quantityProduct.minus(qtyInput)
-				// quantityProduct.check(qtyInput)
-				// console.log('Минус qtyInput', qtyInput)
-				// quantityProduct.updProdInput(addtoInput, qtyInput)
-				// quantityProduct.updAddto(qtyInput)
 			})
 
 			// Плюс
 			qtyPlus.addEventListener('click', function () {
 				quantityProduct.plus(qtyInput)
-				// quantityProduct.check(qtyInput)
-				// console.log('Плюс qtyInput', qtyInput)
-				// quantityProduct.updProdInput(addtoInput, qtyInput)
-				// quantityProduct.updAddto(qtyInput)
 			})
 
 			// Изменение
 			qtyInput.addEventListener('input', function () {
 				quantityProduct.check(this)
 				quantityProduct.updAddtoValue(this)
-				// console.log('addtoInput11', addtoInput)
-				// console.log('qtyInput11', qtyInput)
-				// quantityProduct.updProdInput(addtoInput, qtyInput)
-				// quantityProduct.updAddto(this);
 			})
 
 		})
 	};
-
+	
+	// Обновить кол-во выпадающей корзины
 	updAddtoValue(obj) {
 		const val = obj.value
 		const id = obj.closest('[data-id]').getAttribute('data-id')
@@ -582,21 +539,16 @@ class QuantityProduct extends Quantity {
 		if (!item) {return false}
 		item.value = val
 		item.dispatchEvent(new Event('input'));
-		// console.log('val3', val);
-		// console.log('id3', id);
-		// console.log('item3', item);
 	}
 
+	// Обновить кол-во всех товаров
 	updProdValue(obj) {
 		const val = obj.value
 		const id = obj.closest('[data-id]').getAttribute('data-id')
-		const item = document.querySelector('.product__item[data-id="'+ id +'"] .qty__input')
+		const items = document.querySelectorAll('.product__item[data-id="'+ id +'"] .qty__input')
 		
-		if (!item) {return false}
-		item.value = val
-		// console.log('val4', val);
-		// console.log('id4', id);
-		// console.log('item4', item);
+		if (!items) {return false}
+		items.forEach((el) => el.value = val)
 	}
 }
 
@@ -610,9 +562,7 @@ function Password() {
 	this.onPass = function(){
 		var content = document.querySelector('.form__showPass')
 		// Если нет контента
-		if(!content){
-			return false
-		}
+		if(!content) {return false}
 		
 		content.addEventListener('click', function(event){
 			password.showPass($(content));
@@ -623,9 +573,7 @@ function Password() {
 	this.onReg = function(){
 		var content = document.getElementById('registration')
 		// Если нет контента
-		if(!content){
-			return false
-		}
+		if(!content){ return false}
 		
 		content.addEventListener('click', function(event){
 			password.registration($(content));
@@ -661,6 +609,7 @@ function Password() {
 		});
 	}
 
+	// Регистрация
 	this.registration = function($obj){
 		if($obj.prop('checked')) {
 			$obj.attr('checked', true);
@@ -689,6 +638,7 @@ function Compare() {
 			watchSlidesVisibility: true,
 			slidesPerView: 4,
 			spaceBetween: 16,
+			allowTouchMove: false,
 			simulateTouch: false,
 			grabCursor: false,
 			autoHeight: true,
@@ -818,10 +768,6 @@ function Product() {
 			// Обновление данных
 			$(this).addClass('product__inCart').find('.product__addCart span').text(added);
 			count.text(newCount)
-			// console.log('this', $(this))
-			// console.log('added', added)
-			// console.log('count', count.text())
-			// console.log('new', newCount)
 		});
 	}
 
@@ -1241,7 +1187,7 @@ function Product() {
 			var formData = formBlock.serializeArray();
 			var t = $(this);
 			var id = t.find('input[name="form[goods_id]"]').val()
-			var val = t.find('.goodsDataMainModificationId').val()
+			var val = t.find('.qty__input').val()
 			// Сообщаем серверу, что мы пришли через ajax запрос
 			formData.push({name: 'ajax_q', value: 1});
 			// Так же сообщим ему, что нужно сразу отобразить форму быстрого заказа
@@ -1269,6 +1215,7 @@ function Product() {
 						
 						// Проверяем все товары в других категориях
 						product.inCartAll(id, val)
+						// input.dispatchEvent(new Event('input'));
 	
 					}
 					// Скрытое обновление корзины
@@ -1769,6 +1716,7 @@ function Catalog() {
 
 	}
 
+	// Счетчик активных фильтров
 	this.activeFilterCount = function(){
 		var count = $('.toolbar__form input[name^="form[filter][attr]"]').length;
 		var result = $('.filters__result')
@@ -1776,9 +1724,20 @@ function Catalog() {
 		count == 0 ? result.addClass('is-hide') : result.removeClass('is-hide')
 	}
 
+	// Скрыть каталог
+	// this.hideCatalog = function(){
+	// 	$('.sidebar__block-catalog .catalog__item').each(function(){
+	// 		console.log($(this));
+	// 		if ($(this).hasClass('is-opened')) {
+	// 			$('.sidebar__block-catalog').removeClass('is-hide')
+	// 		}
+	// 	})
+	// }
+
 	console.timeEnd('Catalog test');
 
 }
+
 
 ///////////////////////////////////////
 // Товар. Карточка товара
@@ -1924,7 +1883,7 @@ function Goods() {
 		})
 	}
 
-	// 
+	// Навигация
 	this.opinionNavigate = function($obj, $nav){
 		// console.log('obj2', $obj)
 		// console.log('nav2', $nav)
@@ -2202,7 +2161,7 @@ function Goods() {
 					modificationMeasure         	= modificationBlock.find('[name="measure_name"]').val(),
 					modificationDescription       = modificationBlock.find('.description').html(),
 					modificationGoodsModImageId   = modificationBlock.find('[name="goods_mod_image_id"]').val(),
-					goodsModificationId           = goodsModView.find('.goodsModificationId'),
+					goodsModificationId           = goodsModView.find('.goodsModificationId')
 					goodsPriceNow                 = goodsModView.find('.price__now'),
 					goodsPriceOld                 = goodsModView.find('.price__old'),
 					goodsAvailableQty             = goodsModView.find('.productView__qty'),
@@ -2276,6 +2235,7 @@ function Goods() {
 
 					// Идентификатор товарной модификации
 					goodsModificationId.val(modificationId);
+					goodsModView.find('.goodsDataMainModificationId').val('1')
 					goodsModView.find('.goodsDataMainModificationId').attr('name','form[goods_mod_id][' + modificationId + ']');
 					var goodsDataMainImage = goodsModView.find('.productView__images');
 
@@ -2413,9 +2373,12 @@ function Cart() {
 
 	// Функция вычисления остатка до минимальной суммы заказа
 	this.minSum = function(){
+		console.log('minSum');
 		if($('.cartTotal__min').length) {
 			var minPrice = parseInt($('.cartTotal__min-price').attr('data-price'));
-			var totalSum = parseInt($('.cartSumTotal').attr('data-price'));
+			var totalSum = parseInt($('.cartTotal__min-title').attr('data-price'));
+			console.log('minPrice', minPrice);
+			console.log('totalSum', totalSum);
 			if(minPrice > totalSum) {
 				var diff = minPrice - totalSum
 				var bar = Math.floor(totalSum / minPrice * 100)
@@ -3994,7 +3957,7 @@ function appendSearch() {
 function fixedMenu() {
 	var header = document.querySelector('.header__middle')
   window.addEventListener('scroll', function() {
-		window.pageYOffset > 399 ? header.classList.add('is-fixed') : header.classList.remove('is-fixed')
+		window.pageYOffset > 199 ? header.classList.add('is-fixed') : header.classList.remove('is-fixed')
   });
 
 }
@@ -4014,7 +3977,7 @@ $(window).resize(function(){
 
 function CatalogItems(){
 	this.hover = function(){
-		console.log('hover')
+		// console.log('hover11')
 		const items = document.querySelectorAll('.catalog__items-main .catalog__item')
 		
 		items.forEach((element) => {
@@ -4033,10 +3996,10 @@ function CatalogItems(){
 		// console.log('element', element)
 		// console.log('data-id', element.getAttribute('data-id'))
 		const id = element.getAttribute('data-id')
-		const parent = element.contains('.parent')
+		const parent = element.classList.contains('parent')
 		const subItems = document.querySelectorAll('.catalog__items-sub .catalog__item')
+		// console.log('parent', parent)
 		if (parent) {
-			// console.log('parent', parent)
 			// element.classList.add('is-show')
 			// $('.catalog__item').removeClass('is-show')
 			subItems.forEach((element) => element.classList.remove('is-show'))
@@ -4045,7 +4008,7 @@ function CatalogItems(){
 			// subItems.forEach((element) => {
 			// 	element.classList.remove('is-show')
 			// 	console.log('attr', element.hasAttribute('data-id'))
-			// 	if (element.contains('[data-id="'+ id +'"]')) {
+			// 	if (element.classList.contains('[data-id="'+ id +'"]')) {
 			// 		console.log('id=id', this);
 			// 	}
 			// })

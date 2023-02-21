@@ -154,7 +154,7 @@
 
 					<div class="cartTotal__min-price {CURRENCY_CHAR_CODE}" data-price="{SETTINGS_STORE_ORDER_MIN_ORDER_PRICE}">{SETTINGS_STORE_ORDER_MIN_ORDER_PRICE | money_format}</div>
 
-					<div class="cartTotal__min-title" data-price="{% IF SETTINGS_STORE_ORDER_MIN_PRICE_WITHOUT_DELIVERY %}{CART_SUM_NOW_WITH_DISCOUNT}{% ELSE %}{CART_SUM_NOW_WITH_DELIVERY_AND_DISCOUNT}{% ENDIF %}">до мин. суммы заказа</div>
+					<div class="cartTotal__min-title" data-price="{% IF SETTINGS_STORE_ORDER_MIN_PRICE_WITHOUT_DELIVERY %}{CART_SUM_NOW_WITH_DISCOUNT}{% ELSE %}{ CART_SUM_NOW_WITH_DISCOUNT}{% ENDIF %}">до мин. суммы заказа</div>
 
 					<div class="cartTotal__min-status flex justify-between">
 						<div class="cartTotal__min-bg">
