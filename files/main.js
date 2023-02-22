@@ -117,14 +117,13 @@ function changeTxt(txtObject) {
 }
 
 
-
 ///////////////////////////////////////
 /*** Кол-во ***/
 ///////////////////////////////////////
 class Quantity {
 	// Функция Плюс + для товара. //JS
 	plus(obj) {
-		console.log('plus obj1', obj);
+		console.log('plus obj', obj)
 		obj.value = parseInt(obj.value) + 1
 		obj.setAttribute('value', obj.value)
 		obj.dispatchEvent(new Event('input'));
@@ -133,7 +132,7 @@ class Quantity {
 
 	// Функция Минус - для товара. //JS
 	minus(obj) {
-		console.log('minus obj2', obj);
+		console.log('minus obj', obj)
 		obj.value = parseInt(obj.value) - 1
 		obj.setAttribute('value', obj.value)
 		obj.dispatchEvent(new Event('input'));
@@ -142,6 +141,7 @@ class Quantity {
 
 	// Проверка кол-ва. //JS
 	check(obj) {
+		// console.log('check obj', obj);
 		// Количество
 		let val = parseInt(obj.value);
 		// Проверка максимальныго остатка
@@ -179,14 +179,14 @@ class Quantity {
 			return false;
 		} else {
 			obj.nextElementSibling.classList.remove('qty__disable');
-		}
-		
+		}		
 	};
 
 	// Сообщение пользователю
 	notyMessage(message) {
 		return `<div class="noty__addto"><div class="noty__message">${message}</div></div>`;
 	};
+
 }
 
 // Кол-во в карточке
@@ -196,7 +196,7 @@ class QuantityGoods extends Quantity {
 
 	constructor () {
 		super()
-		console.log('QuantityGoods extends Quantity');
+		console.log('QuantityGoods');
 	};
 
 	// Действия в карточке товара
@@ -213,20 +213,16 @@ class QuantityGoods extends Quantity {
 		if (this.once) return false;
 
 		// Минус
-		qtyMinus.addEventListener('click', function () {
-			quantityGoods.minus(qtyInput)
-		})
+		qtyMinus.addEventListener('click', () => quantityGoods.minus(qtyInput))
 
 		// Плюс
-		qtyPlus.addEventListener('click', function () {
-			quantityGoods.plus(qtyInput)
-		})
+		qtyPlus.addEventListener('click', () => quantityGoods.plus(qtyInput))
 
 		// Изменение
 		qtyInput.addEventListener('input', function () {
 			quantityGoods.check(qtyInput)
 			quantityGoods.updGoods(qtyInput)
-		});
+		})
 
 		// Статус запуска функции
 		this.once = true
@@ -257,6 +253,12 @@ class QuantityGoods extends Quantity {
 			const multiOld = parseInt(val * priceOld);
 			blockOld.querySelector('.num').innerHTML = addSpaces(multiOld);
 		}
+
+		// console.log('goods val', val)
+		// console.log('goods priceNow', priceNow)
+		// console.log('goods priceOld', priceOld)
+		// console.log('goods multiNow', multiNow)
+		// console.log('goods multiOld', multiOld)
 	};
 
 }
@@ -265,46 +267,38 @@ class QuantityGoods extends Quantity {
 class QuantityAddto extends Quantity {
 	constructor () {
 		super()
-		// console.log('QuantityAddto extends Quantity');
+		console.log('QuantityAddto');
 	}
 
 	// Действия в выпадающей корзине
 	onAddto() {
 		const elements = document.querySelectorAll('.addto__qty');
+		// Если нет элементов
+		if (elements == null) return false;
 
-		elements.forEach((element) => {
-			const qtyMinus = element.querySelector('.qty__select_minus')
-			const qtyPlus = element.querySelector('.qty__select_plus')
-			const qtyInput = element.querySelector('.qty__input')
-			// Если не карточка товара
-			if (element == null) return false;
+		elements.forEach((el) => {
+			const qtyMinus = el.querySelector('.qty__select_minus')
+			const qtyPlus = el.querySelector('.qty__select_plus')
+			const qtyInput = el.querySelector('.qty__input')
 
 			// Минус
-			qtyMinus.addEventListener('click', function () {
-				quantityAddto.minus(qtyInput)
-			})
+			qtyMinus.addEventListener('click', () => quantityAddto.minus(qtyInput))
 
 			// Плюс
-			qtyPlus.addEventListener('click', function () {
-				quantityAddto.plus(qtyInput)
-			})
+			qtyPlus.addEventListener('click', () => quantityAddto.plus(qtyInput))
 
 			// Изменение
 			qtyInput.addEventListener('input', function () {
 				quantityAddto.check(this);
 				quantityAddto.updAddto(this);
-				quantityProduct.updProdValue(this)
-			});
+			})
 
-
-		});
+		})
 	};
 
 	// Выпадающая корзина
 	updAddto(obj) {
 		// console.log('updAddto obj', obj);
-		if (!obj) return false
-
 		const item = obj.closest('.addto__item');
 		const mod = item.getAttribute('data-mod-id');
 		const priceNow = item.querySelector('.price__now');
@@ -320,8 +314,8 @@ class QuantityAddto extends Quantity {
 	};
 
 	// Обновление выпадающей корзины
-	getAddtoCart($data, $mod, $priceNow) {
-		fetch('/cart', {
+	async getAddtoCart($data, $mod, $priceNow) {
+		await fetch('/cart', {
 			method: "POST",
 			body: $data
 		})
@@ -347,19 +341,19 @@ class QuantityAddto extends Quantity {
 		const newCount = $doc.querySelector('.cart-count').innerHTML;
 		quantityAddto.updAddtoCount(newCount);
 		// Обновить сумму
-		const newSum = $doc.querySelector('.cartSumDiscount').innerHTML;
+		const newSum = $doc.querySelector('.cartSumTotal').innerHTML;
 		quantityAddto.updAddtoSum(newSum);
 		// console.log('updAddto newSum', newSum);
 		// Обновить скидку
 		const newDiscount = $doc.querySelector('.cartTotal__item-discount .cartTotal__price');
 		const totalDiscount = document.querySelector('.addto__total-discount')
 		if (newDiscount){
-			// console.log('updAddto newDiscount1', newDiscount);
-			totalDiscount.classList.remove('is-disabled')
+			console.log('updAddto newDiscount1', newDiscount);
+			totalDiscount.classList.remove('is-hide')
 			quantityAddto.updAddtoDiscount(newDiscount.innerHTML)
 		} else {
-			// console.log('updAddto newDiscount2', newDiscount);
-			totalDiscount.classList.add('is-disabled')
+			console.log('updAddto newDiscount2', newDiscount);
+			totalDiscount.classList.add('is-hide')
 		}
 
 	};
@@ -370,13 +364,13 @@ class QuantityAddto extends Quantity {
 		elements.forEach((el) => {
 			el.innerHTML = $count;
 			el.setAttribute('data-cart-count', $count);
-		})
+		});
 	};
 
 	// Обновление итоговой цены
 	updAddtoSum($sum) {
 		const elements = document.querySelectorAll('.cartSumNowDiscount');
-		elements.forEach((el) => el.innerHTML = $sum);
+		elements.forEach((el) => el.innerHTML = $sum)
 	};
 
 	// Обновление итоговой скидки
@@ -393,12 +387,7 @@ class QuantityAddto extends Quantity {
 		if (!value) return false
 		// Если есть скидки
 		const discount = value.closest('.addto__total-discount')
-		if (value){
-			discount.classList.remove('is-disabled')
-		} else {
-			discount.classList.add('is-disabled')
-		}
-
+		value ? discount.classList.remove('is-disabled') : discount.classList.add('is-disabled')
 	};
 
 }
@@ -407,42 +396,45 @@ class QuantityAddto extends Quantity {
 class QuantityCart extends Quantity {
 	constructor () {
 		super()
-		// console.log('QuantityCart extends Quantity');
+		console.log('QuantityCart');
 	}
 
 	// Действия в выпадающей корзине
 	onCart() {
 		const elements = document.querySelectorAll('.cartTable__qty');
-		// Если не элементов
+		console.log('elements', elements);
+		// Если не карточка товара
 		if (elements == null) return false;
 
 		elements.forEach((el) => {
+			console.log('el', el);
 			const qtyMinus = el.querySelector('.qty__select_minus')
 			const qtyPlus = el.querySelector('.qty__select_plus')
 			const qtyInput = el.querySelector('.qty__input')
 
+			console.log('qtyMinus', qtyMinus);
+			console.log('qtyPlus', qtyPlus);
+			console.log('qtyInput', qtyInput);
+
 			// Минус
-			qtyMinus.addEventListener('click', function () {
-				quantityCart.minus(qtyInput)
-			})
+			qtyMinus.addEventListener('click', () => quantityCart.minus(qtyInput))
 
 			// Плюс
-			qtyPlus.addEventListener('click', function () {
-				quantityCart.plus(qtyInput)
-			})
+			qtyPlus.addEventListener('click', () => quantityCart.plus(qtyInput))
 
 			// Изменение
 			qtyInput.addEventListener('input', function () {
+				console.log('qtyInput input', this);
 				quantityCart.check(this);
 				quantityCart.updCart(this);
 			})
 
 		})
-	};
+	}
 
 	// Корзина
 	updCart(obj) {
-		// console.log('updCart obj', obj);
+		console.log('updCart obj', obj);
 		const item = obj.closest('.cartTable__item');
 		const mod = item.getAttribute('data-mod-id');
 		const priceNow = item.querySelector('.cartTable__price');
@@ -453,13 +445,14 @@ class QuantityCart extends Quantity {
 		// Обновить корзину
 		setTimeout(() => {
 			quantityCart.getCart(data, mod, priceNow);		
+			console.log('quantityCart getCart', data, mod, priceNow);
 		}, 100);
 
 	};
 
 	// Обновление в корзине
-	getCart($data, $mod, $priceNow) {
-		fetch('/cart', {
+	async getCart($data, $mod, $priceNow) {
+		await fetch('/cart', {
 			method: "POST",
 			body: $data
 		})
@@ -471,6 +464,7 @@ class QuantityCart extends Quantity {
 			const parser = new DOMParser();
 			const doc = parser.parseFromString(html, 'text/html');
 			quantityCart.updCartContent(doc, $mod, $priceNow)
+			console.log('getCart doc', doc);
 		})
 		.catch((error) => console.error(error));
 
@@ -478,6 +472,9 @@ class QuantityCart extends Quantity {
 
 	// Обновление в корзине
 	updCartContent($doc, $mod, $priceNow) {
+		// console.log('doc2', $doc);
+		// console.log('mod2', $mod);
+		// console.log('priceNow2', $priceNow);
 		// Обновить цену
 		const price = $doc.querySelector('.cartTable__item[data-mod-id="' + $mod + '"] .cartTable__price');
 		$priceNow.innerHTML = price.innerHTML;
@@ -489,6 +486,9 @@ class QuantityCart extends Quantity {
 		document.querySelector('.cartTotal__items').innerHTML = newTotal;
 		// Обновить минимальную сумму заказа
 		cart.minSum();
+		// console.log('price', price);
+		// console.log('newCount', newCount);
+		// console.log('newTotal', newTotal);
 	};
 
 }
@@ -534,24 +534,36 @@ class QuantityProduct extends Quantity {
 	updAddtoValue(obj) {
 		const val = obj.value
 		const id = obj.closest('[data-id]').getAttribute('data-id')
-		const item = document.querySelector('.addto__item[data-id="'+ id +'"] .qty__input')
+		const mod = obj.getAttribute('name')
+		const item = document.querySelector('.addto__item[data-id="'+ id +'"] .qty__input[name="'+ mod +'"]')
 		
 		if (!item) {return false}
 		item.value = val
 		item.dispatchEvent(new Event('input'));
+		// console.log('updAddtoValue obj', obj);
+		// console.log('updAddtoValue val', val);
+		// console.log('updAddtoValue id', id);
+		// console.log('updAddtoValue mod', mod);
+		// console.log('updAddtoValue items', item);
 	}
 
 	// Обновить кол-во всех товаров
 	updProdValue(obj) {
 		const val = obj.value
 		const id = obj.closest('[data-id]').getAttribute('data-id')
-		const items = document.querySelectorAll('.product__item[data-id="'+ id +'"] .qty__input')
-		
+		const mod = obj.getAttribute('name')
+		const items = document.querySelectorAll('.product__item[data-id="'+ id +'"] .qty__input[name="'+ mod +'"]')
+
 		if (!items) {return false}
 		items.forEach((el) => el.value = val)
+		// console.log('updProdValue obj', obj);
+		// console.log('updProdValue val', val);
+		// console.log('updProdValue id', id);
+		// console.log('updProdValue mod', mod);
+		// console.log('updProdValue items', items);
 	}
+	
 }
-
 
 
 ///////////////////////////////////////
@@ -751,6 +763,7 @@ function Product() {
 			product.hoverImage($(this))
 			product.priceDiff($(this),'percent')
 		})
+		product.changeMod()
 	}
 
 	// Запуск функции активного класса товара в других категориях
@@ -1410,6 +1423,50 @@ function Product() {
 		return false;
 	}
 
+	// Модификации
+	this.changeMod = function(){
+		// console.log('element', element)
+		const mods = document.querySelectorAll('.product__props-select')
+		
+		mods.forEach((mod) => {
+			mod.addEventListener('change', () => product.updMod(mod))
+		})
+		
+	}
+
+	// Обновить модификацию
+	this.updMod = function(mod){
+		const checked = mod.querySelector('option:checked')
+		const priceNow = checked.getAttribute('data-price')
+		const priceOld = checked.getAttribute('data-price-old')
+		const rest = checked.getAttribute('data-rest')
+		const id = checked.getAttribute('value')
+		const item = mod.closest('.product__item')
+		const itemPriceNow = item.querySelector('.price__now .num')
+		const itemPriceOld = item.querySelector('.price__old .num')
+		const itemQtyInput = item.querySelector('.qty__input')
+		const itemModId = item.querySelector('[name="form[goods_mod_id]"]')
+		const addtoId = document.querySelector('.addto__qty .qty__input[name="form[quantity]['+ id +']"')
+
+		itemPriceNow.innerHTML = addSpaces(Math.floor(priceNow))
+		itemPriceOld.innerHTML = addSpaces(Math.floor(priceOld))
+		itemQtyInput.setAttribute('name', 'form[quantity]['+ id +']')
+		itemQtyInput.setAttribute('max', rest)
+		itemQtyInput.value = addtoId.value
+		itemModId.value = id
+		
+		// console.log('mod', mod)
+		// console.log('el', checked)
+		// console.log('price', priceNow)
+		// console.log('priceOld', priceOld)
+		// console.log('rest', rest)
+		// console.log('id', id)
+		// console.log('itemPriceNow', itemPriceNow)
+		// console.log('itemPriceOld', itemPriceOld)
+		// console.log('itemQtyInput', itemQtyInput)
+		// console.log('itemModId', itemModId)
+	}
+
 }
 
 
@@ -1723,16 +1780,6 @@ function Catalog() {
 		result.attr('data-result', count).text(count)
 		count == 0 ? result.addClass('is-hide') : result.removeClass('is-hide')
 	}
-
-	// Скрыть каталог
-	// this.hideCatalog = function(){
-	// 	$('.sidebar__block-catalog .catalog__item').each(function(){
-	// 		console.log($(this));
-	// 		if ($(this).hasClass('is-opened')) {
-	// 			$('.sidebar__block-catalog').removeClass('is-hide')
-	// 		}
-	// 	})
-	// }
 
 	console.timeEnd('Catalog test');
 
@@ -3911,7 +3958,7 @@ $(document).ready(function(){
 	// cartSaleSum();
 	swiperViewed();
   mainnav('header .mainnav', '1', 991);
-	appendSearch()
+	// appendSearch()
 	fixedMenu()
 	quantityAddto.onAddto()
 	catalogItems.hover()
@@ -3965,7 +4012,7 @@ function fixedMenu() {
 
 // Запуск функций при изменении экрана
 $(window).resize(function(){
-	appendSearch()
+	// appendSearch()
   if(getClientWidth() > 481 && window.outerHeight < 630){
     $('body').addClass('landscape');
   }else{

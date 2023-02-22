@@ -21,6 +21,9 @@
 				{% FOR nested_categories_list %}
 				<div class="categories__item" data-id="{nested_categories_list.ID}">
 					<a class="categories__image flex-center" href="{nested_categories_list.URL}" title="Перейти к категории &laquo;{nested_categories_list.NAME}&raquo;">
+						<noscript>
+							<img class="noscript-lozad" src="{% IF nested_categories_list.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{nested_categories_list.IMAGE_MEDIUM}{% ENDIF %}" alt="{nested_categories_list.NAME}" />
+						</noscript>
 						<img class="lozad" data-src="{% IF nested_categories_list.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{nested_categories_list.IMAGE_MEDIUM}{% ENDIF %}">
 					</a>
 					<a class="categories__name flex-center" href="{nested_categories_list.URL}" title="Перейти к категории &laquo;{nested_categories_list.NAME}&raquo;">
@@ -157,6 +160,9 @@
 			
 						<!-- Изображение -->
 						<a class="product__img flex-center" href="{goods.URL_MIN_PRICE_NOW | url_amp}" title="{goods.NAME}" itemprop="url" data-id="{goods.IMAGE_ID}">
+							<noscript>
+								<img class="noscript-lozad" src="{% IF goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{goods.NAME}" />
+							</noscript>
 							<img class="lozad" src="{ASSETS_IMAGES_PATH}placeholder.png?design=THEMENAME" data-src="{% IF goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{goods.NAME}" />
 						</a>
 			
@@ -343,7 +349,14 @@
 									{% FOR mods %}
 										{% FOR goods_mod_distinctive_properties %}
 											{% IF goods.mods.goods_mod_distinctive_properties.index > 1 %}{continue}{% ENDIF %}
-											<option value="{goods.mods.ID}" name="{goods.mods.goods_mod_distinctive_properties.NAME}">{goods.mods.goods_mod_distinctive_properties.VALUE}</option>
+											<option 
+												value="{goods.mods.ID}" 
+												name="{goods.mods.goods_mod_distinctive_properties.NAME}"
+												data-price="{goods.mods.PRICE_NOW}"
+												data-price-old="{goods.mods.PRICE_NOW_WITHOUT_DISCOUNT || goods.mods.PRICE_OLD}"
+												data-rest="{goods.mods.REST_VALUE}"
+												{% IF goods.mods.ID = goods.MIN_PRICE_NOW_ID %}selected="selected"{% ENDIF %}
+											>{goods.mods.goods_mod_distinctive_properties.VALUE}</option>
 										{% ENDFOR goods_mod_distinctive_properties %}
 									{% ENDFOR mods %}
 								</select>
@@ -589,6 +602,9 @@
 				
 							<!-- Изображение -->
 							<a class="product__img flex-center" href="{goods.URL_MIN_PRICE_NOW | url_amp}" title="{goods.NAME}" itemprop="url" data-id="{goods.IMAGE_ID}">
+								<noscript>
+									<img class="noscript-lozad" src="{% IF goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{goods.NAME}" />
+								</noscript>
 								<img class="lozad" src="{ASSETS_IMAGES_PATH}placeholder.png?design=THEMENAME" data-src="{% IF goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{goods.NAME}" />
 							</a>
 
@@ -598,7 +614,7 @@
 									<span class="qty__select qty__select_minus" title="Уменьшить"><i class="icon-minus"></i></span>
 									<input class="qty__input" 
 												type="text" 
-												name="form[goods_mod_quantity]" 
+												name="form[quantity][{goods.MIN_PRICE_NOW_ID}]" 
 												maxlength="4" 
 												{% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}max="{goods.MAX_REST_VALUE}"{% ENDIF %} 
 												min="1" 
@@ -649,13 +665,20 @@
 								{% IF goods.COUNT_MODIFICATION > 1 %}
 								<div class="product__props selectBox">
 									<select class="product__props-select select" name="form[properties][]">
-									{% FOR mods %}
-										{% FOR goods_mod_distinctive_properties %}
-											{% IF goods.mods.goods_mod_distinctive_properties.index > 1 %}{continue}{% ENDIF %}
-											<option value="{goods.mods.ID}" name="{goods.mods.goods_mod_distinctive_properties.NAME}">{goods.mods.goods_mod_distinctive_properties.VALUE}</option>
-										{% ENDFOR goods_mod_distinctive_properties %}
-									{% ENDFOR mods %}
-								</select>
+										{% FOR mods %}
+											{% FOR goods_mod_distinctive_properties %}
+												{% IF goods.mods.goods_mod_distinctive_properties.index > 1 %}{continue}{% ENDIF %}
+												<option 
+													value="{goods.mods.ID}" 
+													name="{goods.mods.goods_mod_distinctive_properties.NAME}"
+													data-price="{goods.mods.PRICE_NOW}"
+													data-price-old="{goods.mods.PRICE_NOW_WITHOUT_DISCOUNT || goods.mods.PRICE_OLD}"
+													data-rest="{goods.mods.REST_VALUE}"
+													{% IF goods.mods.ID = goods.MIN_PRICE_NOW_ID %}selected="selected"{% ENDIF %}
+												>{goods.mods.goods_mod_distinctive_properties.VALUE}</option>
+											{% ENDFOR goods_mod_distinctive_properties %}
+										{% ENDFOR mods %}
+									</select>
 								</div>
 								{% ENDIF COUNT_MODIFICATION %}
 							</div>

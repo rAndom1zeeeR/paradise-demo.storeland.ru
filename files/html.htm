@@ -51,7 +51,7 @@
 	</script>
 </head>
 
-<body class="nojs loading
+<body class="nojs
 	{% IF index_page %}mod-index{% ENDIF %}
 	{% IF MOD_LNAME = user && ACT=favorites %}mod-favorites{% ENDIF %}
 	{% IF MOD_LNAME = cart %}mod-cart{% ENDIF %}
@@ -69,14 +69,14 @@
 		</div>
 
 		<style>
-			.nojs .preloader {
-				display: none;
-			}
+			.nojs .preloader {display: none;}
+			.nojs .wrapper {margin-top: 94px;}
+			/* .nojs .noscript-lozad {position: absolute;top: 0;left: 0;} */
 		</style>
 	</noscript>
 
 	<!-- Основной контейнер -->
-	<div class="wrapper">
+	<div class="wrapper loading">
 
 		<!-- Фон закрытия объектов -->
 		<div id="overlay"></div>
@@ -255,7 +255,7 @@
 								</form>
 
 								<!-- Результаты поиска -->
-								<div id="search-results">
+								<div class="search-results">
 									<div class="search-results__inner flex-start">
 										<div class="search-results__category">
 											<div class="search-results__title">Категории товаров</div>
@@ -523,7 +523,7 @@
 
 									<div class="addto__total {CURRENCY_CHAR_CODE} flex justify-between">
 										<!-- Скидки, действующие на заказ -->
-										<div class="addto__total-block addto__total-discount is-disabled">
+										<div class="addto__total-block addto__total-discount is-hide">
 											<span class="addto__total-label">Скидка:</span>
 											<span class="addto__total-price">
 												{% FOR cart_discount %}
@@ -607,6 +607,14 @@
 								<div class="slideshow__item swiper-slide flex">
 									<a class="slideshow__image" href="{CATALOG_URL}" title="Наборы орешков с любовью собираем коробочки полные витаминов">
 										<picture>
+											<noscript>
+												<img class="noscript-lozad" 
+														src="{ASSETS_IMAGES_PATH}slide_1_1200.jpg?design=THEMENAME" 
+														alt="Наборы орешков с любовью собираем коробочки полные витаминов" 
+														width="656"
+														height="288"
+												/>
+											</noscript>
 											<img class="lozad" 
 													data-src="{ASSETS_IMAGES_PATH}slide_1_1200.jpg?design=THEMENAME" 
 													alt="Наборы орешков с любовью собираем коробочки полные витаминов" 
@@ -630,6 +638,14 @@
 								<div class="slideshow__item swiper-slide flex">
 									<a class="slideshow__image" href="{CATALOG_URL}" title="Наборы орешков с любовью собираем коробочки полные витаминов">
 										<picture>
+											<noscript>
+												<img class="noscript-lozad" 
+														src="{ASSETS_IMAGES_PATH}slide_2_1200.jpg?design=THEMENAME" 
+														alt="Наборы орешков с любовью собираем коробочки полные витаминов" 
+														width="656"
+														height="288"
+												/>
+											</noscript>
 											<img class="lozad" 
 													data-src="{ASSETS_IMAGES_PATH}slide_2_1200.jpg?design=THEMENAME" 
 													alt="Наборы орешков с любовью собираем коробочки полные витаминов" 
@@ -653,6 +669,14 @@
 								<div class="slideshow__item swiper-slide flex">
 									<a class="slideshow__image" href="{CATALOG_URL}" title="Пряная осень - Устраиваем распродажу специй для любыйх блюд">
 										<picture>
+											<noscript>
+												<img class="noscript-lozad" 
+														src="{ASSETS_IMAGES_PATH}slide_3_1200.jpg?design=THEMENAME" 
+														alt="Пряная осень - Устраиваем распродажу специй для любыйх блюд" 
+														width="656"
+														height="288"
+												/>
+											</noscript>
 											<img class="lozad" 
 													data-src="{ASSETS_IMAGES_PATH}slide_3_1200.jpg?design=THEMENAME" 
 													alt="Пряная осень - Устраиваем распродажу специй для любыйх блюд" 
@@ -676,6 +700,14 @@
 								<div class="slideshow__item swiper-slide flex">
 									<a class="slideshow__image" href="{CATALOG_URL}" title="Сушенные ягоды - Запасаемся витаминами и экономим деньги">
 										<picture>
+											<noscript>
+												<img class="noscript-lozad" 
+														src="{ASSETS_IMAGES_PATH}slide_1_1200.jpg?design=THEMENAME" 
+														alt="Сушенные ягоды - Запасаемся витаминами и экономим деньги" 
+														width="656"
+														height="288"
+												/>
+											</noscript>
 											<img class="lozad" 
 													data-src="{ASSETS_IMAGES_PATH}slide_1_1200.jpg?design=THEMENAME" 
 													alt="Сушенные ягоды - Запасаемся витаминами и экономим деньги" 
@@ -874,6 +906,9 @@
 								
 											<!-- Изображение -->
 											<a class="product__img flex-center" href="{index_page_sale_goods.URL_MIN_PRICE_NOW | url_amp}" title="{index_page_sale_goods.NAME}" itemprop="url" data-id="{index_page_sale_goods.IMAGE_ID}">
+												<noscript>
+													<img class="noscript-lozad" src="{% IF index_page_sale_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{index_page_sale_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{index_page_sale_goods.NAME}" />
+												</noscript>
 												<img class="lozad" src="{ASSETS_IMAGES_PATH}placeholder.png?design=THEMENAME" data-src="{% IF index_page_sale_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{index_page_sale_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{index_page_sale_goods.NAME}" />
 											</a>
 
@@ -883,7 +918,7 @@
 													<span class="qty__select qty__select_minus" title="Уменьшить"><i class="icon-minus"></i></span>
 													<input class="qty__input" 
 																type="text" 
-																name="form[goods_mod_quantity]" 
+																name="form[quantity][{index_page_sale_goods.MIN_PRICE_NOW_ID}]" 
 																maxlength="4" 
 																{% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}max="{index_page_sale_goods.MAX_REST_VALUE}"{% ENDIF %} 
 																min="1" 
@@ -996,12 +1031,20 @@
 														{% FOR mods %}
 															{% FOR goods_mod_distinctive_properties %}
 																{% IF index_page_sale_goods.mods.goods_mod_distinctive_properties.index > 1 %}{continue}{% ENDIF %}
-																<option value="{index_page_sale_goods.mods.ID}">{index_page_sale_goods.mods.goods_mod_distinctive_properties.VALUE}</option>
+																<option 
+																	value="{index_page_sale_goods.mods.ID}" 
+																	name="{index_page_sale_goods.mods.goods_mod_distinctive_properties.NAME}"
+																	data-price="{index_page_sale_goods.mods.PRICE_NOW}"
+																	data-price-old="{index_page_sale_goods.mods.PRICE_NOW_WITHOUT_DISCOUNT || index_page_sale_goods.mods.PRICE_OLD}"
+																	data-rest="{index_page_sale_goods.mods.REST_VALUE}"
+																	{% IF index_page_sale_goods.mods.ID = index_page_sale_goods.MIN_PRICE_NOW_ID %}selected="selected"{% ENDIF %}
+																>{index_page_sale_goods.mods.goods_mod_distinctive_properties.VALUE}</option>
 															{% ENDFOR goods_mod_distinctive_properties %}
 														{% ENDFOR mods %}
 													</select>
 												</div>
 												{% ENDIF COUNT_MODIFICATION %}
+
 											</div>
 								
 										</div>
@@ -1090,7 +1133,10 @@
 							{% IF catalog_full.HIDE || catalog_full.LEVEL > 0 %}{continue}{% ENDIF %}
 							<div class="categories__item swiper-slide" data-id="{catalog_full.ID}">
 								<a class="categories__image flex-center" href="{catalog_full.URL}" title="Перейти к категории &laquo;{catalog_full.NAME}&raquo;">
-									<img class="lozad" data-src="{% IF catalog_full.IMAGE_MEDIUM %}{catalog_full.IMAGE_MEDIUM}{% ELSE %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ENDIF %}">
+									<noscript>
+										<img class="noscript-lozad" src="{% IF catalog_full.IMAGE_MEDIUM %}{catalog_full.IMAGE_MEDIUM}{% ELSE %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ENDIF %}" alt="{catalog_full.NAME}">
+									</noscript>
+									<img class="lozad" src="{ASSETS_IMAGES_PATH}placeholder.png?design=THEMENAME" data-src="{% IF catalog_full.IMAGE_MEDIUM %}{catalog_full.IMAGE_MEDIUM}{% ELSE %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ENDIF %}" alt="{catalog_full.NAME}">
 								</a>
 								<a class="categories__name flex-center" href="{catalog_full.URL}" title="Перейти к категории &laquo;{catalog_full.NAME}&raquo;">
 									<span>{catalog_full.NAME}</span>
@@ -1304,6 +1350,9 @@
 						
 									<!-- Изображение -->
 									<a class="product__img flex-center" href="{index_page_favorites_goods.URL_MIN_PRICE_NOW | url_amp}" title="{index_page_favorites_goods.NAME}" itemprop="url" data-id="{index_page_favorites_goods.IMAGE_ID}">
+										<noscript>
+											<img class="noscript-lozad" src="{% IF index_page_favorites_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{index_page_favorites_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{index_page_favorites_goods.NAME}" />
+										</noscript>
 										<img class="lozad" src="{ASSETS_IMAGES_PATH}placeholder.png?design=THEMENAME" data-src="{% IF index_page_favorites_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{index_page_favorites_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{index_page_favorites_goods.NAME}" />
 									</a>
 
@@ -1313,7 +1362,7 @@
 											<span class="qty__select qty__select_minus" title="Уменьшить"><i class="icon-minus"></i></span>
 											<input class="qty__input" 
 														type="text" 
-														name="form[goods_mod_quantity]" 
+														name="form[quantity][{index_page_favorites_goods.MIN_PRICE_NOW_ID}]" 
 														maxlength="4" 
 														{% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}max="{index_page_favorites_goods.MAX_REST_VALUE}"{% ENDIF %} 
 														min="1" 
@@ -1367,12 +1416,20 @@
 												{% FOR mods %}
 													{% FOR goods_mod_distinctive_properties %}
 														{% IF index_page_favorites_goods.mods.goods_mod_distinctive_properties.index > 1 %}{continue}{% ENDIF %}
-														<option value="{index_page_favorites_goods.mods.ID}">{index_page_favorites_goods.mods.goods_mod_distinctive_properties.VALUE}</option>
+														<option 
+															value="{index_page_favorites_goods.mods.ID}" 
+															name="{index_page_favorites_goods.mods.goods_mod_distinctive_properties.NAME}"
+															data-price="{index_page_favorites_goods.mods.PRICE_NOW}"
+															data-price-old="{index_page_favorites_goods.mods.PRICE_NOW_WITHOUT_DISCOUNT || index_page_favorites_goods.mods.PRICE_OLD}"
+															data-rest="{index_page_favorites_goods.mods.REST_VALUE}"
+															{% IF index_page_favorites_goods.mods.ID = index_page_favorites_goods.MIN_PRICE_NOW_ID %}selected="selected"{% ENDIF %}
+														>{index_page_favorites_goods.mods.goods_mod_distinctive_properties.VALUE}</option>
 													{% ENDFOR goods_mod_distinctive_properties %}
 												{% ENDFOR mods %}
 											</select>
 										</div>
 										{% ENDIF COUNT_MODIFICATION %}
+
 									</div>
 						
 								</div>
@@ -1418,7 +1475,10 @@
 							<div class="offers__item flex">
 								<div class="offers__sticker sticker__sales"><span>-10%</span></div>
 								<div class="offers__image">
-									<img class="lozad" data-src="{ASSETS_IMAGES_PATH}banner_1.jpg?design=THEMENAME" alt="Заряди мозги - Грецкие орехи высшей категории по выгодной цене" />
+									<noscript>
+										<img class="noscript-lozad" src="{ASSETS_IMAGES_PATH}banner_1.jpg?design=THEMENAME" alt="Заряди мозги - Грецкие орехи высшей категории по выгодной цене" />
+									</noscript>
+									<img class="lozad" src="{ASSETS_IMAGES_PATH}placeholder.png?design=THEMENAME" data-src="{ASSETS_IMAGES_PATH}banner_1.jpg?design=THEMENAME" alt="Заряди мозги - Грецкие орехи высшей категории по выгодной цене" />
 								</div>
 								<div class="offers__content">
 									<div class="offers__subtitle"><span>Весь сентябрь</span></div>
@@ -1438,7 +1498,10 @@
 							<div class="offers__item flex">
 								<div class="offers__sticker sticker__sales"><span>-55%</span></div>
 								<div class="offers__image">
-									<img class="lozad" data-src="{ASSETS_IMAGES_PATH}banner_2.jpg?design=THEMENAME" alt="Пряная осень - Огненные скидки на ароматную корицу" />
+									<noscript>
+										<img class="noscript-lozad" src="{ASSETS_IMAGES_PATH}banner_2.jpg?design=THEMENAME" alt="Пряная осень - Огненные скидки на ароматную корицу" />
+									</noscript>
+									<img class="lozad" src="{ASSETS_IMAGES_PATH}placeholder.png?design=THEMENAME" data-src="{ASSETS_IMAGES_PATH}banner_2.jpg?design=THEMENAME" alt="Пряная осень - Огненные скидки на ароматную корицу" />
 								</div>
 								<div class="offers__content">
 									<div class="offers__subtitle"><span>с 1 по 5 октября</span></div>
@@ -1458,7 +1521,10 @@
 							<div class="offers__item flex">
 								<div class="offers__sticker sticker__sales"><span>-5%</span></div>
 								<div class="offers__image">
-									<img class="lozad" data-src="{ASSETS_IMAGES_PATH}banner_3.jpg?design=THEMENAME" alt="Турецкие сладости - Устройте самое лучшее чаепитие"/>
+									<noscript>
+										<img class="noscript-lozad" src="{ASSETS_IMAGES_PATH}banner_3.jpg?design=THEMENAME" alt="Турецкие сладости - Устройте самое лучшее чаепитие" />
+									</noscript>
+									<img class="lozad" src="{ASSETS_IMAGES_PATH}placeholder.png?design=THEMENAME" data-src="{ASSETS_IMAGES_PATH}banner_3.jpg?design=THEMENAME" alt="Турецкие сладости - Устройте самое лучшее чаепитие" />
 								</div>
 								<div class="offers__content">
 									<div class="offers__subtitle"><span>Выгодно!</span></div>
@@ -1689,6 +1755,9 @@
 						
 									<!-- Изображение -->
 									<a class="product__img flex-center" href="{index_page_new_goods.URL_MIN_PRICE_NOW | url_amp}" title="{index_page_new_goods.NAME}" itemprop="url" data-id="{index_page_new_goods.IMAGE_ID}">
+										<noscript>
+											<img class="noscript-lozad" src="{% IF index_page_new_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{index_page_new_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{index_page_new_goods.NAME}" />
+										</noscript>
 										<img class="lozad" src="{ASSETS_IMAGES_PATH}placeholder.png?design=THEMENAME" data-src="{% IF index_page_new_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{index_page_new_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{index_page_new_goods.NAME}" />
 									</a>
 
@@ -1698,7 +1767,7 @@
 											<span class="qty__select qty__select_minus" title="Уменьшить"><i class="icon-minus"></i></span>
 											<input class="qty__input" 
 														type="text" 
-														name="form[goods_mod_quantity]" 
+														name="form[quantity][{index_page_new_goods.MIN_PRICE_NOW_ID}]" 
 														maxlength="4" 
 														{% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}max="{index_page_new_goods.MAX_REST_VALUE}"{% ENDIF %} 
 														min="1" 
@@ -1752,12 +1821,20 @@
 												{% FOR mods %}
 													{% FOR goods_mod_distinctive_properties %}
 														{% IF index_page_new_goods.mods.goods_mod_distinctive_properties.index > 1 %}{continue}{% ENDIF %}
-														<option value="{index_page_new_goods.mods.ID}">{index_page_new_goods.mods.goods_mod_distinctive_properties.VALUE}</option>
+														<option 
+															value="{index_page_new_goods.mods.ID}" 
+															name="{index_page_new_goods.mods.goods_mod_distinctive_properties.NAME}"
+															data-price="{index_page_new_goods.mods.PRICE_NOW}"
+															data-price-old="{index_page_new_goods.mods.PRICE_NOW_WITHOUT_DISCOUNT || index_page_new_goods.mods.PRICE_OLD}"
+															data-rest="{index_page_new_goods.mods.REST_VALUE}"
+															{% IF index_page_new_goods.mods.ID = index_page_new_goods.MIN_PRICE_NOW_ID %}selected="selected"{% ENDIF %}
+														>{index_page_new_goods.mods.goods_mod_distinctive_properties.VALUE}</option>
 													{% ENDFOR goods_mod_distinctive_properties %}
 												{% ENDFOR mods %}
 											</select>
 										</div>
 										{% ENDIF COUNT_MODIFICATION %}
+
 									</div>
 						
 								</div>
@@ -2029,6 +2106,9 @@
 						
 									<!-- Изображение -->
 									<a class="product__img flex-center" href="{index_page_goods.URL_MIN_PRICE_NOW | url_amp}" title="{index_page_goods.NAME}" itemprop="url" data-id="{index_page_goods.IMAGE_ID}">
+										<noscript>
+											<img class="noscript-lozad" src="{% IF index_page_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{index_page_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{index_page_goods.NAME}" />
+										</noscript>
 										<img class="lozad" src="{ASSETS_IMAGES_PATH}placeholder.png?design=THEMENAME" data-src="{% IF index_page_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{index_page_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{index_page_goods.NAME}" />
 									</a>
 
@@ -2038,7 +2118,7 @@
 											<span class="qty__select qty__select_minus" title="Уменьшить"><i class="icon-minus"></i></span>
 											<input class="qty__input" 
 														type="text" 
-														name="form[goods_mod_quantity]" 
+														name="form[quantity][{index_page_goods.MIN_PRICE_NOW_ID}]" 
 														maxlength="4" 
 														{% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}max="{index_page_goods.MAX_REST_VALUE}"{% ENDIF %} 
 														min="1" 
@@ -2092,12 +2172,20 @@
 												{% FOR mods %}
 													{% FOR goods_mod_distinctive_properties %}
 														{% IF index_page_goods.mods.goods_mod_distinctive_properties.index > 1 %}{continue}{% ENDIF %}
-														<option value="{index_page_goods.mods.ID}">{index_page_goods.mods.goods_mod_distinctive_properties.VALUE}</optio>
+														<option 
+															value="{index_page_goods.mods.ID}" 
+															name="{index_page_goods.mods.goods_mod_distinctive_properties.NAME}"
+															data-price="{index_page_goods.mods.PRICE_NOW}"
+															data-price-old="{index_page_goods.mods.PRICE_NOW_WITHOUT_DISCOUNT || index_page_goods.mods.PRICE_OLD}"
+															data-rest="{index_page_goods.mods.REST_VALUE}"
+															{% IF index_page_goods.mods.ID = index_page_goods.MIN_PRICE_NOW_ID %}selected="selected"{% ENDIF %}
+														>{index_page_goods.mods.goods_mod_distinctive_properties.VALUE}</option>
 													{% ENDFOR goods_mod_distinctive_properties %}
 												{% ENDFOR mods %}
 											</select>
 										</div>
 										{% ENDIF COUNT_MODIFICATION %}
+
 									</div>
 						
 								</div>
@@ -2149,6 +2237,14 @@
 							<div class="swiper-slide">
 								<article class="news__item">
 									<a class="news__image flex-center" href="{news_list_all.URL}" title="Перейти к странице &laquo;{news_list_all.TITLE}&raquo;">
+										<noscript>
+											<img class="noscript-lozad" 
+													src="{% IF news_list_all.IMG %}{news_list_all.IMG}{% ELSE %}{ASSETS_IMAGES_PATH}news.png?design=THEMENAME{% ENDIF %}" 
+													alt="{news_list_all.TITLE}" 
+													width="260"
+													height="260"
+											/>
+										</noscript>
 										<img class="lozad" 
 												data-src="{% IF news_list_all.IMG %}{news_list_all.IMG}{% ELSE %}{ASSETS_IMAGES_PATH}news.png?design=THEMENAME{% ENDIF %}" 
 												alt="{news_list_all.TITLE}" 
@@ -2203,6 +2299,14 @@
 							{% IF news_list_shop.index > 2 %}{break}{% ENDIF %}
 								<article class="news__item">
 									<a class="news__image flex-center" href="{news_list_shop.URL}" title="Перейти к странице &laquo;{news_list_shop.TITLE}&raquo;">
+										<noscript>
+											<img class="noscript-lozad" 
+													src="{% IF news_list_shop.IMG %}{news_list_shop.IMG}{% ELSE %}{ASSETS_IMAGES_PATH}news.png?design=THEMENAME{% ENDIF %}" 
+													alt="{news_list_shop.TITLE}" 
+													width="260"
+													height="260"
+											/>
+										</noscript>
 										<img class="lozad" 
 												data-src="{% IF news_list_shop.IMG %}{news_list_shop.IMG}{% ELSE %}{ASSETS_IMAGES_PATH}news.png?design=THEMENAME{% ENDIF %}" 
 												alt="{news_list_shop.TITLE}" 
@@ -2886,6 +2990,9 @@
 							
 										<!-- Изображение -->
 										<a class="product__img flex-center" href="{recently_viewed_goods.URL_MIN_PRICE_NOW | url_amp}" title="{recently_viewed_goods.NAME}" itemprop="url" data-id="{recently_viewed_goods.IMAGE_ID}">
+											<noscript>
+												<img class="noscript-lozad" src="{% IF recently_viewed_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{recently_viewed_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{recently_viewed_goods.NAME}" />
+											</noscript>
 											<img class="lozad" src="{ASSETS_IMAGES_PATH}placeholder.png?design=THEMENAME" data-src="{% IF recently_viewed_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{recently_viewed_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{recently_viewed_goods.NAME}" />
 										</a>
 
@@ -2895,7 +3002,7 @@
 												<span class="qty__select qty__select_minus" title="Уменьшить"><i class="icon-minus"></i></span>
 												<input class="qty__input" 
 															type="text" 
-															name="form[goods_mod_quantity]" 
+															name="form[quantity][{recently_viewed_goods.MIN_PRICE_NOW_ID}]" 
 															maxlength="4" 
 															{% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}max="{recently_viewed_goods.MAX_REST_VALUE}"{% ENDIF %} 
 															min="1" 
@@ -2946,15 +3053,23 @@
 											{% IF recently_viewed_goods.COUNT_MODIFICATION > 1 %}
 											<div class="product__props selectBox">
 												<select class="product__props-select select" name="form[properties][]">
-													{% FOR goods_mod_list %}
-														{% IF recently_viewed_goods.goods_mod_list.index > 1 %}{continue}{% ENDIF %}
-															{% FOR goods_mod_distinctive_properties %}
-															<option value="{recently_viewed_goods.goods_mod_list.ID}">{recently_viewed_goods.goods_mod_list.goods_mod_distinctive_properties.VALUE}</option>
+													{% FOR mods %}
+														{% FOR goods_mod_distinctive_properties %}
+															{% IF recently_viewed_goods.mods.goods_mod_distinctive_properties.index > 1 %}{continue}{% ENDIF %}
+															<option 
+																value="{recently_viewed_goods.mods.ID}" 
+																name="{recently_viewed_goods.mods.goods_mod_distinctive_properties.NAME}"
+																data-price="{recently_viewed_goods.mods.PRICE_NOW}"
+																data-price-old="{recently_viewed_goods.mods.PRICE_NOW_WITHOUT_DISCOUNT || recently_viewed_goods.mods.PRICE_OLD}"
+																data-rest="{recently_viewed_goods.mods.REST_VALUE}"
+																{% IF recently_viewed_goods.mods.ID = recently_viewed_goods.MIN_PRICE_NOW_ID %}selected="selected"{% ENDIF %}
+															>{recently_viewed_goods.mods.goods_mod_distinctive_properties.VALUE}</option>
 														{% ENDFOR goods_mod_distinctive_properties %}
-													{% ENDFOR goods_mod_list %}
+													{% ENDFOR mods %}
 												</select>
 											</div>
 											{% ENDIF COUNT_MODIFICATION %}
+
 										</div>
 							
 									</div>

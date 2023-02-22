@@ -265,7 +265,7 @@
 									<span class="qty__select qty__select_minus" title="Уменьшить"><i class="icon-minus"></i></span>
 									<input class="qty__input" 
 												type="text" 
-												name="form[goods_mod_quantity]" 
+												name="form[quantity][{GOODS_MOD_ID}]" 
 												maxlength="4" 
 												{% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}max="{GOODS_MOD_REST_VALUE}"{% ENDIF %} 
 												min="1" 
@@ -1025,6 +1025,9 @@
 			
 						<!-- Изображение -->
 						<a class="product__img flex-center" href="{related_goods.URL_MIN_PRICE_NOW | url_amp}" title="{related_goods.NAME}" itemprop="url" data-id="{related_goods.IMAGE_ID}">
+							<noscript>
+								<img class="noscript-lozad" src="{% IF goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{goods.NAME}" />
+							</noscript>
 							<img class="lozad" src="{ASSETS_IMAGES_PATH}placeholder.png?design=THEMENAME" data-src="{% IF related_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{related_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{related_goods.NAME}" />
 						</a>
 
@@ -1034,7 +1037,7 @@
 								<span class="qty__select qty__select_minus" title="Уменьшить"><i class="icon-minus"></i></span>
 								<input class="qty__input" 
 											type="text" 
-											name="form[goods_mod_quantity]" 
+											name="form[quantity][{related_goods.MIN_PRICE_NOW_ID}]" 
 											maxlength="4" 
 											{% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}max="{related_goods.MAX_REST_VALUE}"{% ENDIF %} 
 											min="1" 
@@ -1086,14 +1089,22 @@
 							<div class="product__props selectBox">
 								<select class="product__props-select select" name="form[properties][]">
 									{% FOR goods_mod_list %}
-										{% FOR goods_mod_distinctive_properties %}
-											{% IF related_goods.goods_mod_list.goods_mod_distinctive_properties.index > 1 %}{continue}{% ENDIF %}
-											<option value="{related_goods.goods_mod_list.ID}">{related_goods.goods_mod_list.goods_mod_distinctive_properties.VALUE}</option>
-										{% ENDFOR goods_mod_distinctive_properties %}
+										{% FOR goods_mod_property_list %}
+											{% IF related_goods.goods_mod_list.goods_mod_property_list.index > 1 %}{continue}{% ENDIF %}
+											<option 
+												value="{related_goods.goods_mod_list.ID}" 
+												name="{related_goods.goods_mod_list.goods_mod_property_list.NAME}"
+												data-price="{related_goods.goods_mod_list.PRICE_NOW}"
+												data-price-old="{related_goods.goods_mod_list.PRICE_NOW_WITHOUT_DISCOUNT || related_goods.goods_mod_list.PRICE_OLD}"
+												data-rest="{related_goods.goods_mod_list.REST_VALUE}"
+												{% IF related_goods.goods_mod_list.ID = related_goods.goods_mod_list.MIN_PRICE_NOW_ID %}selected="selected"{% ENDIF %}
+											>{related_goods.goods_mod_list.goods_mod_property_list.VALUE}</option>
+										{% ENDFOR goods_mod_property_list %}
 									{% ENDFOR goods_mod_list %}
 								</select>
 							</div>
 							{% ENDIF COUNT_MODIFICATION %}
+
 						</div>
 			
 					</div>
@@ -1312,6 +1323,9 @@
 			
 						<!-- Изображение -->
 						<a class="product__img flex-center" href="{related_views_goods.URL_MIN_PRICE_NOW | url_amp}" title="{related_views_goods.NAME}" itemprop="url" data-id="{related_views_goods.IMAGE_ID}">
+							<noscript>
+								<img class="noscript-lozad" src="{% IF goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{goods.NAME}" />
+							</noscript>
 							<img class="lozad" src="{ASSETS_IMAGES_PATH}placeholder.png?design=THEMENAME" data-src="{% IF related_views_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{related_views_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{related_views_goods.NAME}" />
 						</a>
 
@@ -1321,7 +1335,7 @@
 								<span class="qty__select qty__select_minus" title="Уменьшить"><i class="icon-minus"></i></span>
 								<input class="qty__input" 
 											type="text" 
-											name="form[goods_mod_quantity]" 
+											name="form[quantity][{related_views_goods.MIN_PRICE_NOW_ID}]" 
 											maxlength="4" 
 											{% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}max="{related_views_goods.MAX_REST_VALUE}"{% ENDIF %} 
 											min="1" 
@@ -1373,14 +1387,22 @@
 							<div class="product__props selectBox">
 								<select class="product__props-select select" name="form[properties][]">
 									{% FOR goods_mod_list %}
-										{% FOR goods_mod_distinctive_properties %}
-											{% IF related_views_goods.goods_mod_list.goods_mod_distinctive_properties.index > 1 %}{continue}{% ENDIF %}
-											<option value="{related_views_goods.goods_mod_list.ID}">{related_views_goods.goods_mod_list.goods_mod_distinctive_properties.VALUE}</option>
-										{% ENDFOR goods_mod_distinctive_properties %}
+										{% FOR goods_mod_property_list %}
+											{% IF related_views_goods.goods_mod_list.goods_mod_property_list.index > 1 %}{continue}{% ENDIF %}
+											<option 
+												value="{related_views_goods.goods_mod_list.ID}" 
+												name="{related_views_goods.goods_mod_list.goods_mod_property_list.NAME}"
+												data-price="{related_views_goods.goods_mod_list.PRICE_NOW}"
+												data-price-old="{related_views_goods.goods_mod_list.PRICE_NOW_WITHOUT_DISCOUNT || related_views_goods.goods_mod_list.PRICE_OLD}"
+												data-rest="{related_views_goods.goods_mod_list.REST_VALUE}"
+												{% IF related_views_goods.goods_mod_list.ID = related_views_goods.goods_mod_list.MIN_PRICE_NOW_ID %}selected="selected"{% ENDIF %}
+											>{related_views_goods.goods_mod_list.goods_mod_property_list.VALUE}</option>
+										{% ENDFOR goods_mod_property_list %}
 									{% ENDFOR goods_mod_list %}
 								</select>
 							</div>
 							{% ENDIF COUNT_MODIFICATION %}
+
 						</div>
 			
 					</div>

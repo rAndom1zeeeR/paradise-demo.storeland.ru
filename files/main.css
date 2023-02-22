@@ -1354,7 +1354,10 @@ header {background-color: var(--color-white);box-shadow: 0px 0px 20px 0px var(--
 	.header__bottom {display: none;}
 }
 @media all and (max-width: 767px) {
-	.header__middle {display: none;}
+	/* .header__middle {display: none;} */
+	.header-catalog {display: none;}
+	.header-addto {display: none;}
+	.header__middle {padding: 0;height: 0;}
 }
 
 /*** Шапка. Логотип ***/
@@ -1370,7 +1373,7 @@ header {background-color: var(--color-white);box-shadow: 0px 0px 20px 0px var(--
 .header-contacts .contacts__region {max-width: 224px;}
 .header-contacts .contacts__email {max-width: 224px;}
 .header-contacts .contacts__phone {max-width: 224px;font-size: 18px;white-space: nowrap;}
-.header-contacts .contacts__block {margin-left: 32px;}
+.header-contacts .contacts__block {margin-left: 32px;white-space: normal;}
 .header-contacts .contacts__block:first-child {margin-left: 0;}
 .header-contacts .contacts__icon {margin-top: 4px;}
 .header-contacts .contacts__link:hover .contacts__icon {color: var(--color-black);}
@@ -1450,8 +1453,8 @@ header .catalog__items::-webkit-scrollbar {width: 4px;}
 .catalog__items-sub .catalog__item[data-level="1"] {width: 25%;order: 2;}
 .catalog__items-sub .catalog__item[data-level="1"].parent {order: 1;}
 .catalog__items-sub .catalog__link {font-weight: 500;overflow: hidden;text-overflow: ellipsis;display: block;}
-.catalog__items-sub .catalog__link[data-level="0"] {font-size: 22px;font-weight: 700;background-color: transparent;padding-left: 12px;}
-.catalog__items-sub .catalog__link[data-level="1"] {font-size: 18px;}
+.catalog__items-sub .catalog__link[data-level="0"] {padding-left: 8px;font-size: 22px;font-weight: 700;background-color: transparent;}
+.catalog__items-sub .catalog__link[data-level="1"] {padding-left: 8px;font-size: 18px;}
 .catalog__items-sub .catalog__link i {display: none;}
 .catalog__items-sub .catalog__link:hover {background-color: transparent;}
 .catalog__items-sub .catalog__item[data-level="0"] {display: none;}
@@ -1508,16 +1511,18 @@ header .catalog__items::-webkit-scrollbar {width: 4px;}
 	.search__form {margin-top: 16px;width: 100%;left: 0;z-index: 12;position: absolute;display: none;}
 	.search__icon {display: flex;margin-left: auto;}
 	.search.is-opened .search__form, .adaptive-search__content.is-opened .search__form {display: block;}
-	.search.is-opened .search__input, .adaptive-search__content.is-opened .search__input {border: 1px solid var(--color-lightgray);background-color: var(--color-white);}
+	.search.is-opened .search__input, .adaptive-search__content.is-opened .search__input {border: 1px solid var(--color-lightgray);background-color: var(--color-white);border-radius: 0;}
 }
 @media all and (max-width: 767px) {
-	.search__form {margin-top: 80px;}
+	.header-search {margin: 0;width: 100%;flex-grow: 0;position: absolute;left: 0;}
+	.header-search .search__icon {display: none;}
+	.search__form {margin-top: 0;}
 }
 
 
 /*** Шапка. Результаты поиска ***/
-#search-results {margin-top: 16px;width: 100%;left: 0;z-index: 13;position: absolute;display: none;}
-#search-results ::-webkit-scrollbar {width: 4px;height: 0;}
+.search-results {margin-top: 16px;width: 100%;left: 0;z-index: 13;position: absolute;display: none;}
+.search-results ::-webkit-scrollbar {width: 4px;height: 0;}
 .search-results__inner {padding: 8px;background-color: var(--color-white);box-shadow: 0px 0px 20px var(--color-shadow);border-radius: 12px;}
 .search-results__item {margin-top: 16px;}
 .search-results__item:first-child {margin-top: 0;}
@@ -1530,7 +1535,10 @@ header .catalog__items::-webkit-scrollbar {width: 4px;}
 .search-results__category .search-results__image {display: none;}
 .search-results__goods {width: calc(100% - 200px);padding: 16px;overflow-y: auto;}
 @media all and (max-width: 1023px) {
-	#search-results {margin-top: 72px;}
+	.search-results {margin-top: 72px;}
+}
+@media all and (max-width: 767px) {
+	.search-results {margin-top: 56px;}
 }
 @media all and (max-width: 639px) {
 	.search-results__category {width: 100%;}
@@ -1712,7 +1720,7 @@ footer .container {position: relative;}
 .slideshow__item.swiper-slide {height: 288px;background-position: center;background-size: cover;position: relative;overflow: hidden;}
 .slideshow__content {background-color: var(--color-white);padding: 20px;border-radius: 16px;position: relative;}
 .slideshow__title {margin-bottom: 8px;font-size: 24px;font-weight: 800;display: block;}
-.slideshow__subtitle {font-weight: 500;line-height: 1.25;}
+.slideshow__subtitle {font-weight: 500;line-height: 1.25;white-space: normal;}
 .slideshow__pretitle {margin-bottom: 16px;font-size: 14px;font-weight: 800;text-transform: uppercase;color: var(--color-red);}
 .slideshow__button {margin-top: 16px;}
 .slideshow__image {display: block;width: 100%;height: 100%;position: absolute;left: 0;top: 0;transition: all 0.3s ease;}
@@ -1797,7 +1805,7 @@ footer .container {position: relative;}
 .advantage__items {flex-wrap: nowrap;overflow-x: auto;}
 .advantage__item {width: calc(25% - 16px);min-width: 272px;margin: 0 8px;padding: 20px;background-color: var(--color-lightgray);border-radius: 12px;font-weight: 500;}
 .advantage__icon {color: var(--color-gray);font-size: 32px;}
-.advantage__content {width: calc(100% - 32px);padding-left: 16px;line-height: 20px;}
+.advantage__content {width: calc(100% - 32px);padding-left: 16px;line-height: 20px;white-space: normal;}
 
 
 /**************************************/

@@ -196,6 +196,9 @@
 				
 							<!-- Изображение -->
 							<a class="product__img flex-center" href="{favorites_goods.URL_MIN_PRICE_NOW | url_amp}" title="{favorites_goods.NAME}" itemprop="url" data-id="{favorites_goods.IMAGE_ID}">
+								<noscript>
+									<img class="noscript-lozad" src="{% IF favorites_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{favorites_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{favorites_goods.NAME}" />
+								</noscript>
 								<img class="lozad" src="{ASSETS_IMAGES_PATH}placeholder.png?design=THEMENAME" data-src="{% IF favorites_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{favorites_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{favorites_goods.NAME}" />
 							</a>
 				
@@ -239,12 +242,20 @@
 										{% FOR goods_mod_list %}
 											{% FOR goods_mod_property_list %}
 												{% IF favorites_goods.goods_mod_list.goods_mod_property_list.index > 1 %}{continue}{% ENDIF %}
-												<option value="{favorites_goods.goods_mod_list.ID}">{favorites_goods.goods_mod_list.goods_mod_property_list.VALUE}</option>
+												<option 
+													value="{favorites_goods.goods_mod_list.ID}" 
+													name="{favorites_goods.goods_mod_list.goods_mod_property_list.NAME}"
+													data-price="{favorites_goods.goods_mod_list.PRICE_NOW}"
+													data-price-old="{favorites_goods.goods_mod_list.PRICE_NOW_WITHOUT_DISCOUNT || favorites_goods.goods_mod_list.PRICE_OLD}"
+													data-rest="{favorites_goods.goods_mod_list.REST_VALUE}"
+													{% IF favorites_goods.goods_mod_list.ID = favorites_goods.goods_mod_list.MIN_PRICE_NOW_ID %}selected="selected"{% ENDIF %}
+												>{favorites_goods.goods_mod_list.goods_mod_property_list.VALUE}</option>
 											{% ENDFOR goods_mod_property_list %}
 										{% ENDFOR goods_mod_list %}
 									</select>
 								</div>
 								{% ENDIF COUNT_MODIFICATION %}
+
 							</div>
 				
 						</div>
