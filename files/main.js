@@ -387,7 +387,7 @@ class QuantityAddto extends Quantity {
 		if (!value) return false
 		// Если есть скидки
 		const discount = value.closest('.addto__total-discount')
-		value ? discount.classList.remove('is-disabled') : discount.classList.add('is-disabled')
+		value ? discount.classList.remove('is-hidden') : discount.classList.add('is-hidden')
 	};
 
 }
@@ -3337,6 +3337,7 @@ function openMenu() {
 		// console.log('event', event)
 		$('.search, .adaptive-search__content').addClass('is-opened');
 		$('#overlay').addClass('is-opened');
+		$('.search__input').focus();
 	})
 
 	// Каталог на мобильных устройствах
@@ -3958,7 +3959,6 @@ $(document).ready(function(){
 	// cartSaleSum();
 	swiperViewed();
   mainnav('header .mainnav', '1', 991);
-	// appendSearch()
 	fixedMenu()
 	quantityAddto.onAddto()
 	catalogItems.hover()
@@ -3989,18 +3989,6 @@ $(document).ready(function(){
 
 });
 
-
-function appendSearch() {
-	var search = $('.search')
-	if(getClientWidth() < 767) {
-		$('.adaptive-search__content').html('')
-		$('.adaptive-search__content').append(search.html())
-	} else {
-		$('.adaptive-search__content').html('')
-		return false
-	}
-}
-
 function fixedMenu() {
 	var header = document.querySelector('.header__middle')
   window.addEventListener('scroll', function() {
@@ -4012,7 +4000,6 @@ function fixedMenu() {
 
 // Запуск функций при изменении экрана
 $(window).resize(function(){
-	// appendSearch()
   if(getClientWidth() > 481 && window.outerHeight < 630){
     $('body').addClass('landscape');
   }else{

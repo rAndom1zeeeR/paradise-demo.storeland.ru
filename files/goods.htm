@@ -6,7 +6,16 @@
 		</div>
 
 		<!-- Изображение товара  {% IF GOODS_IMAGE_ID = goods_images.ID %}style="display: none;"{% ENDIF %} -->
-		<div class="productView__images" data-id="{GOODS_IMAGE_ID}">			
+		<div class="productView__images" data-id="{GOODS_IMAGE_ID}">
+			{% IF goods_images_empty %}			
+			<!-- Главное изображение -->
+			<a class="productView__image flex-center" href="{% IF GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{GOODS_IMAGE_LARGE}{% ENDIF %}" data-fancybox="images">
+				<noscript>
+					<img class="noscript-lozad" src="{% IF GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{GOODS_IMAGE_MEDIUM}{% ENDIF %}" alt="{GOODS_NAME}" itemprop="image" />
+				</noscript>
+				<img class="lozad" data-src="{% IF GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{GOODS_IMAGE_MEDIUM}{% ENDIF %}" alt="{GOODS_NAME}" itemprop="image" />
+			</a>
+			{% ELSE %}
 			<!-- Главное изображение -->
 			<div class="swiper">
 				<div class="swiper-wrapper">
@@ -24,6 +33,7 @@
 					<div class="swiper-button-next"></div>
 				</div>
 			</div>
+			{% ENDIF %}
 
 			<!-- Стикеры -->
 			<div class="productView__sticker flex">

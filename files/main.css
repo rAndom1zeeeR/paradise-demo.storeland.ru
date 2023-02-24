@@ -1400,9 +1400,9 @@ header {background-color: var(--color-white);box-shadow: 0px 0px 20px 0px var(--
 }
 
 /*** Добавить в ... ***/
-.header-addto {max-width: 344px;justify-content: flex-end;}
-.addto__block {margin-left: 8px;position: relative;}
-.addto__link {width: 56px;height: 56px;font-weight: 700;background-color: var(--color-lightgray);border-radius: 12px;display: flex;align-items: center;justify-content: center;}
+.header-addto {max-width: 344px;justify-content: flex-end;position: relative;}
+.addto__block {margin-left: 8px;}
+.addto__link {width: 56px;height: 56px;font-weight: 700;background-color: var(--color-lightgray);border-radius: 12px;display: flex;align-items: center;justify-content: center;position: relative;}
 .addto__link i {font-size: 24px;}
 .addto__count {opacity: 0;font-size: 12px;top: -12px;left: calc(50% - 12px);position: absolute;width: 24px;height: 24px;line-height: 24px;background-color: var(--color-primary);color: var(--color-white);border-radius: 100%;text-align: center;font-weight: bold;}
 .has-items .addto__count {opacity: 1;}
@@ -1412,11 +1412,12 @@ header {background-color: var(--color-white);box-shadow: 0px 0px 20px 0px var(--
 .addto__remove {color: var(--color-gray);}
 .addto__remove:hover {color: var(--color-black);}
 .addto__remove i {font-size: 12px;}
+.addto__block.login {position: relative;}
 .addto__login {width: 224px;padding: 0;right: -84px;}
-.addto__favorites, .addto__compare {right: -120px;}
 .mainnav__overflow.dropdown__content {padding: 0;}
 .dropdown__content .mainnav__link {padding: 20px 32px;}
 .dropdown__content .mainnav__link:hover, .dropdown__content .mainnav__link.is-actived {background-color: var(--color-tertiary);color: var(--color-secondary);}
+.addto__total-block.is-hidden {opacity: 0;}
 @media all and (max-width: 479px) {
 	.addto__link {width: 44px;height: 44px;}
 	.addto__link i {font-size: 20px;}

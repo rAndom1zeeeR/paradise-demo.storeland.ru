@@ -71,7 +71,7 @@
             <form class="product__form" action="{CART_ADD_GOODS_MODIFICATION_URL}" method="post" data-id="{goods_mod_info.GOODS_MOD_ID}">
               <input type="hidden" name="hash" value="{HASH}" />
               <input type="hidden" name="form[goods_from]" value="{goods_mod_info.GOODS_FROM}" />
-              <input type="hidden" name="form[goods_mod_id]" value="1" class="goodsDataMainModificationId" />
+              <input type="hidden" name="form[goods_mod_id]" value="{goods_mod_info.GOODS_MOD_ID}" class="goodsDataMainModificationId" />
               <!-- Добавление товара в корзину -->
               <div class="compare__addCart product__addCart">
                 {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && goods_mod_info.REST_VALUE=0 %}
