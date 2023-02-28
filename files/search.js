@@ -71,7 +71,7 @@ function SearchFieldInit(obj) {
 			obj.__SearchFieldCheck()
 		},20);
 	}).bind('cut', function(e){
-		$('#search-results').hide();
+		$('.search-results').hide();
 		$('.search-results__inner > div').remove();
 		obj.__SearchFieldCheck();
 	});
@@ -95,7 +95,7 @@ function SearchFieldInit(obj) {
 		switch(I.keyCode) {
 				// По нажатию клавиш прячем подсказку
 			case 27: // escape
-				$('#search-results').hide();
+				$('.search-results').hide();
 				return false;
 				break;
 				// Нажатие enter при выделенном пункте из поиска
@@ -129,7 +129,7 @@ function SearchFieldInit(obj) {
 	// Кнопка обнуления данных в форме поиска
 	obj.s_reset.click(function(){
 		obj.s_search.val('').focus();
-		$('#search-results').hide();
+		$('.search-results').hide();
 		$('.search-results__item').remove();
 	});
 	// Проверка данных в форме после инициализации функционала. Возможно браузер вставил туда какой-либо текст, нужно обработать и такой вариант
@@ -263,14 +263,14 @@ $(function(){
 				}
 			});
 		}else{
-			$("#search-results").hide();
+			$(".search-results").hide();
 		}
 
 		function showDropdownSearch(data){
 			// Отображение категорий в поиске
 			if(data.category.length!=undefined && data.category.length>0){
 				$(".search-results__category .search-results__item").remove();
-				$("#search-results").hide();
+				$(".search-results").hide();
 				for(с=0; с < data.category.length; с++){
 					// Проверка наличия изображения
 					if (data.category[с].image_icon == null) {
@@ -285,12 +285,12 @@ $(function(){
 				}
 			}else{
 				$(".search-results__category .search-results__item").remove();
-				$("#search-results").hide();
+				$(".search-results").hide();
 			}
 			// Отображение товаров в поиске
 			if(data.goods.length!=undefined && data.goods.length>0){
 				$(".search-results__goods .search-results__item").remove();
-				$("#search-results").hide();
+				$(".search-results").hide();
 				for(i=0; i < data.goods.length; i++){
 					// Проверка наличия изображения
 					if (data.goods[i].image_icon == null) {
@@ -309,13 +309,13 @@ $(function(){
 				}
 			}else{
 				$(".search-results__goods .search-results__item").remove();
-				$("#search-results").hide();
+				$(".search-results").hide();
 			}
 			// Скрываем результаты поиска если ничего не найдено
 			if((data.category.length + data.goods.length) > 0){
-				$("#search-results").show();
+				$(".search-results").show();
 			}else{
-				$("#search-results").hide();
+				$(".search-results").hide();
 			}
 
 			if((data.category.length) > 0){

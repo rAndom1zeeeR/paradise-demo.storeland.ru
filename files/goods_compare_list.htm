@@ -30,8 +30,10 @@
           {% FOR goods_mod_info %}
           <div class="compare__item swiper-slide" data-index="{goods_mod_info.index}">
             <a class="compare__image flex-center" href="{goods_mod_info.GOODS_MOD_URL}" data-id="{goods_mod_info.GOODS_MOD_ID}" title="Перейти к странице &laquo;{goods_mod_info.GOODS_NAME}&raquo;">
-              <img class="swiper-lazy" data-src="{% IF goods_mod_info.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{goods_mod_info.GOODS_IMAGE_SMALL}{% ENDIF %}" alt="{goods_mod_info.GOODS_NAME}" />
-              <div class="swiper-lazy-preloader"></div>
+              <noscript>
+                <img class="noscript-lozad" src="{% IF goods_mod_info.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{goods_mod_info.GOODS_IMAGE_SMALL}{% ENDIF %}" alt="{goods_mod_info.GOODS_NAME}" />
+              </noscript>
+              <img class="lozad" data-src="{% IF goods_mod_info.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{goods_mod_info.GOODS_IMAGE_SMALL}{% ENDIF %}" alt="{goods_mod_info.GOODS_NAME}" />
             </a>
             <a class="compare__remove button-rotate button-link" href="{COMPARE_DELETE_URL}?id={goods_mod_info.GOODS_MOD_ID}" title="Убрать из таблицы сравнения"><i class="icon-close"></i></a>
           </div>
@@ -85,7 +87,7 @@
                     data-name="{goods_mod_info.NAME}" 
                     data-art="{goods_mod_info.ART_NUMBER}"
                   >
-                    <i class="icon-notification"></i>
+                    <i class="icon-notifications"></i>
                     <span>Уведомить</span>
                   </a>
                 {% ELSE %}
@@ -119,11 +121,11 @@
           {% FOR goods_mod_info %}
           <div class="compare__item swiper-slide" data-index="{goods_mod_info.index}">
             <div class="compare__price product__price {CURRENCY_CHAR_CODE} {% IF goods_mod_info.PRICE_NOW_WITHOUT_DISCOUNT>goods_mod_info.PRICE_NOW %}has-price-old{% ELSEIF goods_mod_info.PRICE_OLD>goods_mod_info.PRICE_NOW %}has-price-old{% ENDIF %}" data-id="{goods_mod_info.GOODS_MOD_ID}">
-              <span class="price__now {CURRENCY_CHAR_CODE}" itemprop="price" content="{goods_mod_info.PRICE_NOW}">{goods_mod_info.PRICE_NOW | money_format}</span>
+              <span class="price__now {CURRENCY_CHAR_CODE}" itemprop="price" data-price="{goods_mod_info.PRICE_NOW}">{goods_mod_info.PRICE_NOW | money_format}</span>
 	            {% IF goods_mod_info.PRICE_NOW_WITHOUT_DISCOUNT > goods_mod_info.PRICE_NOW %}
-              <span class="price__old {CURRENCY_CHAR_CODE}" content="{goods_mod_info.PRICE_NOW_WITHOUT_DISCOUNT}">{goods_mod_info.PRICE_NOW_WITHOUT_DISCOUNT | money_format}</span>
+              <span class="price__old {CURRENCY_CHAR_CODE}" data-price="{goods_mod_info.PRICE_NOW_WITHOUT_DISCOUNT}">{goods_mod_info.PRICE_NOW_WITHOUT_DISCOUNT | money_format}</span>
               {% ELSEIF goods_mod_info.PRICE_OLD > goods_mod_info.PRICE_NOW %}
-              <span class="price__old {CURRENCY_CHAR_CODE}" content="{goods_mod_info.PRICE_OLD}">{goods_mod_info.PRICE_OLD | money_format}</span>
+              <span class="price__old {CURRENCY_CHAR_CODE}" data-price="{goods_mod_info.PRICE_OLD}">{goods_mod_info.PRICE_OLD | money_format}</span>
               {% ENDIF %}
             </div>
           </div>
@@ -194,7 +196,7 @@
         <div class="compare__content swiper-wrapper">
           {% FOR values %}
           <div class="compare__item swiper-slide" data-index="{goods_attr_list.values.index}">
-            <span>{% IF goods_attr_list.values.VALUE %}{goods_attr_list.values.VALUE}{% ELSE %}<i class="icon-close"></i>{% ENDIF %}</span>
+            <span>{% IF goods_attr_list.values.VALUE %}{goods_attr_list.values.VALUE}{% ELSE %}<i class="icon-minus"></i>{% ENDIF %}</span>
           </div>
           {% ENDFOR %}
         </div>

@@ -74,14 +74,17 @@
           <label for="sites_client_person">Ваше Имя</label>
           <input id="sites_client_person" class="form__input form__person" type="text" name="form[contact][person]" value="{ORDER_FORM_CONTACT_PERSON}" maxlength="100" type="text" placeholder="ФИО" required/>
         </div>
+
         <div class="form__fields">
           <label for="sites_client_phone">Телефон для связи</label>
           <input id="sites_client_phone" class="form__input form__phone" type="tel" name="form[contact][phone]" value="{ORDER_FORM_CONTACT_PHONE}" maxlength="255" type="text" placeholder="+7 (987) 654-3210" required/>
         </div>
+
         <div class="form__fields">
           <label for="sites_client_email" {% IF ORDER_FORM_CONTACT_WANT_REGISTER %}class="required"{% ENDIF %}><span>Ваш E-mail</span>{% IF ORDER_FORM_CONTACT_WANT_REGISTER %}<em>*</em>{% ENDIF %}</label>
           <input id="sites_client_email" class="form__input form__email" type="email" name="form[contact][email]" value="{ORDER_FORM_CONTACT_EMAIL}" maxlength="255" type="text" placeholder="email@email.ru" {% IF ORDER_FORM_CONTACT_WANT_REGISTER %}required{% ENDIF %}/>
         </div>
+        
         <!-- Если в тарифном плане подключен раздел личного кабинета -->
         {% IFNOT CLIENT_IS_LOGIN %}
         <div class="form__fields form__pass" {% IFNOT ORDER_FORM_CONTACT_WANT_REGISTER %}style="display: none;"{% ENDIF %}>
@@ -89,14 +92,14 @@
           <input id="sites_client_pass" class="form__input required" type="password" name="form[contact][pass]" value="{ORDER_FORM_CONTACT_PASS}" maxlength="50" minlength="6" placeholder="Придумайте пароль *"/>
           
           <div class="form__showPass" title="Показать пароль"></div>
+        </div>
           
-          <div id="capslock">
-            <div class="capslock__icon flex">
-              <i class="icon-warning"></i>
-              <strong>Caps Lock включен.</strong>
-            </div>
-            <div class="capslock__text">Пароль может быть введен неверно.</div>
+        <div id="capslock">
+          <div class="capslock__icon flex">
+            <i class="icon-warning"></i>
+            <strong>Caps Lock включен.</strong>
           </div>
+          <div class="capslock__text">Пароль может быть введен неверно.</div>
         </div>
         {% ENDIF %}
       </div>
@@ -325,7 +328,7 @@
             id="paymentId{order_payment.ID}" 
             name="form[payment][id]" 
             value="{order_payment.ID}"
-            order="{ORDER_FORM_PAYMENT_ID}"
+            order-id="{ORDER_FORM_PAYMENT_ID}"
             {% IF order_payment.first %}checked="checked"
             {% ELSEIF order_payment.ID = ORDER_FORM_PAYMENT_ID %}checked="checked"{% ENDIF %}
             />
@@ -461,6 +464,8 @@
               </td>
               <td colspan="2">
                 <span class="cartSumNowWithDiscount {CURRENCY_CHAR_CODE}" data-price="{CART_SUM_NOW_WITH_DISCOUNT}">{CART_SUM_NOW_WITH_DISCOUNT | money_format}</span>
+                <span class="cartSumDelivery is-hide" data-price="{CART_SUM_DELIVERY}">{CART_SUM_DELIVERY | money_format}</span>
+                <span class="cartSumTotal is-hide" data-price="{CART_SUM_NOW}">{CART_SUM_NOW | money_format}</span>
               </td>
             </tr>
 
