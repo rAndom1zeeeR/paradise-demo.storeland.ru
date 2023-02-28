@@ -15,7 +15,7 @@
 
 	<!-- Вывод категорий -->
 	{% IFNOT nested_categories_list_empty %}
-	<div class="categories {% IF IS_FULL_CATALOG || goods_empty %}categories__full{% ENDIF %}">
+	<div class="categories {% IF IS_FULL_CATALOG %}categories__full{% ENDIF %} {% IFNOT IS_FULL_CATALOG && goods_empty=0 %}has-products{% ENDIF %}">
 		<div class="row-small">
 			<div class="categories__list flex {% IF index_page %}page-index{% ENDIF %}">
 				{% FOR nested_categories_list %}

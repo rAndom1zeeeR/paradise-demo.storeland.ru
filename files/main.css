@@ -472,7 +472,7 @@ main {margin: 40px 0;position: relative;display: block;}
 /****************************************/
 /*** Категории ***/
 /****************************************/
-/* .categories + .toolbar {margin-top: 32px;} */
+.categories.has-products {display: none;}
 .categories__item {width: calc(16.666666% - 16px);margin: 0 8px 16px 8px;position: relative;transition: all 0.3s ease;}
 .categories__item:hover .categories__name {color: var(--color-white);background-color: var(--color-secondary);}
 .categories__image {height: 182px;border-radius: 12px;}
