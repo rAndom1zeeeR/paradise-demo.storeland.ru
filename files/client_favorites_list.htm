@@ -240,17 +240,17 @@
 								<div class="product__props selectBox">
 									<select class="product__props-select select" name="form[properties][]">
 										{% FOR goods_mod_list %}
+											<option 
+												value="{favorites_goods.goods_mod_list.ID}"
+												data-price="{favorites_goods.goods_mod_list.PRICE_NOW}"
+												data-price-old="{favorites_goods.goods_mod_list.PRICE_NOW_WITHOUT_DISCOUNT || favorites_goods.goods_mod_list.PRICE_OLD}"
+												data-rest="{favorites_goods.goods_mod_list.REST_VALUE}"
+												{% IF favorites_goods.goods_mod_list.ID = favorites_goods.MIN_PRICE_NOW_ID %}selected="selected"{% ENDIF %}
+											>
 											{% FOR goods_mod_property_list %}
-												{% IF favorites_goods.goods_mod_list.goods_mod_property_list.index > 1 %}{continue}{% ENDIF %}
-												<option 
-													value="{favorites_goods.goods_mod_list.ID}" 
-													name="{favorites_goods.goods_mod_list.goods_mod_property_list.NAME}"
-													data-price="{favorites_goods.goods_mod_list.PRICE_NOW}"
-													data-price-old="{favorites_goods.goods_mod_list.PRICE_NOW_WITHOUT_DISCOUNT || favorites_goods.goods_mod_list.PRICE_OLD}"
-													data-rest="{favorites_goods.goods_mod_list.REST_VALUE}"
-													{% IF favorites_goods.goods_mod_list.ID = favorites_goods.goods_mod_list.MIN_PRICE_NOW_ID %}selected="selected"{% ENDIF %}
-												>{favorites_goods.goods_mod_list.goods_mod_property_list.VALUE}</option>
+												{favorites_goods.goods_mod_list.goods_mod_property_list.VALUE}{% IFNOT favorites_goods.goods_mod_list.goods_mod_property_list.last %},{% ENDIF %}
 											{% ENDFOR goods_mod_property_list %}
+											</option>
 										{% ENDFOR goods_mod_list %}
 									</select>
 								</div>

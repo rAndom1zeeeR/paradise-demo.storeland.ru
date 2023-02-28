@@ -911,8 +911,8 @@ main {margin: 40px 0;position: relative;display: block;}
 .order-delivery-zone__price {font-weight: bold;}
 
 /* Товар. Добавить Отзыв */
-.opinion__container {width: calc(50% - 16px);margin: 0;flex-grow: 1;}
-.opinion__addForm {width: calc(50% - 24px);margin-left: 24px;flex-grow: 1;position: sticky;position: -webkit-sticky;top: 0;background-color: var(--color-white);border-radius: 12px;padding: 20px;}
+.opinion__container {width: calc(50% - 16px);margin-right: 24px;flex-grow: 1;}
+.opinion__addForm {width: calc(50% - 24px);margin: 0;flex-grow: 1;position: sticky;position: -webkit-sticky;top: 0;background-color: var(--color-white);border-radius: 12px;padding: 20px;}
 .opinion__form {margin-top: 8px;}
 .opinion__block {margin-bottom: 16px;}
 .opinion__block:last-child {margin-bottom: 0;}
@@ -1013,7 +1013,7 @@ main {margin: 40px 0;position: relative;display: block;}
 }
 
 /* Нет отзыва */
-.opinion__empty {padding: 20px 24px;background-color: var(--color-white);border-radius: 12px;position: relative;}
+.opinion__empty {margin-bottom: 20px;padding: 20px 24px;background-color: var(--color-white);border-radius: 12px;position: relative;}
 .opinion__empty-icon {font-size: 40px;color: var(--color-gray);}
 .opinion__empty-content {width: calc(100% - 40px - 260px);padding: 0 48px 0 24px;line-height: 1.5;}
 .opinion__empty-title {font-weight: bold;margin-bottom: 8px;}
@@ -1189,7 +1189,6 @@ main {margin: 40px 0;position: relative;display: block;}
 .cartTable__buttons {margin-bottom: 16px;}
 .cartTable__count {font-size: 18px;font-weight: bold;}
 .cartTable__recalc {display: none;}
-.IE .cartTable__recalc {display: inline-block;}
 /*** Корзина. Итоговый блок ***/
 .cartTable {width: calc(100% - 378px);padding-right: 32px;}
 .cartTotal {width: 378px;position: sticky;top: 96px;padding: 20px 16px;background-color: var(--color-lightgray);border-radius: 12px;}
@@ -1444,10 +1443,14 @@ header {background-color: var(--color-white);box-shadow: 0px 0px 20px 0px var(--
 .header-catalog:hover .header-catalog__icon i:before {content: '\e90b'}
 header .catalog__items {position: relative;max-height: 260px;overflow-y: auto;}
 header .catalog__items::-webkit-scrollbar {width: 4px;}
-.catalog__items-main {width: 25%;border-right: 1px solid var(--color-lightgray);}
+.catalog__items-main {width: 25%;padding: 0 16px;}
+.header-catalog__inner {position: relative;}
+.header-catalog__inner:after {content: '';width: 1px;height: 100%;background-color: var(--color-lightgray);display: block;position: absolute;top: 0;left: calc(25% + 6px);}
 .catalog__items-main .catalog__item {font-size: 18px;font-weight: bold;}
-.catalog__items-main .catalog__item i {font-size: 10px;right: 12px;position: absolute;display: inline-block;}
-.catalog__items-main .catalog__link:hover {padding: 8px 16px;}
+.catalog__items-main .catalog__item i {font-size: 10px;right: 0;position: absolute;display: inline-block;transition: all 0.3s ease;}
+.catalog__items-main .catalog__link {padding: 8px 0;}
+.catalog__items-main .catalog__link:hover, .catalog__items-main .catalog__link.is-opened {padding: 8px 16px;}
+.catalog__items-main .catalog__link:hover i, .catalog__items-main .catalog__link.is-opened i {right: 16px;}
 .catalog__items-sub {padding-left: 32px;width: 75%;}
 .catalog__items-sub .catalog__sub[data-level="1"] {padding: 8px 0 0 0;display: flex;flex-wrap: wrap;align-items: flex-start;}
 .catalog__items-sub .catalog__sub[data-level="3"] {display: none;}
@@ -1537,6 +1540,7 @@ header .catalog__items::-webkit-scrollbar {width: 4px;}
 .search-results__goods {width: calc(100% - 200px);padding: 16px;overflow-y: auto;}
 @media all and (max-width: 1023px) {
 	.search-results {margin-top: 72px;}
+	.search-results__inner {border-radius: 0 0 8px 8px;}
 }
 @media all and (max-width: 767px) {
 	.search-results {margin-top: 56px;}
@@ -2207,3 +2211,11 @@ footer .container {position: relative;}
 @media all and (max-width: 374px) {
 	.compare__image {height: 136px;}
 }
+
+
+/* Если отключен JS */
+.nojs .cartTable__recalc {display: inline-block;}
+.nojs .qty__select {opacity: 0;}
+.nojs .startOrder {display: none;}
+.nojs .lozad {display: none;}
+.nojs .compare__item {width: 25%;}

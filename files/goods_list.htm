@@ -15,7 +15,7 @@
 
 	<!-- Вывод категорий -->
 	{% IFNOT nested_categories_list_empty %}
-	<div class="categories {% IF IS_FULL_CATALOG %}categories__full{% ENDIF %}">
+	<div class="categories {% IF IS_FULL_CATALOG || goods_empty %}categories__full{% ENDIF %}">
 		<div class="row-small">
 			<div class="categories__list flex {% IF index_page %}page-index{% ENDIF %}">
 				{% FOR nested_categories_list %}
@@ -347,17 +347,17 @@
 							<div class="product__props selectBox">
 								<select class="product__props-select select" name="form[properties][]">
 									{% FOR mods %}
+										<option 
+											value="{goods.mods.ID}"
+											data-price="{goods.mods.PRICE_NOW}"
+											data-price-old="{goods.mods.PRICE_NOW_WITHOUT_DISCOUNT || goods.mods.PRICE_OLD}"
+											data-rest="{goods.mods.REST_VALUE}"
+											{% IF goods.mods.ID = goods.MIN_PRICE_NOW_ID %}selected="selected"{% ENDIF %}
+										>
 										{% FOR goods_mod_distinctive_properties %}
-											{% IF goods.mods.goods_mod_distinctive_properties.index > 1 %}{continue}{% ENDIF %}
-											<option 
-												value="{goods.mods.ID}" 
-												name="{goods.mods.goods_mod_distinctive_properties.NAME}"
-												data-price="{goods.mods.PRICE_NOW}"
-												data-price-old="{goods.mods.PRICE_NOW_WITHOUT_DISCOUNT || goods.mods.PRICE_OLD}"
-												data-rest="{goods.mods.REST_VALUE}"
-												{% IF goods.mods.ID = goods.MIN_PRICE_NOW_ID %}selected="selected"{% ENDIF %}
-											>{goods.mods.goods_mod_distinctive_properties.VALUE}</option>
+											{goods.mods.goods_mod_distinctive_properties.VALUE}{% IFNOT goods.mods.goods_mod_distinctive_properties.last %},{% ENDIF %}
 										{% ENDFOR goods_mod_distinctive_properties %}
+										</option>
 									{% ENDFOR mods %}
 								</select>
 							</div>
@@ -666,17 +666,17 @@
 								<div class="product__props selectBox">
 									<select class="product__props-select select" name="form[properties][]">
 										{% FOR mods %}
+											<option 
+												value="{goods.mods.ID}"
+												data-price="{goods.mods.PRICE_NOW}"
+												data-price-old="{goods.mods.PRICE_NOW_WITHOUT_DISCOUNT || goods.mods.PRICE_OLD}"
+												data-rest="{goods.mods.REST_VALUE}"
+												{% IF goods.mods.ID = goods.MIN_PRICE_NOW_ID %}selected="selected"{% ENDIF %}
+											>
 											{% FOR goods_mod_distinctive_properties %}
-												{% IF goods.mods.goods_mod_distinctive_properties.index > 1 %}{continue}{% ENDIF %}
-												<option 
-													value="{goods.mods.ID}" 
-													name="{goods.mods.goods_mod_distinctive_properties.NAME}"
-													data-price="{goods.mods.PRICE_NOW}"
-													data-price-old="{goods.mods.PRICE_NOW_WITHOUT_DISCOUNT || goods.mods.PRICE_OLD}"
-													data-rest="{goods.mods.REST_VALUE}"
-													{% IF goods.mods.ID = goods.MIN_PRICE_NOW_ID %}selected="selected"{% ENDIF %}
-												>{goods.mods.goods_mod_distinctive_properties.VALUE}</option>
+												{goods.mods.goods_mod_distinctive_properties.VALUE}{% IFNOT goods.mods.goods_mod_distinctive_properties.last %},{% ENDIF %}
 											{% ENDFOR goods_mod_distinctive_properties %}
+											</option>
 										{% ENDFOR mods %}
 									</select>
 								</div>

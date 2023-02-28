@@ -353,7 +353,7 @@
 										{% FOR compare_goods %}
 										<div class="addto__item flex" data-id="{compare_goods.ID}">
 											<a class="addto__image flex-center" href="{compare_goods.URL}"title="{compare_goods.NAME}">
-												<img src="{% IF compare_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=THEMENAME{% ELSE %}{compare_goods.IMAGE_ICON}{% ENDIF %}" alt="{compare_goods.NAME}" />
+												<img src="{% IF compare_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{compare_goods.IMAGE_ICON}{% ENDIF %}" alt="{compare_goods.NAME}" />
 											</a>
 
 											<div class="addto__content">
@@ -405,7 +405,7 @@
 										{% FOR favorites_goods %}
 										<div class="addto__item flex" data-id="{favorites_goods.ID}">
 											<a class="addto__image flex-center" href="{favorites_goods.URL}"title="{favorites_goods.NAME}">
-												<img src="{% IF favorites_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo-icon.png?design=THEMENAME{% ELSE %}{favorites_goods.IMAGE_ICON}{% ENDIF %}" alt="{favorites_goods.NAME}" />
+												<img src="{% IF favorites_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{favorites_goods.IMAGE_ICON}{% ENDIF %}" alt="{favorites_goods.NAME}" />
 											</a>
 
 											<div class="addto__content">
@@ -1029,17 +1029,17 @@
 												<div class="product__props selectBox">
 													<select class="product__props-select select" name="form[properties][]">
 														{% FOR mods %}
+															<option 
+																value="{index_page_sale_goods.mods.ID}"
+																data-price="{index_page_sale_goods.mods.PRICE_NOW}"
+																data-price-old="{index_page_sale_goods.mods.PRICE_NOW_WITHOUT_DISCOUNT || index_page_sale_goods.mods.PRICE_OLD}"
+																data-rest="{index_page_sale_goods.mods.REST_VALUE}"
+																{% IF index_page_sale_goods.mods.ID = index_page_sale_goods.MIN_PRICE_NOW_ID %}selected="selected"{% ENDIF %}
+															>
 															{% FOR goods_mod_distinctive_properties %}
-																{% IF index_page_sale_goods.mods.goods_mod_distinctive_properties.index > 1 %}{continue}{% ENDIF %}
-																<option 
-																	value="{index_page_sale_goods.mods.ID}" 
-																	name="{index_page_sale_goods.mods.goods_mod_distinctive_properties.NAME}"
-																	data-price="{index_page_sale_goods.mods.PRICE_NOW}"
-																	data-price-old="{index_page_sale_goods.mods.PRICE_NOW_WITHOUT_DISCOUNT || index_page_sale_goods.mods.PRICE_OLD}"
-																	data-rest="{index_page_sale_goods.mods.REST_VALUE}"
-																	{% IF index_page_sale_goods.mods.ID = index_page_sale_goods.MIN_PRICE_NOW_ID %}selected="selected"{% ENDIF %}
-																>{index_page_sale_goods.mods.goods_mod_distinctive_properties.VALUE}</option>
+																{index_page_sale_goods.mods.goods_mod_distinctive_properties.VALUE}{% IFNOT index_page_sale_goods.mods.goods_mod_distinctive_properties.last %},{% ENDIF %}
 															{% ENDFOR goods_mod_distinctive_properties %}
+															</option>
 														{% ENDFOR mods %}
 													</select>
 												</div>
@@ -1414,17 +1414,17 @@
 										<div class="product__props selectBox">
 											<select class="product__props-select select" name="form[properties][]">
 												{% FOR mods %}
+													<option 
+														value="{index_page_favorites_goods.mods.ID}"
+														data-price="{index_page_favorites_goods.mods.PRICE_NOW}"
+														data-price-old="{index_page_favorites_goods.mods.PRICE_NOW_WITHOUT_DISCOUNT || index_page_favorites_goods.mods.PRICE_OLD}"
+														data-rest="{index_page_favorites_goods.mods.REST_VALUE}"
+														{% IF index_page_favorites_goods.mods.ID = index_page_favorites_goods.MIN_PRICE_NOW_ID %}selected="selected"{% ENDIF %}
+													>
 													{% FOR goods_mod_distinctive_properties %}
-														{% IF index_page_favorites_goods.mods.goods_mod_distinctive_properties.index > 1 %}{continue}{% ENDIF %}
-														<option 
-															value="{index_page_favorites_goods.mods.ID}" 
-															name="{index_page_favorites_goods.mods.goods_mod_distinctive_properties.NAME}"
-															data-price="{index_page_favorites_goods.mods.PRICE_NOW}"
-															data-price-old="{index_page_favorites_goods.mods.PRICE_NOW_WITHOUT_DISCOUNT || index_page_favorites_goods.mods.PRICE_OLD}"
-															data-rest="{index_page_favorites_goods.mods.REST_VALUE}"
-															{% IF index_page_favorites_goods.mods.ID = index_page_favorites_goods.MIN_PRICE_NOW_ID %}selected="selected"{% ENDIF %}
-														>{index_page_favorites_goods.mods.goods_mod_distinctive_properties.VALUE}</option>
+														{index_page_favorites_goods.mods.goods_mod_distinctive_properties.VALUE}{% IFNOT index_page_favorites_goods.mods.goods_mod_distinctive_properties.last %},{% ENDIF %}
 													{% ENDFOR goods_mod_distinctive_properties %}
+													</option>
 												{% ENDFOR mods %}
 											</select>
 										</div>
@@ -1819,17 +1819,17 @@
 										<div class="product__props selectBox">
 											<select class="product__props-select select" name="form[properties][]">
 												{% FOR mods %}
+													<option 
+														value="{index_page_new_goods.mods.ID}"
+														data-price="{index_page_new_goods.mods.PRICE_NOW}"
+														data-price-old="{index_page_new_goods.mods.PRICE_NOW_WITHOUT_DISCOUNT || index_page_new_goods.mods.PRICE_OLD}"
+														data-rest="{index_page_new_goods.mods.REST_VALUE}"
+														{% IF index_page_new_goods.mods.ID = index_page_new_goods.MIN_PRICE_NOW_ID %}selected="selected"{% ENDIF %}
+													>
 													{% FOR goods_mod_distinctive_properties %}
-														{% IF index_page_new_goods.mods.goods_mod_distinctive_properties.index > 1 %}{continue}{% ENDIF %}
-														<option 
-															value="{index_page_new_goods.mods.ID}" 
-															name="{index_page_new_goods.mods.goods_mod_distinctive_properties.NAME}"
-															data-price="{index_page_new_goods.mods.PRICE_NOW}"
-															data-price-old="{index_page_new_goods.mods.PRICE_NOW_WITHOUT_DISCOUNT || index_page_new_goods.mods.PRICE_OLD}"
-															data-rest="{index_page_new_goods.mods.REST_VALUE}"
-															{% IF index_page_new_goods.mods.ID = index_page_new_goods.MIN_PRICE_NOW_ID %}selected="selected"{% ENDIF %}
-														>{index_page_new_goods.mods.goods_mod_distinctive_properties.VALUE}</option>
+														{index_page_new_goods.mods.goods_mod_distinctive_properties.VALUE}{% IFNOT index_page_new_goods.mods.goods_mod_distinctive_properties.last %},{% ENDIF %}
 													{% ENDFOR goods_mod_distinctive_properties %}
+													</option>
 												{% ENDFOR mods %}
 											</select>
 										</div>
@@ -2170,17 +2170,17 @@
 										<div class="product__props selectBox">
 											<select class="product__props-select select" name="form[properties][]">
 												{% FOR mods %}
+													<option 
+														value="{index_page_goods.mods.ID}"
+														data-price="{index_page_goods.mods.PRICE_NOW}"
+														data-price-old="{index_page_goods.mods.PRICE_NOW_WITHOUT_DISCOUNT || index_page_goods.mods.PRICE_OLD}"
+														data-rest="{index_page_goods.mods.REST_VALUE}"
+														{% IF index_page_goods.mods.ID = index_page_goods.MIN_PRICE_NOW_ID %}selected="selected"{% ENDIF %}
+													>
 													{% FOR goods_mod_distinctive_properties %}
-														{% IF index_page_goods.mods.goods_mod_distinctive_properties.index > 1 %}{continue}{% ENDIF %}
-														<option 
-															value="{index_page_goods.mods.ID}" 
-															name="{index_page_goods.mods.goods_mod_distinctive_properties.NAME}"
-															data-price="{index_page_goods.mods.PRICE_NOW}"
-															data-price-old="{index_page_goods.mods.PRICE_NOW_WITHOUT_DISCOUNT || index_page_goods.mods.PRICE_OLD}"
-															data-rest="{index_page_goods.mods.REST_VALUE}"
-															{% IF index_page_goods.mods.ID = index_page_goods.MIN_PRICE_NOW_ID %}selected="selected"{% ENDIF %}
-														>{index_page_goods.mods.goods_mod_distinctive_properties.VALUE}</option>
+														{index_page_goods.mods.goods_mod_distinctive_properties.VALUE}{% IFNOT index_page_goods.mods.goods_mod_distinctive_properties.last %},{% ENDIF %}
 													{% ENDFOR goods_mod_distinctive_properties %}
+													</option>
 												{% ENDFOR mods %}
 											</select>
 										</div>
@@ -2355,7 +2355,7 @@
 			<div class="container">
 				<div class="main__inner flex-start">
 					<!-- Левая часть -->
-					{% IFNOT IS_FULL_CATALOG && MOD_LNAME = catalog %}
+					{% IFNOT IS_FULL_CATALOG && MOD_LNAME = catalog && goods_empty=0 %}
 					<div class="main__left sidebar">
 						<!-- Каталог -->
 						<div class="sidebar__block sidebar__block-catalog">
@@ -2512,7 +2512,7 @@
 					{% ENDIF %}
 
 					<!-- Правая часть -->
-					<div class="main__right {% IFNOT IS_FULL_CATALOG && MOD_LNAME = catalog %}has-sidebar{% ENDIF %}">
+					<div class="main__right {% IFNOT IS_FULL_CATALOG && MOD_LNAME = catalog && goods_empty=0 %}has-sidebar{% ENDIF %}">
 						<!-- Основное блоки заголовков -->
 						<div id="page__title">
 							<!-- Заголовки страниц -->
@@ -3054,17 +3054,17 @@
 											<div class="product__props selectBox">
 												<select class="product__props-select select" name="form[properties][]">
 													{% FOR mods %}
+														<option 
+															value="{recently_viewed_goods.mods.ID}"
+															data-price="{recently_viewed_goods.mods.PRICE_NOW}"
+															data-price-old="{recently_viewed_goods.mods.PRICE_NOW_WITHOUT_DISCOUNT || recently_viewed_goods.mods.PRICE_OLD}"
+															data-rest="{recently_viewed_goods.mods.REST_VALUE}"
+															{% IF recently_viewed_goods.mods.ID = recently_viewed_goods.MIN_PRICE_NOW_ID %}selected="selected"{% ENDIF %}
+														>
 														{% FOR goods_mod_distinctive_properties %}
-															{% IF recently_viewed_goods.mods.goods_mod_distinctive_properties.index > 1 %}{continue}{% ENDIF %}
-															<option 
-																value="{recently_viewed_goods.mods.ID}" 
-																name="{recently_viewed_goods.mods.goods_mod_distinctive_properties.NAME}"
-																data-price="{recently_viewed_goods.mods.PRICE_NOW}"
-																data-price-old="{recently_viewed_goods.mods.PRICE_NOW_WITHOUT_DISCOUNT || recently_viewed_goods.mods.PRICE_OLD}"
-																data-rest="{recently_viewed_goods.mods.REST_VALUE}"
-																{% IF recently_viewed_goods.mods.ID = recently_viewed_goods.MIN_PRICE_NOW_ID %}selected="selected"{% ENDIF %}
-															>{recently_viewed_goods.mods.goods_mod_distinctive_properties.VALUE}</option>
+															{recently_viewed_goods.mods.goods_mod_distinctive_properties.VALUE}{% IFNOT recently_viewed_goods.mods.goods_mod_distinctive_properties.last %},{% ENDIF %}
 														{% ENDFOR goods_mod_distinctive_properties %}
+														</option>
 													{% ENDFOR mods %}
 												</select>
 											</div>
@@ -3794,7 +3794,7 @@
 		catalog.onClick();
 		catalog.priceFilter();
 		catalog.activeFilterCount();
-		// catalog.hideCatalog();
+		catalog.hideSideCatalog();
 	});
 	</script>
 	<script defer type="text/javascript" src="{ASSETS_JS_PATH}jqueryui.js?design=THEMENAME"></script>

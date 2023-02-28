@@ -30,8 +30,10 @@
           {% FOR goods_mod_info %}
           <div class="compare__item swiper-slide" data-index="{goods_mod_info.index}">
             <a class="compare__image flex-center" href="{goods_mod_info.GOODS_MOD_URL}" data-id="{goods_mod_info.GOODS_MOD_ID}" title="Перейти к странице &laquo;{goods_mod_info.GOODS_NAME}&raquo;">
-              <img class="swiper-lazy" data-src="{% IF goods_mod_info.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{goods_mod_info.GOODS_IMAGE_SMALL}{% ENDIF %}" alt="{goods_mod_info.GOODS_NAME}" />
-              <div class="swiper-lazy-preloader"></div>
+              <noscript>
+                <img class="noscript-lozad" src="{% IF goods_mod_info.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{goods_mod_info.GOODS_IMAGE_SMALL}{% ENDIF %}" alt="{goods_mod_info.GOODS_NAME}" />
+              </noscript>
+              <img class="lozad" data-src="{% IF goods_mod_info.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{goods_mod_info.GOODS_IMAGE_SMALL}{% ENDIF %}" alt="{goods_mod_info.GOODS_NAME}" />
             </a>
             <a class="compare__remove button-rotate button-link" href="{COMPARE_DELETE_URL}?id={goods_mod_info.GOODS_MOD_ID}" title="Убрать из таблицы сравнения"><i class="icon-close"></i></a>
           </div>

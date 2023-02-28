@@ -349,11 +349,11 @@ class QuantityAddto extends Quantity {
 		const totalDiscount = document.querySelector('.addto__total-discount')
 		if (newDiscount){
 			console.log('updAddto newDiscount1', newDiscount);
-			totalDiscount.classList.remove('is-hide')
+			totalDiscount.classList.remove('is-hidden')
 			quantityAddto.updAddtoDiscount(newDiscount.innerHTML)
 		} else {
 			console.log('updAddto newDiscount2', newDiscount);
-			totalDiscount.classList.add('is-hide')
+			totalDiscount.classList.add('is-hidden')
 		}
 
 	};
@@ -655,7 +655,7 @@ function Compare() {
 			grabCursor: false,
 			autoHeight: true,
 			lazy: {
-				enabled: true,
+				enabled: false,
 				loadPrevNext: true,
 				loadOnTransitionStart: true,
 			},
@@ -1449,12 +1449,24 @@ function Product() {
 		const addtoId = document.querySelector('.addto__qty .qty__input[name="form[quantity]['+ id +']"')
 
 		itemPriceNow.innerHTML = addSpaces(Math.floor(priceNow))
-		itemPriceOld.innerHTML = addSpaces(Math.floor(priceOld))
+		// Проверка старой цены
+		itemPriceOld ? itemPriceOld.innerHTML = addSpaces(Math.floor(priceOld)) : 
+		// Обновление данных
 		itemQtyInput.setAttribute('name', 'form[quantity]['+ id +']')
 		itemQtyInput.setAttribute('max', rest)
-		itemQtyInput.value = addtoId.value
 		itemModId.value = id
 		
+		// Проверка модификации в корзине
+		if (addtoId) {
+			itemQtyInput.value = addtoId.value
+			item.classList.add('product__inCart')
+		} else {
+			item.classList.remove('product__inCart')
+		}
+
+		// Проверка наличия
+		rest > 0 ? item.classList.remove('product__empty') : item.classList.add('product__empty')
+
 		// console.log('mod', mod)
 		// console.log('el', checked)
 		// console.log('price', priceNow)
@@ -1779,6 +1791,14 @@ function Catalog() {
 		var result = $('.filters__result')
 		result.attr('data-result', count).text(count)
 		count == 0 ? result.addClass('is-hide') : result.removeClass('is-hide')
+	}
+
+	// Скрыть каталог если нет подкатегорий
+	this.hideSideCatalog = function(){
+		var items = $('.sidebar__block-catalog .catalog__item')
+		if (items.length < 2 ) {
+			$('.sidebar__block-catalog').hide();
+		}
 	}
 
 	console.timeEnd('Catalog test');
