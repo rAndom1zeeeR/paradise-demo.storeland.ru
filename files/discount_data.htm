@@ -279,13 +279,11 @@
 						{% ENDIF %}
 
 						<div class="product__attr product__margin">
-							{% FOR mods %}
-								{% FOR goods_attr_list %}
-									<div class="product__attr-item">
-										<span class="product__attr-name">{goods.mods.goods_attr_list.NAME}:</span>
-										<span class="product__attr-value">{goods.mods.goods_attr_list.VALUE}</span>
-									</div>
-								{% ENDFOR %}
+							{% FOR goods_attr_list %}
+								<div class="product__attr-item">
+									<span class="product__attr-name">{goods.goods_attr_list.NAME}:</span>
+									<span class="product__attr-value">{goods.goods_attr_list.VALUE}</span>
+								</div>
 							{% ENDFOR %}
 						</div>
 			

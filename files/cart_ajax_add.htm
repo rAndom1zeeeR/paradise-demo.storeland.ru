@@ -50,8 +50,8 @@
 <div style="display:none;" id="newCartSumNowFormated">{CART_SUM_NOW | money_format}</div>
 <div style="display:none;" id="newCartSumNowDiscount">{CART_SUM_NOW_WITH_DISCOUNT}</div>
 <div style="display:none;" id="newCartSumNowDiscountFormated">{CART_SUM_NOW_WITH_DISCOUNT | money_format}</div>
-<div style="display:none;" id="newCartSumNowTotal">{CART_SUM_NOW_WITH_DELIVERY_AND_DISCOUNT}</div>
-<div style="display:none;" id="newCartSumNowTotalFormated">{CART_SUM_NOW_WITH_DELIVERY_AND_DISCOUNT | money_format}</div>
+<div style="display:none;" id="newCartSumTotal">{CART_SUM_NOW_WITH_DELIVERY_AND_DISCOUNT}</div>
+<div style="display:none;" id="newCartSumTotalFormated">{CART_SUM_NOW_WITH_DELIVERY_AND_DISCOUNT | money_format}</div>
 <div style="display:none;" id="newCartData">
 	<div class="addto__title">
 		<span class="addto__label">В Корзине</span>
@@ -156,7 +156,7 @@
 	$('.cart-wordend').html($('#newCartWord').html());
 	$('.cartSumNow').attr('data-price', $('#newCartSumNow').html()).html(addSpaces($('#newCartSumNowFormated').html()));
 	$('.cartSumNowDiscount').attr('data-price', $('#newCartSumNowDiscount').html()).html(addSpaces($('#newCartSumNowDiscountFormated').html()));
-	$('.cartSumNowTotal').attr('data-price', $('#newCartSumNowTotal').html()).html(addSpaces($('#newCartSumNowTotalFormated').html()));
+	$('.cartSumTotal').attr('data-price', $('#newCartSumTotal').html()).html(addSpaces($('#newCartSumTotalFormated').html()));
 	// Обновление скидки
 	quantityAddto.onAddto();
 </script>

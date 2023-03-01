@@ -1477,6 +1477,13 @@ function Product() {
 		// console.log('itemPriceOld', itemPriceOld)
 		// console.log('itemQtyInput', itemQtyInput)
 		// console.log('itemModId', itemModId)
+
+		console.log('id', id)
+		const link = item.querySelector('.add-mod')
+		const linkNew = link.href.replace(/\d{9}/, id)
+		link.href = linkNew
+		console.log('href0', link)
+		console.log('href0', linkNew)
 	}
 
 }
@@ -2827,7 +2834,7 @@ function Order(){
 	
 					// Получаем новую итоговую стоимость заказа
 					var totalBlock = $(data).closest('#order_form').find('.order-total');
-					var totalSum = totalBlock.find('.cartSumNowWithDiscount').attr('data-price');
+					var totalSum = totalBlock.find('.cartSumDiscount').attr('data-price');
 					var deliveryPrice = totalBlock.find('.cartSumDelivery').attr('data-price');
 					var newTotalSum = parseInt(totalSum) + parseInt(deliveryPrice);
 	
