@@ -365,7 +365,7 @@
 							<div class="product__addCart">
 								<!-- Добавление в корзину -->
 								{% IF goods.MAX_REST_VALUE=0 %}
-								<a class="product__add button-empty add-notify"
+								<a class="product__add add-notify button-empty"
 									title="Уведомить"
 									data-tooltip="Уведомить"
 									rel="nofollow"
@@ -379,7 +379,7 @@
 									<span>Уведомить</span>
 								</a>
 								{% ELSE %}
-								<a class="product__add button-primary {% IF goods.COUNT_MODIFICATION > 1 %}add-mod{% ELSE %}add-cart{% ENDIF %}"
+								<a class="product__add add-cart button-primary"
 									title="Добавить в корзину &laquo;{goods.NAME}&raquo;"
 									data-tooltip="В корзину"
 									rel="nofollow"
@@ -442,26 +442,23 @@
 							<!-- Добавление товара в избранное и сравнение и в корзину -->
 							<div class="product__addCart">
 								<!-- Добавление в корзину -->
-								{% IF goods.MAX_REST_VALUE=0 %}
-								<a class="add-notify"
+								<a class="product__add add-notify"
 									title="Уведомить"
 									data-tooltip="Уведомить"
 									rel="nofollow"
 									data-fancybox
 									data-src="#fancybox__notify"
-									href="javascript:;"
 									data-name="{goods.NAME}"
 									data-art="{goods.ART_NUMBER}"
 								>
 									<i class="icon-notifications"></i>
 									<span>Уведомить</span>
 								</a>
-								{% ELSE %}
-								<a class="{% IF goods.COUNT_MODIFICATION > 1 %}add-mod{% ELSE %}add-cart{% ENDIF %}"
+								<a class="product__add add-cart"
 									title="Добавить в корзину &laquo;{goods.NAME}&raquo;"
 									data-tooltip="В корзину"
 									rel="nofollow"
-									href="{% IF goods.COUNT_MODIFICATION > 1 %}{goods.URL_MIN_PRICE_NOW}{% ELSE %}{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={goods.MIN_PRICE_NOW_ID}{% ENDIF %}"
+									href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={goods.MIN_PRICE_NOW_ID}"
 								>
 									<i class="icon-cart"></i>
 									<span class="inCart__label">В корзину</span>
@@ -473,7 +470,6 @@
 										{% ENDFOR %}
 									</span>
 								</a>
-								{% ENDIF %}
 							</div>
 
 							<!-- Стикеры -->

@@ -775,11 +775,11 @@ function Product() {
 		}
 
 		$('.product__item').filter('[data-id="' + $id + '"]').each(function(){
-			var added = $(this).find('.product__addCart span').attr('data-added');
+			var added = $(this).find('.add-cart span').attr('data-added');
 			var count = $(this).find('.inCart__count');
 			var newCount = parseInt(count.text()) + parseInt($val);
 			// Обновление данных
-			$(this).addClass('product__inCart').find('.product__addCart span').text(added);
+			$(this).addClass('product__inCart').find('.add-cart span').text(added);
 			count.text(newCount)
 		});
 	}
@@ -1287,7 +1287,7 @@ function Product() {
 			$(document).on('click', '.add-mod', function(){
 				var href = $(this).attr('href');
 				href += (false !== href.indexOf('?') ? '&' : '?') + 'only_body=1';
-				product.quickViewShowMod(href);
+				// product.quickViewShowMod(href);
 				$(function(){
 					var observer = lozad();
 					observer.observe();
@@ -1353,7 +1353,7 @@ function Product() {
 
 	// Добавление товара в корзину
 	this.onCart = function(){
-		$('.add-cart').on('click', function(){
+		$('.add-cart, .add-mod').on('click', function(){
 			var form = $(this).closest('form');
 			if ($(this).hasClass('quick')) {
 				form.attr('rel', 'quick');
@@ -1450,10 +1450,10 @@ function Product() {
 
 		itemPriceNow.innerHTML = addSpaces(Math.floor(priceNow))
 		// Проверка старой цены
-		itemPriceOld ? itemPriceOld.innerHTML = addSpaces(Math.floor(priceOld)) : 
+		itemPriceOld ? itemPriceOld.innerHTML = addSpaces(Math.floor(priceOld)) : ''
 		// Обновление данных
-		itemQtyInput.setAttribute('name', 'form[quantity]['+ id +']')
-		itemQtyInput.setAttribute('max', rest)
+		itemQtyInput.name = `form[quantity][${id}]`
+		itemQtyInput.max = rest
 		itemModId.value = id
 		
 		// Проверка модификации в корзине
@@ -1461,11 +1461,17 @@ function Product() {
 			itemQtyInput.value = addtoId.value
 			item.classList.add('product__inCart')
 		} else {
+			itemQtyInput.value = 1
 			item.classList.remove('product__inCart')
 		}
 
 		// Проверка наличия
 		rest > 0 ? item.classList.remove('product__empty') : item.classList.add('product__empty')
+
+		// Обновление ссылки
+		const link = item.querySelector('.add-cart')
+		const linkNew = link.href.replace(/\d{9}/, id)
+		link.href = linkNew
 
 		// console.log('mod', mod)
 		// console.log('el', checked)
@@ -1477,13 +1483,6 @@ function Product() {
 		// console.log('itemPriceOld', itemPriceOld)
 		// console.log('itemQtyInput', itemQtyInput)
 		// console.log('itemModId', itemModId)
-
-		console.log('id', id)
-		const link = item.querySelector('.add-mod')
-		const linkNew = link.href.replace(/\d{9}/, id)
-		link.href = linkNew
-		console.log('href0', link)
-		console.log('href0', linkNew)
 	}
 
 }
