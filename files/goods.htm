@@ -847,7 +847,7 @@
 		<div class="products__grid swiper-wrapper">
 			{% FOR related_goods %}
 			<div class="product__item swiper-slide
-					{% IF related_goods.MAX_REST_VALUE = 0 %}product__empty{% ENDIF %}
+					{% IF related_goods.MIN_REST_VALUE = 0 %}product__empty{% ENDIF %}
 					{% IF related_goods.NB_GOODS_IN_CART %}product__inCart{% ENDIF %}
 					{% IF related_goods.COUNT_MODIFICATION > 1 %}product__has-mod{% ENDIF %}
 					{% IF related_goods.IS_TOP %}product__has-top{% ENDIF %}
@@ -1141,7 +1141,7 @@
 		<div class="products__grid swiper-wrapper">
 			{% FOR related_views_goods %}
 			<div class="product__item swiper-slide
-					{% IF related_views_goods.MAX_REST_VALUE = 0 %}product__empty{% ENDIF %}
+					{% IF related_views_goods.MIN_REST_VALUE = 0 %}product__empty{% ENDIF %}
 					{% IF related_views_goods.NB_GOODS_IN_CART %}product__inCart{% ENDIF %}
 					{% IF related_views_goods.COUNT_MODIFICATION > 1 %}product__has-mod{% ENDIF %}
 					{% IF related_views_goods.IS_TOP %}product__has-top{% ENDIF %}

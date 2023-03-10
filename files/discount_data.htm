@@ -89,7 +89,7 @@
 		<div class="products__list products__ajax">
 			{% FOR goods %}
 			<div class="product__item 
-					{% IF goods.MAX_REST_VALUE = 0 %}product__empty{% ENDIF %}
+					{% IF goods.MIN_REST_VALUE = 0 %}product__empty{% ENDIF %}
 					{% IF goods.NB_GOODS_IN_CART %}product__inCart{% ENDIF %}
 					{% IF goods.COUNT_MODIFICATION > 1 %}product__has-mod{% ENDIF %}
 					{% IF goods.IS_TOP %}product__has-top{% ENDIF %}
@@ -377,7 +377,7 @@
 			<div class="products__grid products__ajax flex-stretch">
 				{% FOR goods %}
 				<div class="product__item 
-						{% IF goods.MAX_REST_VALUE = 0 %}product__empty{% ENDIF %}
+						{% IF goods.MIN_REST_VALUE = 0 %}product__empty{% ENDIF %}
 						{% IF goods.NB_GOODS_IN_CART %}product__inCart{% ENDIF %}
 						{% IF goods.COUNT_MODIFICATION > 1 %}product__has-mod{% ENDIF %}
 						{% IF goods.IS_TOP %}product__has-top{% ENDIF %}

@@ -121,7 +121,7 @@
 		<div class="products__list products__ajax">
 			{% FOR goods %}
 			<div class="product__item 
-					{% IF goods.MAX_REST_VALUE = 0 %}product__empty{% ENDIF %}
+					{% IF goods.MIN_REST_VALUE = 0 %}product__empty{% ENDIF %}
 					{% IF goods.NB_GOODS_IN_CART %}product__inCart{% ENDIF %}
 					{% IF goods.COUNT_MODIFICATION > 1 %}product__has-mod{% ENDIF %}
 					{% IF goods.IS_TOP %}product__has-top{% ENDIF %}
@@ -361,10 +361,29 @@
 							</div>
 							{% ENDIF COUNT_MODIFICATION %}
 
+							<!-- Кол-во -->
+							<div class="product__qty flex-center">
+								<div class="qty flex {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}has-max{% ENDIF %}">
+									<span class="qty__select qty__select_minus" title="Уменьшить"><i class="icon-minus"></i></span>
+									<input class="qty__input" 
+												type="text" 
+												name="form[quantity][{goods.MIN_PRICE_NOW_ID}]" 
+												maxlength="4" 
+												{% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE %}max="{goods.MAX_REST_VALUE}"{% ENDIF %} 
+												min="1" 
+												value="{% IF goods.NB_GOODS_IN_CART %}{goods.NB_GOODS_IN_CART}{% ELSE %}1{% ENDIF %}" 
+												title="Количество, {goods.MEASURE_NAME}"
+												autocomplete="off" 
+												onkeypress="return keyPress(this, event);" 
+												onpaste="return false;" 
+									/>
+									<span class="qty__select qty__select_plus" title="Увеличить"><i class="icon-plus"></i></span>
+								</div>
+							</div>
+
 							<!-- Добавление товара в избранное и сравнение и в корзину -->
 							<div class="product__addCart">
-								<!-- Добавление в корзину -->
-								{% IF goods.MAX_REST_VALUE=0 %}
+								<!-- Уведомить -->
 								<a class="product__add add-notify button-empty"
 									title="Уведомить"
 									data-tooltip="Уведомить"
@@ -378,7 +397,8 @@
 									<i class="icon-notifications"></i>
 									<span>Уведомить</span>
 								</a>
-								{% ELSE %}
+
+								<!-- Добавление в корзину -->
 								<a class="product__add add-cart button-primary"
 									title="Добавить в корзину &laquo;{goods.NAME}&raquo;"
 									data-tooltip="В корзину"
@@ -395,7 +415,6 @@
 										{% ENDFOR %}
 									</span>
 								</a>
-								{% ENDIF %}
 							</div>
 
 						</div>
@@ -412,7 +431,7 @@
 			<div class="products__grid products__ajax flex-stretch">
 				{% FOR goods %}
 				<div class="product__item 
-						{% IF goods.MAX_REST_VALUE = 0 %}product__empty{% ENDIF %}
+						{% IF goods.MIN_REST_VALUE = 0 %}product__empty{% ENDIF %}
 						{% IF goods.NB_GOODS_IN_CART %}product__inCart{% ENDIF %}
 						{% IF goods.COUNT_MODIFICATION > 1 %}product__has-mod{% ENDIF %}
 						{% IF goods.IS_TOP %}product__has-top{% ENDIF %}
@@ -441,7 +460,7 @@
 
 							<!-- Добавление товара в избранное и сравнение и в корзину -->
 							<div class="product__addCart">
-								<!-- Добавление в корзину -->
+								<!-- Уведомить -->
 								<a class="product__add add-notify"
 									title="Уведомить"
 									data-tooltip="Уведомить"
@@ -454,6 +473,7 @@
 									<i class="icon-notifications"></i>
 									<span>Уведомить</span>
 								</a>
+								<!-- Добавление в корзину -->
 								<a class="product__add add-cart"
 									title="Добавить в корзину &laquo;{goods.NAME}&raquo;"
 									data-tooltip="В корзину"

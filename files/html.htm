@@ -755,7 +755,7 @@
 							<div class="products__grid swiper-wrapper">
 								{% FOR index_page_sale_goods %}
 								<div class="product__item swiper-slide
-										{% IF index_page_sale_goods.MAX_REST_VALUE = 0 %}product__empty{% ENDIF %}
+										{% IF index_page_sale_goods.MIN_REST_VALUE = 0 %}product__empty{% ENDIF %}
 										{% IF index_page_sale_goods.NB_GOODS_IN_CART %}product__inCart{% ENDIF %}
 										{% IF index_page_sale_goods.COUNT_MODIFICATION > 1 %}product__has-mod{% ENDIF %}
 										{% IF index_page_sale_goods.IS_TOP %}product__has-top{% ENDIF %}
@@ -1158,7 +1158,7 @@
 					<div class="products__grid flex-stretch">
 						{% FOR index_page_favorites_goods %}
 						<div class="product__item 
-								{% IF index_page_favorites_goods.MAX_REST_VALUE = 0 %}product__empty{% ENDIF %}
+								{% IF index_page_favorites_goods.MIN_REST_VALUE = 0 %}product__empty{% ENDIF %}
 								{% IF index_page_favorites_goods.NB_GOODS_IN_CART %}product__inCart{% ENDIF %}
 								{% IF index_page_favorites_goods.COUNT_MODIFICATION > 1 %}product__has-mod{% ENDIF %}
 								{% IF index_page_favorites_goods.IS_TOP %}product__has-top{% ENDIF %}
@@ -1559,7 +1559,7 @@
 						</div>
 						{% FOR index_page_new_goods %}
 						<div class="product__item
-								{% IF index_page_new_goods.MAX_REST_VALUE = 0 %}product__empty{% ENDIF %}
+								{% IF index_page_new_goods.MIN_REST_VALUE = 0 %}product__empty{% ENDIF %}
 								{% IF index_page_new_goods.NB_GOODS_IN_CART %}product__inCart{% ENDIF %}
 								{% IF index_page_new_goods.COUNT_MODIFICATION > 1 %}product__has-mod{% ENDIF %}
 								{% IF index_page_new_goods.IS_TOP %}product__has-top{% ENDIF %}
@@ -1906,7 +1906,7 @@
 					<div class="products__grid flex-stretch">
 						{% FOR index_page_goods %}
 						<div class="product__item 
-								{% IF index_page_goods.MAX_REST_VALUE = 0 %}product__empty{% ENDIF %}
+								{% IF index_page_goods.MIN_REST_VALUE = 0 %}product__empty{% ENDIF %}
 								{% IF index_page_goods.NB_GOODS_IN_CART %}product__inCart{% ENDIF %}
 								{% IF index_page_goods.COUNT_MODIFICATION > 1 %}product__has-mod{% ENDIF %}
 								{% IF index_page_goods.IS_TOP %}product__has-top{% ENDIF %}
@@ -2349,19 +2349,18 @@
 							</a>
 							<div class="sidebar__content">
 								<ul class="catalog__items unstyled">
-									<li class="catalog__item is-opened">
-										<a class="catalog__link flex">
-											<span class="catalog__name">{CATEGORY_NAME}</span>
-										</a>
-									</li>
-									{% FOR nested_categories_list %}
-									<li class="catalog__item" data-id="{nested_categories_list.ID}">
-										<a class="catalog__link flex" href="{nested_categories_list.URL}" title="Перейти к категории &laquo;{nested_categories_list.NAME}&raquo;">
-											<span class="catalog__name">{nested_categories_list.NAME}</span>
-											{% IF nested_categories_list.ISSET_VISIBLE_SUB %}<span class="catalog__open"></span>{% ENDIF %}
-										</a>
-									</li>
-									{% ENDFOR %}
+									{% FOR catalog_full %}
+										{% IFNOT catalog_full.LEVEL = 0 && catalog_full.FIRST %}
+										<ul class="catalog__sub" data-level="{catalog_full.LEVEL}">
+										{% ENDIF %}
+											<li class="catalog__item {% IF catalog_full.ISSET_VISIBLE_SUB %}parent{% ENDIF %} {% IF catalog_full.CURRENT_PARENT || catalog_full.CURRENT %}is-opened{% ENDIF %}" data-level="{catalog_full.LEVEL}" {% IF catalog_full.HIDE %}style="display: none;"{% ENDIF %}>
+												<a class="catalog__link flex {% IF catalog_full.CURRENT %}is-opened{% ENDIF %}" href="{catalog_full.URL}" data-level="{catalog_full.LEVEL}">
+													<span class="catalog__name">{catalog_full.NAME}</span>
+													{% IF catalog_full.ISSET_VISIBLE_SUB %}<span class="catalog__open"></span>{% ENDIF %}
+												</a>
+											{% IF catalog_full.ISSET_SUB=0 %}</li>{% ENDIF %}
+										{% IF catalog_full.LAST %}{% FOR out %}</li>{% IFNOT catalog_full.out.LAST %}</ul>{% ENDIF out.LAST %}{% ENDFOR out %}{% ENDIF LAST %}
+									{% ENDFOR catalog_full %}
 							</div>
 						</div>
 						{% IF SHOW_GOODS_PRICE_FILTERS || SHOW_GOODS_FILTERS %}
@@ -2786,7 +2785,7 @@
 						<div class="products__grid swiper-wrapper">
 							{% FOR recently_viewed_goods %}
 							<div class="product__item swiper-slide
-									{% IF recently_viewed_goods.MAX_REST_VALUE = 0 %}product__empty{% ENDIF %}
+									{% IF recently_viewed_goods.MIN_REST_VALUE = 0 %}product__empty{% ENDIF %}
 									{% IF recently_viewed_goods.NB_GOODS_IN_CART %}product__inCart{% ENDIF %}
 									{% IF recently_viewed_goods.COUNT_MODIFICATION > 1 %}product__has-mod{% ENDIF %}
 									{% IF recently_viewed_goods.IS_TOP %}product__has-top{% ENDIF %}
