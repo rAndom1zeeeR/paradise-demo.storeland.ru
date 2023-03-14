@@ -663,6 +663,7 @@ main {margin: 40px 0;position: relative;display: block;}
 .sidebar__close {display: none;}
 .sidebar__close i {margin: 0;}
 .sidebar .catalog__sub {padding: 8px;background-color: var(--color-lightgray);border-radius: 12px;}
+.sidebar .catalog__sub[data-level="1"] {margin-top: 8px;}
 /* .sidebar .catalog__item.is-opened .catalog__link {padding-left: 0;background-color: var(--color-secondary);color: var(--color-white);justify-content: center;border-radius: 12px;} */
 /* .sidebar .catalog__item[data-level="0"] {display: none;}
 .sidebar .catalog__item[data-level="0"].is-opened {display: block;}
@@ -1374,13 +1375,13 @@ header {background-color: var(--color-white);box-shadow: 0px 0px 20px 0px var(--
 
 /*** Шапка. Контакты ***/
 .header-contacts {width: calc(100% - 208px);flex-grow: 1;justify-content: flex-end;}
+.header-contacts .contacts__block {margin-left: 32px;white-space: normal;}
+.header-contacts .contacts__block:first-child {margin-left: 0;}
 .header-contacts .contacts__label {display: none;}
 .header-contacts .contacts__worktime {max-width: 176px;}
 .header-contacts .contacts__region {max-width: 224px;}
 .header-contacts .contacts__email {max-width: 224px;}
-.header-contacts .contacts__phone {max-width: 224px;font-size: 18px;white-space: nowrap;}
-.header-contacts .contacts__block {margin-left: 32px;white-space: normal;}
-.header-contacts .contacts__block:first-child {margin-left: 0;}
+.header-contacts .contacts__phone {max-width: 240px;font-size: 18px;white-space: nowrap;}
 .header-contacts .contacts__icon {margin-top: 4px;}
 .header-contacts .contacts__link:hover .contacts__icon {color: var(--color-black);}
 @media all and (max-width: 1199px) {
