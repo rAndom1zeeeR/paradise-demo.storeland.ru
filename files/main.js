@@ -1,5 +1,3 @@
-console.time('time test');
-console.time('start test');
 ///////////////////////////////////////
 /// Общие функции ///
 ///////////////////////////////////////
@@ -1637,7 +1635,6 @@ function Remove() {
 /*** Скрипты для Товары, Категории ***/
 ///////////////////////////////////////
 function Catalog() {
-	console.time('Catalog test');
 
 	var content = document.querySelector('#main')
 
@@ -1763,8 +1760,6 @@ function Catalog() {
 			$('.sidebar__block-catalog').hide();
 		}
 	}
-
-	console.timeEnd('Catalog test');
 
 }
 
@@ -2908,51 +2903,6 @@ var quantityCart = new QuantityCart();
 var quantityProduct = new QuantityProduct();
 
 
-console.timeEnd('start test');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// $.event.special.inputchange = {
-// 	setup: function(){
-// 			var self = this, val;
-// 			$.data(this, 'timer', window.setInterval(function(){
-// 					val = self.value;
-// 					if ( $.data( self, 'cache') != val ) {
-// 							$.data( self, 'cache', val );
-// 							$( self ).trigger( 'inputchange' );
-// 					}
-// 			}, 20));
-// 	},
-// 	teardown: function(){
-// 			window.clearInterval( $.data(this, 'timer') );
-// 	},
-// 	add: function(){
-// 			$.data(this, 'cache', this.value);
-// 	}
-// };
-
-
-
 ///////////////////////////////////////
 // Дополнительные пункты меню в шапке Перенос пунктов меню
 ///////////////////////////////////////
@@ -3183,9 +3133,6 @@ function counterDate() {
 		}, 1000);
 	})
 }
-
-
-
 
 
 ///////////////////////////////////////
@@ -3888,7 +3835,3 @@ function CatalogItems(){
 
 // Объявляем конструктор Количества
 var catalogItems = new CatalogItems();
-
-
-
-console.timeEnd('time test');
