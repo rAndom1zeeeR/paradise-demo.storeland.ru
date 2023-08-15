@@ -738,8 +738,8 @@ function Product() {
 		// Если у нет кол-ва
 		if (!qty) { return false }
 
-		// Если кол-во больше 0
-		qty.getAttribute('max') > 1 ? obj.classList.remove('product__empty') : obj.classList.add('product__empty');
+		// Если кол-во 0
+		qty.getAttribute('max') === 0 ? obj.classList.add('product__empty') : obj.classList.remove('product__empty')
 	}
 
 	// Запуск функции активного класса товара в других категориях. /JS/
