@@ -755,7 +755,7 @@
 							<div class="products__grid swiper-wrapper">
 								{% FOR index_page_sale_goods %}
 								<div class="product__item swiper-slide
-										{% IF index_page_sale_goods.MAX_REST_VALUE = 0 %}product__empty{% ENDIF %}
+										{% IF index_page_sale_goods.MIN_REST_VALUE = 0 %}product__empty{% ENDIF %}
 										{% IF index_page_sale_goods.NB_GOODS_IN_CART %}product__inCart{% ENDIF %}
 										{% IF index_page_sale_goods.COUNT_MODIFICATION > 1 %}product__has-mod{% ENDIF %}
 										{% IF index_page_sale_goods.IS_TOP %}product__has-top{% ENDIF %}
@@ -991,26 +991,23 @@
 												<!-- Добавление товара в избранное и сравнение и в корзину -->
 												<div class="product__addCart">
 													<!-- Добавление в корзину -->
-													{% IF index_page_sale_goods.MAX_REST_VALUE=0 %}
-													<a class="add-notify"
+													<a class="product__add add-notify"
 														title="Уведомить"
 														data-tooltip="Уведомить"
 														rel="nofollow"
 														data-fancybox
 														data-src="#fancybox__notify"
-														href="javascript:;"
 														data-name="{index_page_sale_goods.NAME}"
 														data-art="{index_page_sale_goods.ART_NUMBER}"
 													>
 														<i class="icon-notifications"></i>
 														<span>Уведомить</span>
 													</a>
-													{% ELSE %}
-													<a class="{% IF index_page_sale_goods.COUNT_MODIFICATION > 1 %}add-mod{% ELSE %}add-cart{% ENDIF %}"
+													<a class="product__add add-cart"
 														title="Добавить в корзину &laquo;{index_page_sale_goods.NAME}&raquo;"
 														data-tooltip="В корзину"
 														rel="nofollow"
-														href="{% IF index_page_sale_goods.COUNT_MODIFICATION > 1 %}{index_page_sale_goods.URL_MIN_PRICE_NOW}{% ELSE %}{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_sale_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_sale_goods.MIN_PRICE_NOW_ID}{% ENDIF %}"
+														href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_sale_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_sale_goods.MIN_PRICE_NOW_ID}"
 													>
 														<i class="icon-cart"></i>
 														<span class="inCart__label">В корзину</span>
@@ -1022,7 +1019,6 @@
 															{% ENDFOR %}
 														</span>
 													</a>
-													{% ENDIF %}
 												</div>
 
 												{% IF index_page_sale_goods.COUNT_MODIFICATION > 1 %}
@@ -1162,7 +1158,7 @@
 					<div class="products__grid flex-stretch">
 						{% FOR index_page_favorites_goods %}
 						<div class="product__item 
-								{% IF index_page_favorites_goods.MAX_REST_VALUE = 0 %}product__empty{% ENDIF %}
+								{% IF index_page_favorites_goods.MIN_REST_VALUE = 0 %}product__empty{% ENDIF %}
 								{% IF index_page_favorites_goods.NB_GOODS_IN_CART %}product__inCart{% ENDIF %}
 								{% IF index_page_favorites_goods.COUNT_MODIFICATION > 1 %}product__has-mod{% ENDIF %}
 								{% IF index_page_favorites_goods.IS_TOP %}product__has-top{% ENDIF %}
@@ -1192,26 +1188,23 @@
 									<!-- Добавление товара в избранное и сравнение и в корзину -->
 									<div class="product__addCart">
 										<!-- Добавление в корзину -->
-										{% IF index_page_favorites_goods.MAX_REST_VALUE=0 %}
-										<a class="add-notify"
+										<a class="product__add add-notify"
 											title="Уведомить"
 											data-tooltip="Уведомить"
 											rel="nofollow"
 											data-fancybox
 											data-src="#fancybox__notify"
-											href="javascript:;"
 											data-name="{index_page_favorites_goods.NAME}"
 											data-art="{index_page_favorites_goods.ART_NUMBER}"
 										>
 											<i class="icon-notifications"></i>
 											<span>Уведомить</span>
 										</a>
-										{% ELSE %}
-										<a class="{% IF index_page_favorites_goods.COUNT_MODIFICATION > 1 %}add-mod{% ELSE %}add-cart{% ENDIF %}"
+										<a class="product__add add-cart"
 											title="Добавить в корзину &laquo;{index_page_favorites_goods.NAME}&raquo;"
 											data-tooltip="В корзину"
 											rel="nofollow"
-											href="{% IF index_page_favorites_goods.COUNT_MODIFICATION > 1 %}{index_page_favorites_goods.URL_MIN_PRICE_NOW}{% ELSE %}{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_favorites_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_favorites_goods.MIN_PRICE_NOW_ID}{% ENDIF %}"
+											href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_favorites_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_favorites_goods.MIN_PRICE_NOW_ID}"
 										>
 											<i class="icon-cart"></i>
 											<span class="inCart__label">В корзину</span>
@@ -1223,7 +1216,6 @@
 												{% ENDFOR %}
 											</span>
 										</a>
-										{% ENDIF %}
 									</div>
 
 									<!-- Стикеры -->
@@ -1567,7 +1559,7 @@
 						</div>
 						{% FOR index_page_new_goods %}
 						<div class="product__item
-								{% IF index_page_new_goods.MAX_REST_VALUE = 0 %}product__empty{% ENDIF %}
+								{% IF index_page_new_goods.MIN_REST_VALUE = 0 %}product__empty{% ENDIF %}
 								{% IF index_page_new_goods.NB_GOODS_IN_CART %}product__inCart{% ENDIF %}
 								{% IF index_page_new_goods.COUNT_MODIFICATION > 1 %}product__has-mod{% ENDIF %}
 								{% IF index_page_new_goods.IS_TOP %}product__has-top{% ENDIF %}
@@ -1597,26 +1589,23 @@
 									<!-- Добавление товара в избранное и сравнение и в корзину -->
 									<div class="product__addCart">
 										<!-- Добавление в корзину -->
-										{% IF index_page_new_goods.MAX_REST_VALUE=0 %}
-										<a class="add-notify"
+										<a class="product__add add-notify"
 											title="Уведомить"
 											data-tooltip="Уведомить"
 											rel="nofollow"
 											data-fancybox
 											data-src="#fancybox__notify"
-											href="javascript:;"
 											data-name="{index_page_new_goods.NAME}"
 											data-art="{index_page_new_goods.ART_NUMBER}"
 										>
 											<i class="icon-notifications"></i>
 											<span>Уведомить</span>
 										</a>
-										{% ELSE %}
-										<a class="{% IF index_page_new_goods.COUNT_MODIFICATION > 1 %}add-mod{% ELSE %}add-cart{% ENDIF %}"
+										<a class="product__add add-cart"
 											title="Добавить в корзину &laquo;{index_page_new_goods.NAME}&raquo;"
 											data-tooltip="В корзину"
 											rel="nofollow"
-											href="{% IF index_page_new_goods.COUNT_MODIFICATION > 1 %}{index_page_new_goods.URL_MIN_PRICE_NOW}{% ELSE %}{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_new_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_new_goods.MIN_PRICE_NOW_ID}{% ENDIF %}"
+											href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_new_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_new_goods.MIN_PRICE_NOW_ID}"
 										>
 											<i class="icon-cart"></i>
 											<span class="inCart__label">В корзину</span>
@@ -1628,7 +1617,6 @@
 												{% ENDFOR %}
 											</span>
 										</a>
-										{% ENDIF %}
 									</div>
 
 									<!-- Стикеры -->
@@ -1918,7 +1906,7 @@
 					<div class="products__grid flex-stretch">
 						{% FOR index_page_goods %}
 						<div class="product__item 
-								{% IF index_page_goods.MAX_REST_VALUE = 0 %}product__empty{% ENDIF %}
+								{% IF index_page_goods.MIN_REST_VALUE = 0 %}product__empty{% ENDIF %}
 								{% IF index_page_goods.NB_GOODS_IN_CART %}product__inCart{% ENDIF %}
 								{% IF index_page_goods.COUNT_MODIFICATION > 1 %}product__has-mod{% ENDIF %}
 								{% IF index_page_goods.IS_TOP %}product__has-top{% ENDIF %}
@@ -1948,26 +1936,23 @@
 									<!-- Добавление товара в избранное и сравнение и в корзину -->
 									<div class="product__addCart">
 										<!-- Добавление в корзину -->
-										{% IF index_page_goods.MAX_REST_VALUE=0 %}
-										<a class="add-notify"
+										<a class="product__add add-notify"
 											title="Уведомить"
 											data-tooltip="Уведомить"
 											rel="nofollow"
 											data-fancybox
 											data-src="#fancybox__notify"
-											href="javascript:;"
 											data-name="{index_page_goods.NAME}"
 											data-art="{index_page_goods.ART_NUMBER}"
 										>
 											<i class="icon-notifications"></i>
 											<span>Уведомить</span>
 										</a>
-										{% ELSE %}
-										<a class="{% IF index_page_goods.COUNT_MODIFICATION > 1 %}add-mod{% ELSE %}add-cart{% ENDIF %}"
+										<a class="product__add add-cart"
 											title="Добавить в корзину &laquo;{index_page_goods.NAME}&raquo;"
 											data-tooltip="В корзину"
 											rel="nofollow"
-											href="{% IF index_page_goods.COUNT_MODIFICATION > 1 %}{index_page_goods.URL_MIN_PRICE_NOW}{% ELSE %}{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_goods.MIN_PRICE_NOW_ID}{% ENDIF %}"
+											href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={index_page_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={index_page_goods.MIN_PRICE_NOW_ID}"
 										>
 											<i class="icon-cart"></i>
 											<span class="inCart__label">В корзину</span>
@@ -1979,7 +1964,6 @@
 												{% ENDFOR %}
 											</span>
 										</a>
-										{% ENDIF %}
 									</div>
 
 									<!-- Стикеры -->
@@ -2365,19 +2349,18 @@
 							</a>
 							<div class="sidebar__content">
 								<ul class="catalog__items unstyled">
-									<li class="catalog__item is-opened">
-										<a class="catalog__link flex">
-											<span class="catalog__name">{CATEGORY_NAME}</span>
-										</a>
-									</li>
-									{% FOR nested_categories_list %}
-									<li class="catalog__item" data-id="{nested_categories_list.ID}">
-										<a class="catalog__link flex" href="{nested_categories_list.URL}" title="Перейти к категории &laquo;{nested_categories_list.NAME}&raquo;">
-											<span class="catalog__name">{nested_categories_list.NAME}</span>
-											{% IF nested_categories_list.ISSET_VISIBLE_SUB %}<span class="catalog__open"></span>{% ENDIF %}
-										</a>
-									</li>
-									{% ENDFOR %}
+									{% FOR catalog_full %}
+										{% IFNOT catalog_full.LEVEL = 0 && catalog_full.FIRST %}
+										<ul class="catalog__sub" data-level="{catalog_full.LEVEL}">
+										{% ENDIF %}
+											<li class="catalog__item {% IF catalog_full.ISSET_VISIBLE_SUB %}parent{% ENDIF %} {% IF catalog_full.CURRENT_PARENT || catalog_full.CURRENT %}is-opened{% ENDIF %}" data-level="{catalog_full.LEVEL}" {% IF catalog_full.HIDE %}style="display: none;"{% ENDIF %}>
+												<a class="catalog__link flex {% IF catalog_full.CURRENT %}is-opened{% ENDIF %}" href="{catalog_full.URL}" data-level="{catalog_full.LEVEL}">
+													<span class="catalog__name">{catalog_full.NAME}</span>
+													{% IF catalog_full.ISSET_VISIBLE_SUB %}<span class="catalog__open"></span>{% ENDIF %}
+												</a>
+											{% IF catalog_full.ISSET_SUB=0 %}</li>{% ENDIF %}
+										{% IF catalog_full.LAST %}{% FOR out %}</li>{% IFNOT catalog_full.out.LAST %}</ul>{% ENDIF out.LAST %}{% ENDFOR out %}{% ENDIF LAST %}
+									{% ENDFOR catalog_full %}
 							</div>
 						</div>
 						{% IF SHOW_GOODS_PRICE_FILTERS || SHOW_GOODS_FILTERS %}
@@ -2802,7 +2785,7 @@
 						<div class="products__grid swiper-wrapper">
 							{% FOR recently_viewed_goods %}
 							<div class="product__item swiper-slide
-									{% IF recently_viewed_goods.MAX_REST_VALUE = 0 %}product__empty{% ENDIF %}
+									{% IF recently_viewed_goods.MIN_REST_VALUE = 0 %}product__empty{% ENDIF %}
 									{% IF recently_viewed_goods.NB_GOODS_IN_CART %}product__inCart{% ENDIF %}
 									{% IF recently_viewed_goods.COUNT_MODIFICATION > 1 %}product__has-mod{% ENDIF %}
 									{% IF recently_viewed_goods.IS_TOP %}product__has-top{% ENDIF %}
@@ -2832,26 +2815,23 @@
 										<!-- Добавление товара в избранное и сравнение и в корзину -->
 										<div class="product__addCart">
 											<!-- Добавление в корзину -->
-											{% IF recently_viewed_goods.MAX_REST_VALUE=0 %}
-											<a class="add-notify"
+											<a class="product__add add-notify"
 												title="Уведомить"
 												data-tooltip="Уведомить"
 												rel="nofollow"
 												data-fancybox
 												data-src="#fancybox__notify"
-												href="javascript:;"
 												data-name="{recently_viewed_goods.NAME}"
 												data-art="{recently_viewed_goods.ART_NUMBER}"
 											>
 												<i class="icon-notifications"></i>
 												<span>Уведомить</span>
 											</a>
-											{% ELSE %}
-											<a class="{% IF recently_viewed_goods.COUNT_MODIFICATION > 1 %}add-mod{% ELSE %}add-cart{% ENDIF %}"
+											<a class="product__add add-cart"
 												title="Добавить в корзину &laquo;{recently_viewed_goods.NAME}&raquo;"
 												data-tooltip="В корзину"
 												rel="nofollow"
-												href="{% IF recently_viewed_goods.COUNT_MODIFICATION > 1 %}{recently_viewed_goods.URL_MIN_PRICE_NOW}{% ELSE %}{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={recently_viewed_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={recently_viewed_goods.MIN_PRICE_NOW_ID}{% ENDIF %}"
+												href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={recently_viewed_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={recently_viewed_goods.MIN_PRICE_NOW_ID}"
 											>
 												<i class="icon-cart"></i>
 												<span class="inCart__label">В корзину</span>
@@ -2863,7 +2843,6 @@
 													{% ENDFOR %}
 												</span>
 											</a>
-											{% ENDIF %}
 										</div>
 
 										<!-- Стикеры -->
@@ -3747,7 +3726,7 @@
 			product.default();
 			product.addTo();
 			product.addCart();
-			product.quickViewMod();
+			// product.quickViewMod();
 			product.onCart();
 			product.onNotify();
 			quantityProduct.onProduct();

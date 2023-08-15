@@ -58,7 +58,7 @@
 									{% FOR distinctive_properties %}
 									<div class="cartTable__prop flex">
 										<label>{cart_items.distinctive_properties.NAME}:</label>
-										<span>{cart_items.distinctive_properties.VALUE}</span>
+										<span>{cart_items.distinctive_properties.VALUE}{% IFNOT cart_items.distinctive_properties.last %};{% ENDIF %}</span>
 									</div>
 									{% ENDFOR %}
 								{% ENDIF %}

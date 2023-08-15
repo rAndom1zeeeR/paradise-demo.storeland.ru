@@ -8,7 +8,7 @@
 			<div class="products__grid flex-stretch">
 				{% FOR favorites_goods %}
 				<div class="product__item 
-						{% IF favorites_goods.MAX_REST_VALUE = 0 %}product__empty{% ENDIF %}
+						{% IF favorites_goods.MIN_REST_VALUE = 0 %}product__empty{% ENDIF %}
 						{% IF favorites_goods.NB_GOODS_IN_CART %}product__inCart{% ENDIF %}
 						{% IF favorites_goods.COUNT_MODIFICATION > 1 %}product__has-mod{% ENDIF %}
 						{% IF favorites_goods.IS_TOP %}product__has-top{% ENDIF %}
@@ -38,26 +38,23 @@
 							<!-- Добавление товара в избранное и сравнение и в корзину -->
 							<div class="product__addCart">
 								<!-- Добавление в корзину -->
-								{% IF favorites_goods.MAX_REST_VALUE=0 %}
-								<a class="add-notify"
+								<a class="product__add add-notify"
 									title="Уведомить"
 									data-tooltip="Уведомить"
 									rel="nofollow"
 									data-fancybox
 									data-src="#fancybox__notify"
-									href="javascript:;"
 									data-name="{favorites_goods.NAME}"
 									data-art="{favorites_goods.ART_NUMBER}"
 								>
 									<i class="icon-notifications"></i>
 									<span>Уведомить</span>
 								</a>
-								{% ELSE %}
-								<a class="{% IF favorites_goods.COUNT_MODIFICATION > 1 %}add-mod{% ELSE %}add-cart{% ENDIF %}"
+								<a class="product__add add-cart"
 									title="Добавить в корзину &laquo;{favorites_goods.NAME}&raquo;"
 									data-tooltip="В корзину"
 									rel="nofollow"
-									href="{% IF favorites_goods.COUNT_MODIFICATION > 1 %}{favorites_goods.URL_MIN_PRICE_NOW}{% ELSE %}{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={favorites_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={favorites_goods.MIN_PRICE_NOW_ID}{% ENDIF %}"
+									href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={favorites_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={favorites_goods.MIN_PRICE_NOW_ID}"
 								>
 									<i class="icon-cart"></i>
 									<span class="inCart__label">В корзину</span>
@@ -69,7 +66,6 @@
 										{% ENDFOR %}
 									</span>
 								</a>
-								{% ENDIF %}
 							</div>
 
 							<!-- Стикеры -->

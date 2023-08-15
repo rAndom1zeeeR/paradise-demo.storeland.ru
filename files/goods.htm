@@ -300,7 +300,7 @@
 										<label class="modifications-props__name">{goods_modifications_properties.NAME}:</label>
 										<select class="modifications-props__select select" name="form[properties][]">
 											{% FOR values %}
-												<option value="{goods_modifications_properties.values.ID}" {% IF goods_modifications_properties.values.SELECTED %}selected="selected" {% ENDIF %}>{goods_modifications_properties.values.NAME}</option>
+												<option value="{goods_modifications_properties.values.ID}" data-id="{goods_modifications_properties.ID}" {% IF goods_modifications_properties.values.SELECTED %}selected="selected" {% ENDIF %}>{goods_modifications_properties.values.NAME}</option>
 											{% ENDFOR values %}
 										</select>
 									</div>
@@ -847,7 +847,7 @@
 		<div class="products__grid swiper-wrapper">
 			{% FOR related_goods %}
 			<div class="product__item swiper-slide
-					{% IF related_goods.MAX_REST_VALUE = 0 %}product__empty{% ENDIF %}
+					{% IF related_goods.MIN_REST_VALUE = 0 %}product__empty{% ENDIF %}
 					{% IF related_goods.NB_GOODS_IN_CART %}product__inCart{% ENDIF %}
 					{% IF related_goods.COUNT_MODIFICATION > 1 %}product__has-mod{% ENDIF %}
 					{% IF related_goods.IS_TOP %}product__has-top{% ENDIF %}
@@ -877,26 +877,23 @@
 						<!-- Добавление товара в избранное и сравнение и в корзину -->
 						<div class="product__addCart">
 							<!-- Добавление в корзину -->
-							{% IF related_goods.MAX_REST_VALUE=0 %}
-							<a class="add-notify"
+							<a class="product__add add-notify"
 								title="Уведомить"
 								data-tooltip="Уведомить"
 								rel="nofollow"
 								data-fancybox
 								data-src="#fancybox__notify"
-								href="javascript:;"
 								data-name="{related_goods.NAME}"
 								data-art="{related_goods.ART_NUMBER}"
 							>
 								<i class="icon-notifications"></i>
 								<span>Уведомить</span>
 							</a>
-							{% ELSE %}
-							<a class="{% IF related_goods.COUNT_MODIFICATION > 1 %}add-mod{% ELSE %}add-cart{% ENDIF %}"
+							<a class="product__add add-cart"
 								title="Добавить в корзину &laquo;{related_goods.NAME}&raquo;"
 								data-tooltip="В корзину"
 								rel="nofollow"
-								href="{% IF related_goods.COUNT_MODIFICATION > 1 %}{related_goods.URL_MIN_PRICE_NOW}{% ELSE %}{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={related_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={related_goods.MIN_PRICE_NOW_ID}{% ENDIF %}"
+								href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={related_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={related_goods.MIN_PRICE_NOW_ID}"
 							>
 								<i class="icon-cart"></i>
 								<span class="inCart__label">В корзину</span>
@@ -908,7 +905,6 @@
 									{% ENDFOR %}
 								</span>
 							</a>
-							{% ENDIF %}
 						</div>
 
 						<!-- Стикеры -->
@@ -1145,7 +1141,7 @@
 		<div class="products__grid swiper-wrapper">
 			{% FOR related_views_goods %}
 			<div class="product__item swiper-slide
-					{% IF related_views_goods.MAX_REST_VALUE = 0 %}product__empty{% ENDIF %}
+					{% IF related_views_goods.MIN_REST_VALUE = 0 %}product__empty{% ENDIF %}
 					{% IF related_views_goods.NB_GOODS_IN_CART %}product__inCart{% ENDIF %}
 					{% IF related_views_goods.COUNT_MODIFICATION > 1 %}product__has-mod{% ENDIF %}
 					{% IF related_views_goods.IS_TOP %}product__has-top{% ENDIF %}
@@ -1175,26 +1171,23 @@
 						<!-- Добавление товара в избранное и сравнение и в корзину -->
 						<div class="product__addCart">
 							<!-- Добавление в корзину -->
-							{% IF related_views_goods.MAX_REST_VALUE=0 %}
-							<a class="add-notify"
+							<a class="product__add add-notify"
 								title="Уведомить"
 								data-tooltip="Уведомить"
 								rel="nofollow"
 								data-fancybox
 								data-src="#fancybox__notify"
-								href="javascript:;"
 								data-name="{related_views_goods.NAME}"
 								data-art="{related_views_goods.ART_NUMBER}"
 							>
 								<i class="icon-notifications"></i>
 								<span>Уведомить</span>
 							</a>
-							{% ELSE %}
-							<a class="{% IF related_views_goods.COUNT_MODIFICATION > 1 %}add-mod{% ELSE %}add-cart{% ENDIF %}"
+							<a class="product__add add-cart"
 								title="Добавить в корзину &laquo;{related_views_goods.NAME}&raquo;"
 								data-tooltip="В корзину"
 								rel="nofollow"
-								href="{% IF related_views_goods.COUNT_MODIFICATION > 1 %}{related_views_goods.URL_MIN_PRICE_NOW}{% ELSE %}{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={related_views_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={related_views_goods.MIN_PRICE_NOW_ID}{% ENDIF %}"
+								href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={related_views_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={related_views_goods.MIN_PRICE_NOW_ID}"
 							>
 								<i class="icon-cart"></i>
 								<span class="inCart__label">В корзину</span>
@@ -1206,7 +1199,6 @@
 									{% ENDFOR %}
 								</span>
 							</a>
-							{% ENDIF %}
 						</div>
 
 						<!-- Стикеры -->

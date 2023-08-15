@@ -76,8 +76,7 @@
               <input type="hidden" name="form[goods_mod_id]" value="{goods_mod_info.GOODS_MOD_ID}" class="goodsDataMainModificationId" />
               <!-- Добавление товара в корзину -->
               <div class="compare__addCart product__addCart">
-                {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && goods_mod_info.REST_VALUE=0 %}
-                  <a class="add-notify button-empty" 
+                  <a class="product__add add-notify button-empty" 
                     title="Уведомить" 
                     data-tooltip="Уведомить" 
                     rel="nofollow" 
@@ -90,9 +89,8 @@
                     <i class="icon-notifications"></i>
                     <span>Уведомить</span>
                   </a>
-                {% ELSE %}
                   <!--a class="add-cart quick button-primary" title="Быстро оформить заказ" rel="nofollow" href="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={goods_mod_info.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={goods_mod_info.PRICE_NOW_ID}"><i class="icon-cart"></i><span>Купить</span></a-->
-                  <a class="add-cart button-primary" 
+                  <a class="product__add add-cart button-primary" 
                     title="Добавить в корзину &laquo;{goods_mod_info.GOODS_NAME}&raquo;" 
                     data-tooltip="В корзину" 
                     rel="nofollow" 
@@ -101,7 +99,6 @@
                     <i class="icon-cart"></i>
                     <span>Купить</span>
                   </a>
-                {% ENDIF %}
               </div>
               <!-- /END Добавление товара в корзину -->
             </form>
