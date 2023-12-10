@@ -2591,7 +2591,7 @@ function Order(){
 		// Выбор оплаты по клику
 		$('.order-payment__radio').on('click', function(){
 			var paymentDescription = $('.order-payment__radio:checked').parent().find('.order-payment__desc').html();
-			var payDesc = $('.order-payment__desc');
+			var payDesc = $('.order-payment__description');
 			payDesc.html(paymentDescription);
 			if (paymentDescription == undefined ) {
 				payDesc.addClass('is-hide').removeClass('is-show')
@@ -2601,16 +2601,17 @@ function Order(){
 		});
 
 		// Выбор оплаты по умолчанию
-		$('.order-payment__radio').each(function(){
-			var paymentDescription = $('.order-payment__radio:checked').parent().find('.order-payment__desc').html();
-			var payDesc = $('.order-payment__desc');
-			payDesc.html(paymentDescription);
-			if (paymentDescription == undefined ) {
+		$('.order-payment__radio').each(function () {
+			// console.log('each', $(this).parent());
+			const paymentDescription = $('.order-payment__radio:checked').parent().find('.order-payment__desc').html()
+			const payDesc = $('.order-payment__description')
+			payDesc.html(paymentDescription)
+			if (paymentDescription == undefined) {
 				payDesc.addClass('is-hide').removeClass('is-show')
-			}else{
+			} else {
 				payDesc.addClass('is-show').removeClass('is-hide')
 			}
-		});
+		})
 
 		setTimeout(function(){
 			$('.order-delivery__select').trigger('change')			
@@ -2650,7 +2651,7 @@ function Order(){
 			$('.order-payment__select option:first-child').prop('selected', true);
 
 			// Вывод описания доставки
-			var delDesc = $('.order-delivery__desc');
+			var delDesc = $('.order-delivery__description');
 			var deliveryDescription = $('.order-delivery__radio:checked').parent().find('.order-delivery__desc').html()
 			delDesc.html(deliveryDescription);
 			if (deliveryDescription == undefined ) {
@@ -2661,7 +2662,7 @@ function Order(){
 
 			// Вывод описания оплаты
 			var paymentDescription = $('.order-payments_items .order-payment__radio:checked').parent().find('.order-delivery__desc').html()
-			var payDesc = $('.order-payment__desc');
+			var payDesc = $('.order-payment__description');
 			payDesc.html(paymentDescription);
 			if (paymentDescription == undefined ) {
 				payDesc.addClass('is-hide').removeClass('is-show')
@@ -2685,13 +2686,20 @@ function Order(){
 			var selectedDelId = $(this).find('option:selected').attr('value');
 			$('.order-payments_items .order-payment__radio[value="'+selectedDelId+'"]').click();
 			var paymentDescription = $('.order-payments_items .order-payment__radio:checked').parent().find('.order-payment__desc').html();
-			var payDesc = $('.order-payment__desc');
+			var payDesc = $('.order-payment__description');
 			payDesc.html(paymentDescription);
 			if (paymentDescription == undefined ) {
 				payDesc.addClass('is-hide').removeClass('is-show')
 			}else{
 				payDesc.addClass('is-show').removeClass('is-hide')
 			}
+			console.log('selectedDelId', selectedDelId)
+			console.log('paymentDescription', paymentDescription)
+			console.log('payDesc', payDesc)
+			console.log('', )
+			console.log('', )
+			console.log('', )
+			console.log('', )
 		});
 
 	}

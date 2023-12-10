@@ -63,7 +63,7 @@
 								{% ENDIF %}
 							{% ENDFOR %}
 
-							<div class="order-delivery__description">
+							<div class="order-delivery__description-box">
 								<div class="order-delivery__price {CURRENCY_CHAR_CODE}">
 									<label>Стоимость доставки:</label>
 									<strong>
@@ -71,7 +71,7 @@
 										<span class="currency">{CURRENCY_NAME}</span>
 									</strong>
 								</div>
-								<div class="order-delivery__desc"></div>
+								<div class="order-delivery__description"></div>
 							</div>
 
 						</div>
@@ -164,7 +164,7 @@
 											{% ENDFOR %}
 										</select>
 									</div>
-									<div class="order-payment__desc is-hide"></div>
+									<div class="order-payment__description is-hide"></div>
 								</div>
 							{% ENDIF %}
 						{% ENDFOR %}
@@ -188,9 +188,9 @@
 										/>
 										<label class="order-payment__name" for="quickPaymentId{order_delivery.ID}_{order_delivery.available_payment_list.ID}">{order_delivery.available_payment_list.NAME}</label>
 										<!-- Сообщение для пользователя -->
-										{% IF order_delivery.available_payment_list.MESSAGE %}
-										<div class="order-payment__desc is-hide">{order_delivery.available_payment_list.MESSAGE}</div>
-										{% ENDIF %}
+										
+										<div class="order-payment__desc {% IFNOT order_delivery.available_payment_list.MESSAGE %}is-hide{% ENDIF %}">{order_delivery.available_payment_list.MESSAGE}</div>
+										
 									</div>
 									{% ENDFOR %}
 								</div>
