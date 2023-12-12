@@ -2591,25 +2591,18 @@ function Order(){
 		// Выбор оплаты по клику
 		$('.order-payment__radio').on('click', function(){
 			var paymentDescription = $('.order-payment__radio:checked').parent().find('.order-payment__desc').html();
-			var payDesc = $('.order-payment__description');
-			payDesc.html(paymentDescription);
-			if (paymentDescription == undefined ) {
-				payDesc.addClass('is-hide').removeClass('is-show')
-			}else{
-				payDesc.addClass('is-show').removeClass('is-hide')
+			var payDesc = $('.order-payment__descriptions');
+			if (paymentDescription !== undefined ) {
+				payDesc.html(paymentDescription);
 			}
 		});
 
 		// Выбор оплаты по умолчанию
-		$('.order-payment__radio').each(function () {
-			// console.log('each', $(this).parent());
-			const paymentDescription = $('.order-payment__radio:checked').parent().find('.order-payment__desc').html()
-			const payDesc = $('.order-payment__description')
-			payDesc.html(paymentDescription)
-			if (paymentDescription == undefined) {
-				payDesc.addClass('is-hide').removeClass('is-show')
-			} else {
-				payDesc.addClass('is-show').removeClass('is-hide')
+		$('.order-payment__radio').each(function(){
+			var paymentDescription = $('.order-payment__radio:checked').parent().find('.order-payment__desc').html();
+			var payDesc = $('.order-payment__descriptions');
+			if (paymentDescription !== undefined ) {
+				payDesc.html(paymentDescription);
 			}
 		})
 
@@ -2651,23 +2644,18 @@ function Order(){
 			$('.order-payment__select option:first-child').prop('selected', true);
 
 			// Вывод описания доставки
-			var delDesc = $('.order-delivery__description');
-			var deliveryDescription = $('.order-delivery__radio:checked').parent().find('.order-delivery__desc').html()
-			delDesc.html(deliveryDescription);
-			if (deliveryDescription == undefined ) {
-				delDesc.addClass('is-hide').removeClass('is-show')
-			}else{
-				delDesc.addClass('is-show').removeClass('is-hide')
+			var delDesc = $('.order-delivery__description .order-delivery__desc');
+			var deliveryDescription = $('.order-delivery__radio:checked').parent().parent().find('.order-delivery__desc').html()
+			if (deliveryDescription !== undefined ) {
+				delDesc.html(deliveryDescription);
+				delDesc.removeClass('is-hide')
 			}
 
 			// Вывод описания оплаты
-			var paymentDescription = $('.order-payments_items .order-payment__radio:checked').parent().find('.order-delivery__desc').html()
-			var payDesc = $('.order-payment__description');
-			payDesc.html(paymentDescription);
-			if (paymentDescription == undefined ) {
-				payDesc.addClass('is-hide').removeClass('is-show')
-			}else{
-				payDesc.addClass('is-show').removeClass('is-hide')
+			var paymentDescription = $('.order-payment__radio:checked').parent().find('.order-payment__desc').html();
+			var payDesc = $('.order-payment__descriptions');
+			if (paymentDescription !== undefined ) {
+				payDesc.html(paymentDescription);
 			}
 
 		});
@@ -2686,20 +2674,10 @@ function Order(){
 			var selectedDelId = $(this).find('option:selected').attr('value');
 			$('.order-payments_items .order-payment__radio[value="'+selectedDelId+'"]').click();
 			var paymentDescription = $('.order-payments_items .order-payment__radio:checked').parent().find('.order-payment__desc').html();
-			var payDesc = $('.order-payment__description');
-			payDesc.html(paymentDescription);
-			if (paymentDescription == undefined ) {
-				payDesc.addClass('is-hide').removeClass('is-show')
-			}else{
-				payDesc.addClass('is-show').removeClass('is-hide')
+			var payDesc = $('.order-payment__descriptions');
+			if (paymentDescription !== undefined ) {
+				payDesc.html(paymentDescription);
 			}
-			console.log('selectedDelId', selectedDelId)
-			console.log('paymentDescription', paymentDescription)
-			console.log('payDesc', payDesc)
-			console.log('', )
-			console.log('', )
-			console.log('', )
-			console.log('', )
 		});
 
 	}

@@ -912,7 +912,7 @@ main {margin: 40px 0;position: relative;display: block;}
 .order-delivery__item:nth-child(n+2) {margin-top: 24px;}
 .order-delivery__title {margin-bottom: 12px;font-weight: bold;}
 .order-delivery__radio {margin-right: 12px;}
-.order-delivery__desc {margin-bottom: 16px;}
+.order-delivery__desc:not(:empty) {margin-top: 16px;}
 .order-delivery-zone__list {margin-top: 16px;}
 .order-delivery-zone__item {margin-top: 12px;}
 .order-delivery-zone__name {padding: 0 12px;}
@@ -1299,8 +1299,7 @@ main {margin: 40px 0;position: relative;display: block;}
 .order-delivery__description-box {margin-top: 16px;}
 .order-payments_items {display: none;}
 .order-payment__item + .order-payment__item {margin-top: 12px;}
-.order-payment__desc {margin-top: 12px;width: 100%;}
-.order-payment__description {margin-top: 12px;width: 100%;}
+.order-payment__descriptions {margin-top: 12px;width: 100%;}
 .coupon__code {border-radius: 56px;padding: 0 88px 0 32px;}
 .coupon__code.focus {border-color: var(--color-secondary);}
 .coupon__button {color: var(--color-white);background-color: var(--color-secondary);padding: 0;font-size: 24px;width: 56px;height: 56px;line-height: 64px;border-radius: 100%;position: absolute;top: 0;right: 0;text-align: center;}

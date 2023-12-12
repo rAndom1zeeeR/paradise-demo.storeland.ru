@@ -164,40 +164,39 @@
 											{% ENDFOR %}
 										</select>
 									</div>
-									<div class="order-payment__description is-hide"></div>
+									<div class="order-payment__descriptions"></div>
 								</div>
 							{% ENDIF %}
 						{% ENDFOR %}
+					</div>
 
-						<!-- Инпуты способ оплаты -->
-						<div class="order-payments_items">
-						{% FOR order_delivery %}
-							{% IFNOT order_delivery.available_payment_list_empty %}
-								<div class="order-payment" rel="{order_delivery.ID}">
-									{% FOR available_payment_list %}
-									<div class="order-payment__item">
-										<input class="order-payment__radio checkbox square" 
-													type="radio" 
-													id="quickPaymentId{order_delivery.ID}_{order_delivery.available_payment_list.ID}" 
-													name="form[payment][id]" 
-													data-id="{order_delivery.available_payment_list.ID}" 
-													value="{order_delivery.available_payment_list.ID}" 
-													order-id="{ORDER_FORM_PAYMENT_ID}"
-													{% IF order_delivery.available_payment_list.first %}checked="checked"
-													{% ELSEIF order_delivery.available_payment_list.ID = ORDER_FORM_PAYMENT_ID %}checked="checked"{% ENDIF %}
-										/>
-										<label class="order-payment__name" for="quickPaymentId{order_delivery.ID}_{order_delivery.available_payment_list.ID}">{order_delivery.available_payment_list.NAME}</label>
-										<!-- Сообщение для пользователя -->
-										
-										<div class="order-payment__desc {% IFNOT order_delivery.available_payment_list.MESSAGE %}is-hide{% ENDIF %}">{order_delivery.available_payment_list.MESSAGE}</div>
-										
-									</div>
-									{% ENDFOR %}
+					<!-- Инпуты способ оплаты -->
+					<div class="order-payments_items">
+					{% FOR order_delivery %}
+						{% IFNOT order_delivery.available_payment_list_empty %}
+							<div class="order-payment" rel="{order_delivery.ID}">
+								{% FOR available_payment_list %}
+								<div class="order-payment__item">
+									<input class="order-payment__radio checkbox square" 
+												type="radio" 
+												id="quickPaymentId{order_delivery.ID}_{order_delivery.available_payment_list.ID}" 
+												name="form[payment][id]" 
+												data-id="{order_delivery.available_payment_list.ID}" 
+												value="{order_delivery.available_payment_list.ID}" 
+												order-id="{ORDER_FORM_PAYMENT_ID}"
+												{% IF order_delivery.available_payment_list.first %}checked="checked"
+												{% ELSEIF order_delivery.available_payment_list.ID = ORDER_FORM_PAYMENT_ID %}checked="checked"{% ENDIF %}
+									/>
+									<label class="order-payment__name" for="quickPaymentId{order_delivery.ID}_{order_delivery.available_payment_list.ID}">{order_delivery.available_payment_list.NAME}</label>
+									<!-- Сообщение для пользователя -->
+									{% IF order_delivery.available_payment_list.MESSAGE %}
+									<div class="order-payment__desc">{order_delivery.available_payment_list.MESSAGE}</div>
+									{% ENDIF %}
 								</div>
-							{% ENDIF %}
-						{% ENDFOR %}
-						</div>
-
+								{% ENDFOR %}
+							</div>
+						{% ENDIF %}
+					{% ENDFOR %}
 					</div>
 				</div>
 
