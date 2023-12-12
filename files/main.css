@@ -1296,7 +1296,8 @@ main {margin: 40px 0;position: relative;display: block;}
 .order_fast__form .total__buttons {margin-top: 32px;text-align: center;}
 .order_fast__form .total__buttons button {pointer-events: all;}
 .order-delivery-zone__selectBox {margin-top: 16px;}
-.order-delivery__description-box {margin-top: 16px;}
+.order-delivery__description {margin-top: 16px;}
+.order-delivery__desc:not(:empty) {margin-top: 16px;}
 .order-payments_items {display: none;}
 .order-payment__item + .order-payment__item {margin-top: 12px;}
 .order-payment__descriptions {margin-top: 12px;width: 100%;}
