@@ -335,7 +335,7 @@
             <label class="order-payment__name" for="paymentId{order_payment.ID}">{order_payment.NAME}</label>
             <!-- Сообщение для пользователя -->
             {% IF order_payment.MESSAGE %}
-            <div class="order-payment__desc is-hide">{order_payment.MESSAGE}</div>
+            <div class="order-payment__desc">{order_payment.MESSAGE}</div>
             {% ENDIF %}
           </div>
         {% ENDFOR %}
