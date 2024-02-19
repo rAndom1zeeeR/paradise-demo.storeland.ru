@@ -739,7 +739,7 @@ function Product() {
 		if (!qty) { return false }
 
 		// Если кол-во 0
-		qty.getAttribute('max') === 0 ? obj.classList.add('product__empty') : obj.classList.remove('product__empty')
+		qty.getAttribute('max') === "0" ? obj.classList.add('product__empty') : obj.classList.remove('product__empty')
 	}
 
 	// Запуск функции активного класса товара в других категориях. /JS/
@@ -1412,6 +1412,7 @@ function Product() {
 		const itemQtyInput = item.querySelector('.qty__input')
 		const itemModId = item.querySelector('[name="form[goods_mod_id]"]')
 		const addtoId = document.querySelector('.addto__qty .qty__input[name="form[quantity]['+ id +']"')
+		const goodsModRestValue = item.querySelector('.goodsModRestValue')
 
 		itemPriceNow.innerHTML = addSpaces(Math.floor(priceNow))
 		// Проверка старой цены
@@ -1420,6 +1421,8 @@ function Product() {
 		itemQtyInput.name = `form[quantity][${id}]`
 		itemQtyInput.max = rest
 		itemModId.value = id
+		goodsModRestValue.querySelector('b').innerHTML = rest
+		goodsModRestValue.setAttribute('data-value', rest)
 		
 		// Проверка модификации в корзине
 		if (addtoId) {
